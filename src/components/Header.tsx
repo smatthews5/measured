@@ -4,10 +4,10 @@ import { css, jsx } from '@emotion/core';
 import { Link } from '@reach/router';
 
 const linkContainers = css`
-  margin-left: 70px;
+  margin-left: 140px;
 `;
 const links = css`
-  color: white;
+  color: #c67833;
   &:focus,
   &:hover,
   &:visited,
@@ -26,9 +26,10 @@ const Header: React.FC = () => {
         display: flex;
         align-items: center;
         background-color: #9f465f;
+        height: 60px;
       `}
     >
-      <div css={css`display:flex; padding: 10px;`}>
+      <div css={css`display:flex; padding: 10px;margin-top: 8px; margin-left: 20px;`}>
         <Link
           to="/"
           css={css`
@@ -45,7 +46,7 @@ const Header: React.FC = () => {
       <div
         css={css`
           display: flex;
-          margin-left: 100px;
+          margin-left: 70px;
         `}
       >
         <div css={linkContainers}>
