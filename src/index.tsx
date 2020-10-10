@@ -5,7 +5,7 @@ import App from './App';
 import theme from './theme';
 import { injectGlobal } from 'emotion';
 import { css, Global } from '@emotion/core';
-import { ThemeProvider, CSSReset } from '@chakra-ui/core';
+import { ThemeProvider, ColorModeProvider, CSSReset } from '@chakra-ui/core';
 
 // import all fonts
 injectGlobal`
@@ -77,14 +77,80 @@ ReactDOM.render(
       <CSSReset />
       <Global
         styles={css`
-          a {
+          * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+
+            ::-webkit-scrollbar {
+              width: 0;
+              background: transparent;
+            }
+          }
+
+          html,
+          body {
+            font-family: 'Cabin', Helvetica, sans-serif, 'Apple Color Emoji',
+              'Segoe UI Emoji', 'Segoe UI Symbol';
+            height: 100vw;
+            width: 100vw;
+            overflow: scroll;
+          }
+
+          header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+            height: 10vh;
+            border-bottom: 1px solid ${theme.colors.pale};
+          }
+
+          main {
+          }
+
+          footer {
+          }
+
+          h1,
+          h2,
+          h3 {
+            color: ${theme.colors.lead};
+            font-family: ${theme.fonts.heading};
+            font-weight: 600;
+            text-transform: uppercase;
             text-decoration: none;
+            padding-top: 8%;
+          }
+
+          h1 {
+            font-size: 3.5em;
+          }
+
+          h2 {
+            font-size: 2em;
+            color: ${theme.colors.pale};
+          }
+
+          h3 {
+            color: ${theme.colors.highlight};
+            font-size: 1.5em;
+          }
+
+          button {
+          }
+
+          a {
+            margin: 0;
+          }
+
+          form {
           }
         `}
       />
-      <App />
+      <ColorModeProvider>
+        <App />
+      </ColorModeProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),

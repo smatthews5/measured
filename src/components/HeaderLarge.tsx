@@ -1,70 +1,51 @@
 /** @jsx jsx */
 import React from 'react';
-import { css, jsx } from '@emotion/core';
 import { Link } from '@reach/router';
+import { css, jsx } from '@emotion/core';
+import { Flex, Image, useTheme } from '@chakra-ui/core';
+import icon from '../assets/images/user_icon.png';
 
-const linkContainers = css`
-  margin-Left: 70px;
-`;
-const links = css`
-  color: #c67833;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-  font-family: 'Yanone Kaffeesatz';
-  font-size: 24px;
-  font-weight: 400;
-`;
 const HeaderLarge: React.FC = () => {
+  const theme = useTheme();
   return (
-    <div
+    <header
       css={css`
-        display: flex;
-        border-bottom: 1px solid #d3d3d3;
-        align-items: center;
-        margin: 10px;
-        height: 100px;
+        height: 15vh;
+        background-color: ${theme.colors.lead};
       `}
     >
-      <div>
-        <h1
-          css={css`
-            color: #2c631f;
-            font-size: 56px;
-            font-family: 'Yanone Kaffeesatz';
-            font-weight: 600;
-          `}
-        >
-          MEASURED
-        </h1>
-      </div>
-      <div
-        css={css`
-          display: flex;
-          margin-left: 100px;
-        `}
-      >
-        <div css={linkContainers}>
-          <Link css={links} to="/ingredients">
-            BROWSE INGREDIENTS
-          </Link>
-        </div>
-        <div css={linkContainers}>
-          <Link css={links} to="/drinkBuilder">
-            BUILD A COCKTAIL
-          </Link>
-        </div>
-        <div css={linkContainers}>
-          <Link css={links} to="/myBar">
-            MY BAR
-          </Link>
-        </div>
-      </div>
-    </div>
+      <Flex pl={4} width="25vw">
+        <Link to="/">
+          <h1
+            css={css`
+              font-size: 5em;
+              color: ${theme.colors.white};
+            `}
+          >
+            Measured
+          </h1>
+        </Link>
+      </Flex>
+      <Flex justify="space-between" align="center" width="50vw" pr={4}>
+        <Link to="/ingredients">
+          <h2>Browse ingredients</h2>
+        </Link>
+        <Link to="/build-a-drink">
+          <h2>Build a cocktail</h2>
+        </Link>
+        <Link to="/my-bar">
+          <h2>Explore my bar</h2>
+        </Link>
+        <Link to="/welcome">
+          <Image
+            size="50px"
+            objectFit="cover"
+            src={icon}
+            alt="Login/signup icon"
+          />
+        </Link>
+      </Flex>
+    </header>
   );
 };
 

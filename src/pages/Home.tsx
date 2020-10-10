@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { firestore } from '../firebase';
 import { RouteComponentProps } from '@reach/router';
 
-import Header from '../components/Header';
 import HeaderLarge from '../components/HeaderLarge';
 import Banner from '../components/Banner';
 import Search from '../components/Search';
@@ -17,7 +16,6 @@ const Home: React.FC = (_props: RouteComponentProps) => {
       const data = doc.data();
       console.log(id, ' => ', data);
     });
-
   };
 
   useEffect(() => {
@@ -26,7 +24,6 @@ const Home: React.FC = (_props: RouteComponentProps) => {
 
   return (
     <>
-      <Header />
       <HeaderLarge />
       <Banner />
       <Search />

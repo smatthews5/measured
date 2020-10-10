@@ -1,20 +1,22 @@
 import { theme } from '@chakra-ui/core';
 
-export default {
+const customTheme = {
   ...theme,
   fonts: {
     ...theme.fonts,
     body: '"Cabin", sans-serif',
-    title: '"Yanone Kaffeesatz", sans-serif',
-    fancy: '"Wire One", sans-serif',
+    heading: '"Yanone Kaffeesatz", sans-serif',
+    mono: '"Wire One", sans-serif',
   },
   colors: {
     ...theme.colors,
-    white: '#ffffff',
-    black: '#000000',
-    lead: '',
-    highlight: '',
-    pale: '',
-    dark: '',
+    white: '#fff',
+    black: '#000',
+    lead: '#9f465f',
+    highlight: '#A57194',
+    pale: '#FAE9F4',
+    dark: '#564146',
   },
 };
+
+export default customTheme;
