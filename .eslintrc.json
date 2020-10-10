@@ -15,7 +15,13 @@
     "es6": true
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "import", "jsx-a11y", "react-hooks", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "import",
+    "jsx-a11y",
+    "react-hooks",
+    "@typescript-eslint"
+  ],
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
