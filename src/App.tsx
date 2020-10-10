@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Router } from '@reach/router';
 
 // import full-screen pages
@@ -12,17 +11,15 @@ import LoginSignup from './pages/LoginSignup';
 
 const App = () => {
   return (
-    <React.StrictMode>
-      <Router>
-        <Home path="/" />
-        <Ingredients />
-        <MyBar />
-        <DrinkBuilder />
-        <Recipe />
-        <LoginSignup />
-      </Router>
-    </React.StrictMode>
+    <Router>
+      <Home path="/" />
+      <Ingredients />
+      <MyBar />
+      <DrinkBuilder />
+      <Recipe />
+      <LoginSignup />
+    </Router>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default App;
