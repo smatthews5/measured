@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useMemo } from 'react';
 import { Router, RouteComponentProps } from '@reach/router';
+import { UserContext } from './UserContext';
 
 // import full-screen pages
 import Home from './pages/Home';
@@ -10,23 +10,35 @@ import DrinkBuilder from './pages/DrinkBuilder';
 import Recipe from './pages/Recipe';
 import LoginSignup from './pages/LoginSignup';
 
+const HomePage = (props: RouteComponentProps) => <Home />;
+const IngredientsPage = (props: RouteComponentProps) => <Ingredients />;
+const MyBarPage = (props: RouteComponentProps) => <MyBar />;
+const DrinkBuilderPage = (props: RouteComponentProps) => <DrinkBuilder />;
+const RecipePage = (props: RouteComponentProps) => <Recipe />;
+const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
+
 const App: React.FC = () => {
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    myIngredients: [],
+    likedDrinks: [],
+    createdDrinks: [],
+  });
+  const updatedUser = useMemo(() => ({ user, setUser }), [user, setUser]);
+
   return (
-    <React.StrictMode>
+    <UserContext.Provider value={updatedUser}>
       <Router>
-        <Home path="/"/>
-        <Ingredients path="/ingredients"/>
-        <MyBar path="/myBar"/>
-        <DrinkBuilder path="/drinkBuilder"/>
-        <Recipe path="/recipe"/>
-        <LoginSignup path="/loginSignup"/>
+        <HomePage path="/" />
+        <IngredientsPage path="/ingredients" />
+        <MyBarPage path="/my-bar" />
+        <DrinkBuilderPage path="/build-a-drink" />
+        <RecipePage path="/recipes/:name" />
+        <LoginSignupPage path="/welcome" />
       </Router>
-    </React.StrictMode>
+    </UserContext.Provider>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
-const RouterPage = (
-  // eslint-disable-next-line no-undef
-  props: { pageComponent: JSX.Element } & RouteComponentProps,
-) => props.pageComponent;
+export default App;
