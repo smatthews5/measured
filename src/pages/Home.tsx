@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { firestore } from '../firebase';
 import { RouteComponentProps } from '@reach/router';
 
+import Header from '../components/Header';
 import HeaderLarge from '../components/HeaderLarge';
 import Banner from '../components/Banner';
 import Search from '../components/Search';
@@ -15,7 +16,7 @@ interface Cocktail {
   ingredientList: string[]
 }
 
-const Home = (_props: RouteComponentProps) => {
+const Home: React.FC = (_props: RouteComponentProps) => {
 
   const [cocktails, setCocktails] = useState<Cocktail[]>([])
 
@@ -30,7 +31,7 @@ const Home = (_props: RouteComponentProps) => {
 
   return (
     <>
-      <h1>Measured</h1>
+      <Header />
       <HeaderLarge />
       <Banner />
       <Search />
