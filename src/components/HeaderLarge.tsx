@@ -4,55 +4,63 @@ import { css, jsx } from '@emotion/core';
 import { Link } from '@reach/router';
 
 const linkContainers = css`
-  margin: 30px;
-  font-size: 30px;
+  margin-Left: 70px;
 `;
 const links = css`
-color: #C67833;
-  &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    };
+  color: #c67833;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+  font-family: 'Yanone Kaffeesatz';
+  font-size: 24px;
+  font-weight: 400;
 `;
 const HeaderLarge: React.FC = () => {
   return (
     <div
       css={css`
         display: flex;
-        border-bottom: 1px solid grey;
+        border-bottom: 1px solid #d3d3d3;
         align-items: center;
-        padding: 10px;
-        height: 80px;
+        margin: 10px;
+        height: 100px;
       `}
     >
       <div>
         <h1
           css={css`
             color: #2c631f;
-            margin: 20px;
+            font-size: 56px;
+            font-family: 'Yanone Kaffeesatz';
+            font-weight: 600;
           `}
         >
-          Measured (Logo)
+          MEASURED
         </h1>
       </div>
       <div
         css={css`
           display: flex;
-          margin-left: 40px;
+          margin-left: 100px;
         `}
       >
         <div css={linkContainers}>
           <Link css={links} to="/ingredients">
-            Browse Ingredients
+            BROWSE INGREDIENTS
           </Link>
         </div>
         <div css={linkContainers}>
           <Link css={links} to="/drinkBuilder">
-            Build a Cocktail
+            BUILD A COCKTAIL
           </Link>
         </div>
         <div css={linkContainers}>
           <Link css={links} to="/myBar">
-            My Bar
+            MY BAR
           </Link>
         </div>
       </div>
