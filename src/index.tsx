@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-import { colors } from './theme';
+import theme from './theme';
 import { injectGlobal } from 'emotion';
-import { Global, css } from '@emotion/core';
+import { css, Global } from '@emotion/core';
+import { ThemeProvider, CSSReset } from '@chakra-ui/core';
 
 // import all fonts
 injectGlobal`
@@ -72,23 +73,19 @@ injectGlobal`
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
-    <Global
-      styles={css`
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
-
-        html,
-        body {
-          font-family: 'Cabin', Helvetica, sans-serif, 'Apple Color Emoji',
-            'Segoe UI Emoji', 'Segoe UI Symbol';
-          color: ${colors.black};
-        }
-      `}
-    />
+    <ThemeProvider theme={theme}>
+      <CSSReset />
+      <Global
+        styles={css`
+          a {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+          }
+        `}
+      />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

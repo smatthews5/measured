@@ -15,13 +15,9 @@ const Home: React.FC = (_props: RouteComponentProps) => {
     snapshot.forEach((doc) => {
       const id = doc.id;
       const data = doc.data();
-
-      // eslint-disable-next-line no-console
-      console.log({ id, data });
+      console.log(id, ' => ', data);
     });
 
-    // eslint-disable-next-line no-console
-    console.log('hello');
   };
 
   useEffect(() => {

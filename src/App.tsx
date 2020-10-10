@@ -10,6 +10,7 @@ import DrinkBuilder from './pages/DrinkBuilder';
 import Recipe from './pages/Recipe';
 import LoginSignup from './pages/LoginSignup';
 
+// set up page prop-types for routing
 const HomePage = (props: RouteComponentProps) => <Home />;
 const IngredientsPage = (props: RouteComponentProps) => <Ingredients />;
 const MyBarPage = (props: RouteComponentProps) => <MyBar />;
@@ -18,6 +19,7 @@ const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 
 const App: React.FC = () => {
+  // define initial state for user details
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -25,6 +27,7 @@ const App: React.FC = () => {
     likedDrinks: [],
     createdDrinks: [],
   });
+  // memoize user state --> trigger updates with changes from any page
   const updatedUser = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
