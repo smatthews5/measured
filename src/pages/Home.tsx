@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { firestore } from '../firebase';
 import { RouteComponentProps } from '@reach/router';
 
@@ -6,21 +6,30 @@ import HeaderLarge from '../components/HeaderLarge';
 import Banner from '../components/Banner';
 import Search from '../components/Search';
 import CardGallery from '../containers/CardGallery';
+import { collectIdsAndDocs } from '../utilities';
+
+interface Cocktail {
+  name: string;
+  category: string;
+  base: string;
+  ingredientList: string[];
+}
 
 const Home: React.FC = (_props: RouteComponentProps) => {
-  const getCocktails = async () => {
-    const snapshot = await firestore.collection('cocktails').get();
-
-    snapshot.forEach((doc) => {
-      const id = doc.id;
-      const data = doc.data();
-      console.log(id, ' => ', data);
-    });
-  };
+  const [cocktails, setCocktails] = useState<Cocktail[]>([]);
 
   useEffect(() => {
-    getCocktails();
+    let unsubscribe = firestore
+      .collection('cocktails')
+      .onSnapshot((snapshot) => {
+        const cocktailData: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
+        setCocktails(cocktailData);
+      });
+
+    return unsubscribe;
   }, []);
+
+  console.log(cocktails);
 
   return (
     <>
