@@ -25,14 +25,31 @@ const Card: React.FC = () => {
         <img
           css={css`
             width: 220px;
-            height: 170px;
+            height: 200px;
             object-fit: cover;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
+            border-radius: 4px;
+            /* border-top-right-radius: 4px; */
           `}
           src={drink}
           alt=""
         />
+        <div
+          css={css`
+            position: absolute;
+            margin-top: 170px;
+            margin-left: 170px;
+          `}
+        >
+          <span
+            css={css`
+            `}
+            role="img"
+            aria-label="heart"
+          >
+            {' '}
+            ♥️
+          </span>
+        </div>
       </div>
       <div
         css={css`
@@ -42,10 +59,12 @@ const Card: React.FC = () => {
           height: 100%;
         `}
       >
-        <div css={css`
-        padding: 2px;
-        align-items: center;
-      `}>
+        <div
+          css={css`
+            padding: 2px;
+            align-items: center;
+          `}
+        >
           <div
             css={css`
               padding: 3px;
@@ -70,7 +89,7 @@ const Card: React.FC = () => {
         >
           <div
             css={css`
-              margin-right: 10px;
+              margin-right: 5px;
               font-family: 'Cabin';
               font-style: italic;
               font-size: 10px;
@@ -82,7 +101,6 @@ const Card: React.FC = () => {
             css={css`
               font-family: 'Cabin';
               font-style: italic;
-
               font-size: 10px;
             `}
           >
