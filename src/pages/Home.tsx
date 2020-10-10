@@ -21,10 +21,12 @@ const Home: React.FC = (_props: RouteComponentProps) => {
   const [cocktails, setCocktails] = useState<Cocktail[]>([])
 
   useEffect(() => {
-    firestore.collection('cocktails').onSnapshot(snapshot => {
+    let unsubscribe = firestore.collection('cocktails').onSnapshot(snapshot => {
       const cocktailData: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
       setCocktails(cocktailData);
     })
+
+    return unsubscribe
   }, []);
 
   console.log(cocktails)
