@@ -15,10 +15,8 @@ const Home = (_props: RouteComponentProps) => {
       const id = doc.id;
       const data = doc.data();
 
-      console.log({ id, data });
+      console.log(id, ' => ', data);
     });
-
-    console.log('hello');
   };
 
   useEffect(() => {
