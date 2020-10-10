@@ -36,8 +36,8 @@ const Card: React.FC = () => {
         <div
           css={css`
             position: absolute;
-            margin-top: 170px;
-            margin-left: 170px;
+            margin-top: 175px;
+            margin-left: 180px;
           `}
         >
           <span
