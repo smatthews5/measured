@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Router, RouteComponentProps } from '@reach/router';
+import { UserContext } from './UserContext';
 
 // import full-screen pages
 import Home from './pages/Home';
@@ -17,15 +18,26 @@ const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 
 const App: React.FC = () => {
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    myIngredients: [],
+    likedDrinks: [],
+    createdDrinks: [],
+  });
+  const updatedUser = useMemo(() => ({ user, setUser }), [user, setUser]);
+
   return (
-    <Router>
-      <HomePage path="/" />
-      <IngredientsPage path="/ingredients" />
-      <MyBarPage path="/my-bar" />
-      <DrinkBuilderPage path="/build-a-drink" />
-      <RecipePage path="/recipes/:name" />
-      <LoginSignupPage path="/welcome" />
-    </Router>
+    <UserContext.Provider value={updatedUser}>
+      <Router>
+        <HomePage path="/" />
+        <IngredientsPage path="/ingredients" />
+        <MyBarPage path="/my-bar" />
+        <DrinkBuilderPage path="/build-a-drink" />
+        <RecipePage path="/recipes/:name" />
+        <LoginSignupPage path="/welcome" />
+      </Router>
+    </UserContext.Provider>
   );
 };
 
