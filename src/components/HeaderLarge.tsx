@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/core';
 import { Link } from '@reach/router';
 
 const linkContainers = css`
-  margin-Left: 70px;
+  margin-Left: 140px;
 `;
 const links = css`
   color: #c67833;
@@ -30,22 +30,23 @@ const HeaderLarge: React.FC = () => {
         height: 100px;
       `}
     >
-      <div>
-        <h1
+      <div css={css`margin-left: 20px;`}>
+        <Link to="/"
           css={css`
-            color: #2c631f;
+            color: #9f465f;
             font-size: 56px;
             font-family: 'Yanone Kaffeesatz';
             font-weight: 600;
+            text-decoration: none;
           `}
         >
           MEASURED
-        </h1>
+        </Link>
       </div>
       <div
         css={css`
           display: flex;
-          margin-left: 100px;
+          margin-left: 70px;
         `}
       >
         <div css={linkContainers}>
