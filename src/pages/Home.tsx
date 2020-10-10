@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
-import { RouteComponentProps } from '@reach/router';
 import { firestore } from '../firebase';
+import { RouteComponentProps } from '@reach/router';
+
+import HeaderLarge from '../components/HeaderLarge';
+import Banner from '../components/Banner';
+import Search from '../components/Search';
+import CardGallery from '../containers/CardGallery';
 
 const Home = (_props: RouteComponentProps) => {
   const getCocktails = async () => {
@@ -23,6 +28,10 @@ const Home = (_props: RouteComponentProps) => {
   return (
     <>
       <h1>Measured</h1>
+      <HeaderLarge />
+      <Banner />
+      <Search />
+      <CardGallery />
     </>
   );
 };
