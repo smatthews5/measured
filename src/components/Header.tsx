@@ -20,14 +20,15 @@ const Header: React.FC = () => {
       <Flex
         justify="space-between"
         align="center"
-        width={['50vw', '60vw', '70vw', '75vw']}
+        width={['50vw', '60vw', '65vw', '70vw']}
         pr={4}
       >
         <Link to="/ingredients">
           <Heading
-            as="h3"
+            as="h2"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
+            color="purple.300"
             isTruncated
           >
             Browse ingredients
@@ -35,9 +36,10 @@ const Header: React.FC = () => {
         </Link>
         <Link to="/build-a-drink">
           <Heading
-            as="h3"
+            as="h2"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
+            color="purple.300"
             isTruncated
           >
             Build a cocktail
@@ -45,9 +47,10 @@ const Header: React.FC = () => {
         </Link>
         <Link to="/my-bar">
           <Heading
-            as="h3"
+            as="h2"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
+            color="purple.300"
             isTruncated
           >
             Explore my bar

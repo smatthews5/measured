@@ -21,7 +21,13 @@ const Card: React.FC = () => {
           <h4>Americano</h4>
         </Flex>
         <Flex align="center" padding="2px">
-          <h5 css={css`margin-right: 2px`}>Gin -</h5>
+          <h5
+            css={css`
+              margin-right: 2px;
+            `}
+          >
+            Gin -
+          </h5>
           <h5>Refreshing</h5>
         </Flex>
       </Flex>

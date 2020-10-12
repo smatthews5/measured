@@ -12,11 +12,7 @@ const HeaderLarge: React.FC = () => {
     <header id="large">
       <Flex pl={4} width="25vw" align="center">
         <Link to="/">
-          <Heading
-            as="h1"
-            color="white"
-            fontSize={['3xl', '4xl', '5.5vw', '6.5vw']}
-          >
+          <Heading as="h1" color="white" fontSize={['4xl', '6.5vw']}>
             Measured
           </Heading>
         </Link>
@@ -30,6 +26,7 @@ const HeaderLarge: React.FC = () => {
         <Link to="/ingredients">
           <Heading
             as="h2"
+            color="purple.200"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
             isTruncated
@@ -40,6 +37,7 @@ const HeaderLarge: React.FC = () => {
         <Link to="/build-a-drink">
           <Heading
             as="h2"
+            color="purple.200"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
             isTruncated
@@ -50,6 +48,7 @@ const HeaderLarge: React.FC = () => {
         <Link to="/my-bar">
           <Heading
             as="h2"
+            color="purple.200"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
             isTruncated

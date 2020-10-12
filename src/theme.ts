@@ -24,7 +24,7 @@ const customTheme = extendTheme({
         padding: '0',
       },
       'html, body': {
-        fontFamily: 'body',
+        font: 'body',
         height: '100vh',
         width: '100vw',
         overflow: 'scroll',
@@ -46,7 +46,7 @@ const customTheme = extendTheme({
         backgroundColor: 'purple.400',
         height: '15vh',
       },
-      'h1, h2, h3': {
+      'h1, h2': {
         fontFamily: 'heading',
         textTransform: 'uppercase',
         textDecoration: 'none',
@@ -58,13 +58,9 @@ const customTheme = extendTheme({
         paddingBottom: '8%',
         color: 'purple.400',
       },
-
-      h2: {
-        color: 'purple.200',
-      },
-
       h3: {
-        color: 'purple.300',
+        textTransform: 'uppercase',
+        color: 'white',
       },
       h4: {
         fontWeight: '400',
@@ -75,6 +71,11 @@ const customTheme = extendTheme({
         fontSize: '10px',
         fontStyle: 'italic',
         color: 'gray.400',
+      },
+      hr: {
+        borderBottom: 'solid thin white',
+        marginBottom: '5%',
+        width: '80%',
       },
     },
   },

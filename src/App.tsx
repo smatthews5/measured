@@ -35,16 +35,19 @@ const App: React.FC = () => {
   const [cocktails, setCocktails] = useState([]);
 
   useEffect(() => {
-    firestore.collection("cocktails").get().then((querySnapshot) => {
-      let cocktailArr = [];
-      querySnapshot.forEach((doc) => {
+    firestore
+      .collection('cocktails')
+      .get()
+      .then((querySnapshot) => {
+        let cocktailArr = [];
+        querySnapshot.forEach((doc) => {
           const id = doc.id;
           const data = doc.data();
-          const cocktail = {id: id, ...data}
+          const cocktail = { id: id, ...data };
           cocktailArr.push(cocktail);
+        });
+        setCocktails(cocktailArr);
       });
-      setCocktails(cocktailArr)
-    });
   }, []);
 
   return (
