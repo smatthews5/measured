@@ -1,10 +1,9 @@
 /** @jsx jsx */
 import React from 'react';
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import {
   Flex,
   Input,
-  Icon,
   InputRightElement,
   InputGroup,
   FormControl,
@@ -12,66 +11,84 @@ import {
   Select,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import theme from '../theme';
 
 const Search: React.FC = () => {
   return (
-    <Flex margin="20px" justify="center" align="center" direction="column">
-      <Flex width="75%" borderRadius="6px">
-        <InputGroup>
-          <Input />
+    <Flex justify="center" align="center" direction="column">
+      <Flex width="75%" justify="center" align="center">
+        <InputGroup width="100%" size='sm'>
+          <Input borderRadius="8px" />
           <InputRightElement>
             <SearchIcon name="search" color="grey" />
           </InputRightElement>
         </InputGroup>
       </Flex>
-      <Flex direction="row" width="75%" margin="10px" align="center">
-        <FormLabel
-          htmlFor="cocktail"
-          width="25%"
-          margin="10px"
-          color="#C67833"
-          fontFamily={theme.fonts.heading}
-          fontSize="20px"
-        >
-          Filter by:{' '}
-        </FormLabel>
-        <FormControl margin="10px">
-          <Select
-            id="base-ingedient"
-            placeholder="Base Ingedient"
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        width="75%"
+        align="center"
+      >
+        <Flex align='center' width='35%' justifyContent={['center', 'center','flex-start']}>
+          <FormLabel
+            htmlFor="cocktail"
+            width={['auto', 'auto']}
+            marginTop={['10px', '10px']}
+            marginLeft="10px"
             color="#C67833"
-            fontFamily={theme.fonts.body}
-            border="none"
+            fontFamily="heading"
+            fontSize={{ base: '15px', md: '20px' }}
           >
-            {/* for each option */}
-            <option>Gin</option>
-            <option>Vodka</option>
-            <option>Rum</option>
-          </Select>
-        </FormControl>
-        <FormControl margin="10px">
-          <Select
-            id="strength"
-            placeholder="Strength"
-            color="#C67833"
-            fontFamily={theme.fonts.body}
-            border="none"
-          >
-            <option>Hard Af</option>
-          </Select>
-        </FormControl>
-        <FormControl margin="10px">
-          <Select
-            id="flavour"
-            placeholder="Flavour"
-            color="#C67833"
-            fontFamily={theme.fonts.body}
-            border="none"
-          >
-            <option>Fruity</option>
-          </Select>
-        </FormControl>
+            Filter by:
+          </FormLabel>
+        </Flex>
+        <Flex width="100%">
+          <FormControl>
+            <Select
+              isTruncated
+              id="base-ingedient"
+              placeholder="Base Ingedient"
+              color="#C67833"
+              fontFamily="body"
+              border="none"
+              fontSize={['10px', '16px', '16px', '16px']}
+              focusBorderColor="#e5e5e5" 
+              /* not sure on the grey here? Maybe just none*/
+            >
+              {/* for each option */}
+              <option>Gin</option>
+              <option>Vodka</option>
+              <option>Rum</option>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <Select
+              isTruncated
+              id="strength"
+              placeholder="Strength"
+              color="#C67833"
+              fontFamily="body"
+              border="none"
+              fontSize={['10px', '16px', '16px', '16px']}
+              focusBorderColor="#e5e5e5"
+            >
+              <option>Hard Af</option>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <Select
+              isTruncated
+              id="flavour"
+              placeholder="Flavour"
+              color="#C67833"
+              fontFamily="body"
+              border="none"
+              fontSize={['10px', '16px', '16px', '16px']}
+              focusBorderColor="#e5e5e5"
+            >
+              <option>Fruity</option>
+            </Select>
+          </FormControl>
+        </Flex>
       </Flex>
     </Flex>
   );

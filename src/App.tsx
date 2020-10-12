@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import React, { useState, useMemo, useEffect } from 'react';
 import { Router, RouteComponentProps } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import * as CocktailService from './services/firebase';
-import { Booze, User } from './interfaces';
+import { Booze, User, Cocktail, Ingredient} from './interfaces';
 
 // import full-screen pages
 import Home from './pages/Home';
@@ -24,13 +25,7 @@ const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 
 const App: React.FC = () => {
   // define initial state for user details
-  const [user, setUser] = useState<User>({
-    firstName: '',
-    lastName: '',
-    myIngredients: [],
-    likedDrinks: [],
-    createdDrinks: [],
-  });
+  const [user, setUser] = useState<User>();
 
   // define initial state for drink/ingredient details
   const [booze, setBooze] = useState<Booze>({
@@ -44,12 +39,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     CocktailService.getCocktails()
-      .then((allCocktails) => {
+      .then((allCocktails: Cocktail[]) => {
         setBooze((prevState) => ({ ...prevState, cocktails: allCocktails }));
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
     CocktailService.getIngredients()
-      .then((allIngredients) =>
+      .then((allIngredients: Ingredient[]) =>
         setBooze((prevState) => ({
           ...prevState,
           ingredients: allIngredients,
@@ -59,7 +54,7 @@ const App: React.FC = () => {
         console.log('---> error getting all ingredients', error),
       );
   }, []);
-
+  
   return (
     <UserContext.Provider value={currentUser}>
       <BoozeContext.Provider value={currentBooze}>
