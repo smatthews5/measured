@@ -7,9 +7,9 @@ const CardGallery: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   return (
     <>
-      <Box w="82vw" mx="auto">
+      <Box w="82vw" mx="auto" mt="2vh">
         <Text pl="2vw" fontSize="lg">All Cocktails</Text>
-        <Flex px="9%" overflowX="scroll">
+        <Flex overflowX="scroll">
         {booze.cocktails.map((cocktail) => (
           <Card cocktail={cocktail} key={cocktail.id} />
         ))}
