@@ -16,6 +16,7 @@ const customTheme = {
     highlight: '#A57194',
     pale: '#FAE9F4',
     dark: '#564146',
+    grey: '#808080',
   },
 };
 
