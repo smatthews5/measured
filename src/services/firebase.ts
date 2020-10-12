@@ -24,5 +24,11 @@ export const getCocktails = async () => {
   const cocktails = snapshot.docs.map(collectIdsAndDocs)
   return cocktails;
 }
+
+export const getIngredients = async () => {
+  const snapshot = await firestore.collection('ingredients').get()
+  const ingredients = snapshot.docs.map(collectIdsAndDocs)
+  return ingredients;
+}
  
 export default firebase;
