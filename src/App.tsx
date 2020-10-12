@@ -60,7 +60,7 @@ const App: React.FC = () => {
         console.log('---> error getting all ingredients', error),
       );
   }, []);
-
+  
   return (
     <UserContext.Provider value={currentUser}>
       <BoozeContext.Provider value={currentBooze}>

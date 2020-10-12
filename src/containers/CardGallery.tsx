@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { BoozeContext } from '../Context';
-
 import Card from '../components/Card';
 import { Flex } from '@chakra-ui/core';
 

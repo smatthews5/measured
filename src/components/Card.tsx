@@ -21,8 +21,6 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
     >
       <Flex>
         <Image
-          height="30vh"
-          width="15vw"
           objectFit="cover"
           borderRadius="4px"
           src={cocktail.imageUrl}
@@ -30,11 +28,18 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
           alt="drink"
         />
       </Flex>
-      <Flex justify="space-between" padding="2px">
-        <Flex align="center">
+      <Flex
+        direction={{base: 'column', lg: 'row'}}
+        align={{base: 'center'}}
+        justifyContent="space-between"
+        padding="2px"
+        height={{ base: '50%', md: '75%', lg: '100%' }}
+        width={{ base: '50%', md: '75%', lg: '100%' }}
+      >
+        <Flex align="center" padding="2px">
           <h4>{cocktail.name}</h4>
         </Flex>
-        <Flex align="center" padding="2px">
+        <Flex align="center" justify="center" padding="2px">
           <h5
             css={css`
               margin-right: 2px;
