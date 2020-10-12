@@ -23,10 +23,11 @@ const customTheme = extendTheme({
         margin: '0',
         padding: '0',
       },
-      'html, body': {
+      'html,body': {
         font: 'body',
         height: '100vh',
         width: '100vw',
+        lineHeight: '1',
         overflow: 'scroll',
         '::-webkit-scrollbar': {
           width: '0',
@@ -76,6 +77,13 @@ const customTheme = extendTheme({
         borderBottom: 'solid thin white',
         marginBottom: '5%',
         width: '80%',
+      },
+    },
+  },
+  components: {
+    Flex: {
+      baseStyle: {
+        align: 'center',
       },
     },
   },
