@@ -12,7 +12,7 @@ const HeaderLarge: React.FC = () => {
     <header id="large">
       <Flex pl={4} width="25vw" align="center">
         <Link to="/">
-          <Heading as="h1" color="white" fontSize={['4xl', '6.5vw']}>
+          <Heading as="h1" color="white" fontSize={['4xl', '6vw']}>
             Measured
           </Heading>
         </Link>

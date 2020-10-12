@@ -45,7 +45,6 @@ const App: React.FC = () => {
   useEffect(() => {
     CocktailService.getCocktails()
       .then((allCocktails) => {
-        console.log('---> allCocktails', allCocktails);
         setBooze((prevState) => ({ ...prevState, cocktails: allCocktails }));
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
