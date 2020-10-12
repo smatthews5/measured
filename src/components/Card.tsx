@@ -31,8 +31,8 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
         />
       </Flex>
       <Flex
-        direction={{base: 'column', lg: 'row'}}
-        align={{base: 'center'}}
+        direction={{ base: 'column', lg: 'row' }}
+        align={{ base: 'center' }}
         justifyContent="space-between"
         padding="2px"
         height={{ base: '50%', md: '75%', lg: '100%' }}

@@ -8,11 +8,13 @@ const CardGallery: React.FC = () => {
   return (
     <>
       <Box w="82vw" mx="auto" mt="2vh">
-        <Text pl="2vw" fontSize="lg">All Cocktails</Text>
+        <Text pl="2vw" fontSize="lg">
+          All Cocktails
+        </Text>
         <Flex overflowX="scroll">
-        {booze.cocktails.map((cocktail) => (
-          <Card cocktail={cocktail} key={cocktail.id} />
-        ))}
+          {booze.cocktails.map((cocktail) => (
+            <Card cocktail={cocktail} key={cocktail.id} />
+          ))}
         </Flex>
       </Box>
     </>

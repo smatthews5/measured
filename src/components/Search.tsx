@@ -20,26 +20,27 @@ const Search: React.FC = () => {
         <InputGroup width="100%">
           <Input borderRadius="8px" />
           <InputRightElement>
-            <SearchIcon name="search" color="grey"/>
+            <SearchIcon name="search" color="grey" />
           </InputRightElement>
         </InputGroup>
       </Flex>
-      <Flex direction={{base: 'column', md: 'row'}} width="75%" align="center">
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        width="75%"
+        align="center"
+      >
         <FormLabel
           htmlFor="cocktail"
           width={['25%', '25%']}
           marginTop={['10px', '10px']}
           marginLeft={['20%', '10px']}
-
-
-          
           color="#C67833"
           fontFamily="heading"
-          fontSize={{base: '15px', md: '20px'}}
+          fontSize={{ base: '15px', md: '20px' }}
         >
           Filter by:
         </FormLabel>
-        <Flex width= "100%">
+        <Flex width="100%">
           <FormControl>
             <Select
               isTruncated
