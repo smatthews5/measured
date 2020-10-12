@@ -1,10 +1,9 @@
 /** @jsx jsx */
 import React from 'react';
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import {
   Flex,
   Input,
-  Icon,
   InputRightElement,
   InputGroup,
   FormControl,
@@ -31,18 +30,20 @@ const Search: React.FC = () => {
           width="25%"
           margin="10px"
           color="#C67833"
-          fontFamily={theme.fonts.heading}
+          fontFamily="heading"
           fontSize="20px"
         >
-          Filter by:{' '}
+          Filter by:
         </FormLabel>
         <FormControl margin="10px">
           <Select
             id="base-ingedient"
             placeholder="Base Ingedient"
             color="#C67833"
-            fontFamily={theme.fonts.body}
-            border="none"
+            fontFamily="{theme.fonts.body}"
+            // border="none"
+            margin="10px"
+
           >
             {/* for each option */}
             <option>Gin</option>
@@ -56,7 +57,7 @@ const Search: React.FC = () => {
             placeholder="Strength"
             color="#C67833"
             fontFamily={theme.fonts.body}
-            border="none"
+            // border="none"
           >
             <option>Hard Af</option>
           </Select>
@@ -64,10 +65,10 @@ const Search: React.FC = () => {
         <FormControl margin="10px">
           <Select
             id="flavour"
-            placeholder="Flavour"
+            placeholder= "Flavour"
             color="#C67833"
             fontFamily={theme.fonts.body}
-            border="none"
+            // border="none"
           >
             <option>Fruity</option>
           </Select>
