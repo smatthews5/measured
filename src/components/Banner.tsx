@@ -13,6 +13,7 @@ function Banner() {
           src={feature}
           alt="An Old Fashioned cocktail"
           borderLeftRadius="8px"
+          flexShrink={0}
         />
         <Flex width="100%" align="center" justify="center" direction="column">
           <Heading
