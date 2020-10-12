@@ -1,30 +1,65 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import { Flex, Image } from '@chakra-ui/core';
+import { Flex, Wrap, Image, Heading } from '@chakra-ui/core';
 import icon from '../assets/images/user_icon_reverse.png';
+
+const responsiveFontSize = ['lg', 'xl', '3xl', '4xl'];
+const responsiveWidth = ['7.5vw', '12.5vw', '17.5vw', '20vw'];
+const responsiveImage = ['15px', '30px', '40px', ' 50px'];
 
 const Header: React.FC = () => {
   return (
     <header>
       <Flex pl={4}>
         <Link to="/">
-          <h1>Measured</h1>
+          <Heading as="h1" fontSize={['2xl', '3xl', '3.5vw', '4.5vw']}>
+            Measured
+          </Heading>
         </Link>
       </Flex>
-      <Flex justify="space-between" align="center" width="50vw" pr={4}>
+      <Flex
+        justify="space-between"
+        align="center"
+        width={['50vw', '60vw', '65vw', '70vw']}
+        pr={4}
+      >
         <Link to="/ingredients">
-          <h3>Browse ingredients</h3>
+          <Heading
+            as="h2"
+            fontSize={responsiveFontSize}
+            maxWidth={responsiveWidth}
+            color="purple.300"
+            isTruncated
+          >
+            Browse ingredients
+          </Heading>
         </Link>
         <Link to="/build-a-drink">
-          <h3>Build a cocktail</h3>
+          <Heading
+            as="h2"
+            fontSize={responsiveFontSize}
+            maxWidth={responsiveWidth}
+            color="purple.300"
+            isTruncated
+          >
+            Build a cocktail
+          </Heading>
         </Link>
         <Link to="/my-bar">
-          <h3>Explore my bar</h3>
+          <Heading
+            as="h2"
+            fontSize={responsiveFontSize}
+            maxWidth={responsiveWidth}
+            color="purple.300"
+            isTruncated
+          >
+            Explore my bar
+          </Heading>
         </Link>
         <Link to="/welcome">
           <Image
-            w="50px"
-            h="50px"
+            w={responsiveImage}
+            h={responsiveImage}
             objectFit="cover"
             src={icon}
             alt="Login/signup icon"

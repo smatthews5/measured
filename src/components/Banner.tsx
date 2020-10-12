@@ -1,29 +1,39 @@
 import React from 'react';
-import { Flex, Image } from '@chakra-ui/core';
+import { Flex, Center, Heading, Image } from '@chakra-ui/core';
 import feature from '../tempAsset/images/old fashioned.jpeg';
 
 function Banner() {
   return (
-    <Flex justify="center" align="center">
-      <Flex
-        width="80vw"
-        justify="space-around"
-        align="center"
-        border="solid black 1px"
-        py={50}
-      >
+    <Center py="10">
+      <Flex width="80vw" borderRadius="8px" bgColor="purple.400">
         <Image
-          w="40%"
-          h="40%"
-          objectFit="cover"
+          w="50%"
+          h="auto"
+          fit="contain"
           src={feature}
           alt="An Old Fashioned cocktail"
+          borderLeftRadius="8px"
         />
-        <Flex width="30%" height="100%" border="solid black 1px">
-          Old Fashioned
+        <Flex width="100%" align="center" justify="center" direction="column">
+          <Heading
+            as="h3"
+            fontFamily="mono"
+            fontWeight="normal"
+            fontSize={['2xl', '3xl', '5vw', '6vw']}
+          >
+            Old Fashioned
+          </Heading>
+          <hr />
+          <Heading
+            as="h3"
+            fontWeight="normal"
+            fontSize={['lg', 'xl', '3xl', '3vw']}
+          >
+            Recipe of the day
+          </Heading>
         </Flex>
       </Flex>
-    </Flex>
+    </Center>
   );
 }
 

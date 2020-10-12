@@ -32,9 +32,11 @@ const App: React.FC = () => {
   const updatedUser = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   const [cocktails, setCocktails] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   
   useEffect(() => {
     CocktailService.getCocktails().then((cocktailsData) => setCocktails(cocktailsData));
+    CocktailService.getIngredients().then((ingredientsData) => setIngredients(ingredientsData));
   }, []);
   
   return (

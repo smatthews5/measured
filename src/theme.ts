@@ -18,11 +18,13 @@ const customTheme = extendTheme({
   },
   styles: {
     global: {
-      'html, body': {
-        fontFamily: 'body',
+      '*': {
         boxSizing: 'border-box',
         margin: '0',
         padding: '0',
+      },
+      'html, body': {
+        font: 'body',
         height: '100vh',
         width: '100vw',
         overflow: 'scroll',
@@ -40,26 +42,25 @@ const customTheme = extendTheme({
         minHeight: '6.5vw',
         borderBottom: '1px solid purple.200',
       },
-      'h1, h2, h3': {
+      'header[id="large"]': {
+        backgroundColor: 'purple.400',
+        height: '15vh',
+      },
+      'h1, h2': {
         fontFamily: 'heading',
         textTransform: 'uppercase',
         textDecoration: 'none',
-        paddingTop: '8%',
         fontWeight: '600',
+        paddingTop: '3%',
       },
       h1: {
-        fontSize: '4vw',
+        paddingTop: '15%',
+        paddingBottom: '8%',
         color: 'purple.400',
       },
-
-      h2: {
-        fontSize: '2.5vw',
-        color: 'purple.200',
-      },
-
       h3: {
-        color: 'purple.300',
-        fontSize: '2vw',
+        textTransform: 'uppercase',
+        color: 'white',
       },
       h4: {
         fontWeight: '400',
@@ -70,6 +71,11 @@ const customTheme = extendTheme({
         fontSize: '10px',
         fontStyle: 'italic',
         color: 'gray.400',
+      },
+      hr: {
+        borderBottom: 'solid thin white',
+        marginBottom: '5%',
+        width: '80%',
       },
     },
   },
