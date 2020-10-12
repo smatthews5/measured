@@ -18,12 +18,14 @@ const customTheme = extendTheme({
   },
   styles: {
     global: {
-      'html, body': {
-        fontFamily: 'body',
+      '*': {
         boxSizing: 'border-box',
         margin: '0',
         padding: '0',
-        height: '100vw',
+      },
+      'html, body': {
+        fontFamily: 'body',
+        height: '100vh',
         width: '100vw',
         overflow: 'scroll',
         '::-webkit-scrollbar': {
