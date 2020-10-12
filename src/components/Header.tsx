@@ -11,7 +11,7 @@ const Header: React.FC = () => {
           <h1>Measured</h1>
         </Link>
       </Flex>
-      <Flex justify="space-between" align="center" width="40vw" pr={4}>
+      <Flex justify="space-between" align="center" width="50vw" pr={4}>
         <Link to="/ingredients">
           <h3>Browse ingredients</h3>
         </Link>
@@ -23,7 +23,8 @@ const Header: React.FC = () => {
         </Link>
         <Link to="/welcome">
           <Image
-            size="50px"
+            w="50px"
+            h="50px"
             objectFit="cover"
             src={icon}
             alt="Login/signup icon"
