@@ -122,6 +122,18 @@ ReactDOM.render(
             text-decoration: none;
             padding-top: 8%;
           }
+          h4 {
+            font-family: ${theme.fonts.body};
+            font-weight: 400;
+            color: ${theme.colors.grey}
+          }
+          h5 {
+            font-family: ${theme.fonts.body};
+            font-weight: 400;
+            font-size: 10px;
+            font-style: italic;
+            color: ${theme.colors.grey}
+          }
 
           h1 {
             font-size: 3.5em;

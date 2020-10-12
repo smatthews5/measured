@@ -4,9 +4,9 @@ import { Link } from '@reach/router';
 import { css, jsx } from '@emotion/core';
 import { Flex, Image, useTheme } from '@chakra-ui/core';
 import icon from '../assets/images/user_icon.png';
+import theme from '../theme';
 
 const HeaderLarge: React.FC = () => {
-  const theme = useTheme();
   return (
     <header
       css={css`
