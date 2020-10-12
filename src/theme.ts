@@ -40,26 +40,29 @@ const customTheme = extendTheme({
         minHeight: '6.5vw',
         borderBottom: '1px solid purple.200',
       },
+      'header[id="large"]': {
+        backgroundColor: 'purple.400',
+        height: '15vh',
+      },
       'h1, h2, h3': {
         fontFamily: 'heading',
         textTransform: 'uppercase',
         textDecoration: 'none',
-        paddingTop: '8%',
         fontWeight: '600',
+        paddingTop: '3%',
       },
       h1: {
-        fontSize: '4vw',
+        paddingTop: '15%',
+        paddingBottom: '8%',
         color: 'purple.400',
       },
 
       h2: {
-        fontSize: '2.5vw',
         color: 'purple.200',
       },
 
       h3: {
         color: 'purple.300',
-        fontSize: '2vw',
       },
       h4: {
         fontWeight: '400',

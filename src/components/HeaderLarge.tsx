@@ -1,47 +1,68 @@
-/** @jsx jsx */
 import React from 'react';
 import { Link } from '@reach/router';
-import { css, jsx } from '@emotion/core';
-import { Flex, Image, useTheme } from '@chakra-ui/core';
+import { Flex, Heading, Image } from '@chakra-ui/core';
 import icon from '../assets/images/user_icon.png';
-import theme from '../theme';
+
+const responsiveFontSize = ['lg', '2xl', '3xl', '4xl'];
+const responsiveWidth = ['7.5vw', '12.5vw', '17.5vw', '20vw'];
+const responsiveImage = ['15px', '30px', '40px', ' 50px'];
 
 const HeaderLarge: React.FC = () => {
   return (
-    <header
-      css={css`
-        height: 15vh;
-        background-color: ${theme.colors.purple[400]};
-      `}
-    >
+    <header id="large">
       <Flex pl={4} width="25vw" align="center">
         <Link to="/">
-          <h1
-            css={css`
-              font-size: 6.5vw;
-              color: white;
-            `}
+          <Heading
+            as="h1"
+            color="white"
+            fontSize={['3xl', '4xl', '5.5vw', '6.5vw']}
           >
             Measured
-          </h1>
+          </Heading>
         </Link>
       </Flex>
-      <Flex justify="space-between" align="center" width="60vw" pr={4}>
+      <Flex
+        pr={4}
+        justify="space-between"
+        align="center"
+        width={['45vw', '55vw', '60vw', '65vw']}
+      >
         <Link to="/ingredients">
-          <h2>Browse ingredients</h2>
+          <Heading
+            as="h2"
+            fontSize={responsiveFontSize}
+            maxWidth={responsiveWidth}
+            isTruncated
+          >
+            Browse ingredients
+          </Heading>
         </Link>
         <Link to="/build-a-drink">
-          <h2>Build a cocktail</h2>
+          <Heading
+            as="h2"
+            fontSize={responsiveFontSize}
+            maxWidth={responsiveWidth}
+            isTruncated
+          >
+            Build a cocktail
+          </Heading>
         </Link>
         <Link to="/my-bar">
-          <h2>Explore my bar</h2>
+          <Heading
+            as="h2"
+            fontSize={responsiveFontSize}
+            maxWidth={responsiveWidth}
+            isTruncated
+          >
+            Explore my bar
+          </Heading>
         </Link>
         <Link to="/welcome">
           <Image
-            w="50px"
-            h="50px"
-            objectFit="cover"
+            w={responsiveImage}
+            h={responsiveImage}
             src={icon}
+            objectFit="cover"
             alt="Login/signup icon"
           />
         </Link>
