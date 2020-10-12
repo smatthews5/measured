@@ -27,8 +27,12 @@ const Search: React.FC = () => {
       <Flex direction={{base: 'column', md: 'row'}} width="75%" align="center">
         <FormLabel
           htmlFor="cocktail"
-          width="25%"
-          margin="2px"
+          width={['25%', '25%']}
+          marginTop={['10px', '10px']}
+          marginLeft={['20%', '10px']}
+
+
+          
           color="#C67833"
           fontFamily="heading"
           fontSize={{base: '15px', md: '20px'}}
@@ -42,7 +46,7 @@ const Search: React.FC = () => {
               id="base-ingedient"
               placeholder="Base Ingedient"
               color="#C67833"
-              fontFamily="{theme.fonts.body}"
+              fontFamily="body"
               border="none"
               fontSize={['10px', '16px', '16px', '16px']}
             >
@@ -58,7 +62,7 @@ const Search: React.FC = () => {
               id="strength"
               placeholder="Strength"
               color="#C67833"
-              fontFamily={theme.fonts.body}
+              fontFamily="body"
               border="none"
               fontSize={['10px', '16px', '16px', '16px']}
             >
@@ -71,7 +75,7 @@ const Search: React.FC = () => {
               id="flavour"
               placeholder="Flavour"
               color="#C67833"
-              fontFamily={theme.fonts.body}
+              fontFamily="body"
               border="none"
               fontSize={['10px', '16px', '16px', '16px']}
             >
