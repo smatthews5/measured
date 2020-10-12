@@ -6,18 +6,8 @@ import drink from '../tempAsset/images/americano.jpeg';
 
 const Card: React.FC = () => {
   return (
-    <Flex
-      direction="column"
-      width="180px"
-      borderRadius="4px"
-      margin="10px"
-      justifyContent={{ md: 'center' }}
-      align={{ md: 'center' }}
-    >
-      <Flex
-        height={{ base: '50%', md: '75%', lg: '100%' }}
-        width={{ base: '50%', md: '75%', lg: '100%' }}
-      >
+    <Flex direction="column" width="15vw" minWidth="15vw" borderRadius="4px" margin="2%">
+      <Flex>
         <Image
           objectFit="cover"
           borderRadius="4px"
