@@ -1,5 +1,4 @@
 import React from 'react';
-import { RouteComponentProps } from '@reach/router';
 
 import HeaderLarge from '../components/HeaderLarge';
 import Banner from '../components/Banner';
