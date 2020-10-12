@@ -17,7 +17,11 @@ export interface Cocktail {
   garnish: string,
   id: string,
   imageUrl: string,
-  ingredients: Ingredient[],
+  ingredients: {
+    name: string,
+    amount: number,
+    unit: string
+  }[],
   ingredientsList: string[],
   instructions: [{[key: number]: string}],
   name: string,
