@@ -65,7 +65,7 @@ const customTheme = extendTheme({
       },
       h4: {
         fontWeight: '400',
-        color: 'gray.400',
+        color: 'gray.500',
       },
       h5: {
         fontWeight: '400',

@@ -9,12 +9,14 @@ const CardGallery: React.FC = () => {
   
   return (
     <>
-      <Box w="82vw" mx="auto">
-        <Text pl="2vw" fontSize="lg">All Cocktails</Text>
-        <Flex px="9%" overflowX="scroll">
-        {booze.cocktails.map((cocktail: Cocktail) => (
-          <Card cocktail={cocktail} key={cocktail.id} />
-        ))}
+      <Box w="82vw" mx="auto" mt="2vh">
+        <Text pl="2vw" fontSize="lg">
+          All Cocktails
+        </Text>
+        <Flex overflowX="scroll">
+          {booze.cocktails.map((cocktail) => (
+            <Card cocktail={cocktail} key={cocktail.id} />
+          ))}
         </Flex>
       </Box>
     </>
