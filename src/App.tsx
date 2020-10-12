@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Router, RouteComponentProps } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import * as CocktailService from './services/firebase';
+import { Booze, User } from './interfaces';
 
 // import full-screen pages
 import Home from './pages/Home';
@@ -23,14 +24,7 @@ const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 
 const App: React.FC = () => {
   // define initial state for user details
-  interface IUser {
-    firstName: string;
-    lastName: string;
-    myIngredients: any[];
-    likedDrinks: any[];
-    createdDrinks: any[];
-  }
-  const [user, setUser] = useState<IUser>({
+  const [user, setUser] = useState<User>({
     firstName: '',
     lastName: '',
     myIngredients: [],
@@ -39,11 +33,7 @@ const App: React.FC = () => {
   });
 
   // define initial state for drink/ingredient details
-  interface IBooze {
-    ingredients: any[];
-    cocktails: any[];
-  }
-  const [booze, setBooze] = useState<IBooze>({
+  const [booze, setBooze] = useState<Booze>({
     ingredients: [],
     cocktails: [],
   });
@@ -54,9 +44,10 @@ const App: React.FC = () => {
 
   useEffect(() => {
     CocktailService.getCocktails()
-      .then((allCocktails) =>
-        setBooze((prevState) => ({ ...prevState, cocktails: allCocktails })),
-      )
+      .then((allCocktails) => {
+        console.log('---> allCocktails', allCocktails);
+        setBooze((prevState) => ({ ...prevState, cocktails: allCocktails }));
+      })
       .catch((error) => console.log('---> error getting all cocktails', error));
     CocktailService.getIngredients()
       .then((allIngredients) =>

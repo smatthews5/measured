@@ -1,18 +1,16 @@
-import React from 'react';
-import { Flex } from '@chakra-ui/core';
+import React, { useContext } from 'react';
+import { BoozeContext } from '../Context';
 import Card from '../components/Card';
 import { Flex } from '@chakra-ui/core';
 
 const CardGallery: React.FC = () => {
+  const { booze } = useContext(BoozeContext);
   return (
     <>
       <Flex px="9%" overflowX="scroll">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {booze.cocktails.map((cocktail) => (
+          <Card cocktail={cocktail} key={cocktail.id} />
+        ))}
       </Flex>
     </>
   );
