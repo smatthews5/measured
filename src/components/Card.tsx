@@ -3,6 +3,7 @@ import React from 'react';
 import { css, jsx } from '@emotion/core';
 import { Flex, Image } from '@chakra-ui/core';
 import drink from '../tempAsset/images/americano.jpeg';
+
 const Card: React.FC = () => {
   return (
     <Flex direction="column" width="180px" borderRadius="4px" margin="10px">
@@ -21,7 +22,13 @@ const Card: React.FC = () => {
           <h4>Americano</h4>
         </Flex>
         <Flex align="center" padding="2px">
-          <h5 css={css`margin-right: 2px`}>Gin -</h5>
+          <h5
+            css={css`
+              margin-right: 2px;
+            `}
+          >
+            Gin -
+          </h5>
           <h5>Refreshing</h5>
         </Flex>
       </Flex>

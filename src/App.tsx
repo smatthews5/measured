@@ -40,10 +40,10 @@ const App: React.FC = () => {
       querySnapshot.forEach((doc) => {
           const id = doc.id;
           const data = doc.data();
-          const cocktail = {id: id, ...data}
+          const cocktail = {id: id, ...data};
           cocktailArr.push(cocktail);
       });
-      setCocktails(cocktailArr)
+      setCocktails(cocktailArr);
     });
   }, []);
 
