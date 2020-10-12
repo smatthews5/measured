@@ -33,10 +33,14 @@ const App: React.FC = () => {
 
   const [cocktails, setCocktails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  
+
   useEffect(() => {
-    CocktailService.getCocktails().then((cocktailsData) => setCocktails(cocktailsData));
-    CocktailService.getIngredients().then((ingredientsData) => setIngredients(ingredientsData));
+    CocktailService.getCocktails().then((cocktailsData) =>
+      setCocktails(cocktailsData),
+    );
+    CocktailService.getIngredients().then((ingredientsData) =>
+      setIngredients(ingredientsData),
+    );
   }, []);
 
   return (

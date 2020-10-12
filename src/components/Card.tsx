@@ -6,13 +6,19 @@ import drink from '../tempAsset/images/americano.jpeg';
 
 const Card: React.FC = () => {
   return (
-    <Flex direction="column" width="15vw" minWidth="15vw" borderRadius="4px" margin="2%">
+    <Flex
+      direction="column"
+      width="15vw"
+      minWidth="15vw"
+      borderRadius="4px"
+      mx="2vw"
+    >
       <Flex>
         <Image
-          height="30vh"
+          height="25vh"
           width="15vw"
           objectFit="cover"
-          borderRadius="4px"
+          borderRadius="5px"
           src={drink}
           boxShadow="0px 0px 9px 1px rgba(0, 0, 0, 0.75)"
           alt="drink"
