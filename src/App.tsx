@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Router, RouteComponentProps } from '@reach/router';
-import { UserContext } from './UserContext';
+import { UserContext, BoozeContext } from './Context';
 import * as CocktailService from './services/firebase';
 
 // import full-screen pages
@@ -19,36 +19,69 @@ const DrinkBuilderPage = (props: RouteComponentProps) => <DrinkBuilder />;
 const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 
+// TODO: Prune out the 'any' types and repalce with approppriate cocktail/ingredient interfaces in a separate file
+
 const App: React.FC = () => {
   // define initial state for user details
-  const [user, setUser] = useState({
+  interface IUser {
+    firstName: string;
+    lastName: string;
+    myIngredients: any[];
+    likedDrinks: any[];
+    createdDrinks: any[];
+  }
+  const [user, setUser] = useState<IUser>({
     firstName: '',
     lastName: '',
     myIngredients: [],
     likedDrinks: [],
     createdDrinks: [],
   });
-  // memoize user state --> trigger updates with changes from any page
-  const updatedUser = useMemo(() => ({ user, setUser }), [user, setUser]);
 
-  const [cocktails, setCocktails] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
-  
+  // define initial state for drink/ingredient details
+  interface IBooze {
+    ingredients: any[];
+    cocktails: any[];
+  }
+  const [booze, setBooze] = useState<IBooze>({
+    ingredients: [],
+    cocktails: [],
+  });
+
+  // memoize state --> trigger updates with changes from any page
+  const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
+  const currentBooze = useMemo(() => ({ booze, setBooze }), [booze, setBooze]);
+
   useEffect(() => {
-    CocktailService.getCocktails().then((cocktailsData) => setCocktails(cocktailsData));
-    CocktailService.getIngredients().then((ingredientsData) => setIngredients(ingredientsData));
+    CocktailService.getCocktails()
+      .then((allCocktails) =>
+        setBooze((prevState) => ({ ...prevState, cocktails: allCocktails })),
+      )
+      .catch((error) => console.log('---> error getting all cocktails', error));
+    CocktailService.getIngredients()
+      .then((allIngredients) =>
+        setBooze((prevState) => ({
+          ...prevState,
+          ingredients: allIngredients,
+        })),
+      )
+      .catch((error) =>
+        console.log('---> error getting all ingredients', error),
+      );
   }, []);
   
   return (
-    <UserContext.Provider value={updatedUser}>
-      <Router>
-        <HomePage path="/" />
-        <IngredientsPage path="/ingredients" />
-        <MyBarPage path="/my-bar" />
-        <DrinkBuilderPage path="/build-a-drink" />
-        <RecipePage path="/recipes/:name" />
-        <LoginSignupPage path="/welcome" />
-      </Router>
+    <UserContext.Provider value={currentUser}>
+      <BoozeContext.Provider value={currentBooze}>
+        <Router>
+          <HomePage path="/" />
+          <IngredientsPage path="/ingredients" />
+          <MyBarPage path="/my-bar" />
+          <DrinkBuilderPage path="/build-a-drink" />
+          <RecipePage path="/recipes/:name" />
+          <LoginSignupPage path="/welcome" />
+        </Router>
+      </BoozeContext.Provider>
     </UserContext.Provider>
   );
 };
