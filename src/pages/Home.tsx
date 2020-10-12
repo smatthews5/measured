@@ -7,7 +7,6 @@ import Search from '../components/Search';
 import CardGallery from '../containers/CardGallery';
 
 const Home: React.FC = () => {
-
   return (
     <>
       <HeaderLarge />
