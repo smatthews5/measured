@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { collectIdsAndDocs } from '../utilities';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCuTrD5ArJIOjE42O_i2g97oITTuFSjJck',
@@ -16,4 +17,10 @@ firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
 
+export const getCocktails = async () => {
+  const snapshot = await firestore.collection('cocktails').get()
+  const cocktails = snapshot.docs.map(collectIdsAndDocs)
+  return cocktails;
+}
+ 
 export default firebase;

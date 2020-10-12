@@ -1,8 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Router, RouteComponentProps } from '@reach/router';
 import { UserContext } from './UserContext';
-import { firestore } from './services/firebase';
-import { collectIdsAndDocs } from './utilities';
+import * as CocktailService from './services/firebase';
 
 // import full-screen pages
 import Home from './pages/Home';
@@ -33,18 +32,9 @@ const App: React.FC = () => {
   const updatedUser = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   const [cocktails, setCocktails] = useState([]);
-
+  
   useEffect(() => {
-    firestore.collection("cocktails").get().then((querySnapshot) => {
-      let cocktailArr = [];
-      querySnapshot.forEach((doc) => {
-          const id = doc.id;
-          const data = doc.data();
-          const cocktail = {id: id, ...data}
-          cocktailArr.push(cocktail);
-      });
-      setCocktails(cocktailArr)
-    });
+    CocktailService.getCocktails().then((cocktailsData) => setCocktails(cocktailsData));
   }, []);
 
   return (
