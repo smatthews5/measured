@@ -11,22 +11,22 @@ const HeaderLarge: React.FC = () => {
     <header
       css={css`
         height: 15vh;
-        background-color: ${theme.colors.lead};
+        background-color: ${theme.colors.purple[400]};
       `}
     >
-      <Flex pl={4} width="25vw">
+      <Flex pl={4} width="25vw" align="center">
         <Link to="/">
           <h1
             css={css`
-              font-size: 5em;
-              color: ${theme.colors.white};
+              font-size: 6.5vw;
+              color: white;
             `}
           >
             Measured
           </h1>
         </Link>
       </Flex>
-      <Flex justify="space-between" align="center" width="50vw" pr={4}>
+      <Flex justify="space-between" align="center" width="60vw" pr={4}>
         <Link to="/ingredients">
           <h2>Browse ingredients</h2>
         </Link>
@@ -38,7 +38,8 @@ const HeaderLarge: React.FC = () => {
         </Link>
         <Link to="/welcome">
           <Image
-            size="50px"
+            w="50px"
+            h="50px"
             objectFit="cover"
             src={icon}
             alt="Login/signup icon"

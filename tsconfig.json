@@ -5,11 +5,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
@@ -19,13 +15,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "strict": true,
-    
+
     "noImplicitAny": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "strictBindCallApply": true,
+    "strictBindCallApply": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
