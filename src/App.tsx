@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Router, RouteComponentProps } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import * as CocktailService from './services/firebase';
-import { Booze, User} from './interfaces';
+import { Booze, User, Cocktail, Ingredient} from './interfaces';
 
 // import full-screen pages
 import Home from './pages/Home';
@@ -39,12 +39,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     CocktailService.getCocktails()
-      .then((allCocktails) => {
+      .then((allCocktails: Cocktail[]) => {
         setBooze((prevState) => ({ ...prevState, cocktails: allCocktails }));
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
     CocktailService.getIngredients()
-      .then((allIngredients) =>
+      .then((allIngredients: Ingredient[]) =>
         setBooze((prevState) => ({
           ...prevState,
           ingredients: allIngredients,
