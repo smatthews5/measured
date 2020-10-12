@@ -17,9 +17,9 @@ import theme from '../theme';
 const Search: React.FC = () => {
   return (
     <Flex margin="20px" justify="center" align="center" direction="column">
-      <Flex width="75%" borderRadius="6px">
-        <InputGroup>
-          <Input />
+      <Flex width='75%'>
+        <InputGroup width="100%" >
+          <Input borderRadius="8px"/>
           <InputRightElement>
             <SearchIcon name="search" color="grey" />
           </InputRightElement>

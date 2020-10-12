@@ -23,7 +23,7 @@ const customTheme = extendTheme({
         boxSizing: 'border-box',
         margin: '0',
         padding: '0',
-        height: '100vw',
+        height: '100vh',
         width: '100vw',
         overflow: 'scroll',
         '::-webkit-scrollbar': {

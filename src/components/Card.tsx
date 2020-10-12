@@ -14,8 +14,10 @@ const Card: React.FC = () => {
       justifyContent={{ md: 'center' }}
       align={{ md: 'center' }}
     >
-      <Flex height={{ base: '50%', md: '75%', lg: '100%' }}
-      width={{ base: '50%', md: '75%', lg: '100%' }}>
+      <Flex
+        height={{ base: '50%', md: '75%', lg: '100%' }}
+        width={{ base: '50%', md: '75%', lg: '100%' }}
+      >
         <Image
           objectFit="cover"
           borderRadius="4px"
@@ -24,8 +26,15 @@ const Card: React.FC = () => {
           alt="drink"
         />
       </Flex>
-      <Flex justifyContent="space-between" padding="2px" width='100%'>
-        <Flex align="center" padding="2px" fontSize={['sm', 'md', 'lg', 'xl']}>
+      <Flex
+        direction={{base: 'column', lg: 'row'}}
+        align={{base: 'center'}}
+        justifyContent="space-between"
+        padding="2px"
+        height={{ base: '50%', md: '75%', lg: '100%' }}
+        width={{ base: '50%', md: '75%', lg: '100%' }}
+      >
+        <Flex align="center" padding="2px">
           <h4>Americano</h4>
         </Flex>
         <Flex align="center" justify="center" padding="2px">
