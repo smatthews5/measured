@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 import React, { useContext, useEffect, useState } from 'react';
 import { BoozeContext } from '../Context';
 
 import { Flex, Center, Heading, Image } from '@chakra-ui/core';
-import feature from '../tempAsset/images/old fashioned.jpeg';
+// import feature from '../tempAsset/images/old fashioned.jpeg';
 
-function Banner() {
+const Banner: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   const [featureCocktail, setFeatureCocktail] = useState({
     name: 'test cocktail',
@@ -65,6 +66,6 @@ function Banner() {
       </Flex>
     </Center>
   );
-}
+};
 
 export default Banner;
