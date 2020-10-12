@@ -3,12 +3,14 @@ import React from 'react';
 import { css, jsx } from '@emotion/core';
 import { Flex, Image } from '@chakra-ui/core';
 import drink from '../tempAsset/images/americano.jpeg';
+
 const Card: React.FC = () => {
   return (
     <Flex direction="column" width="180px" borderRadius="4px" margin="10px">
       <Flex>
         <Image
-          size="15vw"
+          height="30vh"
+          width="15vw"
           objectFit="cover"
           borderRadius="4px"
           src={drink}
