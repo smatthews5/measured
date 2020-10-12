@@ -61,6 +61,16 @@ const customTheme = extendTheme({
         color: 'purple.300',
         fontSize: '2vw',
       },
+      h4 {
+            fontWeight: '400',
+            color: 'gray.400',
+          },
+      h5 {
+            fontWeight: '400',
+            fontSize: '10px',
+            fontStyle: 'italic',
+            color: 'gray.400',
+          },
     },
   },
 });
