@@ -13,7 +13,7 @@ import {
   FormLabel,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import {Cocktail} from '../interfaces';
+import { Cocktail } from '../interfaces';
 // TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
 
@@ -62,14 +62,12 @@ const Search: React.FC = () => {
             <SearchIcon name="search" color="grey" />
           </InputRightElement>
         </InputGroup>
-
       </Flex>
       <Flex
         direction={{ base: 'column', md: 'row' }}
         width="70%"
         align="center"
       >
-
         <Flex
           align="center"
           width="35%"
