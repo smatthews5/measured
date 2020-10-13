@@ -22,7 +22,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
           {cocktail?.name}
         </Heading>
         <Flex h="50vh" w="80vw" mt="5vh" mx="auto">
-          <Flex w="50%" justifyContent="flex-end" mr="5%">
+          <Flex w="50%" flexDirection="column" align="flex-end" mr="5%">
             <Image
               src={cocktail?.imageUrl}
               w="65%"
@@ -31,6 +31,27 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
               borderRadius="8px"
               boxShadow="0px 0px 9px 1px rgba(0, 0, 0, 0.75)"
             ></Image>
+            <Flex
+              alignSelf="flex-end"
+              alignItems="center"
+              width="65%"
+              justifyContent="space-around"
+            >
+              <Text
+                fontFamily="heading"
+                fontSize={['md', 'lg', 'xl', '2xl']}
+                w="50%"
+              >
+                Glass: {cocktail?.glassware}
+              </Text>
+              <Text
+                fontFamily="heading"
+                fontSize={['md', 'lg', 'xl', '2xl']}
+                w="50%"
+              >
+                Garnish: {cocktail?.garnish.description}
+              </Text>
+            </Flex>
           </Flex>
           <Flex direction="column" w="50%">
             <Text
@@ -56,7 +77,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             </Text>
             <List spacing={3}>
               {cocktail?.instructions.map((instruction) => (
-                <ListItem>{instruction}</ListItem>
+                <ListItem key={instruction}>{instruction}</ListItem>
               ))}
             </List>
           </Flex>
