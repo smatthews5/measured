@@ -3,28 +3,34 @@ import React, { useContext, useEffect, useState } from 'react';
 import { BoozeContext } from '../Context';
 
 import { Flex, Center, Heading, Image } from '@chakra-ui/core';
-// import feature from '../tempAsset/images/old fashioned.jpeg';
+
+import { Cocktail } from '../interfaces';
 
 const Banner: React.FC = () => {
   const { booze } = useContext(BoozeContext);
-  const [featureCocktail, setFeatureCocktail] = useState({
-    name: 'test cocktail',
-    imageUrl:
-      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/screen-shot-2017-05-25-at-6-35-25-am-1495690657.png?crop=1.00xw:0.978xh;0,0&resize=480:*',
+  const [featureCocktail, setFeatureCocktail] = useState<Cocktail>({
+    base: '',
+    categories: [''],
+    garnish: '',
+    id: '',
+    imageUrl: '',
+    ingredients: [],
+    ingredientsList: [''],
+    instructions: [{ 0: '' }],
+    name: '',
   });
 
   const todayDate = new Date().getDate();
 console.log('booze.cocktails from banner', booze?.cocktails);
 
   useEffect(() => {
-    console.log('---> booze.cocktails', booze?.cocktails);
-    if (booze?.cocktails.length) {
-      console.log('---> running useEffect, today:', todayDate);
-      const index = Math.random() * booze.cocktails.length;
+
+    if (booze.cocktails.length) {
+      const index = Math.floor(Math.random() * booze.cocktails.length);
       const recipeOfTheDay = booze.cocktails[index];
       setFeatureCocktail(recipeOfTheDay);
     }
-  }, [todayDate]);
+  }, [todayDate, booze.cocktails.length]);
 
   return (
     <Center pt={['2vh', '3vh', '4vh', '8vh']}>
@@ -42,8 +48,8 @@ console.log('booze.cocktails from banner', booze?.cocktails);
           w="50%"
           h="auto"
           fit="contain"
-          src={featureCocktail.imageUrl}
-          alt="An Old Fashioned cocktail"
+          src={featureCocktail.imageUrl || undefined}
+          alt={featureCocktail.name || undefined}
           flexShrink={0}
         />
         <Flex width="100%" align="center" justify="center" direction="column">
@@ -53,13 +59,14 @@ console.log('booze.cocktails from banner', booze?.cocktails);
             fontWeight="normal"
             fontSize={['2xl', '3xl', '5vw', '6vw']}
           >
-            {featureCocktail.name}
+            {featureCocktail.name || null}
           </Heading>
           <hr />
           <Heading
             as="h3"
             fontWeight="normal"
             fontSize={['lg', 'xl', '3xl', '3vw']}
+            textTransform="none"
           >
             Recipe of the day
           </Heading>
