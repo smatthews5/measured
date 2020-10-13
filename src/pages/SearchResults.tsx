@@ -5,14 +5,14 @@ import Header from '../components/Header';
 import Search from '../components/Search';
 import CardGrid from '../containers/CardGrid';
 
-function SearchResults() {
+function SearchResults({merged}) {
   const { booze } = useContext(BoozeContext);
   // dynamically display card grid
   return (
     <>
       <Header />
       <Search />
-      <CardGrid cocktails={booze.cocktails} searchTerms="" />
+      <CardGrid cocktails={merged} searchTerms="" />
     </>
   );
 }
