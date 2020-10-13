@@ -14,19 +14,19 @@ export interface Booze {
 }
 
 export interface Cocktail {
-  base: string,
-  categories: string[],
-  garnish: string,
-  id: string,
-  imageUrl: string,
+  base: string;
+  categories: string[];
+  garnish: string;
+  id: string;
+  imageUrl: string;
   ingredients: {
-    name: string,
-    amount: number,
-    unit: string
-  }[],
-  ingredientsList: string[],
-  instructions: [{[key: number]: string}],
-  name: string,
+    name: string;
+    amount: number;
+    unit: string;
+  }[];
+  ingredientsList: string[];
+  instructions: [{ [key: number]: string }];
+  name: string;
 }
 
 export interface Ingredient {

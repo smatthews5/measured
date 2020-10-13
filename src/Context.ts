@@ -1,14 +1,16 @@
 import { createContext } from 'react';
-import {Ingredient, Cocktail} from './interfaces';
+import { Booze, User } from './interfaces';
 
-interface Drink {
-  booze: {
-    ingredients: Ingredient[],
-    cocktails: Cocktail[],
-  },
+interface Person {
+  user: User;
+  setUser: (user: User) => void;
 }
-const UserContext = createContext({});
+interface Drink {
+  booze: Booze;
+  setBooze: (booze: Booze) => void;
+}
 
+const UserContext = createContext<Partial<Person>>({});
 const BoozeContext = createContext<Partial<Drink>>({});
 
 export { UserContext, BoozeContext };
