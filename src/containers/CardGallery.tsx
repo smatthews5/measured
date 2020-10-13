@@ -10,10 +10,10 @@ const CardGallery: React.FC = () => {
   return (
     <>
       <Box w="82vw" mx="auto" mt="2vh">
-        <Flex>
-          <Heading as="h3" fontFamily="mono" color="purple.400" pl="2vw">
-            All Cocktails
-          </Heading>
+      <Heading as="h3" fontFamily="mono" color="purple.400" pl="2vw">
+      All Cocktails
+      </Heading>
+      <Flex overflowX='scroll'>
           {booze?.cocktails.map((cocktail: Cocktail) => (
             <Card cocktail={cocktail} key={cocktail.id} />
           ))}
