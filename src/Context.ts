@@ -5,7 +5,7 @@ interface Drink {
   booze: {
     ingredients: Ingredient[],
     cocktails: Cocktail[],
-  }
+  },
 }
 const UserContext = createContext({});
 

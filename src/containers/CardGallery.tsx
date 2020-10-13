@@ -6,7 +6,6 @@ import {Cocktail} from '../interfaces';
 
 const CardGallery: React.FC = () => {
   const { booze } = useContext(BoozeContext);
-  console.log('booze',booze);
   
   return (
     <>
@@ -15,9 +14,9 @@ const CardGallery: React.FC = () => {
           All Cocktails
         </Text>
         <Flex overflowX="scroll">
-          {booze ? booze.cocktails.map((cocktail: Cocktail) => (
+          {booze?.cocktails.map((cocktail: Cocktail) => (
             <Card cocktail={cocktail} key={cocktail.id} />
-          )) : null }
+          ))}
         </Flex>
       </Box>
     </>

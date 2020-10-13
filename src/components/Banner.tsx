@@ -14,10 +14,11 @@ const Banner: React.FC = () => {
   });
 
   const todayDate = new Date().getDate();
+console.log('booze.cocktails from banner', booze?.cocktails);
 
   useEffect(() => {
-    console.log('---> booze.cocktails', booze.cocktails);
-    if (booze.cocktails.length) {
+    console.log('---> booze.cocktails', booze?.cocktails);
+    if (booze?.cocktails.length) {
       console.log('---> running useEffect, today:', todayDate);
       const index = Math.random() * booze.cocktails.length;
       const recipeOfTheDay = booze.cocktails[index];

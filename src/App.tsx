@@ -38,6 +38,8 @@ const App: React.FC = () => {
     ingredients: [],
     cocktails: [],
   });
+  // searched for state
+  const [searched, setSearched] = useState('');
 
   // memoize state --> trigger updates with changes from any page
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
