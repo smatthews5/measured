@@ -35,22 +35,20 @@ const Search: React.FC = () => {
   const [bases, setBases] = useState<Cocktail[]>();
   const [categories, setCategories] = useState<Cocktail[]>();
 
-  if (bases && categories) {
-    const ids = new Set(bases.map((d) => d.id));
-    const merged = [...bases, ...categories.filter((d) => !ids.has(d.id))];
-  }
-  // merged is an array of unique cocktails
-console.log(merged);
-
-
   function setSearchCriteria(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) {
-    event.preventDefault();
-    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) => setBases(cocktail));
-    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) => setCategories(cocktail));
-  };
+    ) {
+      event.preventDefault();
+      getMatchingCocktailsByBase(base).then((cocktail: Cocktail) => setBases(cocktail));
+      getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) => setCategories(cocktail));
+    };
 
+    // if bases && categories have been set merge their values into an array of unique cocktails
+    if (bases && categories) {
+      const ids = new Set(bases.map((d) => d.id));
+      const merged = [...bases, ...categories.filter((d) => !ids.has(d.id))];
+    }
+    
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
