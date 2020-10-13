@@ -40,6 +40,8 @@ const App: React.FC = () => {
     categories: [],
     bases: [],
   });
+  // searched for state
+  const [searched, setSearched] = useState('');
 
   // memoize state --> trigger updates with changes from any page
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);

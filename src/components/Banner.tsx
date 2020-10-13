@@ -1,10 +1,12 @@
+/* eslint-disable no-console */
 import React, { useContext, useEffect, useState } from 'react';
 import { BoozeContext } from '../Context';
 
 import { Flex, Center, Heading, Image } from '@chakra-ui/core';
+
 import { Cocktail } from '../interfaces';
 
-function Banner() {
+const Banner: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   const [featureCocktail, setFeatureCocktail] = useState<Cocktail>({
     base: '',
@@ -19,8 +21,10 @@ function Banner() {
   });
 
   const todayDate = new Date().getDate();
+console.log('booze.cocktails from banner', booze?.cocktails);
 
   useEffect(() => {
+
     if (booze.cocktails.length) {
       const index = Math.floor(Math.random() * booze.cocktails.length);
       const recipeOfTheDay = booze.cocktails[index];
@@ -70,6 +74,6 @@ function Banner() {
       </Flex>
     </Center>
   );
-}
+};
 
 export default Banner;

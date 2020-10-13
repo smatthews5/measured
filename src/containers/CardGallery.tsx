@@ -13,7 +13,6 @@ const CardGallery: React.FC = () => {
         <Heading as="h3" fontFamily="mono" color="purple.400" pl="2vw">
           All Cocktails
         </Heading>
-        <Flex overflowX="scroll">
           {booze.cocktails.map((cocktail: Cocktail) => (
             <Card cocktail={cocktail} key={cocktail.id} />
           ))}
