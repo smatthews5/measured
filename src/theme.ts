@@ -84,6 +84,7 @@ const customTheme = extendTheme({
         focusBorderColor: 'purple.200',
         fontSize: ['10px', '16px', '16px', '16px'],
         textTransform: 'lowercase',
+        multiple:'true'
       },
     },
   },

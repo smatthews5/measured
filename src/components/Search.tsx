@@ -10,38 +10,37 @@ import {
   InputGroup,
   FormControl,
   Select,
+  Button,
   FormLabel,
+  ButtonGroup,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import { Cocktail } from '../interfaces';
+import {firestore, storage} from '../services/firebase';
+import { Search } from '../interfaces';
+
 // TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
 
 const Search: React.FC = () => {
   const { booze } = useContext(BoozeContext);
-  const [input, setInput] = useState('');
-  const [submit, setSubmit] = useState('');
-  const [newList, setNewList] = useState<Cocktail[]>();
-  console.log('newList', newList);
 
-  function onInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setInput(event.target.value);
-  }
-
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmit(input);
-    const newCocktails = booze?.cocktails.filter((cocktail) =>
-      cocktail.name.includes(submit),
-    );
-    setNewList(newCocktails);
-  }
-
+  const [base, setBase] = useState('');
+  const [category, setCategory] = useState('');
+  const [flavour, setFlavour] = useState('');
+  const [searches, setSearches] = useState<Search>();
+  
+function setSearchCriteria (event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  event.preventDefault();
+  setSearches({
+    base: base,
+    category: category,
+    flavour: flavour,
+  });
+}
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
         <form
-          onSubmit={onSubmit}
           css={css`
             width: 100%;
           `}
@@ -83,12 +82,14 @@ const Search: React.FC = () => {
               id="base-ingedient"
               placeholder="Booze of choice"
               border="none"
-              focusBorderColor="#e5e5e5"
+              // focusBorderColor="#e5e5e5"
+              focusBorderColor="none"
               /* not sure on the grey here? Maybe just none*/
               fontSize={responsiveFont}
+              onChange={(e)=> {setBase(e.target.value);}}
             >
               {booze.bases.map((base: string) => (
-                <option key={base}>{base}</option>
+                <option>{base}</option>
               ))}
             </Select>
           </FormControl>
@@ -98,6 +99,9 @@ const Search: React.FC = () => {
               placeholder="Category"
               border="none"
               fontSize={responsiveFont}
+              // focusBorderColor="#e5e5e5"
+              focusBorderColor="none"
+              onChange={(e)=> {setCategory(e.target.value);}}
             >
               {booze.categories.map((category: string) => (
                 <option key={category}>{category}</option>
@@ -110,10 +114,18 @@ const Search: React.FC = () => {
               placeholder="Flavour"
               border="none"
               fontSize={responsiveFont}
+              // focusBorderColor="#e5e5e5"
+              focusBorderColor="none"
+              onChange={(e)=> {setFlavour(e.target.value);}}
             >
               <option>Fruity</option>
             </Select>
           </FormControl>
+          <ButtonGroup spacing={4} onClick={setSearchCriteria}>
+              <Button leftIcon={<SearchIcon />}variant="solid">
+              Search
+            </Button>
+          </ButtonGroup>
         </Flex>
       </Flex>
     </Flex>

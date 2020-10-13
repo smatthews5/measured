@@ -21,7 +21,6 @@ const Banner: React.FC = () => {
   });
 
   const todayDate = new Date().getDate();
-console.log('booze.cocktails from banner', booze?.cocktails);
 
   useEffect(() => {
 
