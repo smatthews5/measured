@@ -62,8 +62,13 @@ const App: React.FC = () => {
         );
         const setCocktails = new Set(categories);
         const uniqueCategories = Array.from(setCocktails);
+        const allBases = allCocktails.reduce(
+          (acc: string[], cocktail: Cocktail) => [...acc, cocktail.base],
+          [],
+        );
         setBooze((prevState) => ({
           ...prevState,
+          bases: allBases,
           categories: uniqueCategories,
         }));
       })
