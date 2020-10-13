@@ -15,8 +15,9 @@ import {
   ButtonGroup,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import {firestore, storage} from '../services/firebase';
+import { firestore, storage } from '../services/firebase';
 import { Search } from '../interfaces';
+import { collectIdsAndDocs } from '../utilities';
 
 // TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
@@ -28,15 +29,24 @@ const Search: React.FC = () => {
   const [category, setCategory] = useState('');
   const [flavour, setFlavour] = useState('');
   const [searches, setSearches] = useState<Search>();
+
+  function setSearchCriteria(
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) {
+    event.preventDefault();
+    setSearches({
+      base: base,
+      category: category,
+      flavour: flavour,
+    });
+  }
   
-function setSearchCriteria (event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-  event.preventDefault();
-  setSearches({
-    base: base,
-    category: category,
-    flavour: flavour,
-  });
-}
+  async function getMatchingCocktails () {
+    const snapshot = await firestore.collection('cocktails').get();
+    const cocktails = snapshot.docs.map(collectIdsAndDocs);
+    return cocktails;
+  }
+
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
@@ -86,7 +96,9 @@ function setSearchCriteria (event: React.MouseEvent<HTMLDivElement, MouseEvent>)
               focusBorderColor="none"
               /* not sure on the grey here? Maybe just none*/
               fontSize={responsiveFont}
-              onChange={(e)=> {setBase(e.target.value);}}
+              onChange={(e) => {
+                setBase(e.target.value);
+              }}
             >
               {booze.bases.map((base: string) => (
                 <option>{base}</option>
@@ -101,7 +113,9 @@ function setSearchCriteria (event: React.MouseEvent<HTMLDivElement, MouseEvent>)
               fontSize={responsiveFont}
               // focusBorderColor="#e5e5e5"
               focusBorderColor="none"
-              onChange={(e)=> {setCategory(e.target.value);}}
+              onChange={(e) => {
+                setCategory(e.target.value);
+              }}
             >
               {booze.categories.map((category: string) => (
                 <option key={category}>{category}</option>
@@ -116,13 +130,15 @@ function setSearchCriteria (event: React.MouseEvent<HTMLDivElement, MouseEvent>)
               fontSize={responsiveFont}
               // focusBorderColor="#e5e5e5"
               focusBorderColor="none"
-              onChange={(e)=> {setFlavour(e.target.value);}}
+              onChange={(e) => {
+                setFlavour(e.target.value);
+              }}
             >
               <option>Fruity</option>
             </Select>
           </FormControl>
           <ButtonGroup spacing={4} onClick={setSearchCriteria}>
-              <Button leftIcon={<SearchIcon />}variant="solid">
+            <Button leftIcon={<SearchIcon />} variant="solid">
               Search
             </Button>
           </ButtonGroup>
