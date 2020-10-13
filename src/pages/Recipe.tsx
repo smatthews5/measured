@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { BoozeContext } from '../Context';
 
 import Header from '../components/Header';
 import RecipeDetail from '../components/RecipeDetail';
+import { useParams } from '@reach/router';
 
-function Recipe() {
+const Recipe: React.FC = () => {
+  const { booze } = useContext(BoozeContext);
+  const params = useParams();
+
+  const cocktail = booze?.cocktails.filter(
+    (cocktail) => cocktail.name === params.name,
+  )[0];
+
   return (
     <>
       <Header />
       <>
-        <RecipeDetail />
+        <RecipeDetail cocktail={cocktail} />
       </>
     </>
   );
-}
+};
 
 export default Recipe;

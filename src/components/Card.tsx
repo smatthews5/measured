@@ -2,7 +2,7 @@
 import React from 'react';
 import { css, jsx } from '@emotion/core';
 import { Flex, Image } from '@chakra-ui/core';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 
 import { Cocktail } from '../interfaces';
 
@@ -28,6 +28,7 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
           alt="drink"
           height="25vh"
           width="100%"
+          onClick={() => navigate(`/recipes/${cocktail.name}`)}
         />
       </Flex>
       <Flex
