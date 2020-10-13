@@ -1,22 +1,25 @@
-/** @jsx jsx */
-import React from 'react';
-import { jsx } from '@emotion/core';
+import React, { useContext } from 'react';
+import { BoozeContext } from '../Context';
 import {
   Flex,
   Input,
   InputRightElement,
   InputGroup,
   FormControl,
-  FormLabel,
   Select,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
 
+// TODO: Load dropdown options dynamically, from database
+const responsiveFont = ['10px', '16px', '16px', '16px'];
+
 const Search: React.FC = () => {
+  const { booze } = useContext(BoozeContext);
+
   return (
-    <Flex justify="center" align="center" direction="column">
-      <Flex width="75%" justify="center" align="center">
-        <InputGroup width="100%" size='sm'>
+    <Flex justify="center" align="center" direction="column" py="5vh">
+      <Flex width="70%" justify="center" align="center">
+        <InputGroup width="100%" size="sm">
           <Input borderRadius="8px" />
           <InputRightElement>
             <SearchIcon name="search" color="grey" />
@@ -25,36 +28,17 @@ const Search: React.FC = () => {
       </Flex>
       <Flex
         direction={{ base: 'column', md: 'row' }}
-        width="75%"
+        width="70%"
         align="center"
       >
-        <Flex align='center' width='35%' justifyContent={['center', 'center','flex-start']}>
-          <FormLabel
-            htmlFor="cocktail"
-            width={['auto', 'auto']}
-            marginTop={['10px', '10px']}
-            marginLeft="10px"
-            color="#C67833"
-            fontFamily="heading"
-            fontSize={{ base: '15px', md: '20px' }}
-          >
-            Filter by:
-          </FormLabel>
-        </Flex>
         <Flex width="100%">
           <FormControl>
             <Select
-              isTruncated
               id="base-ingedient"
-              placeholder="Base Ingedient"
-              color="#C67833"
-              fontFamily="body"
+              placeholder="Booze of choice"
               border="none"
-              fontSize={['10px', '16px', '16px', '16px']}
-              focusBorderColor="#e5e5e5" 
-              /* not sure on the grey here? Maybe just none*/
+              fontSize={responsiveFont}
             >
-              {/* for each option */}
               <option>Gin</option>
               <option>Vodka</option>
               <option>Rum</option>
@@ -62,28 +46,22 @@ const Search: React.FC = () => {
           </FormControl>
           <FormControl>
             <Select
-              isTruncated
-              id="strength"
-              placeholder="Strength"
-              color="#C67833"
-              fontFamily="body"
+              id="category"
+              placeholder="Category"
               border="none"
-              fontSize={['10px', '16px', '16px', '16px']}
-              focusBorderColor="#e5e5e5"
+              fontSize={responsiveFont}
             >
-              <option>Hard Af</option>
+              {booze.categories.map((category: string) => (
+                <option key={category}>{category}</option>
+              ))}
             </Select>
           </FormControl>
           <FormControl>
             <Select
-              isTruncated
               id="flavour"
               placeholder="Flavour"
-              color="#C67833"
-              fontFamily="body"
               border="none"
-              fontSize={['10px', '16px', '16px', '16px']}
-              focusBorderColor="#e5e5e5"
+              fontSize={responsiveFont}
             >
               <option>Fruity</option>
             </Select>

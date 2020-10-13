@@ -9,6 +9,8 @@ export interface User {
 export interface Booze {
   ingredients: Ingredient[];
   cocktails: Cocktail[];
+  categories: string[];
+  bases: string[];
 }
 
 export interface Cocktail {
@@ -28,8 +30,8 @@ export interface Cocktail {
 }
 
 export interface Ingredient {
-  categories: string[],
-  id: string,
-  imageUrl: string,
-  name: string,
+  categories: string[];
+  id: string;
+  imageUrl: string;
+  name: string;
 }

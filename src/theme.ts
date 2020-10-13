@@ -23,11 +23,10 @@ const customTheme = extendTheme({
         margin: '0',
         padding: '0',
       },
-      'html,body': {
+      'html, body': {
         font: 'body',
         height: '100vh',
         width: '100vw',
-        lineHeight: '1',
         overflow: 'scroll',
         '::-webkit-scrollbar': {
           width: '0',
@@ -77,6 +76,14 @@ const customTheme = extendTheme({
         borderBottom: 'solid thin white',
         marginBottom: '5%',
         width: '80%',
+      },
+      select: {
+        isTruncated: 'true',
+        color: 'purple.300',
+        fontFamily: 'body',
+        focusBorderColor: 'purple.200',
+        fontSize: ['10px', '16px', '16px', '16px'],
+        textTransform: 'lowercase',
       },
     },
   },
