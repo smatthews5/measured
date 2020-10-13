@@ -1,16 +1,6 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Image,
-  List,
-  ListIcon,
-  ListItem,
-  Text,
-} from '@chakra-ui/core';
+import { Flex, Heading, Image, List, ListItem, Text } from '@chakra-ui/core';
 import { RouteComponentProps } from '@reach/router';
 import React from 'react';
-import { FaCocktail } from 'react-icons/fa';
 
 import { Cocktail } from '../interfaces';
 
@@ -31,25 +21,42 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
         >
           {cocktail?.name}
         </Heading>
-        <Flex h="50vh" mt="5vh">
-          <Flex w="50vw">
+        <Flex h="50vh" w="80vw" mt="5vh" mx="auto">
+          <Flex w="50%" justifyContent="flex-end" mr="5%">
             <Image
               src={cocktail?.imageUrl}
-              w="70%"
-              h="80%"
-              mx="auto"
+              w="65%"
+              h="90%"
+              objectFit="cover"
               borderRadius="8px"
               boxShadow="0px 0px 9px 1px rgba(0, 0, 0, 0.75)"
             ></Image>
           </Flex>
-          <Flex direction="column" w="50vw">
-            <Text>Ingredients:</Text>
+          <Flex direction="column" w="50%">
+            <Text
+              fontFamily="heading"
+              mb="2%"
+              fontSize={['md', 'lg', 'xl', '2xl']}
+            >
+              Ingredients:
+            </Text>
             <List spacing={3}>
               {cocktail?.ingredients.map((ingredient) => (
-                <ListItem>
-                  {/* <ListIcon as={FaCocktail} color="purple.500" size="5px" /> */}
+                <ListItem key={ingredient.name}>
                   {`${ingredient.amount} ${ingredient.unit} ${ingredient.name}`}
                 </ListItem>
+              ))}
+            </List>
+            <Text
+              fontFamily="heading"
+              my="2%"
+              fontSize={['md', 'lg', 'xl', '2xl']}
+            >
+              Instructions:
+            </Text>
+            <List spacing={3}>
+              {cocktail?.instructions.map((instruction) => (
+                <ListItem>{instruction}</ListItem>
               ))}
             </List>
           </Flex>
