@@ -17,7 +17,10 @@ import {
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
 import { Search } from '../interfaces';
-import { getMatchingCocktails } from '../services/firebase';
+import {
+  getMatchingCocktailsByBase,
+  getMatchingCocktailsByCategory,
+} from '../services/firebase';
 
 // TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
@@ -28,16 +31,26 @@ const Search: React.FC = () => {
   const [base, setBase] = useState('');
   const [category, setCategory] = useState('');
   const [flavour, setFlavour] = useState('');
-  const [searches, setSearches] = useState<Cocktail[]>();
 
-  console.log('searches', booze);
-  
+  const [bases, setBases] = useState<Cocktail[]>();
+  const [categories, setCategories] = useState<Cocktail[]>();
+
+  if (bases && categories) {
+    const ids = new Set(bases.map((d) => d.id));
+    const merged = [...bases, ...categories.filter((d) => !ids.has(d.id))];
+  }
+  // merged is an array of unique cocktails
+console.log(merged);
+
+
   function setSearchCriteria(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) {
     event.preventDefault();
-    getMatchingCocktails(base).then((cocktail: Cocktail) => setSearches(cocktail));
-  }
+    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) => setBases(cocktail));
+    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) => setCategories(cocktail));
+  };
+
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">

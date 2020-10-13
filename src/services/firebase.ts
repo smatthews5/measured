@@ -25,10 +25,18 @@ export const getCocktails = async () => {
   return cocktails;
 };
 
-export const getMatchingCocktails = async (base: string) => {
+export const getMatchingCocktailsByBase = async (base: string) => {
   const snapshot = await firestore
     .collection('cocktails')
     .where('base', '==', base)
+    .get();
+  const cocktails = snapshot.docs.map(collectIdsAndDocs);
+  return cocktails;
+};
+export const getMatchingCocktailsByCategory = async (category: string) => {
+  const snapshot = await firestore
+    .collection('cocktails')
+    .where('categories', 'array-contains', category)
     .get();
   const cocktails = snapshot.docs.map(collectIdsAndDocs);
   return cocktails;
