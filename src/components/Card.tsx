@@ -1,7 +1,6 @@
-/** @jsx jsx */
 import React from 'react';
-import { css, jsx } from '@emotion/core';
-import { Flex, Image } from '@chakra-ui/core';
+
+import { Flex, Image, Heading } from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
 
 import { Cocktail } from '../interfaces';
@@ -14,45 +13,40 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
   return (
     <Flex
       direction="column"
-      width="15vw"
-      minWidth="15vw"
-      borderRadius="4px"
-      margin="2%"
+      width="25%"
+      minWidth="25%"
+      borderRadius="6px"
+      mr={8}
+      ml={2}
+      mt={5}
+      mb={2}
     >
-      <Flex>
-        <Image
-          objectFit="cover"
-          borderRadius="4px"
-          src={cocktail.imageUrl}
-          boxShadow="0px 0px 9px 1px rgba(0, 0, 0, 0.75)"
-          alt="drink"
-          height="25vh"
-          width="100%"
-          onClick={() => navigate(`/recipes/${cocktail.name}`)}
-        />
-      </Flex>
+      <Image
+        fit="cover"
+        borderRadius="2px"
+        boxShadow="0px 0px 2px 2px gray"
+        src={cocktail.imageUrl}
+        alt={cocktail.name}
+        w="20vw"
+        h="20vw"
+        overflow="hidden"
+        onClick={() => navigate(`/recipes/${cocktail.name}`)}
+      />
       <Flex
-        direction={{ base: 'column', lg: 'row' }}
-        align={{ base: 'center' }}
-        justifyContent="space-between"
+        direction="column"
+        align="flex-start"
+        justify="flex-start"
         padding="2px"
-        height={{ base: '50%', md: '75%', lg: '100%' }}
-        width={{ base: '50%', md: '75%', lg: '100%' }}
         pt="4%"
       >
-        <Flex align="center" padding="2px">
-          <h4>{cocktail.name}</h4>
-        </Flex>
-        <Flex align="center" justify="center" padding="2px">
-          <h5
-            css={css`
-              margin-right: 2px;
-            `}
-          >
-            {cocktail.base} -
-          </h5>
-          <h5>{cocktail.categories[0]}</h5>
-        </Flex>
+        <Heading as="h4" fontWeight="200" fontSize={['md', 'lg', 'xl', '2xl']}>
+          {cocktail.name}
+        </Heading>
+        <hr />
+        <Heading as="h5" fontSize={['0px', '0px', 'sm', 'md']} fontWeight="200">
+          {cocktail.base.toLowerCase()}
+          {cocktail.categories.map((category) => `—${category}`)}
+        </Heading>
       </Flex>
     </Flex>
   );

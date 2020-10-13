@@ -57,6 +57,7 @@ const Banner: React.FC = () => {
             fontWeight="normal"
             fontSize={['lg', 'xl', '3xl', '3vw']}
             textTransform="none"
+            mt={5}
           >
             Recipe of the day
           </Heading>
