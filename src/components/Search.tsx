@@ -17,7 +17,6 @@ import {
 import { SearchIcon } from '@chakra-ui/icons';
 import { firestore, storage } from '../services/firebase';
 import { Search } from '../interfaces';
-import { collectIdsAndDocs } from '../utilities';
 
 // TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
@@ -28,23 +27,13 @@ const Search: React.FC = () => {
   const [base, setBase] = useState('');
   const [category, setCategory] = useState('');
   const [flavour, setFlavour] = useState('');
-  const [searches, setSearches] = useState<Search>();
+  const [searches, setSearches] = useState([]);
 
   function setSearchCriteria(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) {
     event.preventDefault();
-    setSearches({
-      base: base,
-      category: category,
-      flavour: flavour,
-    });
-  }
-  
-  async function getMatchingCocktails () {
-    const snapshot = await firestore.collection('cocktails').get();
-    const cocktails = snapshot.docs.map(collectIdsAndDocs);
-    return cocktails;
+    // getMatchingCocktails();
   }
 
   return (
