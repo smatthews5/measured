@@ -37,7 +37,10 @@ const App: React.FC = () => {
   const [booze, setBooze] = useState<Booze>({
     ingredients: [],
     cocktails: [],
+    categories: [],
+    bases: [],
   });
+  // searched for state
 
   // memoize state --> trigger updates with changes from any page
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
@@ -47,6 +50,22 @@ const App: React.FC = () => {
     CocktailService.getCocktails()
       .then((allCocktails: Cocktail[]) => {
         setBooze((prevState) => ({ ...prevState, cocktails: allCocktails }));
+        return allCocktails;
+      })
+      .then((allCocktails) => {
+        const categories = allCocktails.reduce(
+          (acc: string[], cocktail: Cocktail) => [
+            ...acc,
+            ...cocktail.categories,
+          ],
+          [],
+        );
+        const setCocktails = new Set(categories);
+        const uniqueCategories = Array.from(setCocktails);
+        setBooze((prevState) => ({
+          ...prevState,
+          categories: uniqueCategories,
+        }));
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
     CocktailService.getIngredients()
