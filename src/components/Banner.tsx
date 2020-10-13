@@ -5,6 +5,7 @@ import { BoozeContext } from '../Context';
 import { Flex, Center, Heading, Image } from '@chakra-ui/core';
 
 import { Cocktail } from '../interfaces';
+import { navigate } from '@reach/router';
 
 const Banner: React.FC = () => {
   const { booze } = useContext(BoozeContext);
@@ -31,6 +32,7 @@ const Banner: React.FC = () => {
         py={0}
         align="center" // THIS IS AUTOMATICALLY STRETCH ON SAFARI
         overflow="hidden"
+        onClick={() => navigate(`/recipes/${featureCocktail.name}`)}
       >
         <Image
           w="50%"
