@@ -13,12 +13,22 @@ const Home: React.FC = () => {
       <HeaderLarge />
       <Banner />
       <Search />
-      {/* all cocktails array */}
       <CardGallery
         cocktails={booze.cocktails}
         categoryHeading="All cocktails"
       />
-      {/* cocktails by category */}
+      {booze.categories.map((category) => {
+        const categoryCocktails = booze.cocktails.filter((cocktail) =>
+          cocktail.categories.includes(category),
+        );
+        return (
+          <CardGallery
+            cocktails={categoryCocktails}
+            categoryHeading={category}
+            key={category}
+          />
+        );
+      })}
     </>
   );
 };
