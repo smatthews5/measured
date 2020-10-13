@@ -25,12 +25,12 @@ console.log('booze.cocktails from banner', booze?.cocktails);
 
   useEffect(() => {
 
-    if (booze.cocktails.length) {
+    if (booze?.cocktails.length) {
       const index = Math.floor(Math.random() * booze.cocktails.length);
       const recipeOfTheDay = booze.cocktails[index];
       setFeatureCocktail(recipeOfTheDay);
     }
-  }, [todayDate, booze.cocktails.length]);
+  }, [todayDate, booze?.cocktails.length]);
 
   return (
     <Center pt={['2vh', '3vh', '4vh', '8vh']}>
