@@ -11,6 +11,7 @@ import Ingredients from './pages/Ingredients';
 import MyBar from './pages/MyBar';
 import DrinkBuilder from './pages/DrinkBuilder';
 import Recipe from './pages/Recipe';
+import SearchResults from './pages/SearchResults';
 import LoginSignup from './pages/LoginSignup';
 
 // set up page prop-types for routing
@@ -19,6 +20,7 @@ const IngredientsPage = (props: RouteComponentProps) => <Ingredients />;
 const MyBarPage = (props: RouteComponentProps) => <MyBar />;
 const DrinkBuilderPage = (props: RouteComponentProps) => <DrinkBuilder />;
 const RecipePage = (props: RouteComponentProps) => <Recipe />;
+const SearchResultsPage = (props: RouteComponentProps) => <SearchResults />;
 const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 
 // TODO: Prune out the 'any' types and repalce with approppriate cocktail/ingredient interfaces in a separate file
@@ -94,6 +96,7 @@ const App: React.FC = () => {
           <MyBarPage path="/my-bar" />
           <DrinkBuilderPage path="/build-a-drink" />
           <RecipePage path="/recipes/:name" />
+          <SearchResultsPage path="/search" />
           <LoginSignupPage path="/welcome" />
         </Router>
       </BoozeContext.Provider>

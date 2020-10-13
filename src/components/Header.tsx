@@ -63,6 +63,7 @@ const Header: React.FC = () => {
             objectFit="cover"
             src={icon}
             alt="Login/signup icon"
+            mb={2}
           />
         </Link>
       </Flex>
