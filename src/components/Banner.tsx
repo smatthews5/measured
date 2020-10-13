@@ -8,20 +8,9 @@ import { Cocktail } from '../interfaces';
 
 const Banner: React.FC = () => {
   const { booze } = useContext(BoozeContext);
-  const [featureCocktail, setFeatureCocktail] = useState<Cocktail>({
-    base: '',
-    categories: [''],
-    garnish: '',
-    id: '',
-    imageUrl: '',
-    ingredients: [],
-    ingredientsList: [''],
-    instructions: [{ 0: '' }],
-    name: '',
-  });
+  const [featureCocktail, setFeatureCocktail] = useState<Partial<Cocktail>>({});
 
   const todayDate = new Date().getDate();
-  console.log('booze.cocktails from banner', booze?.cocktails);
 
   useEffect(() => {
     if (booze?.cocktails.length) {
