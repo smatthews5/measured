@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { BoozeContext } from '../Context';
 import { css, jsx } from '@emotion/core';
+import { Cocktail } from '../interfaces';
 
 import {
   Flex,
@@ -15,8 +16,8 @@ import {
   ButtonGroup,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import { firestore, storage } from '../services/firebase';
 import { Search } from '../interfaces';
+import { getMatchingCocktails } from '../services/firebase';
 
 // TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
@@ -27,15 +28,16 @@ const Search: React.FC = () => {
   const [base, setBase] = useState('');
   const [category, setCategory] = useState('');
   const [flavour, setFlavour] = useState('');
-  const [searches, setSearches] = useState([]);
+  const [searches, setSearches] = useState<Cocktail[]>();
 
+  console.log('searches', booze);
+  
   function setSearchCriteria(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) {
     event.preventDefault();
-    // getMatchingCocktails();
+    getMatchingCocktails(base).then((cocktail: Cocktail) => setSearches(cocktail));
   }
-
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">

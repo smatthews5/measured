@@ -21,9 +21,8 @@ const Banner: React.FC = () => {
   });
 
   const todayDate = new Date().getDate();
-
+  
   useEffect(() => {
-
     if (booze?.cocktails.length) {
       const index = Math.floor(Math.random() * booze.cocktails.length);
       const recipeOfTheDay = booze.cocktails[index];
