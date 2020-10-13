@@ -9,23 +9,25 @@ export interface User {
 export interface Booze {
   ingredients: Ingredient[];
   cocktails: Cocktail[];
+  categories: string[];
+  bases: string[];
 }
 
 export interface Cocktail {
-  base: string,
-  categories: string[],
-  garnish: string,
-  id: string,
-  imageUrl: string,
-  ingredients: Ingredient[],
-  ingredientsList: string[],
-  instructions: [{[key: number]: string}],
-  name: string,
+  base: string;
+  categories: string[];
+  garnish: string;
+  id: string;
+  imageUrl: string;
+  ingredients: Ingredient[];
+  ingredientsList: string[];
+  instructions: [{ [key: number]: string }];
+  name: string;
 }
 
 export interface Ingredient {
-  categories: string[],
-  id: string,
-  imageUrl: string,
-  name: string,
+  categories: string[];
+  id: string;
+  imageUrl: string;
+  name: string;
 }
