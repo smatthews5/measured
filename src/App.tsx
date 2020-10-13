@@ -23,8 +23,6 @@ const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const SearchResultsPage = (props: RouteComponentProps) => <SearchResults />;
 const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 
-// TODO: Prune out the 'any' types and repalce with approppriate cocktail/ingredient interfaces in a separate file
-
 const App: React.FC = () => {
   // define initial state for user details
   const [user, setUser] = useState<User>({
@@ -55,6 +53,7 @@ const App: React.FC = () => {
         return allCocktails;
       })
       .then((allCocktails) => {
+        // extract list of categories and bases
         const categories = allCocktails.reduce(
           (acc: string[], cocktail: Cocktail) => [
             ...acc,
@@ -62,15 +61,22 @@ const App: React.FC = () => {
           ],
           [],
         );
-        const setCocktails = new Set(categories);
-        const uniqueCategories = Array.from(setCocktails);
         const allBases = allCocktails.reduce(
           (acc: string[], cocktail: Cocktail) => [...acc, cocktail.base],
           [],
         );
+        // remove any duplicates and sort categories alphabetically
+        const setCocktails = new Set(categories);
+        const setBases = new Set(allBases);
+        const uniqueCategories = Array.from(setCocktails).sort((a, b) =>
+          a > b ? 1 : -1,
+        );
+        const uniqueBases = Array.from(setBases).sort((a, b) =>
+          a > b ? 1 : -1,
+        );
         setBooze((prevState) => ({
           ...prevState,
-          bases: allBases,
+          bases: uniqueBases,
           categories: uniqueCategories,
         }));
       })

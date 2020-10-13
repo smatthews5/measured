@@ -16,7 +16,11 @@ export interface Booze {
 export interface Cocktail {
   base: string;
   categories: string[];
-  garnish: string;
+  garnish: {
+    id: string;
+    description: string;
+  };
+  glassware: string;
   id: string;
   imageUrl: string;
   ingredients: {
@@ -25,7 +29,7 @@ export interface Cocktail {
     unit: string;
   }[];
   ingredientsList: string[];
-  instructions: [{ [key: number]: string }];
+  instructions: string[];
   name: string;
 }
 
@@ -36,7 +40,7 @@ export interface Ingredient {
   name: string;
 }
 export interface Search {
-  base: string,
-  category: string,
-  flavour: string,
+  base: string;
+  category: string;
+  flavour: string;
 }
