@@ -13,7 +13,7 @@ import {
   FormLabel,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import {Cocktail} from '../interfaces';
+import { Cocktail } from '../interfaces';
 // TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
 
@@ -22,6 +22,7 @@ const Search: React.FC = () => {
   const [input, setInput] = useState('');
   const [submit, setSubmit] = useState('');
   const [newList, setNewList] = useState<Cocktail[]>();
+  console.log('newList', newList);
 
   function onInput(event: React.ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value);
@@ -36,40 +37,28 @@ const Search: React.FC = () => {
     setNewList(newCocktails);
   }
 
-  // return (
-  //   <Flex justify="center" align="center" direction="column">
-  //     <Flex width="75%" justify="center" align="center">
-  //       <form
-  //         onSubmit={onSubmit}
-  //         css={css`
-  //           width: 100%;
-  //         `}
-  //       >
-  //         <InputGroup width="100%" size="sm">
-  //           <Input onChange={onInput} borderRadius="8px" />
-  //           <InputRightElement>
-  //             <SearchIcon name="search" color="grey" />
-  //           </InputRightElement>
-  //         </InputGroup>
-  //       </form>
-
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
-        <InputGroup width="100%" size="sm">
-          <Input borderRadius="8px" />
-          <InputRightElement>
-            <SearchIcon name="search" color="grey" />
-          </InputRightElement>
-        </InputGroup>
-
+        <form
+          onSubmit={onSubmit}
+          css={css`
+            width: 100%;
+          `}
+        >
+          <InputGroup width="100%" size="sm">
+            <Input borderRadius="8px" />
+            <InputRightElement>
+              <SearchIcon name="search" color="grey" />
+            </InputRightElement>
+          </InputGroup>
+        </form>
       </Flex>
       <Flex
         direction={{ base: 'column', md: 'row' }}
         width="70%"
         align="center"
       >
-
         <Flex
           align="center"
           width="35%"
@@ -94,14 +83,13 @@ const Search: React.FC = () => {
               id="base-ingedient"
               placeholder="Booze of choice"
               border="none"
-              // fontSize={['10px', '16px', '16px', '16px']}
               focusBorderColor="#e5e5e5"
               /* not sure on the grey here? Maybe just none*/
               fontSize={responsiveFont}
             >
-              <option>Gin</option>
-              <option>Vodka</option>
-              <option>Rum</option>
+              {booze.bases.map((base: string) => (
+                <option key={base}>{base}</option>
+              ))}
             </Select>
           </FormControl>
           <FormControl>
