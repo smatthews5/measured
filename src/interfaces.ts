@@ -35,3 +35,8 @@ export interface Ingredient {
   imageUrl: string;
   name: string;
 }
+export interface Search {
+  base: string,
+  category: string,
+  flavour: string,
+}

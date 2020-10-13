@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { BoozeContext } from '../Context';
 import { css, jsx } from '@emotion/core';
+import { Cocktail } from '../interfaces';
 
 import {
   Flex,
@@ -10,58 +11,48 @@ import {
   InputGroup,
   FormControl,
   Select,
+  Button,
   FormLabel,
+  ButtonGroup,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import { Cocktail } from '../interfaces';
+import { Search } from '../interfaces';
+import { getMatchingCocktails } from '../services/firebase';
+
 // TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
 
 const Search: React.FC = () => {
   const { booze } = useContext(BoozeContext);
-  const [input, setInput] = useState('');
-  const [submit, setSubmit] = useState('');
-  const [newList, setNewList] = useState<Cocktail[]>();
 
-  function onInput(event: React.ChangeEvent<HTMLInputElement>) {
-    setInput(event.target.value);
-  }
+  const [base, setBase] = useState('');
+  const [category, setCategory] = useState('');
+  const [flavour, setFlavour] = useState('');
+  const [searches, setSearches] = useState<Cocktail[]>();
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  console.log('searches', booze);
+  
+  function setSearchCriteria(
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) {
     event.preventDefault();
-    setSubmit(input);
-    const newCocktails = booze?.cocktails.filter((cocktail) =>
-      cocktail.name.includes(submit),
-    );
-    setNewList(newCocktails);
+    getMatchingCocktails(base).then((cocktail: Cocktail) => setSearches(cocktail));
   }
-
-  // return (
-  //   <Flex justify="center" align="center" direction="column">
-  //     <Flex width="75%" justify="center" align="center">
-  //       <form
-  //         onSubmit={onSubmit}
-  //         css={css`
-  //           width: 100%;
-  //         `}
-  //       >
-  //         <InputGroup width="100%" size="sm">
-  //           <Input onChange={onInput} borderRadius="8px" />
-  //           <InputRightElement>
-  //             <SearchIcon name="search" color="grey" />
-  //           </InputRightElement>
-  //         </InputGroup>
-  //       </form>
-
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
-        <InputGroup width="100%" size="sm">
-          <Input borderRadius="8px" />
-          <InputRightElement>
-            <SearchIcon name="search" color="grey" />
-          </InputRightElement>
-        </InputGroup>
+        <form
+          css={css`
+            width: 100%;
+          `}
+        >
+          <InputGroup width="100%" size="sm">
+            <Input borderRadius="8px" />
+            <InputRightElement>
+              <SearchIcon name="search" color="grey" />
+            </InputRightElement>
+          </InputGroup>
+        </form>
       </Flex>
       <Flex
         direction={{ base: 'column', md: 'row' }}
@@ -92,14 +83,17 @@ const Search: React.FC = () => {
               id="base-ingedient"
               placeholder="Booze of choice"
               border="none"
-              // fontSize={['10px', '16px', '16px', '16px']}
-              focusBorderColor="#e5e5e5"
+              // focusBorderColor="#e5e5e5"
+              focusBorderColor="none"
               /* not sure on the grey here? Maybe just none*/
               fontSize={responsiveFont}
+              onChange={(e) => {
+                setBase(e.target.value);
+              }}
             >
-              <option>Gin</option>
-              <option>Vodka</option>
-              <option>Rum</option>
+              {booze.bases.map((base: string) => (
+                <option>{base}</option>
+              ))}
             </Select>
           </FormControl>
           <FormControl>
@@ -108,6 +102,11 @@ const Search: React.FC = () => {
               placeholder="Category"
               border="none"
               fontSize={responsiveFont}
+              // focusBorderColor="#e5e5e5"
+              focusBorderColor="none"
+              onChange={(e) => {
+                setCategory(e.target.value);
+              }}
             >
               {booze.categories.map((category: string) => (
                 <option key={category}>{category}</option>
@@ -120,10 +119,20 @@ const Search: React.FC = () => {
               placeholder="Flavour"
               border="none"
               fontSize={responsiveFont}
+              // focusBorderColor="#e5e5e5"
+              focusBorderColor="none"
+              onChange={(e) => {
+                setFlavour(e.target.value);
+              }}
             >
               <option>Fruity</option>
             </Select>
           </FormControl>
+          <ButtonGroup spacing={4} onClick={setSearchCriteria}>
+            <Button leftIcon={<SearchIcon />} variant="solid">
+              Search
+            </Button>
+          </ButtonGroup>
         </Flex>
       </Flex>
     </Flex>

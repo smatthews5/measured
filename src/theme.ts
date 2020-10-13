@@ -46,6 +46,16 @@ const customTheme = extendTheme({
         backgroundColor: 'purple.400',
         height: '15vh',
       },
+      'div::-webkit-scrollbar': {
+        width: '0.8em',
+      },
+      'div::-webkit-scrollbar-track': {
+        boxShadow: 'inset 0 0 6px gray.100',
+      },
+      'div::-webkit-scrollbar-thumb': {
+        borderRadius: '30px,',
+        bgColor: 'gray.100',
+      },
       'h1, h2': {
         fontFamily: 'heading',
         textTransform: 'uppercase',
@@ -84,6 +94,7 @@ const customTheme = extendTheme({
         focusBorderColor: 'purple.200',
         fontSize: ['10px', '16px', '16px', '16px'],
         textTransform: 'lowercase',
+        multiple:'true'
       },
     },
   },
