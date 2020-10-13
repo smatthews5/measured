@@ -17,11 +17,18 @@ const CardGallery: React.FC<CardGalleryProps> = ({
 }) => {
   return (
     <>
-      <Box w="82vw" mx="auto" mt="2vh">
-        <Heading as="h3" fontFamily="mono" color="purple.400" pl="2vw">
+      <Box w="82vw" mx="auto" my="1.5vh">
+        <Heading
+          as="h3"
+          fontFamily="mono"
+          fontWeight="normal"
+          color="purple.400"
+          pl="1vw"
+          fontSize={['2xl', '3xl', '4xl', '5xl']}
+        >
           {categoryHeading}
         </Heading>
-        <Flex overflowX="scroll">
+        <Flex overflowX="scroll" mx={2} mb={2}>
           {cocktails.map((cocktail: Cocktail) => (
             <Card cocktail={cocktail} key={cocktail.id} />
           ))}

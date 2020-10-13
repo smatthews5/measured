@@ -47,14 +47,15 @@ const customTheme = extendTheme({
         height: '15vh',
       },
       'div::-webkit-scrollbar': {
-        width: '0.8em',
+        height: '1vh',
+        padding: '20px',
       },
       'div::-webkit-scrollbar-track': {
-        boxShadow: 'inset 0 0 6px gray.100',
+        boxShadow: 'inset 0 0 6px gray.200',
       },
       'div::-webkit-scrollbar-thumb': {
-        borderRadius: '30px,',
         bgColor: 'gray.100',
+        backgroundClip: 'content-box',
       },
       'h1, h2': {
         fontFamily: 'heading',
@@ -73,8 +74,8 @@ const customTheme = extendTheme({
         color: 'white',
       },
       h4: {
+        color: 'black',
         fontWeight: '400',
-        color: 'gray.500',
       },
       h5: {
         fontWeight: '400',
@@ -84,7 +85,6 @@ const customTheme = extendTheme({
       },
       hr: {
         borderBottom: 'solid thin white',
-        marginBottom: '5%',
         width: '80%',
       },
       select: {
