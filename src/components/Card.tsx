@@ -1,6 +1,7 @@
 import React from 'react';
-import { Flex, Image, Heading, Box } from '@chakra-ui/core';
-import { RouteComponentProps } from '@reach/router';
+
+import { Flex, Image, Heading } from '@chakra-ui/core';
+import { RouteComponentProps, navigate } from '@reach/router';
 
 import { Cocktail } from '../interfaces';
 
@@ -23,12 +24,13 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
       <Image
         fit="cover"
         borderRadius="2px"
-        boxShadow="0px 0px 2px 0 gray"
+        boxShadow="0px 0px 2px 2px gray"
         src={cocktail.imageUrl}
         alt={cocktail.name}
         w="20vw"
         h="20vw"
         overflow="hidden"
+        onClick={() => navigate(`/recipes/${cocktail.name}`)}
       />
       <Flex
         direction="column"
