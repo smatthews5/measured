@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
 import { Flex, Heading, Image } from '@chakra-ui/core';
-import icon from '../assets/images/user_icon.png';
+import icon from '../assets/images/header_large_icon.png';
 
 const responsiveFontSize = ['lg', '2xl', '3xl', '4xl'];
 const responsiveWidth = ['7.5vw', '12.5vw', '17.5vw', '20vw'];
@@ -63,6 +63,7 @@ const HeaderLarge: React.FC = () => {
             src={icon}
             objectFit="cover"
             alt="Login/signup icon"
+            mb={3}
           />
         </Link>
       </Flex>
