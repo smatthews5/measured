@@ -1,9 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
-import { Cocktail } from '../interfaces';
 import { collectIdsAndDocs } from '../utilities';
-import { Cocktail } from "../interfaces";
+import { Cocktail } from '../interfaces';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCuTrD5ArJIOjE42O_i2g97oITTuFSjJck',
@@ -28,6 +27,7 @@ export const getCocktails = async () => {
 };
 
 export const getMatchingCocktailsByBase = async (base: string[]) => {
+  if (!base.length || !base) return [];
   const snapshot = await firestore
     .collection('cocktails')
     .where('base', 'in', base)
@@ -36,6 +36,7 @@ export const getMatchingCocktailsByBase = async (base: string[]) => {
   return cocktails;
 };
 export const getMatchingCocktailsByCategory = async (category: string[]) => {
+  if (!category.length || !category) return [];
   const snapshot = await firestore
     .collection('cocktails')
     .where('categories', 'array-contains-any', category)

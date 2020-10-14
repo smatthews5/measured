@@ -2,8 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { BoozeContext } from '../Context';
 import { css, jsx } from '@emotion/core';
-import { Booze, Cocktail } from '../interfaces';
-import { RouteComponentProps, navigate } from '@reach/router';
+import { navigate } from '@reach/router';
 
 import {
   Flex,
@@ -12,7 +11,6 @@ import {
   InputGroup,
   Button,
   FormLabel,
-  ButtonGroup,
   Menu,
   MenuButton,
   MenuList,
@@ -20,55 +18,23 @@ import {
   MenuOptionGroup,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import {
-  getMatchingCocktailsByBase,
-  getMatchingCocktailsByCategory,
-} from '../services/firebase';
 
-// TODO: Load dropdown options dynamically, from database
 const responsiveFont = ['10px', '16px', '16px', '16px'];
 
 const Search: React.FC = () => {
-  const { booze, setBooze } = useContext(BoozeContext);
-
+  const { booze } = useContext(BoozeContext);
   const [base, setBase] = useState<string[]>([]);
   const [category, setCategory] = useState<string[]>([]);
 
-  const [filteredBases, setfilteredBases] = useState<Cocktail[]>([]);
-  const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>([]); 
-
-  //concatenate base and category arrays and encode for url..
-  const arrConcat = base.concat(category);
-const searchQuery = arrConcat.join('+');
-
-  //on press of search button run this function. Fetch from the database, the mathcing cocktails. Then filter into an array of unique cocktails
   function setSearchCriteria(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) {
     event.preventDefault();
-    if (base.length > 0) {
-      getMatchingCocktailsByBase(base).then((cocktail: Cocktail[]) => setfilteredBases(cocktail));
-    }
-    if (category.length > 0) {
-      getMatchingCocktailsByCategory(category).then((cocktail: Cocktail[]) => setfilteredCategories(cocktail));
-    }
-    // unique cocktails function
-    // if (filteredBases && filteredCategories) {
-      const ids = new Set(filteredBases.map((d) => d.id));
-      const spreadCategories = filteredCategories.filter(
-          (d) => !ids.has(d.id),
-        ),
-        results = [...filteredBases, ...spreadCategories];
-      const search = {
-        query: [...base, ...category],
-        results,
-      };
-      // add search property to booze object
-      setBooze((prevBooze: Booze) => ({ ...prevBooze, search: search }));      
-      // navigate to search page if not already there
-      location.pathname === '/' ?
-      navigate(`/search/${searchQuery}`) : null;
-    // }
+    const basesURI = base.map((name) => encodeURI(name));
+    const basesString = basesURI.join('+');
+    const categoriesURI = category.map((name) => encodeURI(name));
+    const categoriesString = categoriesURI.join('+');
+    navigate(`/search/${basesString}_${categoriesString}`);
   }
 
   return (
@@ -118,8 +84,8 @@ const searchQuery = arrConcat.join('+');
             >
               Booze of choice
             </MenuButton>
-              
-              <MenuList maxHeight="200px" overflowY='scroll'>
+
+            <MenuList maxHeight="200px" overflowY="scroll">
               <MenuOptionGroup
                 type="checkbox"
                 onChange={(value) => {
@@ -127,7 +93,9 @@ const searchQuery = arrConcat.join('+');
                 }}
               >
                 {booze.bases.map((base: string, index: number) => (
-                  <MenuItemOption key={index} value={base}>{base}</MenuItemOption>
+                  <MenuItemOption key={index} value={base}>
+                    {base}
+                  </MenuItemOption>
                 ))}
               </MenuOptionGroup>
             </MenuList>
@@ -140,7 +108,7 @@ const searchQuery = arrConcat.join('+');
             >
               Category
             </MenuButton>
-            <MenuList maxHeight="200px" overflowY='scroll'>
+            <MenuList maxHeight="200px" overflowY="scroll">
               <MenuOptionGroup
                 type="checkbox"
                 onChange={(value) => {
@@ -148,19 +116,21 @@ const searchQuery = arrConcat.join('+');
                 }}
               >
                 {booze?.categories.map((category: string, index: number) => (
-                  <MenuItemOption key={index} value={category}>{category}</MenuItemOption>
+                  <MenuItemOption key={index} value={category}>
+                    {category}
+                  </MenuItemOption>
                 ))}
               </MenuOptionGroup>
             </MenuList>
           </Menu>
-            <Button
+          <Button
             onClick={setSearchCriteria}
-              leftIcon={<SearchIcon />}
-              variant="outline"
-              colorScheme="purple"
-            >
-              Search
-            </Button>
+            leftIcon={<SearchIcon />}
+            variant="outline"
+            colorScheme="purple"
+          >
+            Search
+          </Button>
         </Flex>
       </Flex>
     </Flex>
