@@ -2,8 +2,8 @@ import React from 'react';
 
 import CardDetail from '../components/CardDetail';
 
-function CardDetailList() {
+const CardDetailList: React.FC = () => {
   return <CardDetail />;
-}
+};
 
 export default CardDetailList;

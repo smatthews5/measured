@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { BoozeContext } from '../Context';
 import { css, jsx } from '@emotion/core';
 import { Booze, Cocktail } from '../interfaces';
-import { RouteComponentProps, navigate } from '@reach/router';
+import { navigate } from '@reach/router';
 
 import {
   Flex,
@@ -12,7 +12,6 @@ import {
   InputGroup,
   Button,
   FormLabel,
-  ButtonGroup,
   Menu,
   MenuButton,
   MenuList,

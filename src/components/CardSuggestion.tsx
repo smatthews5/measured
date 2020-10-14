@@ -1,7 +1,7 @@
 import React from 'react';
 
-function CardSuggestion() {
+const CardSuggestion: React.FC = () => {
   return <div></div>;
-}
+};
 
 export default CardSuggestion;

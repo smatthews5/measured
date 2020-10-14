@@ -8,7 +8,7 @@ import Header from '../components/Header';
 import Search from '../components/Search';
 import CardGrid from '../containers/CardGrid';
 
-function SearchResults({searchQuery}) {
+const SearchResults: React.FC = ({searchQuery}) => {
   const { booze } = useContext(BoozeContext);
   return (
     <>
@@ -17,6 +17,6 @@ function SearchResults({searchQuery}) {
       <CardGrid cocktails={booze?.search.results.length? booze.search.results : booze.cocktails} searchTerms={booze.search.query} />
     </>
   );
-}
+};
 
 export default SearchResults;
