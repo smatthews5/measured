@@ -101,7 +101,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
               mt="5%"
               fontSize={['md', 'lg', 'xl', '2xl']}
             >
-              Instructions:
+              Method:
             </Text>
             <List spacing={3} mt="2%">
               {cocktail?.instructions.map((instruction) => (
