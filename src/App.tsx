@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { useState, useMemo, useEffect } from 'react';
-import { Router, RouteComponentProps } from '@reach/router';
+import { Router, RouteComponentProps, Redirect } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import * as CocktailService from './services/firebase';
 import { Booze, User, Cocktail, Ingredient } from './interfaces';
@@ -26,6 +26,7 @@ const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 const AddACocktailPage = (props: RouteComponentProps) => <AddACocktail />;
 
 const getUniqueOptions = (allCocktails: Cocktail[], property: string) => {
+  // TODO: FIX TYPESCRIPT ERRORS => May need to adjust the Cocktail interface
   const allValues = allCocktails.reduce((acc: string[], cocktail: Cocktail) => {
     if (typeof cocktail[property] === 'object')
       return [...acc, ...cocktail[property]];
@@ -55,10 +56,6 @@ const App: React.FC = () => {
     categories: [],
     bases: [],
     glasses: [],
-    search: {
-      query: [],
-      results: [],
-    },
   });
 
   // memoize state --> trigger updates with changes from any page
@@ -104,7 +101,8 @@ const App: React.FC = () => {
           <MyBarPage path="/my-bar" />
           <DrinkBuilderPage path="/build-a-drink" />
           <RecipePage path="/recipes/:name" />
-          <SearchResultsPage path="/search/:searchQuery" />
+          <SearchResultsPage path="/search/:query" />
+          <Redirect from="/search" to="/search/all" />
           <LoginSignupPage path="/welcome" />
           <AddACocktailPage path="/add" />
         </Router>

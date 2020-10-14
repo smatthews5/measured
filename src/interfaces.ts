@@ -12,10 +12,6 @@ export interface Booze {
   categories: string[];
   bases: string[];
   glasses: string[];
-  search: {
-    query: string[];
-    results: Cocktail[];
-  };
 }
 
 export interface Garnish {
@@ -40,6 +36,7 @@ export interface Cocktail {
   ingredientsList: string[];
   garnish: Garnish;
   instructions: string[];
+  relevance?: number;
 }
 
 export interface Ingredient {
@@ -47,4 +44,8 @@ export interface Ingredient {
   id: string;
   imageUrl: string;
   name: string;
+}
+
+export interface Relevance {
+  [key: string]: number;
 }
