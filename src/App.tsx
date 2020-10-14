@@ -13,6 +13,7 @@ import DrinkBuilder from './pages/DrinkBuilder';
 import Recipe from './pages/Recipe';
 import SearchResults from './pages/SearchResults';
 import LoginSignup from './pages/LoginSignup';
+import AddACocktail from './pages/AddACocktail';
 
 // set up page prop-types for routing
 const HomePage = (props: RouteComponentProps) => <Home />;
@@ -22,6 +23,20 @@ const DrinkBuilderPage = (props: RouteComponentProps) => <DrinkBuilder />;
 const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const SearchResultsPage = (props: RouteComponentProps) => <SearchResults />;
 const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
+const AddACocktailPage = (props: RouteComponentProps) => <AddACocktail />;
+
+const getUniqueOptions = (allCocktails: Cocktail[], property: string) => {
+  const allValues = allCocktails.reduce((acc: string[], cocktail: Cocktail) => {
+    if (typeof cocktail[property] === 'object')
+      return [...acc, ...cocktail[property]];
+    else return [...acc, cocktail[property]];
+  }, []);
+  const uniqueValues = new Set(allValues);
+  const sortedValues = Array.from(uniqueValues).sort((a, b) =>
+    a > b ? 1 : -1,
+  );
+  return sortedValues;
+};
 
 const App: React.FC = () => {
   // define initial state for user details
@@ -39,48 +54,14 @@ const App: React.FC = () => {
     cocktails: [],
     categories: [],
     bases: [],
+    glasses: [],
   });
-  // searched for state
 
   // memoize state --> trigger updates with changes from any page
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   const currentBooze = useMemo(() => ({ booze, setBooze }), [booze, setBooze]);
 
   useEffect(() => {
-    CocktailService.getCocktails()
-      .then((allCocktails: Cocktail[]) => {
-        setBooze((prevState) => ({ ...prevState, cocktails: allCocktails }));
-        return allCocktails;
-      })
-      .then((allCocktails) => {
-        // extract list of categories and bases
-        const categories = allCocktails.reduce(
-          (acc: string[], cocktail: Cocktail) => [
-            ...acc,
-            ...cocktail.categories,
-          ],
-          [],
-        );
-        const allBases = allCocktails.reduce(
-          (acc: string[], cocktail: Cocktail) => [...acc, cocktail.base],
-          [],
-        );
-        // remove any duplicates and sort categories alphabetically
-        const setCocktails = new Set(categories);
-        const setBases = new Set(allBases);
-        const uniqueCategories = Array.from(setCocktails).sort((a, b) =>
-          a > b ? 1 : -1,
-        );
-        const uniqueBases = Array.from(setBases).sort((a, b) =>
-          a > b ? 1 : -1,
-        );
-        setBooze((prevState) => ({
-          ...prevState,
-          bases: uniqueBases,
-          categories: uniqueCategories,
-        }));
-      })
-      .catch((error) => console.log('---> error getting all cocktails', error));
     CocktailService.getIngredients()
       .then((allIngredients: Ingredient[]) =>
         setBooze((prevState) => ({
@@ -91,6 +72,23 @@ const App: React.FC = () => {
       .catch((error) =>
         console.log('---> error getting all ingredients', error),
       );
+    CocktailService.getCocktails()
+      .then((allCocktails: Cocktail[]) => {
+        setBooze((prevState) => ({ ...prevState, cocktails: allCocktails }));
+        return allCocktails;
+      })
+      .then((allCocktails) => {
+        const allCategories = getUniqueOptions(allCocktails, 'categories');
+        const allBases = getUniqueOptions(allCocktails, 'base');
+        const allGlasses = getUniqueOptions(allCocktails, 'glassware');
+        setBooze((prevState) => ({
+          ...prevState,
+          bases: allBases,
+          categories: allCategories,
+          glasses: allGlasses,
+        }));
+      })
+      .catch((error) => console.log('---> error getting all cocktails', error));
   }, []);
 
   return (
@@ -104,6 +102,7 @@ const App: React.FC = () => {
           <RecipePage path="/recipes/:name" />
           <SearchResultsPage path="/search" />
           <LoginSignupPage path="/welcome" />
+          <AddACocktailPage path="/add" />
         </Router>
       </BoozeContext.Provider>
     </UserContext.Provider>
