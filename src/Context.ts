@@ -4,11 +4,11 @@ import { Booze, User } from './interfaces';
 
 interface Person {
   user: User;
-  setUser: (user: User) => void;
+  setUser: (user: User) => Booze;
 }
 interface Drink {
   booze: Booze;
-  setBooze: (booze: Booze) => void;
+  setBooze: (booze: Booze) => Booze;
 }
 
 const UserContext = createContext<Partial<Person>>({});
