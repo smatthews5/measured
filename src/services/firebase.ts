@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
+import { Cocktail } from '../interfaces';
 import { collectIdsAndDocs } from '../utilities';
 
 const firebaseConfig = {
@@ -46,6 +47,18 @@ export const getIngredients = async () => {
   const snapshot = await firestore.collection('ingredients').get();
   const ingredients = snapshot.docs.map(collectIdsAndDocs);
   return ingredients;
+};
+
+export const postCocktail = async (newCocktail: Partial<Cocktail>) => {
+  await firestore
+    .collection('cocktails')
+    .add(newCocktail)
+    .then((docRef) =>
+      console.log('---> New cocktail document created with ID:', docRef.id),
+    )
+    .catch((error) =>
+      console.error('---> Error adding new cocktail to firestore:', error),
+    );
 };
 
 export default firebase;
