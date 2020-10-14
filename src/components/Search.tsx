@@ -33,19 +33,17 @@ const Search: React.FC = () => {
 
   const [base, setBase] = useState<string[]>([]);
   const [category, setCategory] = useState<string[]>([]);
-console.log('base',base);
-console.log('category',category);
 
   const [filteredBases, setfilteredBases] = useState<Cocktail[]>([]);
   const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>([]); 
 
   //concatenate base and category arrays and encode for url..
   const arrConcat = base.concat(category);
-  const arrStr = encodeURIComponent(JSON.stringify(arrConcat));
+const searchQuery = arrConcat.join('+');
 
   //on press of search button run this function. Fetch from the database, the mathcing cocktails. Then filter into an array of unique cocktails
   function setSearchCriteria(
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) {
     event.preventDefault();
     if (base.length > 0) {
@@ -69,7 +67,7 @@ console.log('category',category);
       setBooze((prevBooze: Booze) => ({ ...prevBooze, search: search }));      
       // navigate to search page if not already there
       location.pathname === '/' ?
-      navigate('/search') : null;
+      navigate(`/search/${searchQuery}`) : null;
     // }
   }
 
@@ -155,15 +153,14 @@ console.log('category',category);
               </MenuOptionGroup>
             </MenuList>
           </Menu>
-          <ButtonGroup spacing={4} onClick={setSearchCriteria}>
             <Button
+            onClick={setSearchCriteria}
               leftIcon={<SearchIcon />}
               variant="outline"
               colorScheme="purple"
             >
               Search
             </Button>
-          </ButtonGroup>
         </Flex>
       </Flex>
     </Flex>
