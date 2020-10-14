@@ -10,14 +10,6 @@ import CardGrid from '../containers/CardGrid';
 
 function SearchResults({searchQuery}) {
   const { booze } = useContext(BoozeContext);
-  // dynamically display card grid
-console.log('searchQuery', searchQuery);
-
-// useEffect(() => {
-  
- 
-// },[]);
-
   return (
     <>
       <Header />

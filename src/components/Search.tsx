@@ -26,7 +26,8 @@ import {
 } from '../services/firebase';
 
 // TODO: Load dropdown options dynamically, from database
-const responsiveFont = ['10px', '16px', '16px', '16px'];
+const responsiveFontButton = ['8px', '12px', '14px', '16px'];
+const responsiveButtonHeight = ['20px', '30px', '40px'];
 
 const Search: React.FC = () => {
   const { booze, setBooze } = useContext(BoozeContext);
@@ -118,9 +119,9 @@ const Search: React.FC = () => {
               variant="outline"
               color="grey"
               id="base-ingedient"
-              fontSize={['8px', '12px', '14px', '16px']}
+              fontSize={responsiveFontButton}
               size="lg"
-              height={['20px', '30px', '40px']}
+              height={responsiveButtonHeight}
               marginRight="5px"
             >
               Booze of choice
@@ -147,9 +148,9 @@ const Search: React.FC = () => {
               variant="outline"
               color="grey"
               id="base-ingedient"
-              fontSize={['8px', '12px', '14px', '16px']}
+              fontSize={responsiveFontButton}
               size="lg"
-              height={['20px', '30px', '40px']}
+              height={responsiveButtonHeight}
               marginRight="5px"
             >
               Category
@@ -174,9 +175,9 @@ const Search: React.FC = () => {
             leftIcon={<SearchIcon />}
             variant="outline"
             color="grey"
-            fontSize={['8px', '12px', '14px', '16px']}
+            fontSize={responsiveFontButton}
             size="lg"
-            height={['20px', '30px', '40px']}
+            height={responsiveButtonHeight}
           >
             Search
           </Button>

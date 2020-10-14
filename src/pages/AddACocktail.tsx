@@ -13,7 +13,7 @@ import {
   MenuGroup,
   MenuDivider,
   MenuOptionGroup,
-  MenuItemOption,,
+  MenuItemOption,
 } from '@chakra-ui/core';
 
 import Header from '../components/Header';
