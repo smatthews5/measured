@@ -12,6 +12,7 @@ import {
 import { RouteComponentProps } from '@reach/router';
 import React from 'react';
 import { Ingredient } from '../interfaces';
+import { GiShoppingCart, GiWineBottle } from 'react-icons/gi';
 
 interface CardDetailProps extends RouteComponentProps {
   ingredient: Ingredient;
@@ -39,14 +40,18 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
           ))}
         </HStack>
       </Flex>
-      {/* <Stack direction="row" spacing={4} align="center">
-        <Button colorScheme="gray" variant="solid">
-          Add to my bar
-        </Button>
-        <Button colorScheme="gray" variant="solid">
-          Add to shopping list
-        </Button>
-      </Stack> */}
+      <Stack direction="row" spacing={4} align="center">
+        {/* <Button
+          colorScheme="gray"
+          variant="solid"
+          leftIcon={<GiWineBottle />}
+        ></Button>
+        <Button
+          colorScheme="gray"
+          variant="solid"
+          leftIcon={<GiShoppingCart />}
+        ></Button> */}
+      </Stack>
     </Flex>
   );
 };
