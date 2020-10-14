@@ -4,16 +4,14 @@ import Header from '../components/Header';
 import Search from '../components/Search';
 import CardDetailList from '../containers/CardDetailList';
 
-function Ingredients() {
+const Ingredients: React.FC = () => {
   return (
     <>
       <Header />
       <Search />
-      <>
-        <CardDetailList />
-      </>
+      <CardDetailList />
     </>
   );
-}
+};
 
 export default Ingredients;

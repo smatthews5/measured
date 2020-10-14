@@ -1,7 +1,7 @@
 import React from 'react';
 
-function CardDetail() {
+const CardDetail: React.FC = () => {
   return <div></div>;
-}
+};
 
 export default CardDetail;
