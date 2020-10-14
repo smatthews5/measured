@@ -10,14 +10,16 @@ import {
   Input,
   InputRightElement,
   InputGroup,
-  FormControl,
-  Select,
   Button,
   FormLabel,
   ButtonGroup,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItemOption,
+  MenuOptionGroup,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import { Search } from '../interfaces';
 import {
   getMatchingCocktailsByBase,
   getMatchingCocktailsByCategory,
@@ -29,38 +31,45 @@ const responsiveFont = ['10px', '16px', '16px', '16px'];
 const Search: React.FC = () => {
   const { booze, setBooze } = useContext(BoozeContext);
 
-  const [base, setBase] = useState('');
-  const [category, setCategory] = useState('');
+  const [base, setBase] = useState<string[]>([]);
+  const [category, setCategory] = useState<string[]>([]);
 
-  const [filteredBases, setfilteredBases] = useState<Cocktail[]>(); // to do change names
-  const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>(); // to do change names
+  const [filteredBases, setfilteredBases] = useState<Cocktail[]>([]);
+  const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>([]); 
 
+  //concatenate base and category arrays and encode for url..
+  const arrConcat = base.concat(category);
+const searchQuery = arrConcat.join('+');
+
+  //on press of search button run this function. Fetch from the database, the mathcing cocktails. Then filter into an array of unique cocktails
   function setSearchCriteria(
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) {
     event.preventDefault();
-    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) => setfilteredBases(cocktail),
-    );
-    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) => setfilteredCategories(cocktail),
-    );
-  // if filteredBases && filteredCategories have been set merge their values into an array of unique cocktails
-  if (filteredBases && filteredCategories) {
-    const ids = new Set(filteredBases.map((d) => d.id));
-    const spreadCategories = filteredCategories.filter((d) => !ids.has(d.id)),
-    results = [
-      ...filteredBases,
-      ...spreadCategories,
-    ];
-    const search = {
-      query: [base, category],
-      results
-    };
-    setBooze((prevBooze: Booze) => ({...prevBooze, search: search}));
-    console.log('booze object', booze);
-    navigate('search/');
+    if (base.length > 0) {
+      getMatchingCocktailsByBase(base).then((cocktail: Cocktail[]) => setfilteredBases(cocktail));
+    }
+    if (category.length > 0) {
+      getMatchingCocktailsByCategory(category).then((cocktail: Cocktail[]) => setfilteredCategories(cocktail));
+    }
+    // unique cocktails function
+    // if (filteredBases && filteredCategories) {
+      const ids = new Set(filteredBases.map((d) => d.id));
+      const spreadCategories = filteredCategories.filter(
+          (d) => !ids.has(d.id),
+        ),
+        results = [...filteredBases, ...spreadCategories];
+      const search = {
+        query: [...base, ...category],
+        results,
+      };
+      // add search property to booze object
+      setBooze((prevBooze: Booze) => ({ ...prevBooze, search: search }));      
+      // navigate to search page if not already there
+      location.pathname === '/' ?
+      navigate(`/search/${searchQuery}`) : null;
+    // }
   }
-}
-  
 
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
@@ -100,67 +109,58 @@ const Search: React.FC = () => {
             Filter by:
           </FormLabel>
         </Flex>
-
-        <Flex width="100%">
-          <FormControl>
-            <Select
+        <Flex width="100%" justify="space-between" margin="10px">
+          <Menu closeOnSelect={false}>
+            <MenuButton
+              as={Button}
               id="base-ingedient"
-              placeholder="Booze of choice"
-              border="none"
-              // focusBorderColor="#e5e5e5"
-              focusBorderColor="none"
-              /* not sure on the grey here? Maybe just none*/
               fontSize={responsiveFont}
-              onChange={(e) => {
-                setBase(e.target.value);
-              }}
             >
-              {booze.bases.map((base: string) => (
-                <option>{base}</option>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl>
-            <Select
-              id="category"
-              placeholder="Category"
-              border="none"
+              Booze of choice
+            </MenuButton>
+              
+              <MenuList maxHeight="200px" overflowY='scroll'>
+              <MenuOptionGroup
+                type="checkbox"
+                onChange={(value) => {
+                  setBase(value);
+                }}
+              >
+                {booze.bases.map((base: string, index: number) => (
+                  <MenuItemOption key={index} value={base}>{base}</MenuItemOption>
+                ))}
+              </MenuOptionGroup>
+            </MenuList>
+          </Menu>
+          <Menu closeOnSelect={false}>
+            <MenuButton
+              as={Button}
+              id="base-ingedient"
               fontSize={responsiveFont}
-              // focusBorderColor="#e5e5e5"
-              focusBorderColor="none"
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }}
             >
-              {booze.categories.map((category: string) => (
-                <option key={category}>{category}</option>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl>
-            <Select
-              id="flavour"
-              placeholder="Flavour"
-              border="none"
-              fontSize={responsiveFont}
-              // focusBorderColor="#e5e5e5"
-              focusBorderColor="none"
-              onChange={(e) => {
-                setFlavour(e.target.value);
-              }}
-            >
-              <option>Fruity</option>
-            </Select>
-          </FormControl>
-          <ButtonGroup spacing={4} onClick={setSearchCriteria}>
+              Category
+            </MenuButton>
+            <MenuList maxHeight="200px" overflowY='scroll'>
+              <MenuOptionGroup
+                type="checkbox"
+                onChange={(value) => {
+                  setCategory(value);
+                }}
+              >
+                {booze?.categories.map((category: string, index: number) => (
+                  <MenuItemOption key={index} value={category}>{category}</MenuItemOption>
+                ))}
+              </MenuOptionGroup>
+            </MenuList>
+          </Menu>
             <Button
+            onClick={setSearchCriteria}
               leftIcon={<SearchIcon />}
               variant="outline"
               colorScheme="purple"
             >
               Search
             </Button>
-          </ButtonGroup>
         </Flex>
       </Flex>
     </Flex>

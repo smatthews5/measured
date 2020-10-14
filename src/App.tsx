@@ -104,7 +104,7 @@ const App: React.FC = () => {
           <MyBarPage path="/my-bar" />
           <DrinkBuilderPage path="/build-a-drink" />
           <RecipePage path="/recipes/:name" />
-          <SearchResultsPage path="/search" />
+          <SearchResultsPage path="/search/:searchQuery" />
           <LoginSignupPage path="/welcome" />
           <AddACocktailPage path="/add" />
         </Router>
