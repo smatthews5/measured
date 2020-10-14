@@ -2,7 +2,8 @@
 import React, { useContext, useState } from 'react';
 import { BoozeContext } from '../Context';
 import { css, jsx } from '@emotion/core';
-import { Cocktail } from '../interfaces';
+import { Booze, Cocktail } from '../interfaces';
+import { RouteComponentProps, navigate } from '@reach/router';
 
 import {
   Flex,
@@ -26,29 +27,41 @@ import {
 const responsiveFont = ['10px', '16px', '16px', '16px'];
 
 const Search: React.FC = () => {
-  const { booze } = useContext(BoozeContext);
+  const { booze, setBooze } = useContext(BoozeContext);
 
   const [base, setBase] = useState('');
   const [category, setCategory] = useState('');
-  const [flavour, setFlavour] = useState('');
 
-  const [bases, setBases] = useState<Cocktail[]>();
-  const [categories, setCategories] = useState<Cocktail[]>();
+  const [filteredBases, setfilteredBases] = useState<Cocktail[]>(); // to do change names
+  const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>(); // to do change names
 
   function setSearchCriteria(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) {
-      event.preventDefault();
-      getMatchingCocktailsByBase(base).then((cocktail: Cocktail) => setBases(cocktail));
-      getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) => setCategories(cocktail));
+  ) {
+    event.preventDefault();
+    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) => setfilteredBases(cocktail),
+    );
+    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) => setfilteredCategories(cocktail),
+    );
+  // if filteredBases && filteredCategories have been set merge their values into an array of unique cocktails
+  if (filteredBases && filteredCategories) {
+    const ids = new Set(filteredBases.map((d) => d.id));
+    const spreadCategories = filteredCategories.filter((d) => !ids.has(d.id)),
+    results = [
+      ...filteredBases,
+      ...spreadCategories,
+    ];
+    const search = {
+      query: [base, category],
+      results
     };
+    setBooze((prevBooze: Booze) => ({...prevBooze, search: search}));
+    console.log('booze object', booze);
+    navigate('search/');
+  }
+}
+  
 
-    // if bases && categories have been set merge their values into an array of unique cocktails
-    if (bases && categories) {
-      const ids = new Set(bases.map((d) => d.id));
-      const merged = [...bases, ...categories.filter((d) => !ids.has(d.id))];
-    }
-    
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
@@ -140,7 +153,11 @@ const Search: React.FC = () => {
             </Select>
           </FormControl>
           <ButtonGroup spacing={4} onClick={setSearchCriteria}>
-            <Button leftIcon={<SearchIcon />} variant="solid">
+            <Button
+              leftIcon={<SearchIcon />}
+              variant="outline"
+              colorScheme="purple"
+            >
               Search
             </Button>
           </ButtonGroup>

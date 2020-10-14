@@ -11,6 +11,10 @@ export interface Booze {
   cocktails: Cocktail[];
   categories: string[];
   bases: string[];
+  search: {
+    query: string[];
+    results: Cocktail[];
+  }
 }
 
 export interface Cocktail {
@@ -38,9 +42,4 @@ export interface Ingredient {
   id: string;
   imageUrl: string;
   name: string;
-}
-export interface Search {
-  base: string;
-  category: string;
-  flavour: string;
 }
