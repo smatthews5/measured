@@ -17,9 +17,12 @@ import {
   MenuItemOption,
   MenuOptionGroup,
 } from '@chakra-ui/core';
-import { SearchIcon } from '@chakra-ui/icons';
 
-const responsiveFont = ['10px', '16px', '16px', '16px'];
+import { SearchIcon, ChevronDownIcon } from '@chakra-ui/icons';
+
+const responsiveFontButton = ['8px', '12px', '14px', '16px'];
+const responsiveButtonHeight = ['20px', '30px', '40px'];
+
 
 const Search: React.FC = () => {
   const { booze } = useContext(BoozeContext);
@@ -38,7 +41,7 @@ const Search: React.FC = () => {
   }
 
   return (
-    <Flex justify="center" align="center" direction="column" py="5vh">
+    <Flex justify="center" align="center" direction="column" pt="5vh">
       <Flex width="70%" justify="center" align="center">
         <form
           css={css`
@@ -79,12 +82,17 @@ const Search: React.FC = () => {
           <Menu closeOnSelect={false}>
             <MenuButton
               as={Button}
+              rightIcon={<ChevronDownIcon />}
+              variant="outline"
+              color="grey"
               id="base-ingedient"
-              fontSize={responsiveFont}
+              fontSize={responsiveFontButton}
+              size="lg"
+              height={responsiveButtonHeight}
+              marginRight="5px"
             >
               Booze of choice
             </MenuButton>
-
             <MenuList maxHeight="200px" overflowY="scroll">
               <MenuOptionGroup
                 type="checkbox"
@@ -103,8 +111,14 @@ const Search: React.FC = () => {
           <Menu closeOnSelect={false}>
             <MenuButton
               as={Button}
+              rightIcon={<ChevronDownIcon />}
+              variant="outline"
+              color="grey"
               id="base-ingedient"
-              fontSize={responsiveFont}
+              fontSize={responsiveFontButton}
+              size="lg"
+              height={responsiveButtonHeight}
+              marginRight="5px"
             >
               Category
             </MenuButton>
@@ -127,7 +141,11 @@ const Search: React.FC = () => {
             onClick={setSearchCriteria}
             leftIcon={<SearchIcon />}
             variant="outline"
-            colorScheme="purple"
+
+            color="grey"
+            fontSize={responsiveFontButton}
+            size="lg"
+            height={responsiveButtonHeight}
           >
             Search
           </Button>

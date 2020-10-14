@@ -25,7 +25,7 @@ import {
 } from '../interfaces';
 import { postCocktail } from '../services/firebase';
 
-function AddACocktail() {
+const AddACocktail: React.FC = () => {
   const { booze } = useContext(BoozeContext);
 
   const [cocktail, setCocktail] = useState<Partial<Cocktail>>({});
@@ -140,6 +140,6 @@ function AddACocktail() {
       </Flex>
     </>
   );
-}
+};
 
 export default AddACocktail;

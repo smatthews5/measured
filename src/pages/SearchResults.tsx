@@ -12,7 +12,6 @@ import {
   getMatchingCocktailsByCategory,
 } from '../services/firebase';
 
-// TODO: ENSURE PAGE LOADS WHEN ONLY BASE OR CAT SPECIFIED
 const SearchResults = () => {
   const { query } = useParams();
   const { booze } = useContext(BoozeContext);

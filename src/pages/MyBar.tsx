@@ -5,7 +5,7 @@ import CardDetailList from '../containers/CardDetailList';
 import CardGallery from '../containers/CardGallery';
 import CardSuggestionContainer from '../containers/CardSuggestionContainer';
 
-function MyBar() {
+const MyBar: React.FC = () => {
   return (
     <>
       <Header />
@@ -18,6 +18,6 @@ function MyBar() {
       </>
     </>
   );
-}
+};
 
 export default MyBar;
