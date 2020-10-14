@@ -25,7 +25,7 @@ const Header: React.FC = () => {
       >
         <Link to="/ingredients">
           <Heading
-            as="h2"
+            as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
             color="purple.300"
@@ -36,7 +36,7 @@ const Header: React.FC = () => {
         </Link>
         <Link to="/build-a-drink">
           <Heading
-            as="h2"
+            as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
             color="purple.300"
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
         </Link>
         <Link to="/my-bar">
           <Heading
-            as="h2"
+            as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
             color="purple.300"

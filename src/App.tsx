@@ -57,7 +57,7 @@ const App: React.FC = () => {
     glasses: [],
     search: {
       query: [],
-      results: []
+      results: [],
     },
   });
 

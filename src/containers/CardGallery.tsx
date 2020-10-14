@@ -28,7 +28,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({
         >
           {categoryHeading}
         </Heading>
-        <Flex overflowX="scroll" mx={2} mb={2}>
+        <Flex overflowX="scroll" mx="1%" mb={2}>
           {cocktails.map((cocktail: Cocktail) => (
             <Card cocktail={cocktail} key={cocktail.id} />
           ))}

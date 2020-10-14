@@ -14,7 +14,12 @@ const SearchResults: React.FC = ({searchQuery}) => {
     <>
       <Header />
       <Search />
-      <CardGrid cocktails={booze?.search.results.length? booze.search.results : booze.cocktails} searchTerms={booze.search.query} />
+      <CardGrid
+        cocktails={
+          booze?.search.results.length ? booze.search.results : booze.cocktails
+        }
+        searchTerms={booze.search.query}
+      />
     </>
   );
 };

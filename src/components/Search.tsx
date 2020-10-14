@@ -73,7 +73,7 @@ const Search: React.FC = () => {
   }
 
   return (
-    <Flex justify="center" align="center" direction="column" py="5vh">
+    <Flex justify="center" align="center" direction="column" pt="5vh">
       <Flex width="70%" justify="center" align="center">
         <form
           css={css`
