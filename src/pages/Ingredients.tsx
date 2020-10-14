@@ -6,6 +6,7 @@ import Search from '../components/Search';
 import CardDetailList from '../containers/CardDetailList';
 
 const Ingredients: React.FC = () => {
+
   const { booze } = useContext(BoozeContext);
   const ingredients = booze.ingredients;
 

@@ -11,30 +11,35 @@ export interface Booze {
   cocktails: Cocktail[];
   categories: string[];
   bases: string[];
+  glasses: string[];
   search: {
     query: string[];
     results: Cocktail[];
   };
 }
 
-export interface Cocktail {
-  base: string;
-  categories: string[];
-  garnish: {
-    id: string;
-    description: string;
-  };
-  glassware: string;
+export interface Garnish {
   id: string;
-  imageUrl: string;
-  ingredients: {
-    name: string;
-    amount: number;
-    unit: string;
-  }[];
-  ingredientsList: string[];
-  instructions: string[];
+  description: string;
+}
+
+export interface IngredientDetails {
   name: string;
+  amount: number;
+  unit: string;
+}
+
+export interface Cocktail {
+  id: string;
+  name: string;
+  base: string;
+  imageUrl: string;
+  glassware: string;
+  categories: string[];
+  ingredients: IngredientDetails[];
+  ingredientsList: string[];
+  garnish: Garnish;
+  instructions: string[];
 }
 
 export interface Ingredient {

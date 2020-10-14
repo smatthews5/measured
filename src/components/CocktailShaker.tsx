@@ -1,7 +1,7 @@
 import React from 'react';
 
-function CocktailShaker() {
+const CocktailShaker: React.FC = () => {
   return <div></div>;
-}
+};
 
 export default CocktailShaker;

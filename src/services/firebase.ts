@@ -1,8 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
-import { collectIdsAndDocs } from '../utilities';
 import { Cocktail } from '../interfaces';
+import { collectIdsAndDocs } from '../utilities';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCuTrD5ArJIOjE42O_i2g97oITTuFSjJck',
@@ -25,19 +25,20 @@ export const getCocktails = async () => {
   const cocktails = snapshot.docs.map(collectIdsAndDocs);
   return cocktails;
 };
-
-export const getMatchingCocktailsByBase = async (base: string) => {
+//returns cocktails by filtered base from dropdown filter
+export const getMatchingCocktailsByBase = async (base: string[]) => {
   const snapshot = await firestore
     .collection('cocktails')
-    .where('base', '==', base)
+    .where('base', 'in', base)
     .get();
   const cocktails: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
   return cocktails;
 };
-export const getMatchingCocktailsByCategory = async (category: string) => {
+//returns cocktails by filtered categories from dropdown filter
+export const getMatchingCocktailsByCategory = async (category: string[]) => {
   const snapshot = await firestore
     .collection('cocktails')
-    .where('categories', 'array-contains', category)
+    .where('categories', 'array-contains-any', category)
     .get();
   const cocktails: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
   return cocktails;
@@ -47,6 +48,18 @@ export const getIngredients = async () => {
   const snapshot = await firestore.collection('ingredients').get();
   const ingredients = snapshot.docs.map(collectIdsAndDocs);
   return ingredients;
+};
+
+export const postCocktail = async (newCocktail: Partial<Cocktail>) => {
+  await firestore
+    .collection('cocktails')
+    .add(newCocktail)
+    .then((docRef) =>
+      console.log('---> New cocktail document created with ID:', docRef.id),
+    )
+    .catch((error) =>
+      console.error('---> Error adding new cocktail to firestore:', error),
+    );
 };
 
 export default firebase;

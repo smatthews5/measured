@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BoozeContext } from '../Context';
+
+import { navigate } from '@reach/router';
+
 
 import Header from '../components/Header';
 import Search from '../components/Search';
 import CardGrid from '../containers/CardGrid';
 
-function SearchResults() {
+const SearchResults: React.FC = ({searchQuery}) => {
   const { booze } = useContext(BoozeContext);
-  // dynamically display card grid
   return (
     <>
       <Header />
@@ -20,6 +22,6 @@ function SearchResults() {
       />
     </>
   );
-}
+};
 
 export default SearchResults;

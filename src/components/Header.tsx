@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import { Flex, Wrap, Image, Heading } from '@chakra-ui/core';
+import { Flex, Image, Heading } from '@chakra-ui/core';
 import icon from '../assets/images/header_icon.png';
 
 const responsiveFontSize = ['lg', 'xl', '3xl', '4xl'];

@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import CocktailShaker from '../components/CocktailShaker';
 import CardSuggestionContainer from '../containers/CardSuggestionContainer';
 
-function DrinkBuilder() {
+const DrinkBuilder: React.FC = () => {
   return (
     <>
       <Header />
