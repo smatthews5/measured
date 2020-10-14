@@ -1,19 +1,28 @@
 import { StackDivider, VStack } from '@chakra-ui/core';
+import { RouteComponentProps } from '@reach/router';
 import React from 'react';
 
 import CardDetail from '../components/CardDetail';
+import { Ingredient } from '../interfaces';
 
-const CardDetailList: React.FC = () => {
+interface CardDetailListProps extends RouteComponentProps {
+  ingredients: Ingredient[];
+}
+
+const CardDetailList: React.FC<CardDetailListProps> = ({ ingredients }) => {
   return (
     <>
       <VStack
         divider={<StackDivider borderColor="gray.200" />}
         spacing={4}
         align="stretch"
+        width="70vw"
+        mx="auto"
+        my="5%"
       >
-        <CardDetail />
-        <CardDetail />
-        <CardDetail />
+        {ingredients.map((ingredient) => (
+          <CardDetail ingredient={ingredient} key={ingredient.id} />
+        ))}
       </VStack>
     </>
   );

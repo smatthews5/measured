@@ -41,12 +41,12 @@ const App: React.FC = () => {
     bases: [],
     search: {
       query: [],
-      results: []
+      results: [],
     },
   });
   // searched for state
-const [searchedFor, setSearchedFor] = useState();
-const SearchedContext = React.createContext([]);
+  const [searchedFor, setSearchedFor] = useState();
+  const SearchedContext = React.createContext([]);
 
   // memoize state --> trigger updates with changes from any page
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
@@ -102,15 +102,15 @@ const SearchedContext = React.createContext([]);
   return (
     <UserContext.Provider value={currentUser}>
       <BoozeContext.Provider value={currentBooze}>
-          <Router>
-            <HomePage path="/" />
-            <IngredientsPage path="/ingredients" />
-            <MyBarPage path="/my-bar" />
-            <DrinkBuilderPage path="/build-a-drink" />
-            <RecipePage path="/recipes/:name" />
-            <SearchResultsPage path="/search" />
-            <LoginSignupPage path="/welcome" />
-          </Router>
+        <Router>
+          <HomePage path="/" />
+          <IngredientsPage path="/ingredients" />
+          <MyBarPage path="/my-bar" />
+          <DrinkBuilderPage path="/build-a-drink" />
+          <RecipePage path="/recipes/:name" />
+          <SearchResultsPage path="/search" />
+          <LoginSignupPage path="/welcome" />
+        </Router>
       </BoozeContext.Provider>
     </UserContext.Provider>
   );

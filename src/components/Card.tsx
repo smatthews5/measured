@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
       width="25%"
       minWidth="25%"
       borderRadius="6px"
-      mr={8}
+      mr={2}
       ml={2}
       mt={5}
       mb={2}
@@ -27,8 +27,8 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
         boxShadow="0px 0px 8px 1px rgba(0, 0, 0, 0.5)"
         src={cocktail.imageUrl}
         alt={cocktail.name}
-        w="20vw"
-        h="20vw"
+        w="18vw"
+        h="18vw"
         overflow="hidden"
         onClick={() => navigate(`/recipes/${cocktail.name}`)}
       />

@@ -39,31 +39,29 @@ const Search: React.FC = () => {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) {
     event.preventDefault();
-    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) => setfilteredBases(cocktail),
+    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) =>
+      setfilteredBases(cocktail),
     );
-    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) => setfilteredCategories(cocktail),
+    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) =>
+      setfilteredCategories(cocktail),
     );
-  // if filteredBases && filteredCategories have been set merge their values into an array of unique cocktails
-  if (filteredBases && filteredCategories) {
-    const ids = new Set(filteredBases.map((d) => d.id));
-    const spreadCategories = filteredCategories.filter((d) => !ids.has(d.id)),
-    results = [
-      ...filteredBases,
-      ...spreadCategories,
-    ];
-    const search = {
-      query: [base, category],
-      results
-    };
-    setBooze((prevBooze: Booze) => ({...prevBooze, search: search}));
-    console.log('booze object', booze);
-    navigate('search/');
+    // if filteredBases && filteredCategories have been set merge their values into an array of unique cocktails
+    if (filteredBases && filteredCategories) {
+      const ids = new Set(filteredBases.map((d) => d.id));
+      const spreadCategories = filteredCategories.filter((d) => !ids.has(d.id)),
+        results = [...filteredBases, ...spreadCategories];
+      const search = {
+        query: [base, category],
+        results,
+      };
+      setBooze((prevBooze: Booze) => ({ ...prevBooze, search: search }));
+      console.log('booze object', booze);
+      navigate('search/');
+    }
   }
-}
-  
 
   return (
-    <Flex justify="center" align="center" direction="column" py="5vh">
+    <Flex justify="center" align="center" direction="column" pt="5vh">
       <Flex width="70%" justify="center" align="center">
         <form
           css={css`

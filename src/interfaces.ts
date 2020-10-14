@@ -14,7 +14,7 @@ export interface Booze {
   search: {
     query: string[];
     results: Cocktail[];
-  }
+  };
 }
 
 export interface Cocktail {

@@ -26,7 +26,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
       <Flex
         height="80vh"
         width="80vw"
-        backgroundColor="rgb(230,230,230, 0.5)"
+        backgroundColor="rgb(240,240,240, 0.5)"
         boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
         borderRadius={20}
         margin="auto"
@@ -80,8 +80,8 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
               ))}
             </List>
           </Box>
-          <Flex alignSelf="center" w="100%" pl="5vw">
-            <Flex w="50%" alignItems="center" justifyContent="center">
+          <Flex w="100%" pl="5vw">
+            <Flex w="50%" alignItems="center">
               <Image
                 w={responsiveImage}
                 h={responsiveImage}

@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
 import { collectIdsAndDocs } from '../utilities';
-import { Cocktail } from "../interfaces";
+import { Cocktail } from '../interfaces';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCuTrD5ArJIOjE42O_i2g97oITTuFSjJck',
