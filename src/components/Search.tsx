@@ -15,6 +15,11 @@ import {
   Button,
   FormLabel,
   ButtonGroup,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItemOption,
+  MenuOptionGroup,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
 import { Search } from '../interfaces';
@@ -39,28 +44,26 @@ const Search: React.FC = () => {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) {
     event.preventDefault();
-    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) => setfilteredBases(cocktail),
+    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) =>
+      setfilteredBases(cocktail),
     );
-    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) => setfilteredCategories(cocktail),
+    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) =>
+      setfilteredCategories(cocktail),
     );
-  // if filteredBases && filteredCategories have been set merge their values into an array of unique cocktails
-  if (filteredBases && filteredCategories) {
-    const ids = new Set(filteredBases.map((d) => d.id));
-    const spreadCategories = filteredCategories.filter((d) => !ids.has(d.id)),
-    results = [
-      ...filteredBases,
-      ...spreadCategories,
-    ];
-    const search = {
-      query: [base, category],
-      results
-    };
-    setBooze((prevBooze: Booze) => ({...prevBooze, search: search}));
-    console.log('booze object', booze);
-    navigate('search/');
+    // if filteredBases && filteredCategories have been set merge their values into an array of unique cocktails
+    if (filteredBases && filteredCategories) {
+      const ids = new Set(filteredBases.map((d) => d.id));
+      const spreadCategories = filteredCategories.filter((d) => !ids.has(d.id)),
+        results = [...filteredBases, ...spreadCategories];
+      const search = {
+        query: [base, category],
+        results,
+      };
+      setBooze((prevBooze: Booze) => ({ ...prevBooze, search: search }));
+      console.log('booze object', booze);
+      navigate('search/');
+    }
   }
-}
-  
 
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
@@ -102,56 +105,48 @@ const Search: React.FC = () => {
         </Flex>
 
         <Flex width="100%">
-          <FormControl>
-            <Select
+          <Menu closeOnSelect={false}>
+            <MenuButton
+              as={Button}
               id="base-ingedient"
-              placeholder="Booze of choice"
-              border="none"
-              // focusBorderColor="#e5e5e5"
-              focusBorderColor="none"
-              /* not sure on the grey here? Maybe just none*/
               fontSize={responsiveFont}
-              onChange={(e) => {
-                setBase(e.target.value);
-              }}
             >
-              {booze.bases.map((base: string) => (
-                <option>{base}</option>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl>
-            <Select
-              id="category"
-              placeholder="Category"
-              border="none"
+              Booze of choice
+            </MenuButton>
+            <MenuList>
+              <MenuOptionGroup
+                type="checkbox"
+                onChange={(value) => {
+                  setBase(value);
+                }}
+              >
+                {booze.bases.map((base: string) => (
+                  <MenuItemOption value={base}>{base}</MenuItemOption>
+                ))}
+              </MenuOptionGroup>
+            </MenuList>
+          </Menu>
+          <Menu closeOnSelect={false}>
+            <MenuButton
+              as={Button}
+              id="base-ingedient"
               fontSize={responsiveFont}
-              // focusBorderColor="#e5e5e5"
-              focusBorderColor="none"
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }}
             >
-              {booze.categories.map((category: string) => (
-                <option key={category}>{category}</option>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl>
-            <Select
-              id="flavour"
-              placeholder="Flavour"
-              border="none"
-              fontSize={responsiveFont}
-              // focusBorderColor="#e5e5e5"
-              focusBorderColor="none"
-              onChange={(e) => {
-                setFlavour(e.target.value);
-              }}
-            >
-              <option>Fruity</option>
-            </Select>
-          </FormControl>
+              Category
+            </MenuButton>
+            <MenuList>
+              <MenuOptionGroup
+                type="checkbox"
+                onChange={(value) => {
+                  setCategory(value);
+                }}
+              >
+                {booze?.categories.map((category: string) => (
+                  <MenuItemOption value={category}>{category}</MenuItemOption>
+                ))}
+              </MenuOptionGroup>
+            </MenuList>
+          </Menu>
           <ButtonGroup spacing={4} onClick={setSearchCriteria}>
             <Button
               leftIcon={<SearchIcon />}
