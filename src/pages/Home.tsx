@@ -5,12 +5,13 @@ import HeaderLarge from '../components/HeaderLarge';
 import Banner from '../components/Banner';
 import Search from '../components/Search';
 import CardGallery from '../containers/CardGallery';
+import Header from '../components/Header';
 
 const Home: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   return (
     <>
-      <HeaderLarge />
+      <Header />
       <Banner />
       <Search />
       <CardGallery

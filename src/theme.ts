@@ -70,7 +70,6 @@ const customTheme = extendTheme({
         color: 'purple.400',
       },
       h3: {
-        textTransform: 'uppercase',
         color: 'white',
       },
       h4: {

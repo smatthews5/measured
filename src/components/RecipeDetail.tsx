@@ -1,4 +1,12 @@
-import { Flex, Heading, Image, List, ListItem, Text } from '@chakra-ui/core';
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  List,
+  ListItem,
+  Text,
+} from '@chakra-ui/core';
 import { RouteComponentProps } from '@reach/router';
 import React from 'react';
 import garnish from '../assets/images/garnish2.png';
@@ -16,72 +24,37 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   return (
     <>
       <Flex
-        direction="column"
         height="80vh"
         width="80vw"
         backgroundColor="rgb(230,230,230, 0.5)"
-        boxShadow="0px 0px 8px 1px rgba(0, 0, 0, 0.2)"
+        boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
         borderRadius={20}
         margin="auto"
         mt={5}
       >
-        <Heading
-          as="h2"
-          fontFamily="mono"
-          color="purple.400"
-          mx="auto"
-          fontSize={['2xl', '3xl', '5vw', '6vw']}
-        >
-          {cocktail?.name}
-        </Heading>
-        <Flex h="50vh" w="80vw" mt="5vh" mx="auto">
-          <Flex w="50%" flexDirection="column" align="flex-end" mr="5%">
-            <Image
-              src={cocktail?.imageUrl}
-              w="65%"
-              h="90%"
-              objectFit="cover"
-              borderRadius="8px"
-              boxShadow="0px 0px 9px 1px rgba(0, 0, 0, 0.75)"
-            ></Image>
-            <Flex alignItems="center" width="60%" mt="2%">
-              <Image
-                w={responsiveImage}
-                h={responsiveImage}
-                src={glass}
-                objectFit="cover"
-                alt="glassware icon"
-                mb={3}
-                ml={10}
-              />
-              <Text
-                fontFamily="heading"
-                fontSize={['sm', 'md', 'lg', 'lg']}
-                w="50%"
-              >
-                : {cocktail?.glassware}
-              </Text>
-              <Image
-                w={responsiveImage}
-                h={responsiveImage}
-                src={garnish}
-                objectFit="cover"
-                alt="garnish icon"
-                mb={3}
-              />
-              <Text
-                fontFamily="heading"
-                fontSize={['sm', 'md', 'lg', 'lg']}
-                w="50%"
-              >
-                :{' '}
-                {cocktail?.garnish.description !== ''
-                  ? cocktail?.garnish.description
-                  : 'n/a'}
-              </Text>
-            </Flex>
-          </Flex>
-          <Flex direction="column" w="50%">
+        <Flex w="50%" flexDirection="column">
+          <Image
+            src={cocktail?.imageUrl}
+            w="85%"
+            h="85%"
+            mx="auto"
+            my="auto"
+            objectFit="cover"
+            borderRadius="8px"
+            boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
+          ></Image>
+        </Flex>
+        <Flex direction="column" w="50%" h="100%" justifyContent="space-evenly">
+          <Box>
+            <Heading
+              as="h3"
+              fontWeight="200"
+              color="purple.400"
+              textAlign="center"
+              fontSize={['xl', '2xl', '3xl', '4vw']}
+            >
+              {cocktail?.name}
+            </Heading>
             <Text
               fontFamily="heading"
               mb="2%"
@@ -96,11 +69,9 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
                 </ListItem>
               ))}
             </List>
-            <Text
-              fontFamily="heading"
-              mt="5%"
-              fontSize={['md', 'lg', 'xl', '2xl']}
-            >
+          </Box>
+          <Box>
+            <Text fontFamily="heading" fontSize={['md', 'lg', 'xl', '2xl']}>
               Method:
             </Text>
             <List spacing={3} mt="2%">
@@ -108,6 +79,33 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
                 <ListItem key={instruction}>{instruction}</ListItem>
               ))}
             </List>
+          </Box>
+          <Flex alignSelf="center" w="100%" pl="5vw">
+            <Flex w="50%" alignItems="center" justifyContent="center">
+              <Image
+                w={responsiveImage}
+                h={responsiveImage}
+                src={glass}
+                objectFit="cover"
+                alt="glassware icon"
+              />
+              <Text>: {cocktail?.glassware}</Text>
+            </Flex>
+            <Flex w="50%" alignItems="center">
+              <Image
+                w={responsiveImage}
+                h={responsiveImage}
+                src={garnish}
+                objectFit="cover"
+                alt="garnish icon"
+              />
+              <Text>
+                :{' '}
+                {cocktail?.garnish.description !== ''
+                  ? cocktail?.garnish.description
+                  : 'n/a'}
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
