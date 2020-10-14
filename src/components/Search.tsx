@@ -20,7 +20,6 @@ import {
   MenuOptionGroup,
 } from '@chakra-ui/core';
 import { SearchIcon } from '@chakra-ui/icons';
-import { Search } from '../interfaces';
 import {
   getMatchingCocktailsByBase,
   getMatchingCocktailsByCategory,
@@ -32,33 +31,31 @@ const responsiveFont = ['10px', '16px', '16px', '16px'];
 const Search: React.FC = () => {
   const { booze, setBooze } = useContext(BoozeContext);
 
-  const [base, setBase] = useState('');
-  const [category, setCategory] = useState('');
+  const [base, setBase] = useState<string[]>([]);
+  const [category, setCategory] = useState<string[]>([]);
+console.log('base',base);
+console.log('category',category);
 
-  const [filteredBases, setfilteredBases] = useState<Cocktail[]>();
-  const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>(); 
+  const [filteredBases, setfilteredBases] = useState<Cocktail[]>([]);
+  const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>([]); 
 
   //concatenate base and category arrays and encode for url..
   const arrConcat = base.concat(category);
   const arrStr = encodeURIComponent(JSON.stringify(arrConcat));
 
   //on press of search button run this function. Fetch from the database, the mathcing cocktails. Then filter into an array of unique cocktails
-  async function setSearchCriteria(
+  function setSearchCriteria(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) {
     event.preventDefault();
     if (base.length > 0) {
-      getMatchingCocktailsByBase(base).then((cocktail: Cocktail) =>
-        setfilteredBases(cocktail),
-      );
+      getMatchingCocktailsByBase(base).then((cocktail: Cocktail[]) => setfilteredBases(cocktail));
     }
     if (category.length > 0) {
-      getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) =>
-        setfilteredCategories(cocktail),
-      );
+      getMatchingCocktailsByCategory(category).then((cocktail: Cocktail[]) => setfilteredCategories(cocktail));
     }
     // unique cocktails function
-    if (filteredBases || filteredCategories) {
+    // if (filteredBases && filteredCategories) {
       const ids = new Set(filteredBases.map((d) => d.id));
       const spreadCategories = filteredCategories.filter(
           (d) => !ids.has(d.id),
@@ -69,10 +66,11 @@ const Search: React.FC = () => {
         results,
       };
       // add search property to booze object
-      setBooze((prevBooze: Booze) => ({ ...prevBooze, search: search }));
-      // navigate to search page
-      navigate('search/');
-    }
+      setBooze((prevBooze: Booze) => ({ ...prevBooze, search: search }));      
+      // navigate to search page if not already there
+      location.pathname === '/' ?
+      navigate('/search') : null;
+    // }
   }
 
   return (
@@ -122,15 +120,16 @@ const Search: React.FC = () => {
             >
               Booze of choice
             </MenuButton>
-            <MenuList>
+              
+              <MenuList maxHeight="200px" overflowY='scroll'>
               <MenuOptionGroup
                 type="checkbox"
                 onChange={(value) => {
                   setBase(value);
                 }}
               >
-                {booze.bases.map((base: string) => (
-                  <MenuItemOption value={base}>{base}</MenuItemOption>
+                {booze.bases.map((base: string, index: number) => (
+                  <MenuItemOption key={index} value={base}>{base}</MenuItemOption>
                 ))}
               </MenuOptionGroup>
             </MenuList>
@@ -143,15 +142,15 @@ const Search: React.FC = () => {
             >
               Category
             </MenuButton>
-            <MenuList>
+            <MenuList maxHeight="200px" overflowY='scroll'>
               <MenuOptionGroup
                 type="checkbox"
                 onChange={(value) => {
                   setCategory(value);
                 }}
               >
-                {booze?.categories.map((category: string) => (
-                  <MenuItemOption value={category}>{category}</MenuItemOption>
+                {booze?.categories.map((category: string, index: number) => (
+                  <MenuItemOption key={index} value={category}>{category}</MenuItemOption>
                 ))}
               </MenuOptionGroup>
             </MenuList>
