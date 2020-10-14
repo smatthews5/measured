@@ -23,8 +23,8 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
     >
       <Image
         fit="cover"
-        borderRadius="2px"
-        boxShadow="0px 0px 2px 2px gray"
+        borderRadius="5px"
+        boxShadow="0px 0px 8px 1px rgba(0, 0, 0, 0.5)"
         src={cocktail.imageUrl}
         alt={cocktail.name}
         w="20vw"

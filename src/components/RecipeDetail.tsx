@@ -1,8 +1,12 @@
 import { Flex, Heading, Image, List, ListItem, Text } from '@chakra-ui/core';
 import { RouteComponentProps } from '@reach/router';
 import React from 'react';
+import garnish from '../assets/images/garnish2.png';
+import glass from '../assets/images/glass2.png';
 
 import { Cocktail } from '../interfaces';
+
+const responsiveImage = ['15px', '30px', '40px', ' 50px'];
 
 interface RecipeDetailProps extends RouteComponentProps {
   cocktail: Cocktail | undefined;
@@ -11,7 +15,16 @@ interface RecipeDetailProps extends RouteComponentProps {
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   return (
     <>
-      <Flex direction="column" height="90vh">
+      <Flex
+        direction="column"
+        height="80vh"
+        width="80vw"
+        backgroundColor="rgb(230,230,230, 0.5)"
+        boxShadow="0px 0px 8px 1px rgba(0, 0, 0, 0.2)"
+        borderRadius={20}
+        margin="auto"
+        mt={5}
+      >
         <Heading
           as="h2"
           fontFamily="mono"
@@ -31,25 +44,40 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
               borderRadius="8px"
               boxShadow="0px 0px 9px 1px rgba(0, 0, 0, 0.75)"
             ></Image>
-            <Flex
-              alignSelf="flex-end"
-              alignItems="center"
-              width="65%"
-              justifyContent="space-around"
-            >
+            <Flex alignItems="center" width="60%" mt="2%">
+              <Image
+                w={responsiveImage}
+                h={responsiveImage}
+                src={glass}
+                objectFit="cover"
+                alt="glassware icon"
+                mb={3}
+                ml={10}
+              />
               <Text
                 fontFamily="heading"
-                fontSize={['md', 'lg', 'xl', '2xl']}
+                fontSize={['sm', 'md', 'lg', 'lg']}
                 w="50%"
               >
-                Glass: {cocktail?.glassware}
+                : {cocktail?.glassware}
               </Text>
+              <Image
+                w={responsiveImage}
+                h={responsiveImage}
+                src={garnish}
+                objectFit="cover"
+                alt="garnish icon"
+                mb={3}
+              />
               <Text
                 fontFamily="heading"
-                fontSize={['md', 'lg', 'xl', '2xl']}
+                fontSize={['sm', 'md', 'lg', 'lg']}
                 w="50%"
               >
-                Garnish: {cocktail?.garnish.description}
+                :{' '}
+                {cocktail?.garnish.description !== ''
+                  ? cocktail?.garnish.description
+                  : 'n/a'}
               </Text>
             </Flex>
           </Flex>
@@ -70,12 +98,12 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             </List>
             <Text
               fontFamily="heading"
-              my="2%"
+              mt="5%"
               fontSize={['md', 'lg', 'xl', '2xl']}
             >
-              Instructions:
+              Method:
             </Text>
-            <List spacing={3}>
+            <List spacing={3} mt="2%">
               {cocktail?.instructions.map((instruction) => (
                 <ListItem key={instruction}>{instruction}</ListItem>
               ))}

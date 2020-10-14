@@ -59,7 +59,7 @@ const Banner: React.FC = () => {
             textTransform="none"
             mt={5}
           >
-            Recipe of the day
+            Featured cocktail
           </Heading>
         </Flex>
       </Flex>
