@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Divider } from '@chakra-ui/core';
+
 import Header from '../components/Header';
 import CardDetailList from '../containers/CardDetailList';
 import CardGallery from '../containers/CardGallery';
@@ -9,9 +11,10 @@ const MyBar: React.FC = () => {
   return (
     <>
       <Header />
+      <Divider />
       <>
-        <CardGallery />
-        <CardDetailList />
+        <CardGallery cocktails={[]} categoryHeading="my ingredients" />
+        <CardDetailList ingredients={[]} />
       </>
       <>
         <CardSuggestionContainer />

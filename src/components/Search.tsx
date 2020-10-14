@@ -10,7 +10,6 @@ import {
   InputRightElement,
   InputGroup,
   Button,
-  FormLabel,
   Menu,
   MenuButton,
   MenuList,
@@ -18,11 +17,14 @@ import {
   MenuOptionGroup,
 } from '@chakra-ui/core';
 
-import { SearchIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import {
+  SearchIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+} from '@chakra-ui/icons';
 
 const responsiveFontButton = ['8px', '12px', '14px', '16px'];
 const responsiveButtonHeight = ['20px', '30px', '40px'];
-
 
 const Search: React.FC = () => {
   const { booze } = useContext(BoozeContext);
@@ -43,48 +45,26 @@ const Search: React.FC = () => {
   return (
     <Flex justify="center" align="center" direction="column" pt="5vh">
       <Flex width="70%" justify="center" align="center">
-        <form
-          css={css`
-            width: 100%;
-          `}
-        >
-          <InputGroup width="100%" size="sm">
-            <Input borderRadius="8px" />
-            <InputRightElement>
-              <SearchIcon name="search" color="grey" />
-            </InputRightElement>
-          </InputGroup>
-        </form>
+        <InputGroup width="100%" size="sm">
+          <Input borderRadius="8px" />
+          <InputRightElement>
+            <SearchIcon name="search" color="grey" />
+          </InputRightElement>
+        </InputGroup>
       </Flex>
       <Flex
         direction={{ base: 'column', md: 'row' }}
         width="70%"
         align="center"
       >
-        <Flex
-          align="center"
-          width="35%"
-          justifyContent={['center', 'center', 'flex-start']}
-        >
-          <FormLabel
-            htmlFor="cocktail"
-            width={['auto', 'auto']}
-            marginTop={['10px', '10px']}
-            marginLeft="10px"
-            color="#C67833"
-            fontFamily="heading"
-            fontSize={{ base: '15px', md: '20px' }}
-          >
-            Filter by:
-          </FormLabel>
-        </Flex>
-        <Flex width="100%" justify="space-between" margin="10px">
+        <Flex width="100%" justify="space-between" mt={2}>
           <Menu closeOnSelect={false}>
             <MenuButton
               as={Button}
               rightIcon={<ChevronDownIcon />}
               variant="outline"
-              color="grey"
+              width="33%"
+              color="purple.400"
               id="base-ingedient"
               fontSize={responsiveFontButton}
               size="lg"
@@ -93,7 +73,11 @@ const Search: React.FC = () => {
             >
               Booze of choice
             </MenuButton>
-            <MenuList maxHeight="200px" overflowY="scroll">
+            <MenuList
+              maxHeight="200px"
+              overflowY="scroll"
+              fontSize={responsiveFontButton}
+            >
               <MenuOptionGroup
                 type="checkbox"
                 onChange={(value) => {
@@ -113,16 +97,21 @@ const Search: React.FC = () => {
               as={Button}
               rightIcon={<ChevronDownIcon />}
               variant="outline"
-              color="grey"
+              width="33%"
+              color="purple.400"
               id="base-ingedient"
               fontSize={responsiveFontButton}
               size="lg"
               height={responsiveButtonHeight}
               marginRight="5px"
             >
-              Category
+              Type of drink
             </MenuButton>
-            <MenuList maxHeight="200px" overflowY="scroll">
+            <MenuList
+              maxHeight="200px"
+              overflowY="scroll"
+              fontSize={responsiveFontButton}
+            >
               <MenuOptionGroup
                 type="checkbox"
                 onChange={(value) => {
@@ -139,15 +128,15 @@ const Search: React.FC = () => {
           </Menu>
           <Button
             onClick={setSearchCriteria}
-            leftIcon={<SearchIcon />}
+            rightIcon={<ChevronRightIcon />}
             variant="outline"
-
-            color="grey"
+            color="purple.400"
+            width="33%"
             fontSize={responsiveFontButton}
             size="lg"
             height={responsiveButtonHeight}
           >
-            Search
+            Find my cocktail
           </Button>
         </Flex>
       </Flex>
