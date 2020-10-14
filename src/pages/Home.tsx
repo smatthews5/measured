@@ -6,12 +6,14 @@ import Banner from '../components/Banner';
 import Search from '../components/Search';
 import CardGallery from '../containers/CardGallery';
 import Header from '../components/Header';
+import { Divider } from '@chakra-ui/core';
 
 const Home: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   return (
     <>
       <Header />
+      <Divider />
       <Banner />
       <Search />
       <CardGallery
