@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
-import { Cocktail } from '../interfaces';
+import { Cocktail, Ingredient } from '../interfaces';
 import { collectIdsAndDocs } from '../utilities';
 
 const firebaseConfig = {
@@ -20,13 +20,13 @@ firebase.initializeApp(firebaseConfig);
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
 
-export const getCocktails = async () => {
+export const getCocktails = async (): Promise<Cocktail[]> => {
   const snapshot = await firestore.collection('cocktails').get();
   const cocktails = snapshot.docs.map(collectIdsAndDocs);
   return cocktails;
 };
 //returns cocktails by filtered base from dropdown filter
-export const getMatchingCocktailsByBase = async (base: string[]) => {
+export const getMatchingCocktailsByBase = async (base: string[]): Promise<Cocktail[]> => {
   const snapshot = await firestore
     .collection('cocktails')
     .where('base', 'in', base)
@@ -35,7 +35,7 @@ export const getMatchingCocktailsByBase = async (base: string[]) => {
   return cocktails;
 };
 //returns cocktails by filtered categories from dropdown filter
-export const getMatchingCocktailsByCategory = async (category: string[]) => {
+export const getMatchingCocktailsByCategory = async (category: string[]): Promise<Cocktail[]> => {
   const snapshot = await firestore
     .collection('cocktails')
     .where('categories', 'array-contains-any', category)
@@ -44,7 +44,7 @@ export const getMatchingCocktailsByCategory = async (category: string[]) => {
   return cocktails;
 };
 
-export const getIngredients = async () => {
+export const getIngredients = async (): Promise<Ingredient[]> => {
   const snapshot = await firestore.collection('ingredients').get();
   const ingredients = snapshot.docs.map(collectIdsAndDocs);
   return ingredients;
