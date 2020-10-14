@@ -12,7 +12,7 @@ function SearchResults() {
     <>
       <Header />
       <Search />
-      <CardGrid cocktails={booze.cocktails} searchTerms="" />
+      <CardGrid cocktails={booze?.search.results.length? booze.search.results : booze.cocktails} searchTerms={booze.search.query} />
     </>
   );
 }

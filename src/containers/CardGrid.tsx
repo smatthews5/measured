@@ -16,7 +16,7 @@ const CardGrid: React.FC<CardGridProps> = ({ cocktails, searchTerms }) => {
       {cocktails ? (
         <>
           <Heading as="h3" mx={8}>
-            {searchTerms}
+            Search results
           </Heading>
           <Grid
             templateColumns="repeat(4, 1fr)"

@@ -55,6 +55,10 @@ const App: React.FC = () => {
     categories: [],
     bases: [],
     glasses: [],
+    search: {
+      query: [],
+      results: []
+    },
   });
 
   // memoize state --> trigger updates with changes from any page
