@@ -10,8 +10,6 @@ import {
   Input,
   InputRightElement,
   InputGroup,
-  FormControl,
-  Select,
   Button,
   FormLabel,
   ButtonGroup,
@@ -37,30 +35,42 @@ const Search: React.FC = () => {
   const [base, setBase] = useState('');
   const [category, setCategory] = useState('');
 
-  const [filteredBases, setfilteredBases] = useState<Cocktail[]>(); // to do change names
-  const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>(); // to do change names
+  const [filteredBases, setfilteredBases] = useState<Cocktail[]>();
+  const [filteredCategories, setfilteredCategories] = useState<Cocktail[]>(); 
 
-  function setSearchCriteria(
+  //concatenate base and category arrays and encode for url..
+  const arrConcat = base.concat(category);
+  const arrStr = encodeURIComponent(JSON.stringify(arrConcat));
+
+  //on press of search button run this function. Fetch from the database, the mathcing cocktails. Then filter into an array of unique cocktails
+  async function setSearchCriteria(
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) {
     event.preventDefault();
-    getMatchingCocktailsByBase(base).then((cocktail: Cocktail) =>
-      setfilteredBases(cocktail),
-    );
-    getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) =>
-      setfilteredCategories(cocktail),
-    );
-    // if filteredBases && filteredCategories have been set merge their values into an array of unique cocktails
-    if (filteredBases && filteredCategories) {
+    if (base.length > 0) {
+      getMatchingCocktailsByBase(base).then((cocktail: Cocktail) =>
+        setfilteredBases(cocktail),
+      );
+    }
+    if (category.length > 0) {
+      getMatchingCocktailsByCategory(category).then((cocktail: Cocktail) =>
+        setfilteredCategories(cocktail),
+      );
+    }
+    // unique cocktails function
+    if (filteredBases || filteredCategories) {
       const ids = new Set(filteredBases.map((d) => d.id));
-      const spreadCategories = filteredCategories.filter((d) => !ids.has(d.id)),
+      const spreadCategories = filteredCategories.filter(
+          (d) => !ids.has(d.id),
+        ),
         results = [...filteredBases, ...spreadCategories];
       const search = {
-        query: [base, category],
+        query: [...base, ...category],
         results,
       };
+      // add search property to booze object
       setBooze((prevBooze: Booze) => ({ ...prevBooze, search: search }));
-      console.log('booze object', booze);
+      // navigate to search page
       navigate('search/');
     }
   }
@@ -103,8 +113,7 @@ const Search: React.FC = () => {
             Filter by:
           </FormLabel>
         </Flex>
-
-        <Flex width="100%">
+        <Flex width="100%" justify="space-between" margin="10px">
           <Menu closeOnSelect={false}>
             <MenuButton
               as={Button}
