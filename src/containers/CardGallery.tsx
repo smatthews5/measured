@@ -18,7 +18,6 @@ const CardGallery: React.FC<CardGalleryProps> = ({
 }) => {
   let boxWidth;
   cocktails.hasOwnProperty('base') ? boxWidth = '82vw' : boxWidth= '100%';
-
   return (
 
     <>
@@ -31,7 +30,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({
           pl="1vw"
           fontSize={['2xl', '3xl', '4xl', '5xl']}
         >
-          {cocktails.hasOwnProperty('base') ? {categoryHeading} : null}
+          {categoryHeading}
         </Heading>
         <Flex overflowX="scroll" mx="1%" mb={2}>
           {cocktails.map((cocktail: Cocktail) => (

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Flex, Text } from '@chakra-ui/core';
-import { BoozeContext } from '../Context';
+import { BoozeContext, UserContext } from '../Context';
 
 import { Cocktail } from '../interfaces';
 
@@ -15,8 +15,12 @@ import CardSuggestion from '../components/CardSuggestion';
 
 const MyBar: React.FC = () => {
   const { booze } = useContext(BoozeContext);
+  const { user } = useContext(UserContext);
+
   const cocktails = booze?.cocktails;
   const ingredients = booze?.ingredients;
+  const userLikedDrinks = user?.likedDrinks;
+
   /*
 build a new component for the ingredients to be like framer - just an image and name
 drinks ive favourited to also be a new component showing image name ingredients and steps on a card like the recipe page
@@ -27,20 +31,36 @@ a limited number of cocktails shown
   return (
     <>
       <Header />
-      <Flex width="100%" borderTop="0.5px solid lightGray" >
-        <Flex direction="column" width="70%" margin="10px">
-          <Flex borderBottom="0.5px solid lightGray" width="100%" direction="column" >
-            <Text padding="10px">Ingredients I Have</Text>
+      <Flex width="100%" borderTop="0.5px solid lightGray">
+        <Flex direction="column" width="70%" margin="10px" height="75vh">
+          <Flex
+            borderBottom="0.5px solid lightGray"
+            width="100%"
+            direction="column"
+            height="50%"
+          >
+            <Text>Ingredients I Have</Text>
             <CardGallery cocktails={ingredients} />
           </Flex>
-          <Flex width="100%" direction="column">
+          <Flex width='100%' direction="column" height="100%">
             <Text padding="10px">Drinks I've Favourited</Text>
-            <RecipeDetail cocktails={cocktails} />
+            <Flex direction='row' overflowX='scroll'>
+              {userLikedDrinks?.map((drink) => (
+                <RecipeDetail cocktail={drink} />
+              ))}
+            </Flex>
           </Flex>
         </Flex>
-        <Flex direction="column" alignItems="center" width='100%' justify='center' borderLeft="0.5px solid lightGray" margin='10px'>
-          <Text margin="20px">Ready to Make</Text>
-            <CardSuggestionContainer cocktails={cocktails} />
+        <Flex
+          direction="column"
+          width="100%"
+          borderLeft="0.5px solid lightGray"
+          margin="10px"
+        >
+          <Text margin="10px" alignSelf="center">
+            Ready to Make
+          </Text>
+          <CardSuggestionContainer cocktails={cocktails} />
         </Flex>
       </Flex>
     </>

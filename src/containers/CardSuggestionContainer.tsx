@@ -5,7 +5,7 @@ import CardSuggestion from '../components/CardSuggestion';
 
 const CardSuggestionContainer: React.FC = ({ cocktails }) => {
   return (
-    <Flex margin='10px'>
+    <Flex overflowX='scroll' height='75vh'>
       <CardSuggestion cocktails={cocktails} />
     </Flex>
   );
