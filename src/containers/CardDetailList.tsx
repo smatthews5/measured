@@ -5,7 +5,6 @@ import React from 'react';
 import CardDetail from '../components/CardDetail';
 import { Ingredient } from '../interfaces';
 
-
 interface CardDetailListProps extends RouteComponentProps {
   ingredients: Ingredient[];
 }

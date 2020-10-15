@@ -5,20 +5,19 @@ import HeaderLarge from '../components/HeaderLarge';
 import Banner from '../components/Banner';
 import Search from '../components/Search';
 import CardGallery from '../containers/CardGallery';
-import Header from '../components/Header';
 import { Divider } from '@chakra-ui/core';
 
 const Home: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   return (
     <>
-      <Header />
+      <HeaderLarge />
       <Divider />
       <Banner />
       <Search />
       <CardGallery
         cocktails={booze.cocktails}
-        categoryHeading="All cocktails"
+        categoryHeading="all cocktails"
       />
       {booze.categories.map((category) => {
         const categoryCocktails = booze.cocktails.filter((cocktail) =>

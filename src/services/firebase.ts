@@ -5,7 +5,6 @@ import { collectIdsAndDocs } from '../utilities';
 
 import { Cocktail, Ingredient } from '../interfaces';
 
-
 const firebaseConfig = {
   apiKey: 'AIzaSyCuTrD5ArJIOjE42O_i2g97oITTuFSjJck',
   authDomain: 'measured-885db.firebaseapp.com',
@@ -29,7 +28,9 @@ export const getCocktails = async (): Promise<Cocktail[]> => {
 };
 
 //returns cocktails by filtered base from dropdown filter
-export const getMatchingCocktailsByBase = async (base: string[]): Promise<Cocktail[]> => {
+export const getMatchingCocktailsByBase = async (
+  base: string[],
+): Promise<Cocktail[]> => {
   if (!base.length || !base) return [];
   const snapshot = await firestore
     .collection('cocktails')
@@ -40,7 +41,9 @@ export const getMatchingCocktailsByBase = async (base: string[]): Promise<Cockta
 };
 
 //returns cocktails by filtered categories from dropdown filter
-export const getMatchingCocktailsByCategory = async (category: string[]): Promise<Cocktail[]> => {
+export const getMatchingCocktailsByCategory = async (
+  category: string[],
+): Promise<Cocktail[]> => {
   if (!category.length || !category) return [];
   const snapshot = await firestore
     .collection('cocktails')
