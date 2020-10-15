@@ -15,11 +15,13 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   content,
   categoryHeading,
 }) => {
-  let boxWidth;
-  content.hasOwnProperty('base') ? (boxWidth = '82vw') : (boxWidth = '100%'); // FIX
   return (
     <>
-      <Box w="82vw" mx="auto" my="2.5vh">
+      <Box
+        w={content[0].hasOwnProperty('base') ? '82vw' : '100%'}
+        mx="auto"
+        my="2.5vh"
+      >
         <Heading
           as="h3"
           fontWeight="normal"
