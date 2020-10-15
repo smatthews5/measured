@@ -21,14 +21,15 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   return (
 
     <>
-      <Box w={boxWidth} mx="auto" my="1.5vh">
+      <Box w={boxWidth} mx="auto" my="2.5vh">
         <Heading
           as="h3"
-          fontFamily="mono"
           fontWeight="normal"
+          letterSpacing="0.02em"
           color="purple.400"
           pl="1vw"
-          fontSize={['2xl', '3xl', '4xl', '5xl']}
+          py={2}
+          fontSize={['xl', '2xl', '3xl', '4xl']}
         >
           {categoryHeading}
         </Heading>

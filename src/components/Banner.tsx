@@ -45,19 +45,20 @@ const Banner: React.FC = () => {
         <Flex width="100%" align="center" justify="center" direction="column">
           <Heading
             as="h3"
+            color="white"
             fontFamily="mono"
             fontWeight="normal"
-            textTransform="uppercase"
             fontSize={['2xl', '3xl', '4vw', '6vw']}
           >
             {featureCocktail.name || null}
           </Heading>
           <hr />
           <Heading
-            as="h3"
-            fontWeight="normal"
+            as="h4"
+            fontFamily="body"
+            fontWeight="200"
+            color="white"
             fontSize={['lg', 'xl', '2xl', '2vw']}
-            textTransform="none"
             mt={5}
           >
             Featured cocktail

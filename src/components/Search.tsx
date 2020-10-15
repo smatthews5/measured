@@ -43,10 +43,10 @@ const Search: React.FC = () => {
   }
 
   return (
-    <Flex justify="center" align="center" direction="column" pt="5vh">
+    <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
         <InputGroup width="100%" size="sm">
-          <Input borderRadius="8px" />
+          <Input borderRadius="8px" height={responsiveButtonHeight} />
           <InputRightElement>
             <SearchIcon name="search" color="grey" />
           </InputRightElement>
@@ -62,9 +62,10 @@ const Search: React.FC = () => {
             <MenuButton
               as={Button}
               rightIcon={<ChevronDownIcon />}
-              variant="outline"
+              variant="unstyled"
+              bgColor="purple.400"
+              color="white"
               width="33%"
-              color="purple.400"
               id="base-ingedient"
               fontSize={responsiveFontButton}
               size="lg"
@@ -96,9 +97,10 @@ const Search: React.FC = () => {
             <MenuButton
               as={Button}
               rightIcon={<ChevronDownIcon />}
-              variant="outline"
               width="33%"
-              color="purple.400"
+              variant="unstyled"
+              bgColor="purple.400"
+              color="white"
               id="base-ingedient"
               fontSize={responsiveFontButton}
               size="lg"

@@ -24,6 +24,7 @@ export const storage = firebase.storage();
 export const getCocktails = async (): Promise<Cocktail[]> => {
   const snapshot = await firestore.collection('cocktails').get();
   const cocktails = snapshot.docs.map(collectIdsAndDocs);
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return cocktails;
 };
 
@@ -37,6 +38,7 @@ export const getMatchingCocktailsByBase = async (
     .where('base', 'in', base)
     .get();
   const cocktails: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return cocktails;
 };
 
@@ -50,16 +52,19 @@ export const getMatchingCocktailsByCategory = async (
     .where('categories', 'array-contains-any', category)
     .get();
   const cocktails: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return cocktails;
 };
 
 export const getIngredients = async (): Promise<Ingredient[]> => {
   const snapshot = await firestore.collection('ingredients').get();
   const ingredients = snapshot.docs.map(collectIdsAndDocs);
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return ingredients;
 };
 
 export const postCocktail = async (newCocktail: Partial<Cocktail>) => {
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   await firestore
     .collection('cocktails')
     .add(newCocktail)
