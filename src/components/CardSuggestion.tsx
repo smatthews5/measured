@@ -46,19 +46,19 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
   const cockcock = rankResults(cocks);
 
   return (
-    <Flex direction="column">
-      {cockcock.map((cocktail, index: number) => (
-        <Flex key={index} margin="10px">
-          <Image src={cocktail.imageUrl} width="13vw" borderRadius="5px" />
+    <Flex direction={['row', 'row', 'column']}>
+      {cockcock?.map((cocktail, index: number) => (
+        <Flex key={index} margin="10px" direction={['column', 'column', 'row']}>
+          <Image src={cocktail.imageUrl} minWidth="13vw" width='13vw' maxHeight='13vw' borderRadius="5px" />
           <Flex direction="column" marginLeft="10px">
             <Text>
               {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
             </Text>
             <Flex marginTop="10px" direction="column">
-              <Text fontSize="12px">Ingredients:</Text>
+              <Text fontSize={['0px','12px']}>Ingredients:</Text>
               {cocktail.ingredients.map(
-                (ingredient: Ingredient, index: number) => (
-                  <Text key={index} fontSize="8px">
+                (ingredient, index: number) => (
+                  <Text key={index} fontSize={['0px','8px']}>
                     {ingredient.name}
                   </Text>
                 ),

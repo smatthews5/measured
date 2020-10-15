@@ -14,12 +14,16 @@ const MyBar: React.FC = () => {
   const cocktails = booze?.cocktails;
   const userLikedDrinks = user?.likedDrinks;
   const userIngredients = user?.myIngredients;
-
+  const w = window.innerWidth > 800;
   return (
     <>
       <Header />
-      <Flex width="100%" borderTop="0.5px solid lightGray">
-        <Flex direction="column" width="70%" margin="10px" height="75vh">
+      <Flex
+        width="100%"
+        borderTop="0.5px solid lightGray"
+        direction={['column', 'column', 'row']}
+      >
+        <Flex direction="column" width={['100%','100%',"70%"]} margin="10px" height="75vh">
           <Flex
             borderBottom="0.5px solid lightGray"
             width="100%"
@@ -44,12 +48,13 @@ const MyBar: React.FC = () => {
           </Flex>
         </Flex>
         <Flex
-          direction="column"
-          width="30%"
+          direction={['column', 'column', 'column']}
+          overflowX="scroll"
+          width={['100%', '100%', '30%']}
           borderLeft="0.5px solid lightGray"
           margin="10px"
         >
-          <Text margin="10px" alignSelf="center">
+          <Text margin="10px" alignSelf={['left', 'left', 'left','center']}>
             Ready to Make
           </Text>
           <CardSuggestionContainer cocktails={cocktails} />

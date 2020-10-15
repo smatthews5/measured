@@ -16,10 +16,11 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   categoryHeading,
 }) => {
   let boxWidth;
-  content.hasOwnProperty('base') ? (boxWidth = '82vw') : (boxWidth = '100%'); // FIX
+  const urlLocation = location.pathname == '/'; 
+  urlLocation ? (boxWidth = '82vw') : (boxWidth = '100%');
   return (
     <>
-      <Box w="82vw" mx="auto" my="2.5vh">
+      <Box w={boxWidth} mx="auto" my="2.5vh">
         <Heading
           as="h3"
           fontWeight="normal"
