@@ -5,6 +5,7 @@ import Card from '../components/Card';
 import { Cocktail } from '../interfaces';
 
 import { Box, Heading, Flex } from '@chakra-ui/core';
+import { GiNuclearPlant } from 'react-icons/gi';
 
 interface CardGalleryProps extends RouteComponentProps {
   cocktails: Cocktail[];
@@ -15,9 +16,12 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   cocktails,
   categoryHeading,
 }) => {
+  let boxWidth;
+  cocktails.hasOwnProperty('base') ? boxWidth = '82vw' : boxWidth= '100%';
   return (
+
     <>
-      <Box w="82vw" mx="auto" my="2.5vh">
+      <Box w={boxWidth} mx="auto" my="2.5vh">
         <Heading
           as="h3"
           fontWeight="normal"
