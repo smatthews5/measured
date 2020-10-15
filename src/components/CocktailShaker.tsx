@@ -4,60 +4,46 @@ import { Flex, Image, Box, IconButton, Button } from '@chakra-ui/core';
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import shaker from '../assets/images/Cocktail_shaker.png';
 
-const CocktailShaker: React.FC = () => {
-  const { booze } = useContext(BoozeContext);
-  const ingredients = booze?.ingredients;
+import { RouteComponentProps } from '@reach/router';
+import { Ingredient } from '../interfaces';
 
-  const [seasoningIndex, setSeasoningIndex] = useState(0);
-  const [balanceIndex, setBalanceIndex] = useState(0);
-  const [coreIndex, setCoreIndex] = useState(0);
-
-  const [selection, setSelection] = useState([]);
-
-  useEffect(() => {
-    console.log(selection);
-  }, [selection]);
-
-  const seasoning = ingredients.filter((ingredient) =>
-    ingredient.builder.includes('seasoning'),
-  );
-  const balance = ingredients.filter((ingredient) =>
-    ingredient.builder.includes('balance'),
-  );
-  const core = ingredients.filter((ingredient) =>
-    ingredient.builder.includes('core'),
-  );
-
-  const updateSelection = () => {
-    setSelection([
-      core[coreIndex],
-      balance[balanceIndex],
-      seasoning[seasoningIndex],
-    ]);
-  };
-
-  const handleRightClick = (
-    ingredients: string[],
+interface CocktailShakerProps extends RouteComponentProps {
+  seasoning: Ingredient[];
+  balance: Ingredient[];
+  core: Ingredient[];
+  seasoningIndex: number;
+  balanceIndex: number;
+  coreIndex: number;
+  handleButtonClick: () => void;
+  setSeasoningIndex: (index: number) => void;
+  setBalanceIndex: (index: number) => void;
+  setCoreIndex: (index: number) => void;
+  handleLeftClick: (
+    ingredients: Ingredient[],
     index: number,
     setIndex: (index: number) => void,
-  ) => {
-    if (index >= ingredients.length - 1) return;
-    setIndex(index + 1);
-  };
-
-  const handleLeftClick = (
-    ingredients: string[],
+  ) => void;
+  handleRightClick: (
+    ingredients: Ingredient[],
     index: number,
     setIndex: (index: number) => void,
-  ) => {
-    if (index === 0) return;
-    setIndex(index - 1);
-  };
+  ) => void;
+}
 
-  const handleButtonClick = () => {
-    updateSelection();
-  };
-
+const CocktailShaker: React.FC<CocktailShakerProps> = ({
+  seasoning,
+  balance,
+  core,
+  seasoningIndex,
+  balanceIndex,
+  coreIndex,
+  handleButtonClick,
+  setSeasoningIndex,
+  setBalanceIndex,
+  setCoreIndex,
+  handleLeftClick,
+  handleRightClick,
+}) => {
   return (
     <>
       <Button onClick={handleButtonClick}>Find cocktails</Button>
