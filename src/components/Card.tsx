@@ -44,7 +44,7 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
         </Heading>
         <hr />
         <Heading as="h5" fontSize={['0px', '0px', 'sm', 'md']} fontWeight="200">
-          {cocktail.base.toLowerCase()}
+          {cocktail.hasOwnProperty('base') ? cocktail.base.toLowerCase() : null}
           {cocktail.categories.map((category) => `—${category}`)}
         </Heading>
       </Flex>

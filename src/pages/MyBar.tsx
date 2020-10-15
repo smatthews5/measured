@@ -8,7 +8,7 @@ import Header from '../components/Header';
 import CardDetailList from '../containers/CardDetailList';
 import CardGallery from '../containers/CardGallery';
 import CardSuggestionContainer from '../containers/CardSuggestionContainer';
-import RecipeDeatil from '../components/RecipeDetail';
+import RecipeDetail from '../components/RecipeDetail';
 import CardSuggestion from '../components/CardSuggestion';
 
 const MyBar: React.FC = () => {
@@ -18,7 +18,9 @@ const MyBar: React.FC = () => {
 /*
 build a new component for the ingredients to be like framer - just an image and name
 drinks ive favourited to also be a new component showing image name ingredients and steps on a card like the recipe page
-drinks ready to make image and name setup in the cardSuggestionContainer .. click on and take to recipe page??? 
+drinks ready to make image and name setup in the cardSuggestionContainer.. click on and take to recipe page???
+cardSuggestion to have filter method based on what ingredients you have.. Cocktails conatining the most of your ingredients shown first.. 
+a limited number of cocktails shown 
 */
   return (
     <>
@@ -28,9 +30,12 @@ drinks ready to make image and name setup in the cardSuggestionContainer .. clic
           <Flex border="0.5px solid lightGray" width="100%">
             Ingredients I Have
           </Flex>
-          <CardDetailList ingredients={ingredients} />
+          <CardGallery
+        cocktails={booze?.ingredients}
+        categoryHeading="-"
+      />
           <Flex>Drinks I've Favourited</Flex>
-            <RecipeDeatil cocktails={cocktails.cocktail} />
+            <RecipeDetail cocktails={cocktails.cocktail} />
         </Flex>
         <Flex direction="column" alignItems="center">
           <Flex margin="20px">Ready to Make</Flex>
