@@ -21,15 +21,15 @@ const MyBar: React.FC = () => {
 build a new component for the ingredients to be like framer - just an image and name
 drinks ive favourited to also be a new component showing image name ingredients and steps on a card like the recipe page
 drinks ready to make image and name setup in the cardSuggestionContainer.. click on and take to recipe page???
-cardSuggestion to have filter method based on what ingredients you have.. Cocktails conatining the most of your ingredients shown first.. 
+cardSuggestion to have filter method based on what ingredients you have.. Cocktails containing the most of your ingredients shown first.. 
 a limited number of cocktails shown 
 */
   return (
     <>
       <Header />
-      <Flex width="100%" border="1px solid red">
-        <Flex direction="column" width="75%" border="1px solid red">
-          <Flex border="0.5px solid lightGray" width="100%" direction="column">
+      <Flex width="100%" borderTop="0.5px solid lightGray" >
+        <Flex direction="column" width="70%" margin="10px">
+          <Flex borderBottom="0.5px solid lightGray" width="100%" direction="column" >
             <Text padding="10px">Ingredients I Have</Text>
             <CardGallery cocktails={ingredients} />
           </Flex>
@@ -38,11 +38,9 @@ a limited number of cocktails shown
             <RecipeDetail cocktails={cocktails} />
           </Flex>
         </Flex>
-        <Flex direction="column" alignItems="center">
-          <Flex margin="20px">Ready to Make</Flex>
-          <Flex direction="column" margin="20px">
+        <Flex direction="column" alignItems="center" width='100%' justify='center' borderLeft="0.5px solid lightGray" margin='10px'>
+          <Text margin="20px">Ready to Make</Text>
             <CardSuggestionContainer cocktails={cocktails} />
-          </Flex>
         </Flex>
       </Flex>
     </>
