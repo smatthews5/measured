@@ -13,7 +13,7 @@ const MyBar: React.FC = () => {
 
   const cocktails = booze?.cocktails;
   const userLikedDrinks = user?.likedDrinks;
-  const userIngredients = user?.myIngredients;  
+  const userIngredients = user?.myIngredients;
 
   return (
     <>
@@ -27,20 +27,25 @@ const MyBar: React.FC = () => {
             height="50%"
           >
             <Text>Ingredients I Have</Text>
-            <CardGallery cocktails={userIngredients} />
+            <CardGallery content={userIngredients} />
           </Flex>
-          <Flex width='100%' direction="column" height="100%">
-            <Text padding="10px">Drinks I've Favourited</Text>
-            <Flex direction='column' flexWrap='wrap' overflowY='scroll' height='100%'>
+          <Flex width="100%" direction="column" height="100%">
+            <Text padding="10px">Drinks I&apos;ve favourited</Text>
+            <Flex
+              direction="column"
+              flexWrap="wrap"
+              overflowY="scroll"
+              height="100%"
+            >
               {userLikedDrinks?.map((drink) => (
-                <RecipeDetail cocktail={drink} />
+                <RecipeDetail cocktail={drink} key={drink} />
               ))}
             </Flex>
           </Flex>
         </Flex>
         <Flex
           direction="column"
-          width='30%'
+          width="30%"
           borderLeft="0.5px solid lightGray"
           margin="10px"
         >

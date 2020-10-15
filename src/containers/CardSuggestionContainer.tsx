@@ -2,10 +2,19 @@ import React from 'react';
 import { Flex } from '@chakra-ui/core';
 
 import CardSuggestion from '../components/CardSuggestion';
+import { Cocktail } from '../interfaces';
 
-const CardSuggestionContainer: React.FC = ({ cocktails }) => {
+import { RouteComponentProps } from '@reach/router';
+
+interface CardSuggestionContainerProps extends RouteComponentProps {
+  cocktails: Cocktail[];
+}
+
+const CardSuggestionContainer: React.FC<CardSuggestionContainerProps> = ({
+  cocktails,
+}) => {
   return (
-    <Flex overflowX='scroll' height='75vh'>
+    <Flex overflowX="scroll" height="75vh">
       <CardSuggestion cocktails={cocktails} />
     </Flex>
   );

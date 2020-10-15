@@ -1,9 +1,15 @@
 import React from 'react';
 import { Flex, Image, Text } from '@chakra-ui/core';
-import { Ingredient } from '../interfaces';
+import { Ingredient, Cocktail } from '../interfaces';
 
-const CardSuggestion: React.FC = ({ cocktails }) => {
-/*
+import { RouteComponentProps } from '@reach/router';
+
+interface CardSuggestionProps extends RouteComponentProps {
+  cocktails: Cocktail[];
+}
+
+const CardSuggestion: React.FC<CardSuggestionProps> = ({ cocktails }) => {
+  /*
   pull into here a lst of ingredients we have, as well as the cocktails
   add functionality where we filter ready to make by what ingredients we have
   only list first 5..
@@ -15,16 +21,16 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
         <Flex key={index} margin="10px">
           <Image src={cocktail.imageUrl} width="13vw" borderRadius="5px" />
           <Flex direction="column" marginLeft="10px">
-            <Text>{cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}</Text>
-            <Flex marginTop='10px' direction='column'>
-            <Text fontSize="12px">Ingredients:</Text>
-              {cocktail.ingredients.map(
-                (ingredient: Ingredient, index: number) => (
-                  <Text key={index} fontSize="8px">
-                    {ingredient.name}
-                  </Text>
-                ),
-              )}
+            <Text>
+              {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
+            </Text>
+            <Flex marginTop="10px" direction="column">
+              <Text fontSize="12px">Ingredients:</Text>
+              {cocktail.ingredients.map((ingredient, index) => (
+                <Text key={index} fontSize="8px">
+                  {ingredient.name}
+                </Text>
+              ))}
             </Flex>
           </Flex>
         </Flex>

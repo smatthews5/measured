@@ -28,7 +28,7 @@ const CardGrid: React.FC<CardGridProps> = ({ cocktails }) => {
             align="center"
           >
             {cocktails.map((cocktail: Cocktail) => (
-              <Card cocktail={cocktail} key={cocktail.id} />
+              <Card content={cocktail} key={cocktail.id} />
             ))}
           </Flex>
         </>
