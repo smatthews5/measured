@@ -5,6 +5,7 @@ import Card from '../components/Card';
 import { Cocktail } from '../interfaces';
 
 import { Box, Heading, Flex } from '@chakra-ui/core';
+import { GiNuclearPlant } from 'react-icons/gi';
 
 interface CardGalleryProps extends RouteComponentProps {
   cocktails: Cocktail[];
@@ -15,9 +16,13 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   cocktails,
   categoryHeading,
 }) => {
+  let boxWidth;
+  cocktails.hasOwnProperty('base') ? boxWidth = '82vw' : boxWidth= '100%';
+
   return (
+
     <>
-      <Box w="82vw" mx="auto" my="1.5vh">
+      <Box w={boxWidth} mx="auto" my="1.5vh">
         <Heading
           as="h3"
           fontFamily="mono"
@@ -26,7 +31,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({
           pl="1vw"
           fontSize={['2xl', '3xl', '4xl', '5xl']}
         >
-          {categoryHeading}
+          {cocktails.hasOwnProperty('base') ? {categoryHeading} : null}
         </Heading>
         <Flex overflowX="scroll" mx="1%" mb={2}>
           {cocktails.map((cocktail: Cocktail) => (

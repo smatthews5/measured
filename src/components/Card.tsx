@@ -10,11 +10,19 @@ interface CardProps extends RouteComponentProps {
 }
 
 const Card: React.FC<CardProps> = ({ cocktail }) => {
+  let cardWidth;
+  let cardMinWidth;
+  let imageWidth;
+  let imageHeight;
+  cocktail.hasOwnProperty('base') ? cardWidth = '25%' : cardWidth= '10%';
+  cocktail.hasOwnProperty('base') ? cardMinWidth = '25%' : cardMinWidth= '10%';
+  cocktail.hasOwnProperty('base') ? imageWidth = '18vw' : imageWidth= '10vw';
+  cocktail.hasOwnProperty('base') ? imageHeight = '18vw' : imageHeight= '10vw';
   return (
     <Flex
       direction="column"
-      width="25%"
-      minWidth="25%"
+      width={cardWidth}
+      minWidth={cardMinWidth}
       borderRadius="6px"
       mr={2}
       ml={2}
@@ -24,11 +32,11 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
       <Image
         fit="cover"
         borderRadius="5px"
-        boxShadow="0px 0px 8px 1px rgba(0, 0, 0, 0.5)"
+        // boxShadow="0px 0px 8px 1px rgba(0, 0, 0, 0.5)"
         src={cocktail.imageUrl}
         alt={cocktail.name}
-        w="18vw"
-        h="18vw"
+        w={imageWidth}
+        h={imageHeight}
         overflow="hidden"
         onClick={() => navigate(`/recipes/${cocktail.name}`)}
       />
@@ -45,7 +53,7 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
         <hr />
         <Heading as="h5" fontSize={['0px', '0px', 'sm', 'md']} fontWeight="200">
           {cocktail.hasOwnProperty('base') ? cocktail.base.toLowerCase() : null}
-          {cocktail.categories.map((category) => `—${category}`)}
+          {cocktail.hasOwnProperty('base') ? cocktail.categories.map((category) => `—${category}`) : null}
         </Heading>
       </Flex>
     </Flex>
