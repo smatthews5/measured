@@ -15,13 +15,11 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   content,
   categoryHeading,
 }) => {
+  // content[0].hasOwnProperty('base') ? '82vw' : '100%'; NEED TO FIX FOR MYBAR PAGE
+
   return (
     <>
-      <Box
-        w={content[0].hasOwnProperty('base') ? '82vw' : '100%'}
-        mx="auto"
-        my="2.5vh"
-      >
+      <Box w="82vw" mx="auto" my="2.5vh">
         <Heading
           as="h3"
           fontWeight="normal"
