@@ -4,6 +4,8 @@ import { BoozeContext } from '../Context';
 
 import { Cocktail } from '../interfaces';
 
+import { Divider } from '@chakra-ui/core';
+
 import Header from '../components/Header';
 import CardDetailList from '../containers/CardDetailList';
 import CardGallery from '../containers/CardGallery';

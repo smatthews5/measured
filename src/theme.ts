@@ -3,7 +3,7 @@ import { extendTheme } from '@chakra-ui/core';
 const customTheme = extendTheme({
   colors: {
     purple: {
-      100: '#fff', // white
+      100: '#faf9ea', // cream
       200: '#FAE9F4', // pale
       300: '#A57194', // highlight
       400: '#9f465f', // lead
@@ -38,13 +38,14 @@ const customTheme = extendTheme({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '1em',
-        height: '10vh',
+        paddingTop: '1.2em',
+        height: '12vh',
         minHeight: '6.5vw',
         borderBottom: '1px solid purple.200',
       },
       'header[id="large"]': {
-        backgroundColor: 'purple.400',
-        height: '15vh',
+        backgroundColor: 'purple.100',
+        height: '16vh',
       },
       'div::-webkit-scrollbar': {
         height: '1vh',

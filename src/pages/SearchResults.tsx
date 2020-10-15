@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Search from '../components/Search';
 import CardGrid from '../containers/CardGrid';
 import { Cocktail, Relevance } from '../interfaces';
+import { Divider } from '@chakra-ui/core';
 
 import {
   getMatchingCocktailsByBase,
@@ -56,23 +57,18 @@ const SearchResults = () => {
   };
 
   useEffect(() => {
-    // TODO: NEED THIS LINE TO ACCESSS BOOZE OBJ (async issues?)
-    if (query === ('all' || '_' || undefined)) {
-      console.log('---> booze.cocktails', booze);
-      setResults(booze.cocktails);
-    } else {
-      const [bases, categories] = query.split('_');
-      const baseArray = bases.split('+');
-      const categoryArray = categories.split('+');
-      getMatches(baseArray, categoryArray);
-    }
+    const [bases, categories] = query.split('_');
+    const baseArray = bases.split('+');
+    const categoryArray = categories.split('+');
+    getMatches(baseArray, categoryArray);
   }, [query]);
 
   return (
     <>
       <Header />
+      <Divider />
       <Search />
-      <CardGrid cocktails={results} />
+      <CardGrid cocktails={results.length ? results : booze.cocktails} />
     </>
   );
 };

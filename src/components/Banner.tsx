@@ -47,7 +47,8 @@ const Banner: React.FC = () => {
             as="h3"
             fontFamily="mono"
             fontWeight="normal"
-            fontSize={['2xl', '3xl', '4vw', '5vw']}
+            textTransform="uppercase"
+            fontSize={['2xl', '3xl', '4vw', '6vw']}
           >
             {featureCocktail.name || null}
           </Heading>
