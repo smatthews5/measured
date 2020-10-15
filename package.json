@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.tsx",
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "parcel src/index.html --no-hmr",
     "build": "parcel build src/index.html",
     "format": "prettier \"src/**/*.{ts,tsx,html}\" --write",
     "test": "echo \"Error: no test specified\" && exit 1",

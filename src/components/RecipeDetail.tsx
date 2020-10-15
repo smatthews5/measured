@@ -7,7 +7,7 @@ import glass from '../assets/images/glass.png';
 
 import { Cocktail } from '../interfaces';
 
-const responsiveImage = ['10px', '20px', '35px', ' 40px'];
+const responsiveImage = ['20px', '25px', '35px', ' 40px'];
 
 interface RecipeDetailProps extends RouteComponentProps {
   cocktail: Cocktail | undefined;
@@ -39,12 +39,12 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
       overflowY="scroll"
     >
       <Flex
-        w="40%"
-        minWidth="300px"
+        w={['80%', '60%', '40%', '40%']}
+        minWidth="338px"
         flexDirection="column"
         mx="auto"
         my="auto"
-        justify="center"
+        justify="space-evenly"
         align="center"
       >
         <Heading
@@ -52,8 +52,8 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
           fontFamily="mono"
           color="purple.400"
           textAlign="center"
-          mb={4}
-          fontSize={['4xl', '5xl', '6xl', '7xl']}
+          my={4}
+          fontSize={['5xl', '5xl', '6xl', '7xl']}
         >
           {cocktail?.name}
         </Heading>
@@ -68,13 +68,13 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
       </Flex>
       <Flex
         direction="column"
-        w="55%"
-        minWidth="300px"
+        w={['90%', '90%', '75%', '55%']}
+        minWidth="338px"
         h="100%"
         justifyContent="space-evenly"
         overflowY="scroll"
       >
-        <Flex align="flex-start" width="80%" ml="8">
+        <Flex align="flex-start" justify="flex-start" width="100%">
           <Heading
             width="25%"
             as="h4"
@@ -97,7 +97,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             ))}
           </List>
         </Flex>
-        <Flex align="flex-start" justify="flex-start">
+        <Flex align="flex-start" width="100%" justify="flex-start">
           <Heading
             width="25%"
             as="h4"
@@ -119,7 +119,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
           <Flex
             align="flex-end"
             justify="flex-start"
-            width="50%"
+            width={['90%', '80%', '60%', '50%']}
             minWidth="150px"
           >
             <Flex width="50%" align="flex-end" justify="flex-end">
@@ -139,7 +139,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
                 Glass
               </Heading>
             </Flex>
-            <Text width="50%" ml={8} mb={1}>
+            <Text width="50%" ml={8} mb={1} fontSize="sm">
               {cocktail?.glassware}
             </Text>
           </Flex>
@@ -147,14 +147,14 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             <Flex
               align="flex-end"
               justify="flex-start"
-              width="50%"
+              width={['90%', '80%', '60%', '50%']}
               minWidth="150px"
             >
               <Flex width="50%" align="flex-end" justify="flex-end">
                 <Image
                   w={responsiveImage}
                   src={garnish}
-                  mr={4}
+                  mr={2}
                   objectFit="cover"
                   alt="garnish icon"
                 />
@@ -167,7 +167,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
                   Garnish
                 </Heading>
               </Flex>
-              <Text width="50%" ml={8} mb={1}>
+              <Text width="50%" ml={8} mb={1} fontSize="sm">
                 {cocktail?.garnish.description}
               </Text>
             </Flex>
