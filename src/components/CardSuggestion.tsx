@@ -10,11 +10,6 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
   const userIngredientsNames = userIngredients?.map(
     (ingredient) => ingredient.name,
   );
-  /* 
-filteredCocks now contains all the cocktails that contain the ingredients that we have.. but it is not yet a unique array..
-we need to filter by how many of our ingredients match those in the cocktail - so tht they are ordered by what we have the most of..
-*/
-
   const cocks: Cocktail[] = [];
   for (let i = 0; i < cocktails.length; i++) {
     for (let j = 0; j < cocktails[i].ingredients.length; j++) {
@@ -25,13 +20,34 @@ we need to filter by how many of our ingredients match those in the cocktail - s
       }
     }
   }
-  cocks.forEach((cock) => console.log('cocks', cock.id));
-  console.log('cocks', cocks);
-  console.log('cocks.length', cocks.length);
+  const rankResults = (allMatches: Cocktail[]) => {
+    try {
+      const relevance: Relevance = {};
+      const uniqueCocktails: Cocktail[] = [];
+      allMatches.forEach((cocktail) => {
+        if (relevance[cocktail.id]) {
+          relevance[cocktail.id]++;
+        } else {
+          relevance[cocktail.id] = 1;
+          uniqueCocktails.push(cocktail);
+        }
+      });
+      const rankedCocktails = uniqueCocktails
+        .map((cocktail) => ({
+          ...cocktail,
+          relevance: relevance[cocktail.id],
+        }))
+        .sort((a, b) => b.relevance - a.relevance);
+      return rankedCocktails;
+    } catch (error) {
+      console.log('---> error ranking and removing duplicates', error);
+    }
+  };
+  const cockcock = rankResults(cocks);
 
   return (
     <Flex direction="column">
-      {cocks.map((cocktail, index: number) => (
+      {cockcock.map((cocktail, index: number) => (
         <Flex key={index} margin="10px">
           <Image src={cocktail.imageUrl} width="13vw" borderRadius="5px" />
           <Flex direction="column" marginLeft="10px">
@@ -40,7 +56,6 @@ we need to filter by how many of our ingredients match those in the cocktail - s
             </Text>
             <Flex marginTop="10px" direction="column">
               <Text fontSize="12px">Ingredients:</Text>
-<<<<<<< HEAD
               {cocktail.ingredients.map(
                 (ingredient: Ingredient, index: number) => (
                   <Text key={index} fontSize="8px">
@@ -48,13 +63,6 @@ we need to filter by how many of our ingredients match those in the cocktail - s
                   </Text>
                 ),
               )}
-=======
-              {cocktail.ingredients.map((ingredient, index) => (
-                <Text key={index} fontSize="8px">
-                  {ingredient.name}
-                </Text>
-              ))}
->>>>>>> c71bbd8d2e792ff132f2f6e8e9b68dab39dcb885
             </Flex>
           </Flex>
         </Flex>
