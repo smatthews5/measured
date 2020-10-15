@@ -14,6 +14,7 @@ import {
   MenuDivider,
   MenuOptionGroup,
   MenuItemOption,
+  Divider,
 } from '@chakra-ui/core';
 
 import Header from '../components/Header';
@@ -53,6 +54,7 @@ const AddACocktail: React.FC = () => {
   return (
     <>
       <Header />
+      <Divider />
       <Flex w="80vw" align="center" justify="center" p={10}>
         <FormControl w="100%">
           <FormLabel>Cocktail name:</FormLabel>

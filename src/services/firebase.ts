@@ -5,7 +5,6 @@ import { collectIdsAndDocs } from '../utilities';
 
 import { Cocktail, Ingredient } from '../interfaces';
 
-
 const firebaseConfig = {
   apiKey: 'AIzaSyCuTrD5ArJIOjE42O_i2g97oITTuFSjJck',
   authDomain: 'measured-885db.firebaseapp.com',
@@ -25,38 +24,47 @@ export const storage = firebase.storage();
 export const getCocktails = async (): Promise<Cocktail[]> => {
   const snapshot = await firestore.collection('cocktails').get();
   const cocktails = snapshot.docs.map(collectIdsAndDocs);
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return cocktails;
 };
 
 //returns cocktails by filtered base from dropdown filter
-export const getMatchingCocktailsByBase = async (base: string[]): Promise<Cocktail[]> => {
+export const getMatchingCocktailsByBase = async (
+  base: string[],
+): Promise<Cocktail[]> => {
   if (!base.length || !base) return [];
   const snapshot = await firestore
     .collection('cocktails')
     .where('base', 'in', base)
     .get();
   const cocktails: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return cocktails;
 };
 
 //returns cocktails by filtered categories from dropdown filter
-export const getMatchingCocktailsByCategory = async (category: string[]): Promise<Cocktail[]> => {
+export const getMatchingCocktailsByCategory = async (
+  category: string[],
+): Promise<Cocktail[]> => {
   if (!category.length || !category) return [];
   const snapshot = await firestore
     .collection('cocktails')
     .where('categories', 'array-contains-any', category)
     .get();
   const cocktails: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return cocktails;
 };
 
 export const getIngredients = async (): Promise<Ingredient[]> => {
   const snapshot = await firestore.collection('ingredients').get();
   const ingredients = snapshot.docs.map(collectIdsAndDocs);
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return ingredients;
 };
 
 export const postCocktail = async (newCocktail: Partial<Cocktail>) => {
+  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   await firestore
     .collection('cocktails')
     .add(newCocktail)

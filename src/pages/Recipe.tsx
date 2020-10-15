@@ -4,6 +4,7 @@ import { BoozeContext } from '../Context';
 import Header from '../components/Header';
 import RecipeDetail from '../components/RecipeDetail';
 import { useParams } from '@reach/router';
+import { Divider } from '@chakra-ui/core';
 
 const Recipe: React.FC = () => {
   const { booze } = useContext(BoozeContext);
@@ -16,6 +17,7 @@ const Recipe: React.FC = () => {
   return (
     <>
       <Header />
+      <Divider />
       <>
         <RecipeDetail cocktail={cocktail} />
       </>

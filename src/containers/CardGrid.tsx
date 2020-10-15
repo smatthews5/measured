@@ -12,29 +12,27 @@ interface CardGridProps extends RouteComponentProps {
 const CardGrid: React.FC<CardGridProps> = ({ cocktails }) => {
   return (
     <>
-      {
-        cocktails.length > 0 ? (
-          <>
-            <Heading as="h3" mx={8}>
+      {cocktails.length > 0 ? (
+        <>
+          <Flex width="100%" justify="center">
+            <Heading as="h3" pb={8}>
               Search results
             </Heading>
-            <Flex
-              wrap="wrap"
-              mx="auto"
-              width="80vw"
-              justify="center"
-              align="center"
-            >
-              {cocktails.map((cocktail: Cocktail) => (
-                <Card cocktail={cocktail} key={cocktail.id} />
-              ))}
-            </Flex>
-          </>
-        ) : null
-        // <Heading as="h3" color="purple.400" mx={8}>
-
-        // </Heading>
-      }
+          </Flex>
+          <Flex
+            wrap="wrap"
+            mx="auto"
+            paddingLeft={8}
+            width="80vw"
+            justify="center"
+            align="center"
+          >
+            {cocktails.map((cocktail: Cocktail) => (
+              <Card cocktail={cocktail} key={cocktail.id} />
+            ))}
+          </Flex>
+        </>
+      ) : null}
     </>
   );
 };

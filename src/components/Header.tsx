@@ -12,7 +12,7 @@ const Header: React.FC = () => {
     <header>
       <Flex pl={4}>
         <Link to="/">
-          <Heading as="h1" fontSize={['2xl', '3xl', '3.5vw', '4.5vw']}>
+          <Heading as="h1" fontSize={['3xl', '4xl', '6xl', '8xl']}>
             Measured
           </Heading>
         </Link>
@@ -20,7 +20,7 @@ const Header: React.FC = () => {
       <Flex
         justify="space-between"
         align="center"
-        width={['50vw', '60vw', '65vw', '70vw']}
+        width={['45vw', '55vw', '60vw', '65vw']}
         pr={4}
       >
         <Link to="/ingredients">
@@ -28,10 +28,9 @@ const Header: React.FC = () => {
             as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
-            color="purple.300"
             isTruncated
           >
-            Browse ingredients
+            browse ingredients
           </Heading>
         </Link>
         <Link to="/build-a-drink">
@@ -39,10 +38,9 @@ const Header: React.FC = () => {
             as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
-            color="purple.300"
             isTruncated
           >
-            Build a cocktail
+            build a cocktail
           </Heading>
         </Link>
         <Link to="/my-bar">
@@ -50,10 +48,9 @@ const Header: React.FC = () => {
             as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
-            color="purple.300"
             isTruncated
           >
-            Explore my bar
+            explore my bar
           </Heading>
         </Link>
         <Link to="/welcome">
