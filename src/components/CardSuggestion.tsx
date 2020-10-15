@@ -40,6 +40,7 @@ we need to filter by how many of our ingredients match those in the cocktail - s
             </Text>
             <Flex marginTop="10px" direction="column">
               <Text fontSize="12px">Ingredients:</Text>
+<<<<<<< HEAD
               {cocktail.ingredients.map(
                 (ingredient: Ingredient, index: number) => (
                   <Text key={index} fontSize="8px">
@@ -47,6 +48,13 @@ we need to filter by how many of our ingredients match those in the cocktail - s
                   </Text>
                 ),
               )}
+=======
+              {cocktail.ingredients.map((ingredient, index) => (
+                <Text key={index} fontSize="8px">
+                  {ingredient.name}
+                </Text>
+              ))}
+>>>>>>> c71bbd8d2e792ff132f2f6e8e9b68dab39dcb885
             </Flex>
           </Flex>
         </Flex>

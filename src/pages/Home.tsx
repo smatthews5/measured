@@ -15,17 +15,14 @@ const Home: React.FC = () => {
       <Divider />
       <Banner />
       <Search />
-      <CardGallery
-        cocktails={booze.cocktails}
-        categoryHeading="all cocktails"
-      />
+      <CardGallery content={booze.cocktails} categoryHeading="all cocktails" />
       {booze.categories.map((category) => {
         const categoryCocktails = booze.cocktails.filter((cocktail) =>
           cocktail.categories.includes(category),
         );
         return (
           <CardGallery
-            cocktails={categoryCocktails}
+            content={categoryCocktails}
             categoryHeading={category}
             key={category}
           />

@@ -8,7 +8,7 @@ import { Cocktail } from '../interfaces';
 
 const responsiveImage = ['20px', '25px', '35px', ' 40px'];
 
-        import {
+import {
   Box,
   Flex,
   Heading,
@@ -33,7 +33,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
     else if (decimal === '75') return integer + '¾';
     else return num;
   };
-    
+
   const urlLocation = location.pathname == '/my-bar';
   let responsiveImage;
   let iw; //image Width
@@ -55,94 +55,89 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   urlLocation
     ? (responsiveImage = ['10px', '20px', '30px', ' 40px'])
     : (responsiveImage = ['15px', '30px', '40px', ' 50px']);
-  
+
   return urlLocation ? (
-      <Flex
-        height={ch}
-        width={cw}
-        backgroundColor="rgb(240,240,240, 0.5)"
-        boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
-        borderRadius={20}
-        margin="10px"
-        mt={5}
-      >
-        <Flex w="50%" flexDirection="column">
-          <Image
-            src={cocktail?.imageUrl}
-            w={iw}
-            h={ih}
-            m="auto"
-            objectFit="cover"
-            borderRadius="8px"
-            boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
-          ></Image>
-        </Flex>
-        <Flex
-          direction="column"
-          w="100%"
-          h="100%"
-          justifyContent="space-evenly"
-        >
-          <Flex direction="column">
-            <Heading
-              as="h3"
-              fontWeight="200"
-              color="purple.400"
-              textAlign="center"
-              fontSize={hfs}
-            >
-              {cocktail?.name.charAt(0).toUpperCase() + cocktail?.name.slice(1)}
-            </Heading>
-            <Text fontFamily="heading" mb="2%" fontSize={shfs}>
-              Ingredients:
-            </Text>
-            <Flex>
-              {cocktail?.ingredients.map((ingredient) => (
-                <Flex key={ingredient.name} margin="2px">
-                  <Text fontSize="10px">• {ingredient.name}</Text>
-                </Flex>
-              ))}
-            </Flex>
+    <Flex
+      height={ch}
+      width={cw}
+      backgroundColor="rgb(240,240,240, 0.5)"
+      boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
+      borderRadius={20}
+      margin="10px"
+      mt={5}
+    >
+      <Flex w="50%" flexDirection="column">
+        <Image
+          src={cocktail?.imageUrl}
+          w={iw}
+          h={ih}
+          m="auto"
+          objectFit="cover"
+          borderRadius="8px"
+          boxShadow="0px 0px 5px 1px rgba(0, 0, 0, 0.2)"
+        ></Image>
+      </Flex>
+      <Flex direction="column" w="100%" h="100%" justifyContent="space-evenly">
+        <Flex direction="column">
+          <Heading
+            as="h3"
+            fontWeight="200"
+            color="purple.400"
+            textAlign="center"
+            fontSize={hfs}
+          >
+            {cocktail?.name.charAt(0).toUpperCase() + cocktail?.name.slice(1)}
+          </Heading>
+          <Text fontFamily="heading" mb="2%" fontSize={shfs}>
+            Ingredients:
+          </Text>
+          <Flex>
+            {cocktail?.ingredients.map((ingredient) => (
+              <Flex key={ingredient.name} margin="2px">
+                <Text fontSize="10px">• {ingredient.name}</Text>
+              </Flex>
+            ))}
           </Flex>
-          <Box>
-            <Text fontFamily="heading" fontSize={shfs}>
-              Method:
-            </Text>
+        </Flex>
+        <Box>
+          <Text fontFamily="heading" fontSize={shfs}>
+            Method:
+          </Text>
+          <Text fontSize="10px">
+            {cocktail?.instructions[0].charAt(0).toUpperCase() +
+              cocktail?.instructions[0].slice(1)}
+            ...
+          </Text>
+        </Box>
+        <Flex w="100%">
+          <Flex w="50%">
+            <Image
+              w={responsiveImage}
+              h={responsiveImage}
+              src={glass}
+              objectFit="cover"
+              alt="glassware icon"
+            />
+            <Text fontSize="10px">: {cocktail?.glassware}</Text>
+          </Flex>
+          <Flex w="50%">
+            <Image
+              w={responsiveImage}
+              h={responsiveImage}
+              src={garnish}
+              objectFit="cover"
+              alt="garnish icon"
+            />
             <Text fontSize="10px">
-              {cocktail?.instructions[0].charAt(0).toUpperCase() +
-                cocktail?.instructions[0].slice(1)}
-              ...
+              :{' '}
+              {cocktail?.garnish.description !== ''
+                ? cocktail?.garnish.description
+                : 'n/a'}
             </Text>
-          </Box>
-          <Flex w="100%">
-            <Flex w="50%">
-              <Image
-                w={responsiveImage}
-                h={responsiveImage}
-                src={glass}
-                objectFit="cover"
-                alt="glassware icon"
-              />
-              <Text fontSize="10px">: {cocktail?.glassware}</Text>
-            </Flex>
-            <Flex w="50%">
-              <Image
-                w={responsiveImage}
-                h={responsiveImage}
-                src={garnish}
-                objectFit="cover"
-                alt="garnish icon"
-              />
-              <Text fontSize="10px">
-                :{' '}
-                {cocktail?.garnish.description !== ''
-                  ? cocktail?.garnish.description
-                  : 'n/a'}
-              </Text>
-            </Flex>
           </Flex>
         </Flex>
       </Flex>
+    </Flex>
   ) : (
     <Flex
       height="70vh"
