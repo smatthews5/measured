@@ -42,7 +42,6 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
     : (responsiveImage = ['15px', '30px', '40px', ' 50px']);
 
   return urlLocation ? (
-    <>
       <Flex
         height={ch}
         width={cw}
@@ -129,7 +128,6 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
           </Flex>
         </Flex>
       </Flex>
-    </>
   ) : (
     <>
       <Flex

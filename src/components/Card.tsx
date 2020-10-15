@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import React from 'react';
 
 import { Flex, Image, Heading } from '@chakra-ui/core';
