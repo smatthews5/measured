@@ -43,7 +43,7 @@ const Search: React.FC = () => {
   }
 
   return (
-    <Flex justify="center" align="center" direction="column" pt="5vh">
+    <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
         <InputGroup width="100%" size="sm">
           <Input borderRadius="8px" />
@@ -129,7 +129,7 @@ const Search: React.FC = () => {
           <Button
             onClick={setSearchCriteria}
             rightIcon={<ChevronRightIcon />}
-            variant="outline"
+            variant="unstyled"
             color="purple.400"
             width="33%"
             fontSize={responsiveFontButton}

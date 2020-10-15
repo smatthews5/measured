@@ -28,7 +28,6 @@ const Header: React.FC = () => {
             as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
-            color="purple.400"
             isTruncated
           >
             browse ingredients
@@ -39,7 +38,6 @@ const Header: React.FC = () => {
             as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
-            color="purple.400"
             isTruncated
           >
             build a cocktail
@@ -50,7 +48,6 @@ const Header: React.FC = () => {
             as="h3"
             fontSize={responsiveFontSize}
             maxWidth={responsiveWidth}
-            color="purple.400"
             isTruncated
           >
             explore my bar
