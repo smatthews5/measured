@@ -4,23 +4,31 @@ import React from 'react';
 import { Flex, Image, Heading } from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
 
-import { Cocktail } from '../interfaces';
+import { Cocktail, Ingredient } from '../interfaces';
 
 interface CardProps extends RouteComponentProps {
-  cocktail: Cocktail;
+  content: Cocktail | Ingredient;
 }
 
-const Card: React.FC<CardProps> = ({ cocktail }) => {
+const Card: React.FC<CardProps> = ({ content }) => {
   let cardWidth;
   let cardMinWidth;
   let imageWidth;
   let imageHeight;
   let responsiveText;
-  cocktail.hasOwnProperty('base') ? cardWidth = '25%' : cardWidth= '10%';
-  cocktail.hasOwnProperty('base') ? cardMinWidth = '25%' : cardMinWidth= '10%';
-  cocktail.hasOwnProperty('base') ? imageWidth = '18vw' : imageWidth= '10vw';
-  cocktail.hasOwnProperty('base') ? imageHeight = '18vw' : imageHeight= '10vw';
-  cocktail.hasOwnProperty('base') ? responsiveText = ['md', 'lg', 'xl', '2xl'] : responsiveText= ['8px', '9px', '10px', '11px'];
+  content.hasOwnProperty('base') ? (cardWidth = '25%') : (cardWidth = '10%');
+  content.hasOwnProperty('base')
+    ? (cardMinWidth = '25%')
+    : (cardMinWidth = '10%');
+  content.hasOwnProperty('base')
+    ? (imageWidth = '18vw')
+    : (imageWidth = '10vw');
+  content.hasOwnProperty('base')
+    ? (imageHeight = '18vw')
+    : (imageHeight = '10vw');
+  content.hasOwnProperty('base')
+    ? (responsiveText = ['md', 'lg', 'xl', '2xl'])
+    : (responsiveText = ['8px', '9px', '10px', '11px']);
   return (
     <Flex
       direction="column"
@@ -34,12 +42,16 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
       <Image
         fit="cover"
         borderRadius="5px"
-        src={cocktail.imageUrl}
-        alt={cocktail.name}
+        src={content.imageUrl}
+        alt={content.name}
         w={imageWidth}
         h={imageHeight}
         overflow="hidden"
-        onClick={() => cocktail.hasOwnProperty('base') ? navigate(`/recipes/${cocktail.name}`) : null}
+        onClick={() =>
+          content.hasOwnProperty('base')
+            ? navigate(`/recipes/${content.name}`)
+            : null
+        }
       />
       <Flex
         direction="column"
@@ -58,7 +70,7 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
             isTruncated
             maxWidth="70%"
           >
-            {cocktail.name}
+            {content.name}
           </Heading>
           <Heading
             as="h5"
@@ -66,16 +78,15 @@ const Card: React.FC<CardProps> = ({ cocktail }) => {
             fontWeight="200"
             fontSize={['0px', '0px', 'sm', 'md']}
           >
-            {cocktail.hasOwnProperty('base') ? cocktail.base.toLowerCase():''}
+            {content.hasOwnProperty('base') ? content.base.toLowerCase() : ''}
           </Heading>
         </Flex>
         <hr id="wide" />
         <Heading as="h6" fontSize={['0px', '0px', 'sm', 'md']} fontWeight="200">
-          {cocktail.categories
+          {content.categories
             .sort((a, b) => (a > b ? 1 : -1))
             .map((category, index) => {
-              if (index === cocktail.categories.length - 1)
-                return `${category}`;
+              if (index === content.categories.length - 1) return `${category}`;
               else return `${category} — `;
             })}
         </Heading>

@@ -240,7 +240,6 @@ const App: React.FC = () => {
     glasses: [],
   });
 
-
   // memoize state --> trigger updates with changes from any page
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   const currentBooze = useMemo(() => ({ booze, setBooze }), [booze, setBooze]);
