@@ -20,7 +20,7 @@ interface CardDetailProps extends RouteComponentProps {
 
 const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
   return (
-    <Flex width="100%">
+    <Flex width="100%" justifyContent="space-between">
       <Image
         src={ingredient.imageUrl}
         w="10vw"
@@ -28,7 +28,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
         objectFit="cover"
         borderRadius="5px"
       />
-      <Flex direction="column" ml="5%" justifyContent="space-between">
+      <Flex direction="column" ml="5%" justifyContent="space-between" mr="auto">
         <Text fontFamily="heading" fontSize="2em">
           {ingredient.name}
         </Text>
@@ -41,16 +41,12 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
         </HStack>
       </Flex>
       <Stack direction="row" spacing={4} align="center">
-        {/* <Button
-          colorScheme="gray"
-          variant="solid"
-          leftIcon={<GiWineBottle />}
-        ></Button>
-        <Button
-          colorScheme="gray"
-          variant="solid"
-          leftIcon={<GiShoppingCart />}
-        ></Button> */}
+        <Button colorScheme="gray" variant="solid" w="6vw">
+          <GiWineBottle size={30} />
+        </Button>
+        <Button colorScheme="gray" variant="solid" w="6vw">
+          <GiShoppingCart size={30} />
+        </Button>
       </Stack>
     </Flex>
   );

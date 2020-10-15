@@ -44,6 +44,7 @@ export interface Ingredient {
   id: string;
   imageUrl: string;
   name: string;
+  builder: string[];
 }
 
 export interface Relevance {
