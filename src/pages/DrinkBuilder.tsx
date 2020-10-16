@@ -6,6 +6,7 @@ import CocktailShaker from '../components/CocktailShaker';
 import CardSuggestionContainer from '../containers/CardSuggestionContainer';
 import { Box, Divider, Flex, Button, Text } from '@chakra-ui/core';
 import { Ingredient } from '../interfaces';
+import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
 
 const responsiveFontButton = ['8px', '12px', '14px', '16px'];
 const responsiveButtonHeight = ['20px', '30px', '40px'];
@@ -24,7 +25,8 @@ const DrinkBuilder: React.FC = () => {
 
   useEffect(() => {
     const newCocktails = filterCocktails(selection);
-    setContent(newCocktails);
+    console.log(newCocktails);
+    setContent(newCocktails.sort((a, b) => b.relevance - a.relevance));
   }, [selection]);
 
   const seasoning = ingredients.filter((ingredient) =>
@@ -77,6 +79,7 @@ const DrinkBuilder: React.FC = () => {
         }
       }
       if (counter > 0) {
+        cocktails[i].relevance = counter;
         filteredCocktails.push(cocktails[i]);
         counter = 0;
       }
@@ -131,11 +134,11 @@ const DrinkBuilder: React.FC = () => {
             handleRightClick={handleRightClick}
           />
         </Flex>
-        <Box width="50vw" borderLeft="0.5px solid lightGray" pl="5%" h="100%">
+        <Box width="50vw" borderLeft="0.5px solid lightGray" px="5%" h="100%">
           <Button
             w="60%"
             my="3%"
-            ml="15%"
+            ml="20%"
             onClick={handleButtonClick}
             variant="unstyled"
             bgColor="purple.400"
@@ -145,7 +148,8 @@ const DrinkBuilder: React.FC = () => {
           >
             Find cocktails
           </Button>
-          <CardSuggestionContainer cocktails={content} />
+          {/* <CardSuggestionContainer cocktails={content} /> */}
+          <BuilderSuggestionContainer cocktails={content} />
         </Box>
       </Flex>
     </>
