@@ -48,7 +48,6 @@ const Card: React.FC<CardProps> = ({ content }) => {
           >
             <Image
               fit="contain"
-              fallbackSrc={loading}
               src={ingredients}
               alt="ingredients indicator"
               w="100%"
@@ -124,16 +123,17 @@ const Card: React.FC<CardProps> = ({ content }) => {
                 })
             : null}
         </Heading>
-        {content.hasOwnProperty('base') ?
-        <Image
-          position="absolute"
-          bottom={['8%', '8%', '2%', '2%']}
-          right="10%"
-          fit="contain"
-          src={like}
-          alt="like button"
-          w="20px"
-        ></Image> : null}
+        {content.hasOwnProperty('base') ? (
+          <Image
+            position="absolute"
+            bottom={['8%', '8%', '2%', '2%']}
+            right="10%"
+            fit="contain"
+            src={like}
+            alt="like button"
+            w="20px"
+          ></Image>
+        ) : null}
       </Flex>
     </Flex>
   );

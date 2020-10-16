@@ -96,12 +96,12 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
           <List spacing={3} ml={8} width="55%">
             {cocktail?.ingredients.map((ingredient) => (
               <ListItem key={ingredient.name}>
-                <p>
+                <Text ml={2}>
                   {ingredient.amount % 1 === 0
                     ? ingredient.amount
                     : calculateFraction(ingredient.amount)}{' '}
                   {ingredient.unit} {ingredient.name}
-                </p>
+                </Text>
               </ListItem>
             ))}
           </List>
@@ -119,7 +119,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
           <List spacing={3} ml={8} width="55%">
             {cocktail?.instructions.map((instruction) => (
               <ListItem key={instruction}>
-                <p>{instruction}</p>
+                <Text ml={2}>{instruction}</Text>
               </ListItem>
             ))}
           </List>

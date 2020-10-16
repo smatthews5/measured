@@ -49,7 +49,6 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
     <Flex direction={['row', 'row', 'row','column']} height="50px" margin={['100px','10px']}>
       {cockcock?.map((cocktail) => (
         <Flex
-
           key={cocktail.id}
           margin={['10px', '10px', '10px']}
           direction={['column', 'column', 'column','row']}

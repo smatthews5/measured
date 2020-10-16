@@ -16,12 +16,10 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   content,
   categoryHeading,
 }) => {
-
   // content[0].hasOwnProperty('base') ? '82vw' : '100%'; NEED TO FIX FOR MYBAR PAGE
 
-
   let boxWidth;
-  const urlLocation = location.pathname == '/'; 
+  const urlLocation = location.pathname == '/';
   urlLocation ? (boxWidth = '82vw') : (boxWidth = '100%');
 
   return (
