@@ -30,7 +30,7 @@ const Home: React.FC = () => {
           <HeaderLarge />
           <Divider />
           <Banner />
-          <Search />
+          <Search existingSearch={''} />
           <CardGallery
             content={booze.cocktails}
             categoryHeading="all cocktails"

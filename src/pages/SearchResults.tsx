@@ -45,7 +45,7 @@ const SearchResults = () => {
     <>
       <Header />
       <Divider />
-      <Search />
+      <Search existingSearch={query} />
       <CardGrid cocktails={results.length ? results : []} />
     </>
   );
