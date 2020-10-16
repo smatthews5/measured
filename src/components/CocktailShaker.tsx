@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { BoozeContext } from '../Context';
 import { Flex, Image, Box, IconButton, Button } from '@chakra-ui/core';
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
-import shaker from '../assets/images/Cocktail_shaker.png';
+import shaker from '../assets/images/shaker.jpg';
 
 import { RouteComponentProps } from '@reach/router';
 import { Ingredient } from '../interfaces';
@@ -46,30 +46,36 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
 }) => {
   return (
     <>
-      <Button onClick={handleButtonClick}>Find cocktails</Button>
-      <Box position="relative" zIndex={1} width="100%">
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        position="relative"
+        zIndex={1}
+        width="100%"
+      >
         <Image
           src={shaker}
           mt="3%"
           height="85vh"
-          width="100%"
+          width="auto"
           position="absolute"
           zIndex={2}
         />
 
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="15vh">
+        <Flex position="relative" zIndex={3} justifyContent="center" pt="28vh">
           <IconButton
             aria-label="Change index"
             icon={<ChevronLeftIcon fontSize="3xl" />}
-            height="10vh"
+            height="8vh"
             background="white"
             onClick={() => {
               handleLeftClick(seasoning, seasoningIndex, setSeasoningIndex);
             }}
           />
           <Box
-            width="60%"
-            height="10vh"
+            width="18vw"
+            height="8vh"
             background="white"
             textAlign="center"
             fontSize="3vw"
@@ -82,26 +88,26 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
           <IconButton
             aria-label="Change index"
             icon={<ChevronRightIcon fontSize="3xl" />}
-            height="10vh"
+            height="8vh"
             background="white"
             onClick={() => {
               handleRightClick(seasoning, seasoningIndex, setSeasoningIndex);
             }}
           />
         </Flex>
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="15vh">
+        <Flex position="relative" zIndex={3} justifyContent="center" pt="2vh">
           <IconButton
             aria-label="Change index"
             icon={<ChevronLeftIcon fontSize="3xl" />}
-            height="10vh"
+            height="8vh"
             background="white"
             onClick={() => {
               handleLeftClick(balance, balanceIndex, setBalanceIndex);
             }}
           />
           <Box
-            width="60%"
-            height="10vh"
+            width="18vw"
+            height="8vh"
             background="white"
             textAlign="center"
             fontSize="3vw"
@@ -114,26 +120,26 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
           <IconButton
             aria-label="Change index"
             icon={<ChevronRightIcon fontSize="3xl" />}
-            height="10vh"
+            height="8vh"
             background="white"
             onClick={() => {
               handleRightClick(balance, balanceIndex, setBalanceIndex);
             }}
           />
         </Flex>
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="12vh">
+        <Flex position="relative" zIndex={3} justifyContent="center" pt="2vh">
           <IconButton
             aria-label="Change index"
             icon={<ChevronLeftIcon fontSize="3xl" />}
-            height="10vh"
+            height="8vh"
             background="white"
             onClick={() => {
               handleLeftClick(core, coreIndex, setCoreIndex);
             }}
           />
           <Box
-            width="60%"
-            height="10vh"
+            width="18vw"
+            height="8vh"
             background="white"
             textAlign="center"
             fontSize="3vw"
@@ -146,14 +152,14 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
           <IconButton
             aria-label="Change index"
             icon={<ChevronRightIcon fontSize="3xl" />}
-            height="10vh"
+            height="8vh"
             background="white"
             onClick={() => {
               handleRightClick(core, coreIndex, setCoreIndex);
             }}
           />
         </Flex>
-      </Box>
+      </Flex>
     </>
   );
 };

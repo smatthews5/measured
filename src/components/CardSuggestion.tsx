@@ -19,9 +19,17 @@ const CardSuggestion: React.FC<CardSuggestionProps> = ({ cocktails }) => {
     <Flex direction="column">
       {cocktails.map((cocktail, index: number) => (
         <Flex key={index} margin="10px">
-          <Image src={cocktail.imageUrl} width="13vw" borderRadius="5px" />
+          <Image
+            src={cocktail.imageUrl}
+            width="35%"
+            minWidth="35%"
+            maxWidth="35%"
+            h="13vw"
+            borderRadius="5px"
+            objectFit="cover"
+          />
           <Flex direction="column" marginLeft="10px">
-            <Text>
+            <Text fontSize="3vh" fontFamily="heading">
               {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
             </Text>
             <Flex marginTop="10px" direction="column">

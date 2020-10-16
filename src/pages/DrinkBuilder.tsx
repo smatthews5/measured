@@ -4,9 +4,11 @@ import { BoozeContext } from '../Context';
 import Header from '../components/Header';
 import CocktailShaker from '../components/CocktailShaker';
 import CardSuggestionContainer from '../containers/CardSuggestionContainer';
-import { Box, Divider, Flex } from '@chakra-ui/core';
+import { Box, Divider, Flex, Button, Text } from '@chakra-ui/core';
 import { Ingredient } from '../interfaces';
-import { GiLevelThree } from 'react-icons/gi';
+
+const responsiveFontButton = ['8px', '12px', '14px', '16px'];
+const responsiveButtonHeight = ['20px', '30px', '40px'];
 
 const DrinkBuilder: React.FC = () => {
   const { booze } = useContext(BoozeContext);
@@ -89,7 +91,33 @@ const DrinkBuilder: React.FC = () => {
       <Header />
       <Divider />
       <Flex>
-        <Box width="50vw">
+        <Flex width="50vw">
+          {/* <Box width="15vw" pl="5%" textAlign="center">
+            <Text
+              pt="15vh"
+              fontFamily="heading"
+              fontSize="5vh"
+              textTransform="uppercase"
+            >
+              Seasoning
+            </Text>
+            <Text
+              pt="16vh"
+              fontFamily="heading"
+              fontSize="5vh"
+              textTransform="uppercase"
+            >
+              Balance
+            </Text>
+            <Text
+              pt="10vh"
+              fontFamily="heading"
+              fontSize="5vh"
+              textTransform="uppercase"
+            >
+              Core
+            </Text>
+          </Box> */}
           <CocktailShaker
             seasoning={seasoning}
             balance={balance}
@@ -104,8 +132,21 @@ const DrinkBuilder: React.FC = () => {
             handleLeftClick={handleLeftClick}
             handleRightClick={handleRightClick}
           />
-        </Box>
+        </Flex>
         <Box width="50vw" borderLeft="0.5px solid lightGray" pl="5%" h="100%">
+          <Button
+            w="60%"
+            my="3%"
+            ml="15%"
+            onClick={handleButtonClick}
+            variant="unstyled"
+            bgColor="purple.400"
+            color="white"
+            fontSize={responsiveFontButton}
+            height={responsiveButtonHeight}
+          >
+            Find cocktails
+          </Button>
           <CardSuggestionContainer cocktails={content} />
         </Box>
       </Flex>
