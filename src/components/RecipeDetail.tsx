@@ -85,7 +85,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             textAlign="center"
             fontSize={hfs}
           >
-            {cocktail?.name.charAt(0).toUpperCase() + cocktail?.name.slice(1)}
+            {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
           </Heading>
           <Text fontFamily="heading" mb="2%" fontSize={shfs}>
             Ingredients:
@@ -103,8 +103,8 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             Method:
           </Text>
           <Text fontSize="10px">
-            {cocktail?.instructions[0].charAt(0).toUpperCase() +
-              cocktail?.instructions[0].slice(1)}
+            {cocktail.instructions[0].charAt(0).toUpperCase() +
+              cocktail.instructions[0].slice(1)}
             ...
           </Text>
         </Box>

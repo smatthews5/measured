@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { Flex, Text } from '@chakra-ui/core';
+import { Flex, Text, Header } from '@chakra-ui/core';
 import { BoozeContext, UserContext } from '../Context';
 
-import Header from '../components/Header';
+import HeaderBar from '../components/Header';
 import CardGallery from '../containers/CardGallery';
 import CardSuggestionContainer from '../containers/CardSuggestionContainer';
 import RecipeDetail from '../components/RecipeDetail';
@@ -17,7 +17,7 @@ const MyBar: React.FC = () => {
   const w = window.innerWidth > 800;
   return (
     <>
-      <Header />
+      <HeaderBar />
       <Flex
         width="100%"
         borderTop="0.5px solid lightGray"
