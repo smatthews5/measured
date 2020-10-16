@@ -149,24 +149,24 @@ const Search: React.FC = () => {
                 Active Search:
               </Flex>
               {base
-                ? base.map((bas, i) => (
+                ? base.map((query, i) => (
                     <Text
                       key={i}
                       color="gray.400"
                       fontSize={responsiveFontButton}
                     >
-                      {bas}
+                      {query}
                     </Text>
                   ))
                 : null}
               {category
-                ? category.map((bas, i) => (
+                ? category.map((query, i) => (
                     <Text
                       key={i}
                       color="gray.400"
                       fontSize={responsiveFontButton}
                     >
-                      {bas}
+                      {query}
                     </Text>
                   ))
                 : null}

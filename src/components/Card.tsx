@@ -17,13 +17,11 @@ interface CardProps extends RouteComponentProps {
 const Card: React.FC<CardProps> = ({ content }) => {
   const [showBadge, toggleBadge] = useState(false);
 
-  const cardWidth = content.hasOwnProperty('base') ? '25%' : '10%';
-  const cardMinWidth = content.hasOwnProperty('base') ? '25%' : '10%';
-  const imageWidth = content.hasOwnProperty('base') ? '18vw' : '10vw';
-  const imageHeight = content.hasOwnProperty('base') ? '18vw' : '10vw';
-  const responsiveText = content.hasOwnProperty('base')
-    ? ['md', 'lg', 'xl', '2xl']
-    : ['8px', '9px', '10px', '11px'];
+  const cardWidth = content.hasOwnProperty('base') ? '25%' : '25%';
+  const cardMinWidth = content.hasOwnProperty('base') ? '25%' : '25%';
+  const imageWidth = content.hasOwnProperty('base') ? '18vw' : '16vw';
+  const imageHeight = content.hasOwnProperty('base') ? '18vw' : '16vw';
+  const responsiveText = ['md', 'lg', 'xl', '2xl'];
 
   const responsiveBadge = ['0px', '0px', '60px', '60px'];
   const responsiveHeading = ['0px', '0px', '58px', '58px'];
