@@ -18,7 +18,7 @@ const CardSuggestion: React.FC<CardSuggestionProps> = ({ cocktails }) => {
   return (
     <Flex direction="column">
       {cocktails.map((cocktail, index: number) => (
-        <Flex key={index} margin="10px">
+        <Flex key={cocktail.id} margin="10px">
           <Image
             src={cocktail.imageUrl}
             width="35%"
@@ -35,7 +35,7 @@ const CardSuggestion: React.FC<CardSuggestionProps> = ({ cocktails }) => {
             <Flex marginTop="10px" direction="column">
               <Text fontSize="12px">Ingredients:</Text>
               {cocktail.ingredients.map((ingredient, index) => (
-                <Text key={index} fontSize="8px">
+                <Text key={ingredient.name} fontSize="8px">
                   {ingredient.name}
                 </Text>
               ))}

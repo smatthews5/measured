@@ -23,10 +23,8 @@ const DrinkBuilder: React.FC = () => {
   const [coreIndex, setCoreIndex] = useState(0);
 
   useEffect(() => {
-    console.log(selection);
     const newCocktails = filterCocktails(selection);
     setContent(newCocktails);
-    console.log(newCocktails);
   }, [selection]);
 
   const seasoning = ingredients.filter((ingredient) =>
