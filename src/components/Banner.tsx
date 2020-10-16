@@ -2,10 +2,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BoozeContext } from '../Context';
 
-import { Flex, Center, Heading, Image } from '@chakra-ui/core';
+import { Box, Flex, Center, Heading, Image } from '@chakra-ui/core';
 
 import { Cocktail } from '../interfaces';
 import { navigate } from '@reach/router';
+
+import ingredients from '../assets/images/ingredients.png';
+
+const responsiveBadge = ['60px', '60px', '100px', '100px'];
+const responsiveHeading = ['58px', '58px', '96px', '96px'];
 
 const Banner: React.FC = () => {
   const { booze } = useContext(BoozeContext);
@@ -34,15 +39,55 @@ const Banner: React.FC = () => {
         overflow="hidden"
         onClick={() => navigate(`/recipes/${featureCocktail.name}`)}
       >
-        <Image
-          w="50%"
-          h="auto"
-          fit="contain"
-          src={featureCocktail.imageUrl || undefined}
-          alt={featureCocktail.name || undefined}
-          flexShrink={0}
-        />
-        <Flex width="100%" align="center" justify="center" direction="column">
+        <Flex
+          position="relative"
+          width="50%"
+          minWidth="50%"
+          alignSelf="flex-start"
+        >
+          <Image
+            w="40vw"
+            h="40vw"
+            align="center top"
+            fit="cover"
+            src={featureCocktail.imageUrl || undefined}
+            alt={featureCocktail.name || undefined}
+            flexShrink={0}
+            zIndex="0"
+          />
+          <Box
+            position="absolute"
+            top="1.5vw"
+            right="1.5vw"
+            w={responsiveBadge}
+            h={responsiveBadge}
+          >
+            <Image
+              fit="cover"
+              src={ingredients}
+              alt="ingredients indicator"
+              w="100%"
+              h="100%"
+            ></Image>
+            <Heading
+              textAlign="right"
+              fontFamily="mono"
+              lineHeight="70%"
+              fontWeight="200"
+              fontSize={responsiveHeading}
+              color="white"
+              position="absolute"
+              left="25%"
+              top="15%"
+              zIndex="10"
+            >
+              {featureCocktail.ingredientsList
+                ? featureCocktail.ingredientsList.length
+                : null}
+            </Heading>
+          </Box>
+        </Flex>
+        <Flex width="50%" align="center" justify="center" direction="column">
           <Heading
             as="h3"
             color="white"

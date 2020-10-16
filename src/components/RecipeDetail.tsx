@@ -6,8 +6,6 @@ import glass from '../assets/images/glass.png';
 
 import { Cocktail } from '../interfaces';
 
-const responsiveImage = ['20px', '25px', '35px', ' 40px'];
-
 import {
   Box,
   Flex,
@@ -28,10 +26,10 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
     const fractionString = num.toString();
     let [integer, decimal] = fractionString.split('.');
     integer === '0' ? (integer = '') : (integer = integer + ' ');
-    if (decimal === '25') return integer + '¼';
-    else if (decimal === '5') return integer + '½';
-    else if (decimal === '75') return integer + '¾';
-    else return num;
+    if (decimal === '25') decimal = '¼';
+    else if (decimal === '5') decimal = '½';
+    else if (decimal === '75') decimal = '¾';
+    return integer + decimal;
   };
 
   const urlLocation = location.pathname == '/my-bar';
@@ -41,7 +39,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   let ch; //card Height;
   let cw; //card Width;
   let hfs; //heading Font Size;
-  let shfs; //subHeadingFontSize;
+  let shfs; //sub Heading Font Size;
   urlLocation ? (iw = '85%') : (iw = '85%');
   urlLocation ? (ih = '85%') : (ih = '85%');
   urlLocation ? (ch = '30vh') : (ch = '80vh');
@@ -65,6 +63,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
       borderRadius={20}
       margin="10px"
       mt={5}
+      overflowX="scroll"
     >
       <Flex w="50%" flexDirection="column">
         <Image
@@ -86,7 +85,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             textAlign="center"
             fontSize={hfs}
           >
-            {cocktail?.name.charAt(0).toUpperCase() + cocktail?.name.slice(1)}
+            {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
           </Heading>
           <Text fontFamily="heading" mb="2%" fontSize={shfs}>
             Ingredients:
@@ -104,8 +103,8 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             Method:
           </Text>
           <Text fontSize="10px">
-            {cocktail?.instructions[0].charAt(0).toUpperCase() +
-              cocktail?.instructions[0].slice(1)}
+            {cocktail.instructions[0].charAt(0).toUpperCase() +
+              cocktail.instructions[0].slice(1)}
             ...
           </Text>
         </Box>
