@@ -63,7 +63,7 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
           zIndex={2}
         />
 
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="28vh">
+        <Flex position="relative" zIndex={3} justifyContent="center" pt="25vh">
           <IconButton
             aria-label="Change index"
             icon={<ChevronLeftIcon fontSize="3xl" />}
@@ -95,7 +95,7 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
             }}
           />
         </Flex>
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="2vh">
+        <Flex position="relative" zIndex={3} justifyContent="center" pt="3vh">
           <IconButton
             aria-label="Change index"
             icon={<ChevronLeftIcon fontSize="3xl" />}
@@ -127,7 +127,7 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
             }}
           />
         </Flex>
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="2vh">
+        <Flex position="relative" zIndex={3} justifyContent="center" pt="3vh">
           <IconButton
             aria-label="Change index"
             icon={<ChevronLeftIcon fontSize="3xl" />}

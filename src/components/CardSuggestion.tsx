@@ -62,6 +62,7 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
             minWidth={['100px', '100px', '13vw']}
             minHeight="100px"
             borderRadius="5px"
+            objectFit="cover"
           />
           <Flex direction="column" marginLeft={['0px', '0px', '10px']}>
             <Heading
@@ -73,9 +74,15 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
               {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
             </Heading>
             <Flex marginTop="10px" direction="column">
-              <Text color='gray.500' fontSize={['0px', '0px', '12px']}>Ingredients:</Text>
+              <Text color="gray.500" fontSize={['0px', '0px', '12px']}>
+                Ingredients:
+              </Text>
               {cocktail.ingredients.map((ingredient, index: number) => (
-                <Text color='gray.500' key={ingredient.name} fontSize={['0px', '0px', '8px']}>
+                <Text
+                  color="gray.500"
+                  key={ingredient.name}
+                  fontSize={['0px', '0px', '8px']}
+                >
                   {ingredient.name}
                 </Text>
               ))}
