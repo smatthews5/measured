@@ -49,8 +49,10 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
     <Flex direction={['row', 'row', 'column']} height="50px">
       {cockcock?.map((cocktail, index: number) => (
         <Flex
+
           key={cocktail.id}
-          margin="10px"
+          margin={['10px', '10px', '10px']}
+
           direction={['column', 'column', 'row']}
           minHeight={['100px', '13vw', '13vw']}
           minWidth={['100px', '13vw', '13vw']}
@@ -67,8 +69,10 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
             <Heading
               as="h4"
               isTruncated
-              fontSize={['8px', '8px', '16px']}
-              alignSelf="center"
+              fontSize={['10px', '10px', '16px']}
+              padding='2px'
+              alignSelf={['center', 'center', 'flex-start']}
+              marginLeft={['0px', '0px', '8px']}
             >
               {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
             </Heading>
