@@ -96,7 +96,6 @@ const customTheme = extendTheme({
         fontStyle: 'italic',
       },
       p: {
-        marginLeft: '10px',
         fontSize: 'md',
       },
       'p::first-letter': {
