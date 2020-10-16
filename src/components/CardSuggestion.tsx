@@ -49,7 +49,7 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
     <Flex direction={['row', 'row', 'column']} height="50px">
       {cockcock?.map((cocktail, index: number) => (
         <Flex
-          key={index}
+          key={cocktail.id}
           margin="10px"
           direction={['column', 'column', 'row']}
           minHeight={['100px', '13vw', '13vw']}
@@ -75,7 +75,7 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
             <Flex marginTop="10px" direction="column">
               <Text color='gray.500' fontSize={['0px', '0px', '12px']}>Ingredients:</Text>
               {cocktail.ingredients.map((ingredient, index: number) => (
-                <Text color='gray.500' key={index} fontSize={['0px', '0px', '8px']}>
+                <Text color='gray.500' key={ingredient.name} fontSize={['0px', '0px', '8px']}>
                   {ingredient.name}
                 </Text>
               ))}
