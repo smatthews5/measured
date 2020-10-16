@@ -6,8 +6,6 @@ import glass from '../assets/images/glass.png';
 
 import { Cocktail } from '../interfaces';
 
-const responsiveImage = ['20px', '25px', '35px', ' 40px'];
-
 import {
   Box,
   Flex,
@@ -41,7 +39,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   let ch; //card Height;
   let cw; //card Width;
   let hfs; //heading Font Size;
-  let shfs; //subHeadingFontSize;
+  let shfs; //sub Heading Font Size;
   urlLocation ? (iw = '85%') : (iw = '85%');
   urlLocation ? (ih = '85%') : (ih = '85%');
   urlLocation ? (ch = '30vh') : (ch = '80vh');
@@ -65,6 +63,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
       borderRadius={20}
       margin="10px"
       mt={5}
+      overflowX="scroll"
     >
       <Flex w="50%" flexDirection="column">
         <Image

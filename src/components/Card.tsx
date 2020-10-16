@@ -99,17 +99,20 @@ const Card: React.FC<CardProps> = ({ content }) => {
             fontWeight="200"
             fontSize={['0px', '0px', 'sm', 'md']}
           >
-            {content.hasOwnProperty('base') ? content.base.toLowerCase() : ''}
+            {content.hasOwnProperty('base') ? content.base.toLowerCase() : null}
           </Heading>
         </Flex>
         <hr id="wide" />
         <Heading as="h6" fontSize={['0px', '0px', 'sm', 'md']} fontWeight="200">
-          {content.categories
-            .sort((a, b) => (a > b ? 1 : -1))
-            .map((category, index) => {
-              if (index === content.categories.length - 1) return `${category}`;
-              else return `${category} — `;
-            })}
+          {content.hasOwnProperty('base')
+            ? content.categories
+                .sort((a, b) => (a > b ? 1 : -1))
+                .map((category, index) => {
+                  if (index === content.categories.length - 1)
+                    return `${category}`;
+                  else return `${category} — `;
+                })
+            : null}
         </Heading>
         <Image
           position="absolute"
