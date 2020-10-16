@@ -28,34 +28,6 @@ export const getCocktails = async (): Promise<Cocktail[]> => {
   return cocktails;
 };
 
-//returns cocktails by filtered base from dropdown filter
-export const getMatchingCocktailsByBase = async (
-  base: string[],
-): Promise<Cocktail[]> => {
-  if (!base.length || !base) return [];
-  const snapshot = await firestore
-    .collection('cocktails')
-    .where('base', 'in', base)
-    .get();
-  const cocktails: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
-  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
-  return cocktails;
-};
-
-//returns cocktails by filtered categories from dropdown filter
-export const getMatchingCocktailsByCategory = async (
-  category: string[],
-): Promise<Cocktail[]> => {
-  if (!category.length || !category) return [];
-  const snapshot = await firestore
-    .collection('cocktails')
-    .where('categories', 'array-contains-any', category)
-    .get();
-  const cocktails: Cocktail[] = snapshot.docs.map(collectIdsAndDocs);
-  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
-  return cocktails;
-};
-
 export const getIngredients = async (): Promise<Ingredient[]> => {
   const snapshot = await firestore.collection('ingredients').get();
   const ingredients = snapshot.docs.map(collectIdsAndDocs);

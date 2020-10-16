@@ -6,24 +6,24 @@ import Header from '../components/Header';
 import Search from '../components/Search';
 import CardGrid from '../containers/CardGrid';
 import { Cocktail } from '../interfaces';
-import { removeDuplicatesAndRankResults } from '../utilities';
 import { Divider } from '@chakra-ui/core';
 
-import {
-  getMatchingCocktailsByBase,
-  getMatchingCocktailsByCategory,
-} from '../services/firebase';
+import { removeDuplicatesAndRankResults } from '../utilities';
 
 const SearchResults = () => {
   const { query } = useParams();
-  const { booze } = useContext(BoozeContext);
+  const { booze, setBooze } = useContext(BoozeContext);
   const [results, setResults] = useState<Cocktail[]>([]);
 
   const getMatches = async (baseArray: string[], categoryArray: string[]) => {
     try {
-      const matchBases = await getMatchingCocktailsByBase(baseArray);
-      const matchCategories = await getMatchingCocktailsByCategory(
-        categoryArray,
+      const matchBases = booze?.cocktails.filter((cocktail) =>
+        baseArray.includes(cocktail.base),
+      );
+      const matchCategories = booze?.cocktails.filter((cocktail) =>
+        cocktail.categories.some((categoryName) =>
+          categoryArray.includes(categoryName),
+        ),
       );
       const allMatches = [...matchBases, ...matchCategories];
       const rankedMatches = removeDuplicatesAndRankResults(allMatches);
@@ -33,11 +33,12 @@ const SearchResults = () => {
     }
   };
 
+  // PAGE DOES NOT LOAD IF HOME PAGE HAS NOT YET BEEN ACCESSED??
   useEffect(() => {
     const [bases, categories] = query.split('_');
     const baseArray = bases.split('+');
     const categoryArray = categories.split('+');
-    getMatches(baseArray, categoryArray);
+    if (booze?.cocktails.length) getMatches(baseArray, categoryArray);
   }, [query]);
 
   return (
@@ -45,7 +46,7 @@ const SearchResults = () => {
       <Header />
       <Divider />
       <Search />
-      <CardGrid cocktails={results.length ? results : booze.cocktails} />
+      <CardGrid cocktails={results.length ? results : []} />
     </>
   );
 };
