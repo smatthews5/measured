@@ -1,12 +1,10 @@
-/** @jsx jsx */
 import React, { useContext, useState } from 'react';
 import { BoozeContext } from '../Context';
-import { css, jsx } from '@emotion/core';
-import { navigate } from '@reach/router';
+import { navigate, RouteComponentProps } from '@reach/router';
 
 import {
   Flex,
-  Text,
+  Heading,
   Input,
   InputRightElement,
   InputGroup,
@@ -27,10 +25,24 @@ import {
 const responsiveFontButton = ['8px', '12px', '14px', '16px'];
 const responsiveButtonHeight = ['20px', '30px', '40px'];
 
-const Search: React.FC = () => {
+interface SearchProps extends RouteComponentProps {
+  existingSearch: string;
+}
+
+const Search: React.FC<SearchProps> = ({ existingSearch }) => {
+  if (existingSearch) {
+    const [bases, categories] = existingSearch.split('_');
+    if (bases) {
+      const baseArray = bases.split('+');
+    }
+    if (categories) {
+      const categoryArray = categories.split('+');
+    }
+  }
+
   const { booze } = useContext(BoozeContext);
-  const [base, setBase] = useState<string[]>([]);
-  const [category, setCategory] = useState<string[]>([]);
+  const [base, setBase] = useState<string[]>(baseArray || []);
+  const [category, setCategory] = useState<string[]>(categoryArray || []);
 
   function setSearchCriteria(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -83,6 +95,7 @@ const Search: React.FC = () => {
               >
                 <MenuOptionGroup
                   type="checkbox"
+                  defaultValue={base}
                   onChange={(value) => {
                     setBase(value);
                   }}
@@ -105,8 +118,8 @@ const Search: React.FC = () => {
                 color="white"
                 id="base-ingedient"
                 fontSize={responsiveFontButton}
-                size="lg"
                 height={responsiveButtonHeight}
+                size="lg"
                 marginRight="5px"
               >
                 Type of drink
@@ -118,6 +131,7 @@ const Search: React.FC = () => {
               >
                 <MenuOptionGroup
                   type="checkbox"
+                  defaultValue={category}
                   onChange={(value) => {
                     setCategory(value);
                   }}
@@ -137,37 +151,50 @@ const Search: React.FC = () => {
               color="purple.400"
               width="33%"
               fontSize={responsiveFontButton}
-              size="lg"
               height={responsiveButtonHeight}
+              size="lg"
             >
               Find my cocktail
             </Button>
           </Flex>
           {base.length || category.length ? (
             <Flex marginTop="10px" width="100%" overflowX="scroll">
-              <Flex color="gray.500" fontSize={responsiveFontButton}>
-                Active Search:
+              <Flex>
+                <Heading
+                  as="h5"
+                  color="gray.500"
+                  fontSize={responsiveFontButton}
+                  textTransform="uppercase"
+                >
+                  Show me...
+                </Heading>
               </Flex>
               {base
-                ? base.map((bas, i) => (
-                    <Text
-                      key={i}
+                ? base.map((selection) => (
+                    <Heading
+                      as="h5"
+                      key={selection}
+                      pl={3}
+                      textTransform="uppercase"
                       color="gray.400"
                       fontSize={responsiveFontButton}
                     >
-                      {bas}
-                    </Text>
+                      {selection}
+                    </Heading>
                   ))
                 : null}
               {category
-                ? category.map((bas, i) => (
-                    <Text
-                      key={i}
+                ? category.map((selection) => (
+                    <Heading
+                      as="h5"
+                      key={selection}
+                      pl={3}
+                      textTransform="uppercase"
                       color="gray.400"
                       fontSize={responsiveFontButton}
                     >
-                      {bas}
-                    </Text>
+                      {selection}
+                    </Heading>
                   ))
                 : null}
             </Flex>

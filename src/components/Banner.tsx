@@ -69,7 +69,6 @@ const Banner: React.FC = () => {
             >
               <Image
                 fit="cover"
-                fallbackSrc={loading}
                 src={ingredients}
                 alt="ingredients indicator"
                 w="100%"
