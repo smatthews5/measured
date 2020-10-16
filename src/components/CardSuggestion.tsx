@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Flex, Image, Text } from '@chakra-ui/core';
+import { Flex, Image, Text, Heading } from '@chakra-ui/core';
 import { Cocktail, Ingredient, Relevance } from '../interfaces';
 import { UserContext } from '../Context';
 
@@ -46,23 +46,39 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
   const cockcock = rankResults(cocks);
 
   return (
-    <Flex direction={['row', 'row', 'column']}>
+    <Flex direction={['row', 'row', 'column']} height="50px">
       {cockcock?.map((cocktail, index: number) => (
-        <Flex key={index} margin="10px" direction={['column', 'column', 'row']}>
-          <Image src={cocktail.imageUrl} minWidth="13vw" width='13vw' maxHeight='13vw' borderRadius="5px" />
-          <Flex direction="column" marginLeft="10px">
-            <Text>
+        <Flex
+          key={index}
+          margin="10px"
+          direction={['column', 'column', 'row']}
+          minHeight={['100px', '13vw', '13vw']}
+          minWidth={['100px', '13vw', '13vw']}
+        >
+          <Image
+            src={cocktail.imageUrl}
+            maxWidth="13vw"
+            maxHeight="13vw"
+            minWidth={['100px', '100px', '13vw']}
+            minHeight="100px"
+            borderRadius="5px"
+          />
+          <Flex direction="column" marginLeft={['0px', '0px', '10px']}>
+            <Heading
+              as="h4"
+              isTruncated
+              fontSize={['8px', '8px', '16px']}
+              alignSelf="center"
+            >
               {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
-            </Text>
+            </Heading>
             <Flex marginTop="10px" direction="column">
-              <Text fontSize={['0px','12px']}>Ingredients:</Text>
-              {cocktail.ingredients.map(
-                (ingredient, index: number) => (
-                  <Text key={index} fontSize={['0px','8px']}>
-                    {ingredient.name}
-                  </Text>
-                ),
-              )}
+              <Text color='gray.500' fontSize={['0px', '0px', '12px']}>Ingredients:</Text>
+              {cocktail.ingredients.map((ingredient, index: number) => (
+                <Text color='gray.500' key={index} fontSize={['0px', '0px', '8px']}>
+                  {ingredient.name}
+                </Text>
+              ))}
             </Flex>
           </Flex>
         </Flex>
@@ -70,5 +86,4 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
     </Flex>
   );
 };
-
 export default CardSuggestion;
