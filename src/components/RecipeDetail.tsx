@@ -28,10 +28,10 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
     const fractionString = num.toString();
     let [integer, decimal] = fractionString.split('.');
     integer === '0' ? (integer = '') : (integer = integer + ' ');
-    if (decimal === '25') return integer + '¼';
-    else if (decimal === '5') return integer + '½';
-    else if (decimal === '75') return integer + '¾';
-    else return num;
+    if (decimal === '25') decimal = '¼';
+    else if (decimal === '5') decimal = '½';
+    else if (decimal === '75') decimal = '¾';
+    return integer + decimal;
   };
 
   const urlLocation = location.pathname == '/my-bar';
