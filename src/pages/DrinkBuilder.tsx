@@ -149,7 +149,10 @@ const DrinkBuilder: React.FC = () => {
             Find cocktails
           </Button>
           {/* <CardSuggestionContainer cocktails={content} /> */}
-          <BuilderSuggestionContainer cocktails={content} />
+          <BuilderSuggestionContainer
+            cocktails={content}
+            selection={selection}
+          />
         </Box>
       </Flex>
     </>
