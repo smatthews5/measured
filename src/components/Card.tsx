@@ -1,11 +1,12 @@
 /* eslint-disable no-prototype-builtins */
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Box, Flex, Image, Heading } from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
 
 import ingredients from '../assets/images/ingredients.png';
 import like from '../assets/images/like.png';
+import loading from '../assets/images/loading.png';
 
 import { Cocktail, Ingredient } from '../interfaces';
 
@@ -14,6 +15,8 @@ interface CardProps extends RouteComponentProps {
 }
 
 const Card: React.FC<CardProps> = ({ content }) => {
+  const [showBadge, toggleBadge] = useState(false);
+
   const cardWidth = content.hasOwnProperty('base') ? '25%' : '10%';
   const cardMinWidth = content.hasOwnProperty('base') ? '25%' : '10%';
   const imageWidth = content.hasOwnProperty('base') ? '18vw' : '10vw';
@@ -37,10 +40,17 @@ const Card: React.FC<CardProps> = ({ content }) => {
       position="relative"
     >
       <Box position="relative">
-        {content.hasOwnProperty('base') ? (
-          <Box position="absolute" bottom="10px" right="13%" w={responsiveBadge} h={responsiveBadge}>
+        {content.hasOwnProperty('base') && showBadge ? (
+          <Box
+            position="absolute"
+            bottom="10px"
+            right="13%"
+            w={responsiveBadge}
+            h={responsiveBadge}
+          >
             <Image
               fit="contain"
+              fallbackSrc={loading}
               src={ingredients}
               alt="ingredients indicator"
               w="100%"
@@ -57,12 +67,14 @@ const Card: React.FC<CardProps> = ({ content }) => {
             >
               {content.ingredientsList.length}
             </Heading>
-          </>
+          </Box>
         ) : null}
         <Image
           fit="cover"
           borderRadius="5px"
+          fallbackSrc={loading}
           src={content.imageUrl}
+          onLoad={() => toggleBadge(true)}
           alt={content.name}
           w={imageWidth}
           h={imageHeight}

@@ -8,12 +8,14 @@ import { Cocktail } from '../interfaces';
 import { navigate } from '@reach/router';
 
 import ingredients from '../assets/images/ingredients.png';
+import loading from '../assets/images/loading.png';
 
 const responsiveBadge = ['60px', '60px', '100px', '100px'];
 const responsiveHeading = ['58px', '58px', '96px', '96px'];
 
 const Banner: React.FC = () => {
   const { booze } = useContext(BoozeContext);
+  const [showBadge, toggleBadge] = useState(false);
   const [featureCocktail, setFeatureCocktail] = useState<Partial<Cocktail>>({});
 
   const todayDate = new Date().getDate();
@@ -50,42 +52,47 @@ const Banner: React.FC = () => {
             h="40vw"
             align="center top"
             fit="cover"
-            src={featureCocktail.imageUrl || undefined}
-            alt={featureCocktail.name || undefined}
+            fallbackSrc={loading}
+            src={featureCocktail.imageUrl}
+            alt={featureCocktail.name}
+            onLoad={() => toggleBadge(true)}
             flexShrink={0}
             zIndex="0"
           />
-          <Box
-            position="absolute"
-            top="1.5vw"
-            right="1.5vw"
-            w={responsiveBadge}
-            h={responsiveBadge}
-          >
-            <Image
-              fit="cover"
-              src={ingredients}
-              alt="ingredients indicator"
-              w="100%"
-              h="100%"
-            ></Image>
-            <Heading
-              textAlign="right"
-              fontFamily="mono"
-              lineHeight="70%"
-              fontWeight="200"
-              fontSize={responsiveHeading}
-              color="white"
+          {showBadge ? (
+            <Box
               position="absolute"
-              left="25%"
-              top="15%"
-              zIndex="10"
+              top="1.5vw"
+              right="1.5vw"
+              w={responsiveBadge}
+              h={responsiveBadge}
             >
-              {featureCocktail.ingredientsList
-                ? featureCocktail.ingredientsList.length
-                : null}
-            </Heading>
-          </Box>
+              <Image
+                fit="cover"
+                fallbackSrc={loading}
+                src={ingredients}
+                alt="ingredients indicator"
+                w="100%"
+                h="100%"
+              ></Image>
+              <Heading
+                textAlign="right"
+                fontFamily="mono"
+                lineHeight="70%"
+                fontWeight="200"
+                fontSize={responsiveHeading}
+                color="white"
+                position="absolute"
+                left="25%"
+                top="15%"
+                zIndex="10"
+              >
+                {featureCocktail.ingredientsList
+                  ? featureCocktail.ingredientsList.length
+                  : null}
+              </Heading>
+            </Box>
+          ) : null}
         </Flex>
         <Flex width="50%" align="center" justify="center" direction="column">
           <Heading
@@ -95,7 +102,7 @@ const Banner: React.FC = () => {
             fontWeight="normal"
             fontSize={['2xl', '3xl', '4vw', '6vw']}
           >
-            {featureCocktail.name || null}
+            {featureCocktail.name}
           </Heading>
           <hr />
           <Heading
