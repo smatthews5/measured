@@ -98,7 +98,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
           <Text fontFamily="heading" fontSize={['0px', '0px', '10px', '10px']}>
             Method:
           </Text>
-          <Text fontSize={['0px', '0px', '10px', '10px']}>
+          <Text fontSize={['0px', '0px', '8px', '8px']}>
             {cocktail.instructions[0].charAt(0).toUpperCase() +
               cocktail.instructions[0].slice(1)}
             ...
