@@ -4,6 +4,7 @@ import React from 'react';
 
 import CardDetail from '../components/CardDetail';
 import { Ingredient } from '../interfaces';
+import { shuffleOrder } from '../utilities';
 
 interface CardDetailListProps extends RouteComponentProps {
   ingredients: Ingredient[];
@@ -20,7 +21,7 @@ const CardDetailList: React.FC<CardDetailListProps> = ({ ingredients }) => {
         mx="auto"
         my="5%"
       >
-        {ingredients.map((ingredient) => (
+        {shuffleOrder(ingredients).map((ingredient) => (
           <CardDetail ingredient={ingredient} key={ingredient.id} />
         ))}
       </VStack>

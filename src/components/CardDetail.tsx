@@ -23,18 +23,31 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
     <Flex width="100%" justifyContent="space-between">
       <Image
         src={ingredient.imageUrl}
-        w="10vw"
-        h="10vw"
+        w="9vw"
+        h="9vw"
         objectFit="cover"
         borderRadius="5px"
       />
-      <Flex direction="column" ml="5%" justifyContent="space-between" mr="auto">
-        <Text fontFamily="heading" fontSize="2em">
+      <Flex direction="column" ml={8} justifyContent="space-between" mr="auto">
+        <Text
+          fontFamily="mono"
+          fontSize="3em"
+          fontWeight="600"
+          letterSpacing="0.03em"
+        >
           {ingredient.name}
         </Text>
-        <HStack spacing={4} pb="5%">
+        <HStack spacing={4} pb="5%" ml={2}>
           {ingredient.categories.map((category) => (
-            <Tag size="lg" key={category} variant="subtle" colorScheme="cyan">
+            <Tag
+              size="lg"
+              key={category}
+              variant="subtle"
+              bgColor="purple.200"
+              color="purple.400"
+              fontFamily="body"
+              fontSize="lg"
+            >
               <TagLabel>{category}</TagLabel>
             </Tag>
           ))}
