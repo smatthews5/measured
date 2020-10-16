@@ -71,7 +71,6 @@ const FavouritedDrinks: React.FC<RecipeDetailProps> = ({ cocktail }) => {
               icon={<CloseIcon />}
               colorScheme="gray"
               variant="solid"
-              size={['0px']}
             />
             <Text fontSize={['0px', '0px', '16px', '16px']}>Remove</Text>
           </Flex>

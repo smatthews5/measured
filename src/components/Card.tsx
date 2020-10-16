@@ -1,8 +1,9 @@
 /* eslint-disable no-prototype-builtins */
 import React, { useState } from 'react';
 
-import { Box, Flex, Image, Heading } from '@chakra-ui/core';
+import { Box, Flex, Image, Heading, IconButton } from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
+import { CloseIcon } from '@chakra-ui/icons';
 
 import ingredients from '../assets/images/ingredients.png';
 import like from '../assets/images/like.png';
@@ -133,7 +134,19 @@ const Card: React.FC<CardProps> = ({ content }) => {
             alt="like button"
             w="20px"
           ></Image>
-        ) : null}
+        ) : (
+          <IconButton
+            position="absolute"
+            right="10%"
+            width={['5px','20px']}
+            height={['5px','20px']}
+            aria-label="delete"
+            icon={<CloseIcon />}
+            colorScheme="gray"
+            variant="ghost"
+            size='sm'
+          />
+        )}
       </Flex>
     </Flex>
   );
