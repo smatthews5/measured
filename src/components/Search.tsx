@@ -43,11 +43,19 @@ const Search: React.FC = () => {
     navigate(`/search/${basesString}_${categoriesString}`);
   }
 
+  const handleChange = (event) => {
+    console.log(event.target.value);
+  };
+
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
         <InputGroup width="100%" size="sm">
-          <Input borderRadius="8px" height={responsiveButtonHeight} />
+          <Input
+            borderRadius="8px"
+            height={responsiveButtonHeight}
+            onChange={handleChange}
+          />
           <InputRightElement>
             <SearchIcon name="search" color="grey" />
           </InputRightElement>
