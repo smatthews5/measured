@@ -114,6 +114,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
                 })
             : null}
         </Heading>
+        {content.hasOwnProperty('base') ?
         <Image
           position="absolute"
           bottom={['8%', '8%', '2%', '2%']}
@@ -122,7 +123,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
           src={like}
           alt="like button"
           w="20px"
-        ></Image>
+        ></Image> : null}
       </Flex>
     </Flex>
   );

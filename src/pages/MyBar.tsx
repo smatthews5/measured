@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { Flex, Text, Header } from '@chakra-ui/core';
+import { Flex, Text, Heading } from '@chakra-ui/core';
 import { BoozeContext, UserContext } from '../Context';
 
-import HeaderBar from '../components/Header';
+import Header from '../components/Header';
 import CardGallery from '../containers/CardGallery';
 import CardSuggestionContainer from '../containers/CardSuggestionContainer';
 import RecipeDetail from '../components/RecipeDetail';
@@ -17,32 +17,46 @@ const MyBar: React.FC = () => {
   const w = window.innerWidth > 800;
   return (
     <>
-      <HeaderBar />
+      <Header />
       <Flex
         width="100%"
         borderTop="0.5px solid lightGray"
         direction={['column', 'column', 'row']}
       >
-        <Flex direction="column" width={['100%','100%',"70%"]} margin="10px" height="75vh">
+        <Flex
+          direction="column"
+          width={['100%', '100%', '70%']}
+          margin="10px"
+          height="75vh"
+        >
           <Flex
             borderBottom="0.5px solid lightGray"
             width="100%"
             direction="column"
             height="50%"
           >
-            <Text>Ingredients I Have</Text>
+            <Heading as="h4" fontSize="20px" textDecoration="underline">
+              Ingredients I Have
+            </Heading>
             <CardGallery content={userIngredients} />
           </Flex>
           <Flex width="100%" direction="column" height="100%">
-            <Text padding="10px">Drinks I&apos;ve favourited</Text>
+            <Heading
+              as="h4"
+              marginTop="10px"
+              fontSize="20px"
+              textDecoration="underline"
+            >
+              Drinks I&apos;ve favourited
+            </Heading>
             <Flex
               direction="column"
               flexWrap="wrap"
-              overflowY="scroll"
+              overflowX="scroll"
               height="100%"
             >
               {userLikedDrinks?.map((drink) => (
-                <RecipeDetail cocktail={drink} key={drink} />
+                <RecipeDetail cocktail={drink} key={drink.id} />
               ))}
             </Flex>
           </Flex>
@@ -54,9 +68,14 @@ const MyBar: React.FC = () => {
           borderLeft="0.5px solid lightGray"
           margin="10px"
         >
-          <Text margin="10px" alignSelf={['left', 'left', 'left','center']}>
+          <Heading
+            as="h4"
+            margin="10px"
+            alignSelf={['left', 'left', 'left', 'center']}
+            textDecoration="underline"
+          >
             Ready to Make
-          </Text>
+          </Heading>
           <CardSuggestionContainer cocktails={cocktails} />
         </Flex>
       </Flex>
