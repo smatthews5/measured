@@ -15,7 +15,7 @@ const Ingredients: React.FC = () => {
     <>
       <Header />
       <Divider />
-      <Search />
+      <Search existingSearch={''} />
       <CardDetailList ingredients={ingredients} />
     </>
   );
