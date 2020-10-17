@@ -27,26 +27,30 @@ const Home: React.FC = () => {
         <LoadingScreen />
       ) : (
         <>
-          <HeaderLarge />
-          <Divider />
-          <Banner />
-          <Search existingSearch={''} />
-          <CardGallery
-            content={booze.cocktails}
-            categoryHeading="all cocktails"
-          />
-          {booze.categories.map((category) => {
-            const categoryCocktails = booze.cocktails.filter((cocktail) =>
-              cocktail.categories.includes(category),
-            );
-            return (
-              <CardGallery
-                content={categoryCocktails}
-                categoryHeading={category}
-                key={category}
-              />
-            );
-          })}
+          <div id="fixed">
+            <HeaderLarge />
+            <Divider />
+          </div>
+          <div id="scroll-large">
+            <Banner />
+            <Search existingSearch={''} />
+            <CardGallery
+              content={booze.cocktails}
+              categoryHeading="all cocktails"
+            />
+            {booze.categories.map((category) => {
+              const categoryCocktails = booze.cocktails.filter((cocktail) =>
+                cocktail.categories.includes(category),
+              );
+              return (
+                <CardGallery
+                  content={categoryCocktails}
+                  categoryHeading={category}
+                  key={category}
+                />
+              );
+            })}
+          </div>
         </>
       )}
     </>

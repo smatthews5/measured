@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect, Component } from 'react';
 import { Router, RouteComponentProps, Redirect } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import * as CocktailService from './services/firebase';
-import { Booze, User, Cocktail, Ingredient, Garnish } from './interfaces';
+import { Booze, User, Cocktail, Ingredient } from './interfaces';
 
 // import full-screen pages
 import Home from './pages/Home';

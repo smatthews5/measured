@@ -50,9 +50,21 @@ const customTheme = extendTheme({
         height: '12vh',
         minHeight: '6.5vw',
         borderBottom: '1px solid purple.200',
+        bgColor: 'white',
       },
       'header[id="large"]': {
         height: '16vh',
+      },
+      'div[id="fixed"]': {
+        position: 'fixed',
+        w: '100%',
+        zIndex: '100',
+      },
+      'div[id="scroll"]': {
+        pt: '12vh',
+      },
+      'div[id="scroll-large"]': {
+        pt: '16vh',
       },
       'div::-webkit-scrollbar': {
         height: '1vh',

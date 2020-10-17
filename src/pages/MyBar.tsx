@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Flex, Heading } from '@chakra-ui/core';
+import { Flex, Divider, Heading } from '@chakra-ui/core';
+
 import { BoozeContext, UserContext } from '../Context';
 
 import Header from '../components/Header';
@@ -17,7 +18,11 @@ const MyBar: React.FC = () => {
 
   return (
     <>
-      <Header />
+      <div id="fixed">
+        <Header />
+        <Divider />
+      </div>
+      <div id="scroll">
       <Flex
         width="100%"
         borderTop="0.5px solid lightGray"
@@ -54,7 +59,6 @@ const MyBar: React.FC = () => {
               </Flex>
             </Flex>
           </Flex>
-        </Flex>
         <Flex
           direction='column'
           overflowX="scroll"
@@ -64,15 +68,21 @@ const MyBar: React.FC = () => {
         >
           <Heading
             as="h4"
+
             margin="10px"
-            alignSelf={['left', 'left', 'left', 'center']}
-            textDecoration="underline"
           >
-            Ready to Make
-          </Heading>
-          <CardSuggestionContainer cocktails={cocktails} />
+            <Heading
+              as="h4"
+              margin="10px"
+              alignSelf={['left', 'left', 'left', 'center']}
+              textDecoration="underline"
+            >
+              Ready to Make
+            </Heading>
+            <CardSuggestionContainer cocktails={cocktails} />
+          </Flex>
         </Flex>
-      </Flex>
+      </div>
     </>
   );
 };

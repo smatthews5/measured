@@ -1,5 +1,5 @@
 import {
-  Box,
+  Heading
   Flex,
   Text,
   Image,
@@ -18,6 +18,8 @@ interface CardDetailProps extends RouteComponentProps {
   ingredient: Ingredient;
 }
 
+// TODO: MAKE THIS PAGE RESPONSIVE
+
 const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
   return (
     <Flex width="100%" justifyContent="space-between">
@@ -26,18 +28,18 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
         w="9vw"
         h="9vw"
         objectFit="cover"
-        borderRadius="5px"
+        borderRadius={2}
       />
       <Flex direction="column" ml={8} justifyContent="space-between" mr="auto">
-        <Text
+        <Heading
+          as="h4"
+          fontSize="2.5em"
           fontFamily="mono"
-          fontSize="3em"
           fontWeight="600"
-          letterSpacing="0.03em"
         >
           {ingredient.name}
-        </Text>
-        <HStack spacing={4} pb="5%" ml={2}>
+        </Heading>
+        <HStack spacing={4} pb="5%">
           {ingredient.categories.map((category) => (
             <Tag
               size="lg"
@@ -45,8 +47,10 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
               variant="subtle"
               bgColor="purple.200"
               color="purple.400"
-              fontFamily="body"
-              fontSize="lg"
+              fontWeight="600"
+              fontFamily="mono"
+              letterSpacing="0.02em"
+              fontSize="1.25em"
             >
               <TagLabel>{category}</TagLabel>
             </Tag>

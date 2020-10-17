@@ -57,10 +57,14 @@ const SearchResults = () => {
 
   return (
     <>
-      <Header />
-      <Divider />
-      <Search existingSearch={query} />
-      <CardGrid cocktails={results.length ? results : []} />
+      <div id="fixed">
+        <Header />
+        <Divider />
+      </div>
+      <div id="scroll">
+        <Search existingSearch={query} />
+        <CardGrid cocktails={results.length ? results : []} />
+      </div>
     </>
   );
 };
