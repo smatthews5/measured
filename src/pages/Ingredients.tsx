@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { BoozeContext } from '../Context';
 
-import { Divider } from '@chakra-ui/core';
+import { Box, Divider } from '@chakra-ui/core';
 
 import Header from '../components/Header';
 import Search from '../components/Search';
@@ -13,10 +13,14 @@ const Ingredients: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <Divider />
-      <Search existingSearch={''} />
-      <CardDetailList ingredients={ingredients} />
+      <div id="fixed">
+        <Header />
+        <Divider />
+      </div>
+      <div id="scroll">
+        <Search existingSearch={''} />
+        <CardDetailList ingredients={ingredients} />
+      </div>
     </>
   );
 };
