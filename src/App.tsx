@@ -41,6 +41,7 @@ const getUniqueOptions = (allCocktails: Cocktail[], property: string) => {
 
 const App: React.FC = () => {
   // define initial state for user details
+  const [userInfo, setUserInfo] = useState();
   const [user, setUser] = useState<User>({
     firstName: 'JillStephenChris',
     lastName: 'MastersMatthewsPerry',
@@ -243,8 +244,8 @@ const App: React.FC = () => {
   // memoize state --> trigger updates with changes from any page
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   const currentBooze = useMemo(() => ({ booze, setBooze }), [booze, setBooze]);
-  
-  let unsubscribefromauth = null;
+
+  let unsubscribeFromAuth = null;
 
   useEffect(() => {
     CocktailService.getIngredients()
@@ -272,12 +273,17 @@ const App: React.FC = () => {
           categories: allCategories,
           glasses: allGlasses,
         }));
-        unsubscribefromauth = CocktailService.auth.onAuthStateChanged(user => console.log('user', user?.displayName));
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
+
+    unsubscribeFromAuth = CocktailService.auth.onAuthStateChanged( async (userAuth) => {
+        const user = await CocktailService.createUserProfileDocument(userAuth);
+        setUserInfo({ user });
+      },
+    );
   }, []);
 
-
+  console.log('userInfo', userInfo);
 
   return (
     <UserContext.Provider value={currentUser}>
