@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Component } from 'react';
 import { Router, RouteComponentProps, Redirect } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import * as CocktailService from './services/firebase';
@@ -243,6 +243,8 @@ const App: React.FC = () => {
   // memoize state --> trigger updates with changes from any page
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   const currentBooze = useMemo(() => ({ booze, setBooze }), [booze, setBooze]);
+  
+  let unsubscribefromauth = null;
 
   useEffect(() => {
     CocktailService.getIngredients()
@@ -270,9 +272,12 @@ const App: React.FC = () => {
           categories: allCategories,
           glasses: allGlasses,
         }));
+        unsubscribefromauth = CocktailService.auth.onAuthStateChanged(user => console.log('user', user?.displayName));
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
   }, []);
+
+
 
   return (
     <UserContext.Provider value={currentUser}>

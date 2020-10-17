@@ -1,9 +1,9 @@
 export interface User {
-  firstName: string;
-  lastName: string;
-  myIngredients: Ingredient[];
-  likedDrinks: Cocktail[];
-  createdDrinks: Cocktail[];
+  firstName?: string;
+  lastName?: string;
+  myIngredients?: Ingredient[];
+  likedDrinks?: Cocktail[];
+  createdDrinks?: Cocktail[];
 }
 
 export interface Booze {

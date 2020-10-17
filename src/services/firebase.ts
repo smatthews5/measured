@@ -24,7 +24,8 @@ export const storage = firebase.storage();
 export const auth = firebase.auth();
 
 export const provider = new firebase.auth.GoogleAuthProvider();
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = (): Promise<firebase.auth.UserCredential> => auth.signInWithPopup(provider);
+export const signOutFromGoogle = (): Promise<void> => auth.signOut();
 
 export const getCocktails = async (): Promise<Cocktail[]> => {
   const snapshot = await firestore.collection('cocktails').get();
@@ -40,7 +41,7 @@ export const getIngredients = async (): Promise<Ingredient[]> => {
   return ingredients;
 };
 
-export const postCocktail = async (newCocktail: Partial<Cocktail>) => {
+export const postCocktail = async (newCocktail: Partial<Cocktail>): Promise<void> => {
   console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   await firestore
     .collection('cocktails')
