@@ -9,12 +9,14 @@ import About from '../components/About';
 const LoginSignup: React.FC = () => {
   return (
     <>
-      <Header />
-      <Divider />
-      <>
+      <div id="fixed">
+        <Header />
+        <Divider />
+      </div>
+      <div id="scroll">
         <Form />
         <About />
-      </>
+      </div>
     </>
   );
 };
