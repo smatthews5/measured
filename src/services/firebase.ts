@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
+import 'firebase/auth';
 import { collectIdsAndDocs } from '../utilities';
 
 import { Cocktail, Ingredient } from '../interfaces';
@@ -20,6 +21,10 @@ firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
+export const auth = firebase.auth();
+
+export const provider = new firebase.auth.GoogleAuthProvider();
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export const getCocktails = async (): Promise<Cocktail[]> => {
   const snapshot = await firestore.collection('cocktails').get();
