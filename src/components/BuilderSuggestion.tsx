@@ -13,9 +13,13 @@ import { navigate, RouteComponentProps } from '@reach/router';
 
 interface BuilderSuggestionProps extends RouteComponentProps {
   cocktail: Cocktail;
+  selection: string[];
 }
 
-const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({ cocktail }) => {
+const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
+  cocktail,
+  selection,
+}) => {
   return (
     <Flex
       mb="3%"
@@ -45,14 +49,16 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({ cocktail }) => {
         >
           {cocktail.name}
         </Heading>
-        <Flex flexWrap="wrap">
+        <Flex flexWrap="wrap" pb="5px">
           {cocktail.ingredientsList.map((ingredient) => (
             <Tag
               size="md"
               key={ingredient}
-              variant="subtle"
-              bgColor="purple.200"
-              color="purple.400"
+              variant="outline"
+              bgColor={
+                selection.includes(ingredient) ? 'purple.200' : 'gray.100'
+              }
+              color={selection.includes(ingredient) ? 'purple.400' : 'gray.600'}
               fontFamily="body"
               textTransform="capitalize"
               fontSize="sm"
