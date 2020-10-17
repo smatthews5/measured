@@ -15,7 +15,7 @@ export interface Booze {
 }
 
 export interface Garnish {
-  id: string;
+  name: string;
   description: string;
 }
 
@@ -26,7 +26,6 @@ export interface IngredientDetails {
 }
 
 export interface Cocktail {
-  id: string;
   name: string;
   base: string;
   imageUrl: string;
@@ -37,6 +36,7 @@ export interface Cocktail {
   garnish: Garnish;
   instructions: string[];
   relevance?: number;
+  id?: string;
 }
 
 export interface Ingredient {

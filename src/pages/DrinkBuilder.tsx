@@ -154,29 +154,28 @@ const DrinkBuilder: React.FC = () => {
             {/* <CardSuggestionContainer cocktails={content} /> */}
             <BuilderSuggestionContainer cocktails={content} />
           </Box>
+          <Box width="50vw" borderLeft="0.5px solid lightGray" px="5%" h="100%">
+            <Button
+              w="60%"
+              my="3%"
+              ml="20%"
+              onClick={handleButtonClick}
+              variant="unstyled"
+              bgColor="purple.400"
+              color="white"
+              fontSize={responsiveFontButton}
+              height={responsiveButtonHeight}
+            >
+              Find cocktails
+            </Button>
+            {/* <CardSuggestionContainer cocktails={content} /> */}
+            <BuilderSuggestionContainer
+              cocktails={content}
+              selection={selection}
+            />
+          </Box>
         </Flex>
-        <Box width="50vw" borderLeft="0.5px solid lightGray" px="5%" h="100%">
-          <Button
-            w="60%"
-            my="3%"
-            ml="20%"
-            onClick={handleButtonClick}
-            variant="unstyled"
-            bgColor="purple.400"
-            color="white"
-            fontSize={responsiveFontButton}
-            height={responsiveButtonHeight}
-          >
-            Find cocktails
-          </Button>
-          {/* <CardSuggestionContainer cocktails={content} /> */}
-          <BuilderSuggestionContainer
-            cocktails={content}
-            selection={selection}
-          />
-        </Box>
-      </Flex>
-        </div>
+      </div>
     </>
   );
 };

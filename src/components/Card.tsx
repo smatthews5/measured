@@ -138,13 +138,13 @@ const Card: React.FC<CardProps> = ({ content }) => {
           <IconButton
             position="absolute"
             right="10%"
-            width={['5px','20px']}
-            height={['5px','20px']}
+            width={['5px', '20px']}
+            height={['5px', '20px']}
             aria-label="delete"
             icon={<CloseIcon />}
             colorScheme="gray"
             variant="ghost"
-            size='sm'
+            size="sm"
           />
         )}
       </Flex>
