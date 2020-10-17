@@ -8,14 +8,18 @@ import CardGrid from '../containers/CardGrid';
 import { Cocktail } from '../interfaces';
 import { Divider } from '@chakra-ui/core';
 
-import { removeDuplicatesAndRankResults } from '../utilities';
+import { removeDuplicatesAndRankResults, splitAndSearch } from '../utilities';
 
 const SearchResults = () => {
   const { query } = useParams();
   const { booze, setBooze } = useContext(BoozeContext);
   const [results, setResults] = useState<Cocktail[]>([]);
 
-  const getMatches = async (baseArray: string[], categoryArray: string[]) => {
+  const getMatches = async (
+    baseArray: string[],
+    categoryArray: string[],
+    searchTermsArray: string[],
+  ) => {
     try {
       const matchBases = booze?.cocktails.filter((cocktail) =>
         baseArray.includes(cocktail.base),
@@ -25,7 +29,15 @@ const SearchResults = () => {
           categoryArray.includes(categoryName),
         ),
       );
-      const allMatches = [...matchBases, ...matchCategories];
+      const matchSearchTerms = booze?.cocktails.filter(
+        (cocktail) => splitAndSearch(cocktail, searchTermsArray) > 0,
+      );
+      console.log(matchSearchTerms);
+      const allMatches = [
+        ...matchBases,
+        ...matchCategories,
+        ...matchSearchTerms,
+      ];
       const rankedMatches = removeDuplicatesAndRankResults(allMatches);
       setResults(rankedMatches);
     } catch (error) {
@@ -35,10 +47,12 @@ const SearchResults = () => {
 
   // PAGE DOES NOT LOAD IF HOME PAGE HAS NOT YET BEEN ACCESSED??
   useEffect(() => {
-    const [bases, categories] = query.split('_');
+    const [bases, categories, searchTerms] = query.split('_');
     const baseArray = bases.split('+');
     const categoryArray = categories.split('+');
-    if (booze?.cocktails.length) getMatches(baseArray, categoryArray);
+    const searchTermsArray = searchTerms.split(' ');
+    if (booze?.cocktails.length)
+      getMatches(baseArray, categoryArray, searchTermsArray);
   }, [query]);
 
   return (

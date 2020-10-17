@@ -43,6 +43,7 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
   const { booze } = useContext(BoozeContext);
   const [base, setBase] = useState<string[]>(baseArray || []);
   const [category, setCategory] = useState<string[]>(categoryArray || []);
+  const [searchTerms, setSearchTerms] = useState<string>('');
 
   function setSearchCriteria(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -52,14 +53,22 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
     const basesString = basesURI.join('+');
     const categoriesURI = category.map((name) => encodeURI(name));
     const categoriesString = categoriesURI.join('+');
-    navigate(`/search/${basesString}_${categoriesString}`);
+    navigate(`/search/${basesString}_${categoriesString}_${searchTerms}`);
   }
+
+  const handleChange = (event) => {
+    setSearchTerms(event.target.value);
+  };
 
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
         <InputGroup width="100%" size="sm">
-          <Input borderRadius="8px" height={responsiveButtonHeight} />
+          <Input
+            borderRadius="8px"
+            height={responsiveButtonHeight}
+            onChange={handleChange}
+          />
           <InputRightElement>
             <SearchIcon name="search" color="grey" />
           </InputRightElement>

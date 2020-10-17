@@ -289,7 +289,7 @@ const App: React.FC = () => {
           <DrinkBuilderPage path="/build-a-drink" />
           <RecipePage path="/recipes/:name" />
           <SearchResultsPage path="/search/:query" />
-          <Redirect from="/search" to="/search/_" />
+          <Redirect from="/search" to="/search/__" />
           <LoginSignupPage path="/welcome" />
           <AddACocktailPage path="/add" />
         </Router>
