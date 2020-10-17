@@ -46,12 +46,12 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
   const cockcock = rankResults(cocks);
 
   return (
-    <Flex direction={['row', 'row', 'column']} height="50px">
-      {cockcock?.map((cocktail, index: number) => (
+    <Flex direction={['row', 'row', 'row','column']} height="50px" margin={['100px','10px']}>
+      {cockcock?.map((cocktail) => (
         <Flex
           key={cocktail.id}
           margin={['10px', '10px', '10px']}
-          direction={['column', 'column', 'row']}
+          direction={['column', 'column', 'column','row']}
           minHeight={['100px', '13vw', '13vw']}
           minWidth={['100px', '13vw', '13vw']}
         >
@@ -59,31 +59,32 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
             src={cocktail.imageUrl}
             maxWidth="13vw"
             maxHeight="13vw"
-            minWidth={['100px', '100px', '13vw']}
-            minHeight="100px"
+            minWidth={['200px', '200px', '200px', '13vw']}
+            minHeight="200px"
             borderRadius="5px"
             objectFit="cover"
           />
-          <Flex direction="column" marginLeft={['0px', '0px', '10px']}>
+          <Flex direction="column" marginLeft={['0px', '0px','0px', '10px']}>
             <Heading
               as="h4"
               isTruncated
-              fontSize={['10px', '10px', '16px']}
-              padding="2px"
-              alignSelf={['center', 'center', 'flex-start']}
+              fontSize={['14px', '16px', '18px', '24px']}
+              padding='2px'
+              alignSelf={['center', 'center', 'center','flex-start']}
               marginLeft={['0px', '0px', '8px']}
             >
               {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
             </Heading>
             <Flex marginTop="10px" direction="column">
-              <Text color="gray.500" fontSize={['0px', '0px', '12px']}>
+              <Text color="gray.600" fontSize={['0px', '0px', '0px', '20px']}>
                 Ingredients:
               </Text>
               {cocktail.ingredients.map((ingredient, index: number) => (
                 <Text
-                  color="gray.500"
+                  color="gray.400"
                   key={ingredient.name}
-                  fontSize={['0px', '0px', '8px']}
+                  fontSize={['0px', '0px', '0px','18px']}
+                  isTruncated
                 >
                   {ingredient.name}
                 </Text>

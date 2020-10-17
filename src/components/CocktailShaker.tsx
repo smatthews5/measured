@@ -77,7 +77,7 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
             }}
           />
           <Box
-            width="18vw"
+            width="25vw"
             height="8vh"
             background="white"
             textAlign="center"
@@ -109,7 +109,7 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
             }}
           />
           <Box
-            width="18vw"
+            width="25vw"
             height="8vh"
             background="white"
             textAlign="center"
@@ -141,7 +141,7 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
             }}
           />
           <Box
-            width="18vw"
+            width="25vw"
             height="8vh"
             background="white"
             textAlign="center"

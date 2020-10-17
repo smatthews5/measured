@@ -1,8 +1,9 @@
 /* eslint-disable no-prototype-builtins */
 import React, { useState } from 'react';
 
-import { Box, Flex, Image, Heading } from '@chakra-ui/core';
+import { Box, Flex, Image, Heading, IconButton } from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
+import { CloseIcon } from '@chakra-ui/icons';
 
 import ingredients from '../assets/images/ingredients.png';
 import like from '../assets/images/like.png';
@@ -17,13 +18,11 @@ interface CardProps extends RouteComponentProps {
 const Card: React.FC<CardProps> = ({ content }) => {
   const [showBadge, toggleBadge] = useState(false);
 
-  const cardWidth = content.hasOwnProperty('base') ? '25%' : '10%';
-  const cardMinWidth = content.hasOwnProperty('base') ? '25%' : '10%';
-  const imageWidth = content.hasOwnProperty('base') ? '18vw' : '10vw';
-  const imageHeight = content.hasOwnProperty('base') ? '18vw' : '10vw';
-  const responsiveText = content.hasOwnProperty('base')
-    ? ['md', 'lg', 'xl', '2xl']
-    : ['8px', '9px', '10px', '11px'];
+  const cardWidth = content.hasOwnProperty('base') ? '25%' : '25%';
+  const cardMinWidth = content.hasOwnProperty('base') ? '25%' : '25%';
+  const imageWidth = content.hasOwnProperty('base') ? '18vw' : '16vw';
+  const imageHeight = content.hasOwnProperty('base') ? '18vw' : '16vw';
+  const responsiveText = ['md', 'lg', 'xl', '2xl'];
 
   const responsiveBadge = ['0px', '0px', '60px', '60px'];
   const responsiveHeading = ['0px', '0px', '58px', '58px'];
@@ -135,7 +134,19 @@ const Card: React.FC<CardProps> = ({ content }) => {
             alt="like button"
             w="20px"
           ></Image>
-        ) : null}
+        ) : (
+          <IconButton
+            position="absolute"
+            right="10%"
+            width={['5px','20px']}
+            height={['5px','20px']}
+            aria-label="delete"
+            icon={<CloseIcon />}
+            colorScheme="gray"
+            variant="ghost"
+            size='sm'
+          />
+        )}
       </Flex>
     </Flex>
   );
