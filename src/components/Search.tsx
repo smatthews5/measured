@@ -43,6 +43,7 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
   const { booze } = useContext(BoozeContext);
   const [base, setBase] = useState<string[]>(baseArray || []);
   const [category, setCategory] = useState<string[]>(categoryArray || []);
+  const [searchTerms, setSearchTerms] = useState<string>('');
 
   function setSearchCriteria(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -52,11 +53,11 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
     const basesString = basesURI.join('+');
     const categoriesURI = category.map((name) => encodeURI(name));
     const categoriesString = categoriesURI.join('+');
-    navigate(`/search/${basesString}_${categoriesString}`);
+    navigate(`/search/${basesString}_${categoriesString}_${searchTerms}`);
   }
 
   const handleChange = (event) => {
-    console.log(event.target.value);
+    setSearchTerms(event.target.value);
   };
 
   return (
