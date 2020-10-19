@@ -25,7 +25,6 @@ const DrinkBuilder: React.FC = () => {
 
   useEffect(() => {
     const newCocktails = filterCocktails(selection);
-    console.log(newCocktails);
     setContent(newCocktails.sort((a, b) => b.relevance - a.relevance));
   }, [selection]);
 

@@ -33,14 +33,9 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
   const toast = useToast();
 
   const handleClickMyBar = async (ingredient: string) => {
-    let ingredientList = user.myIngredients.slice();
-    if (!ingredientList.includes(ingredient)) {
-      console.log(`${ingredient} not in my bar`);
+    if (!user.myIngredients.includes(ingredient)) {
       addIngredient(user.uid, ingredient);
     } else {
-      // const index = ingredientList.indexOf(ingredient);
-      // ingredientList.splice(index);
-      console.log(`${ingredient} already in my bar`);
       removeIngredient(user.uid, ingredient);
     }
     const updatedUser = await getUserDocument(user.uid);
