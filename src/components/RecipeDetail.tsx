@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
+import { UserContext } from '../Context';
+import {
+  addCocktail,
+  getUserDocument,
+  removeCocktail,
+} from '../services/firebase';
 
 import garnish from '../assets/images/garnish.png';
 import glass from '../assets/images/glass.png';
+import empty from '../assets/images/empty.png';
+import full from '../assets/images/full.png';
+import loading from '../assets/images/loading.png';
 
 import { Cocktail } from '../interfaces';
 
@@ -14,6 +23,7 @@ import {
   List,
   ListItem,
   Text,
+  Tooltip,
 } from '@chakra-ui/core';
 import { calculateFraction } from '../utilities';
 
@@ -22,7 +32,28 @@ interface RecipeDetailProps extends RouteComponentProps {
 }
 
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
-  const responsiveImage = ['15px', '30px', '40px', ' 50px'];
+  const { user, setUser } = useContext(UserContext);
+  const [showFavourite, toggleFavourite] = useState<boolean>(false);
+
+  const responsiveImage = ['0px', '0px', '40px', ' 50px'];
+
+  useEffect(() => {
+    if (user && user.likedDrinks.includes(cocktail.name)) toggleFavourite(true);
+    else toggleFavourite(false);
+  }, [cocktail?.name, user, user?.likedDrinks]);
+
+  const handleClickMyBar = async (cocktail: string) => {
+    let cocktailList = user?.likedDrinks.slice();
+    if (!cocktailList?.includes(cocktail)) {
+      addCocktail(user.uid, cocktail);
+      toggleFavourite(true);
+    } else {
+      removeCocktail(user.uid, cocktail);
+      toggleFavourite(false);
+    }
+    const updatedUser = await getUserDocument(user.uid);
+    setUser(updatedUser);
+  };
 
   return (
     <Flex
@@ -36,7 +67,28 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
       mt="8vh"
       wrap="wrap"
       overflowY="scroll"
+      position="relative"
     >
+      <Box position="absolute" top="5%" right="2.5%">
+        <Tooltip
+          label={showFavourite ? 'Remove from favourites' : 'Add to favourites'}
+          fontSize="sm"
+          bgColor="purple.400"
+        >
+          <Image
+            fit="contain"
+            fallbackSrc={loading}
+            src={showFavourite ? full : empty}
+            alt="empty glass icon"
+            w={['25px', '25px', '40px', '50px']}
+            onClick={
+              user
+                ? () => handleClickMyBar(cocktail.name)
+                : () => console.log('Not logged in!')
+            }
+          ></Image>
+        </Tooltip>
+      </Box>
       <Flex
         w={['80%', '60%', '40%', '40%']}
         minWidth="338px"
@@ -114,14 +166,18 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             ))}
           </List>
         </Flex>
-        <Flex width="100%" align="flex-end" px={8} wrap="wrap">
+        <Flex width="100%" align="center" px={8} wrap="wrap">
           <Flex
-            align="flex-end"
+            align="center"
             justify="flex-start"
-            width={['90%', '80%', '60%', '50%']}
+            width={['90%', '90%', '60%', '50%']}
             minWidth="150px"
           >
-            <Flex width="50%" align="flex-end" justify="flex-end">
+            <Flex
+              width={['25%', '25%', '50%', '50%']}
+              align="center"
+              justify="flex-end"
+            >
               <Image
                 w={responsiveImage}
                 src={glass}
@@ -138,18 +194,22 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
                 Glass
               </Heading>
             </Flex>
-            <Text width="50%" ml={8} mb={1} fontSize="sm">
+            <Text width="55%" ml={8} mb={1} fontSize={['md', 'md', 'sm', 'sm']}>
               {cocktail?.glassware}
             </Text>
           </Flex>
           {cocktail?.garnish.description ? (
             <Flex
-              align="flex-end"
+              align="center"
               justify="flex-start"
-              width={['90%', '80%', '60%', '50%']}
+              width={['90%', '90%', '60%', '50%']}
               minWidth="150px"
             >
-              <Flex width="50%" align="flex-end" justify="flex-end">
+              <Flex
+                width={['25%', '25%', '50%', '50%']}
+                align="center"
+                justify="flex-end"
+              >
                 <Image
                   w={responsiveImage}
                   src={garnish}
@@ -166,7 +226,12 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
                   Garnish
                 </Heading>
               </Flex>
-              <Text width="50%" ml={8} mb={1} fontSize="sm">
+              <Text
+                width="55%"
+                ml={8}
+                mb={1}
+                fontSize={['md', 'md', 'sm', 'sm']}
+              >
                 {cocktail?.garnish.description}
               </Text>
             </Flex>

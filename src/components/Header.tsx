@@ -228,7 +228,7 @@ const Header: React.FC = () => {
                   <Flex direction="column" margin="10px">
                     <Flex>
                       <Text textDecoration="underline">
-                        Haven't got an account?
+                        Haven&abos;t got an account?
                       </Text>
                       <Link to="/welcome">
                         <Text marginLeft="5px">Sign up!</Text>
