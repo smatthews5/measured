@@ -105,7 +105,7 @@ const MyBar: React.FC = () => {
               >
                 What can I make?
               </Heading>
-              {ingredientsList.length === 0 ? (
+              {userIngredients.length === 0 ? (
                 <>
                   <Text as="h4" px="6%" fontSize="2xl">
                     &larr; Add any ingredients you have to your{' '}
