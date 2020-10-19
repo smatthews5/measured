@@ -1,8 +1,9 @@
 export interface User {
+  uid: string;
   displayName?: string;
   email?: string;
-  myIngredients?: Ingredient[];
-  likedDrinks?: Cocktail[];
+  myIngredients: string[];
+  likedDrinks: string[];
   createdDrinks?: Cocktail[];
   photoUrl?: string;
   createdAt?: Date;
