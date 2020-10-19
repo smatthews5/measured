@@ -24,6 +24,8 @@ const Form: React.FC = () => {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -36,8 +38,8 @@ const Form: React.FC = () => {
 
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password,
+        newEmail,
+        newPassword,
       );
       createUserProfileDocument(user, { displayName });
       // setTimeout message to say success
@@ -46,12 +48,12 @@ const Form: React.FC = () => {
       console.error('form error', error);
     }
     setDisplayName('');
-    setEmail('');
-    setPassword('');
+    setNewEmail('');
+    setNewPassword('');
   };
 
   const onSignIn = async (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     auth.signInWithEmailAndPassword(email, password);
   };
@@ -82,7 +84,6 @@ const Form: React.FC = () => {
             setPassword(value.target.value)
           }
         />
-        <FormHelperText>We'll never share this data.</FormHelperText>
       </FormControl>
 
       <Flex width="100%" justify="center" align="center">
@@ -100,7 +101,7 @@ const Form: React.FC = () => {
         </Button>
       </Flex>
       <Flex justify="center" align="center">
-        <Text textDecoration='underline'>Haven't got an account?</Text>
+        <Text textDecoration="underline">Haven't got an account?</Text>
         <Button width="25%" variant="ghost" margin="5px" onClick={onOpen}>
           Sign up
         </Button>
@@ -127,11 +128,11 @@ const Form: React.FC = () => {
                     Email address
                   </FormLabel>
                   <Input
-                    ref={initialRef}
+                    placeholder="Email"
                     type="email"
-                    value={email}
+                    value={newEmail}
                     onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
-                      setEmail(value.target.value)
+                      setNewEmail(value.target.value)
                     }
                   />
                 </FormControl>
@@ -140,11 +141,11 @@ const Form: React.FC = () => {
                     Password
                   </FormLabel>
                   <Input
-                    ref={initialRef}
+                    placeholder="Password"
                     type="password"
-                    value={password}
+                    value={newPassword}
                     onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
-                      setPassword(value.target.value)
+                      setNewPassword(value.target.value)
                     }
                   />
                 </FormControl>
