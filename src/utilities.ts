@@ -1,7 +1,25 @@
+// TODO: FIX TYPESCRIPT ERRORS => May need to adjust the Cocktail interface
+
 import { Cocktail, Ingredient, Relevance } from './interfaces';
 
 export const collectIdsAndDocs = (doc: any) => {
   return { id: doc.id, ...doc.data() };
+};
+
+export const getUniqueOptions = (
+  allCocktails: Cocktail[],
+  property: string,
+) => {
+  const allValues = allCocktails.reduce((acc: string[], cocktail: Cocktail) => {
+    if (typeof cocktail[property] === 'object')
+      return [...acc, ...cocktail[property]];
+    else return [...acc, cocktail[property]];
+  }, []);
+  const uniqueValues = new Set(allValues);
+  const sortedValues = Array.from(uniqueValues).sort((a, b) =>
+    a > b ? 1 : -1,
+  );
+  return sortedValues;
 };
 
 export const removeDuplicatesAndRankResults = (allMatches: Cocktail[]) => {

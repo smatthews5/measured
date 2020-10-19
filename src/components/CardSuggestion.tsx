@@ -46,12 +46,16 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
   const cockcock = rankResults(cocks);
 
   return (
-    <Flex direction={['row', 'row', 'row','column']} height="50px" margin={['100px','10px']}>
+    <Flex
+      direction={['row', 'row', 'row', 'column']}
+      height="50px"
+      margin={['100px', '10px']}
+    >
       {cockcock?.map((cocktail) => (
         <Flex
           key={cocktail.id}
           margin={['10px', '10px', '10px']}
-          direction={['column', 'column', 'column','row']}
+          direction={['column', 'column', 'column', 'row']}
           minHeight={['100px', '13vw', '13vw']}
           minWidth={['100px', '13vw', '13vw']}
         >
@@ -64,13 +68,13 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
             borderRadius="5px"
             objectFit="cover"
           />
-          <Flex direction="column" marginLeft={['0px', '0px','0px', '10px']}>
+          <Flex direction="column" marginLeft={['0px', '0px', '0px', '10px']}>
             <Heading
               as="h4"
               isTruncated
               fontSize={['14px', '16px', '18px', '24px']}
-              padding='2px'
-              alignSelf={['center', 'center', 'center','flex-start']}
+              padding="2px"
+              alignSelf={['center', 'center', 'center', 'flex-start']}
               marginLeft={['0px', '0px', '8px']}
             >
               {cocktail.name.charAt(0).toUpperCase() + cocktail.name.slice(1)}
@@ -83,7 +87,7 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
                 <Text
                   color="gray.400"
                   key={ingredient.name}
-                  fontSize={['0px', '0px', '0px','18px']}
+                  fontSize={['0px', '0px', '0px', '18px']}
                   isTruncated
                 >
                   {ingredient.name}

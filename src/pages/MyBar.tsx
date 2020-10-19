@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/core';
+
 import { BoozeContext, UserContext } from '../Context';
 
 import Header from '../components/Header';

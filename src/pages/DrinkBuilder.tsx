@@ -89,53 +89,57 @@ const DrinkBuilder: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <Divider />
-      <Flex>
-        <Flex width="50vw" direction="column">
-          <CocktailShaker
-            seasoning={seasoning}
-            balance={balance}
-            core={core}
-            seasoningIndex={seasoningIndex}
-            balanceIndex={balanceIndex}
-            coreIndex={coreIndex}
-            handleButtonClick={handleButtonClick}
-            setSeasoningIndex={setSeasoningIndex}
-            setBalanceIndex={setBalanceIndex}
-            setCoreIndex={setCoreIndex}
-            handleLeftClick={handleLeftClick}
-            handleRightClick={handleRightClick}
-          />
-          <Button
-            w="60%"
-            my="3%"
-            ml="20%"
-            onClick={handleButtonClick}
-            variant="unstyled"
-            bgColor="purple.400"
-            color="white"
-            fontSize={responsiveFontButton}
-            height={responsiveButtonHeight}
-            zIndex={4}
+      <div id="fixed">
+        <Header />
+        <Divider />
+      </div>
+      <div id="scroll">
+        <Flex>
+          <Flex width="50vw" direction="column">
+            <CocktailShaker
+              seasoning={seasoning}
+              balance={balance}
+              core={core}
+              seasoningIndex={seasoningIndex}
+              balanceIndex={balanceIndex}
+              coreIndex={coreIndex}
+              handleButtonClick={handleButtonClick}
+              setSeasoningIndex={setSeasoningIndex}
+              setBalanceIndex={setBalanceIndex}
+              setCoreIndex={setCoreIndex}
+              handleLeftClick={handleLeftClick}
+              handleRightClick={handleRightClick}
+            />
+            <Button
+              w="60%"
+              my="3%"
+              ml="20%"
+              onClick={handleButtonClick}
+              variant="unstyled"
+              bgColor="purple.400"
+              color="white"
+              fontSize={responsiveFontButton}
+              height={responsiveButtonHeight}
+              zIndex={4}
+            >
+              Find cocktails
+            </Button>
+          </Flex>
+          <Box
+            width="50vw"
+            borderLeft="0.5px solid lightGray"
+            px="5%"
+            pt="2%"
+            h="85vh"
+            overflowX="scroll"
           >
-            Find cocktails
-          </Button>
+            <BuilderSuggestionContainer
+              cocktails={content}
+              selection={selection}
+            />
+          </Box>
         </Flex>
-        <Box
-          width="50vw"
-          borderLeft="0.5px solid lightGray"
-          px="5%"
-          pt="2%"
-          h="85vh"
-          overflowX="scroll"
-        >
-          <BuilderSuggestionContainer
-            cocktails={content}
-            selection={selection}
-          />
-        </Box>
-      </Flex>
+      </div>
     </>
   );
 };

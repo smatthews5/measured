@@ -5,7 +5,7 @@ import {
   FormHelperText,
   Input,
   Flex,
-  Button
+  Button,
 } from '@chakra-ui/core';
 import { signInWithGoogle } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
@@ -25,7 +25,7 @@ const Form: React.FC = () => {
         <FormHelperText>We'll never share this data.</FormHelperText>
       </FormControl>
 
-      <Flex width='100%' justify='center'>
+      <Flex width="100%" justify="center">
         <Button width="25%" margin="5px">
           Sign up
         </Button>
@@ -33,7 +33,14 @@ const Form: React.FC = () => {
           Sign Out
         </Button>
       </Flex>
-      <Button leftIcon={<FcGoogle />}width="25%" margin="5px" onClick={signInWithGoogle}>Sign up with google</Button>
+      <Button
+        leftIcon={<FcGoogle />}
+        width="25%"
+        margin="5px"
+        onClick={signInWithGoogle}
+      >
+        Sign up with google
+      </Button>
     </Flex>
   );
 };

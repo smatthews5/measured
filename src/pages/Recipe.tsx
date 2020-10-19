@@ -16,11 +16,13 @@ const Recipe: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <Divider />
-      <>
+      <div id="fixed">
+        <Header />
+        <Divider />
+      </div>
+      <div id="scroll">
         <RecipeDetail cocktail={cocktail} />
-      </>
+      </div>
     </>
   );
 };

@@ -2,8 +2,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Router, RouteComponentProps, Redirect } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
+import { Booze, User, Cocktail, Ingredient } from './interfaces';
+
 import * as CocktailService from './services/firebase';
-import { Booze, User, Cocktail, Ingredient, Garnish } from './interfaces';
+import { getUniqueOptions } from './utilities';
 
 // import full-screen pages
 import Home from './pages/Home';
@@ -24,20 +26,6 @@ const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const SearchResultsPage = (props: RouteComponentProps) => <SearchResults />;
 const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
 const AddACocktailPage = (props: RouteComponentProps) => <AddACocktail />;
-
-const getUniqueOptions = (allCocktails: Cocktail[], property: string) => {
-  // TODO: FIX TYPESCRIPT ERRORS => May need to adjust the Cocktail interface
-  const allValues = allCocktails.reduce((acc: string[], cocktail: Cocktail) => {
-    if (typeof cocktail[property] === 'object')
-      return [...acc, ...cocktail[property]];
-    else return [...acc, cocktail[property]];
-  }, []);
-  const uniqueValues = new Set(allValues);
-  const sortedValues = Array.from(uniqueValues).sort((a, b) =>
-    a > b ? 1 : -1,
-  );
-  return sortedValues;
-};
 
 const App: React.FC = () => {
   // define initial state for user details

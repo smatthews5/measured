@@ -7,6 +7,8 @@ import shaker from '../assets/images/shaker.jpg';
 import { RouteComponentProps } from '@reach/router';
 import { Ingredient } from '../interfaces';
 
+//TODO: Make page responsive
+
 interface CocktailShakerProps extends RouteComponentProps {
   seasoning: Ingredient[];
   balance: Ingredient[];
@@ -60,6 +62,7 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
           mt="3%"
           height="85vh"
           width="auto"
+          minWidth="350px"
           position="absolute"
           zIndex={2}
         />
