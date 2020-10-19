@@ -21,7 +21,7 @@ const MyBar: React.FC = () => {
     if (isLoading) {
       setTimeout(() => {
         toggleLoading(false);
-      }, 500);
+      }, 1500);
     }
   }, []);
 
@@ -41,8 +41,7 @@ const MyBar: React.FC = () => {
   return (
     <>
       {isLoading ? (
-        // <LoadingScreen />
-        <Header />
+        <LoadingScreen />
       ) : (
         <>
           <Header />
