@@ -36,7 +36,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
   const { user, setUser } = useContext(UserContext);
 
   const toast = useToast();
-  
+
   const imageWidth = content.hasOwnProperty('base') ? '18vw' : '16vw';
   const imageHeight = content.hasOwnProperty('base') ? '18vw' : '16vw';
 
@@ -184,14 +184,15 @@ const Card: React.FC<CardProps> = ({ content }) => {
               onClick={
                 user
                   ? () => handleClickMyBar(content.name)
-                  : () => toast({
-                      title: 'Please Log In.',
-                      description:
-                        'You need to be logged in to add cocktails to your favourites.',
-                      status: 'warning',
-                      duration: 5000,
-                      isClosable: true,
-                    })
+                  : () =>
+                      toast({
+                        title: 'Please Log In.',
+                        description:
+                          'You need to be logged in to add cocktails to your favourites.',
+                        status: 'warning',
+                        duration: 5000,
+                        isClosable: true,
+                      })
               }
             ></Image>
           </Tooltip>

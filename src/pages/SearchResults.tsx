@@ -62,7 +62,10 @@ const SearchResults = () => {
       </div>
       <div id="scroll">
         <Search existingSearch={query} />
-        <CardGrid cocktails={results.length ? results : []} />
+        <CardGrid
+          cocktails={results.length ? results : []}
+          title="Search results"
+        />
       </div>
     </>
   );
