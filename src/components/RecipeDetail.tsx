@@ -98,7 +98,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
               <ListItem key={ingredient.name}>
                 <Text ml={2}>
                   {ingredient.amount % 1 === 0
-                    ? ingredient.amount
+                    ? Math.round(ingredient.amount)
                     : calculateFraction(ingredient.amount)}{' '}
                   {ingredient.unit} {ingredient.name}
                 </Text>
