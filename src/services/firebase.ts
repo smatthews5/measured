@@ -125,4 +125,30 @@ export const removeIngredient = async (uid: string, ingredient: string) => {
   }
 };
 
+export const addCocktail = async (uid: string, cocktail: string) => {
+  if (!uid) return null;
+  try {
+    const userRef = firestore.collection('users').doc(uid);
+    await userRef.update({
+      likedDrinks: firebase.firestore.FieldValue.arrayUnion(cocktail),
+    });
+    console.log('successfully added cocktail');
+  } catch (error) {
+    console.error('error adding cocktail', error.message);
+  }
+};
+
+export const removeCocktail = async (uid: string, cocktail: string) => {
+  if (!uid) return null;
+  try {
+    const userRef = firestore.collection('users').doc(uid);
+    await userRef.update({
+      likedDrinks: firebase.firestore.FieldValue.arrayRemove(cocktail),
+    });
+    console.log('successfully removed cocktail');
+  } catch (error) {
+    console.error('error removing cocktail', error.message);
+  }
+};
+
 export default firebase;
