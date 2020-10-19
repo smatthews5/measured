@@ -19,7 +19,7 @@ import { signInWithGoogle, signOut } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { auth, createUserProfileDocument } from '../services/firebase';
 
-const Form: React.FC = () => {
+const FormModal: React.FC = () => {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -178,4 +178,4 @@ const Form: React.FC = () => {
   );
 };
 
-export default Form;
+export default FormModal;

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/core';
 
 import { BoozeContext, UserContext } from '../Context';
-
+import {Ingredient} from '../interfaces';
 import Header from '../components/Header';
 import IngredientsGallery from '../containers/IngredientsGallery';
 import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
@@ -14,8 +14,8 @@ const MyBar: React.FC = () => {
   const { user } = useContext(UserContext);
   const [isLoading, toggleLoading] = useState(true);
 
-  const cocktails = booze.cocktails;
-  const userIngredients = user.myIngredients;
+  const cocktails = booze?.cocktails;
+  const userIngredients = user?.user.myIngredients;
 
   useEffect(() => {
     if (isLoading) {
@@ -33,8 +33,8 @@ const MyBar: React.FC = () => {
     'pantry',
   ];
 
-  let ingredientsList: string[] = [];
-  userIngredients.forEach((ingredient) =>
+  const ingredientsList: string[] = [];
+  userIngredients.forEach((ingredient: Ingredient) =>
     ingredientsList.push(ingredient.name),
   );
 
@@ -75,7 +75,7 @@ const MyBar: React.FC = () => {
                   </Heading>
                   <IngredientsGallery
                     ingredients={userIngredients.filter(
-                      (ingredient) => ingredient.barCategory === category,
+                      (ingredient: Ingredient) => ingredient.barCategory === category,
                     )}
                   />
                 </>

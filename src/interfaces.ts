@@ -1,11 +1,13 @@
 export interface User {
-  displayName?: string;
-  email?: string;
-  myIngredients?: Ingredient[];
-  likedDrinks?: Cocktail[];
-  createdDrinks?: Cocktail[];
-  photoUrl?: string;
-  createdAt?: Date;
+  user: {
+    displayName?: string;
+    email?: string;
+    myIngredients?: Ingredient[];
+    likedDrinks?: Cocktail[];
+    createdDrinks?: Cocktail[];
+    photoUrl?: string;
+    createdAt?: Date;
+  };
 }
 
 export interface Booze {
