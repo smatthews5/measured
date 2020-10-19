@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { BoozeContext } from '../Context';
 import { navigate, RouteComponentProps } from '@reach/router';
 
@@ -30,20 +30,31 @@ interface SearchProps extends RouteComponentProps {
 }
 
 const Search: React.FC<SearchProps> = ({ existingSearch }) => {
-  if (existingSearch) {
-    const [bases, categories] = existingSearch.split('_');
-    if (bases) {
-      const baseArray = bases.split('+');
-    }
-    if (categories) {
-      const categoryArray = categories.split('+');
-    }
-  }
-
   const { booze } = useContext(BoozeContext);
-  const [base, setBase] = useState<string[]>(baseArray || []);
-  const [category, setCategory] = useState<string[]>(categoryArray || []);
+  const [base, setBase] = useState<string[]>([]);
+  const [category, setCategory] = useState<string[]>([]);
   const [searchTerms, setSearchTerms] = useState<string>('');
+
+  useEffect(() => {
+    if (existingSearch) {
+      const [bases, categories, keywords] = existingSearch.split('_');
+      if (bases) {
+        console.log('---> bases', bases);
+        const baseArray = bases.split('+');
+        setBase(baseArray);
+      }
+      if (categories) {
+        console.log('---> categories', categories);
+        const categoryArray = categories.split('+');
+        setCategory(categoryArray);
+      }
+      if (keywords) {
+        console.log('---> keywords', keywords);
+        const keywordsStr = decodeURI(keywords);
+        setSearchTerms(keywordsStr);
+      }
+    }
+  }, []);
 
   function setSearchCriteria(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -53,12 +64,12 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
     const basesString = basesURI.join('+');
     const categoriesURI = category.map((name) => encodeURI(name));
     const categoriesString = categoriesURI.join('+');
-    navigate(`/search/${basesString}_${categoriesString}_${searchTerms}`);
+    const searchTermsString = searchTerms
+      .replace(/[\W]/g, ' ')
+      .replace(/[ ]+/g, ' ');
+    const searchTermsURI = encodeURI(searchTermsString.trim());
+    navigate(`/search/${basesString}_${categoriesString}_${searchTermsURI}`);
   }
-
-  const handleChange = (event) => {
-    setSearchTerms(event.target.value);
-  };
 
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
@@ -67,7 +78,8 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
           <Input
             borderRadius="8px"
             height={responsiveButtonHeight}
-            onChange={handleChange}
+            value={searchTerms}
+            onChange={(event) => setSearchTerms(event.target.value)}
           />
           <InputRightElement>
             <SearchIcon name="search" color="grey" />

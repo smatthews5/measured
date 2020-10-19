@@ -12,7 +12,7 @@ import { removeDuplicatesAndRankResults, splitAndSearch } from '../utilities';
 
 const SearchResults = () => {
   const { query } = useParams();
-  const { booze, setBooze } = useContext(BoozeContext);
+  const { booze } = useContext(BoozeContext);
   const [results, setResults] = useState<Cocktail[]>([]);
 
   const getMatches = async (
@@ -32,7 +32,6 @@ const SearchResults = () => {
       const matchSearchTerms = booze?.cocktails.filter(
         (cocktail) => splitAndSearch(cocktail, searchTermsArray) > 0,
       );
-      console.log(matchSearchTerms);
       const allMatches = [
         ...matchBases,
         ...matchCategories,
