@@ -62,12 +62,13 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
             color="purple.400"
             mr="6%"
             mt="6%"
-            p="3%"
-            boxSize="20%"
+            p="1%"
+            size="xs"
             zIndex={2}
             position="absolute"
-            backgroundColor="rgb(255,255,255,0.6)"
+            variant="ghost"
             borderRadius="5px"
+            _hover={{ bgColor: 'rgb(255,255,255,0.6)' }}
             onClick={() => handleClick(ingredient.name)}
           />
           <Text
