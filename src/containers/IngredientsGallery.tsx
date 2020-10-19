@@ -50,7 +50,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
         lineHeight="20vh"
         fontSize="15vh"
         color="purple.400"
-        fontFamily="mono"
+        fontFamily="heading"
         onClick={() => navigate('/ingredients')}
       >
         +
