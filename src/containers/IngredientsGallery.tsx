@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps, navigate } from '@reach/router';
 
 import { Cocktail, Ingredient } from '../interfaces';
 
@@ -51,6 +51,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
         fontSize="15vh"
         color="purple.400"
         fontFamily="mono"
+        onClick={() => navigate('/ingredients')}
       >
         +
       </Box>
