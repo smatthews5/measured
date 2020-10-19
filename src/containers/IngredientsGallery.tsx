@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
 
-import { Cocktail, Ingredient } from '../interfaces';
+import { Ingredient } from '../interfaces';
 
 import {
   Box,
-  Heading,
   Flex,
   Grid,
   Image,

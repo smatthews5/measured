@@ -84,6 +84,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             onClick={
               user
                 ? () => handleClickMyBar(cocktail.name)
+                // eslint-disable-next-line no-console
                 : () => console.log('Not logged in!')
             }
           ></Image>
