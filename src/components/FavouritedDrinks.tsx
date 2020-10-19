@@ -37,7 +37,7 @@ const FavouritedDrinks: React.FC<RecipeDetailProps> = ({ cocktail }) => {
         <Flex padding="10px" direction="column" align="center">
           <Image
             src={cocktail?.imageUrl}
-            width='300px'
+            width="300px"
             height="300px"
             borderRadius="6px"
           />
@@ -46,7 +46,7 @@ const FavouritedDrinks: React.FC<RecipeDetailProps> = ({ cocktail }) => {
           </Heading>
         </Flex>
 
-        <Flex padding="10px" direction="column" width={['0%','0%','50%']}>
+        <Flex padding="10px" direction="column" width={['0%', '0%', '50%']}>
           <Flex justify="space-between">
             <Heading as="h4" fontSize={['0px', '0px', '32px', '32px']}>
               Ingredients
