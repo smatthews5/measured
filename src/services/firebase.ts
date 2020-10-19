@@ -24,7 +24,9 @@ export const storage = firebase.storage();
 export const auth = firebase.auth();
 
 export const provider = new firebase.auth.GoogleAuthProvider();
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = (): Promise<firebase.auth.UserCredential> =>
+  auth.signInWithPopup(provider);
+export const signOut = (): Promise<void> => auth.signOut();
 
 export const getCocktails = async (): Promise<Cocktail[]> => {
   const snapshot = await firestore.collection('cocktails').get();
@@ -40,7 +42,9 @@ export const getIngredients = async (): Promise<Ingredient[]> => {
   return ingredients;
 };
 
-export const postCocktail = async (newCocktail: Partial<Cocktail>) => {
+export const postCocktail = async (
+  newCocktail: Partial<Cocktail>,
+): Promise<void> => {
   console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   await firestore
     .collection('cocktails')
@@ -51,6 +55,49 @@ export const postCocktail = async (newCocktail: Partial<Cocktail>) => {
     .catch((error) =>
       console.error('---> Error adding new cocktail to firestore:', error),
     );
+};
+
+export const createUserProfileDocument = async (user, additionalData) => {
+  if (!user) return;
+  // get a reference to the place in the database where the user profile might be
+  const userRef = firestore.doc(`users/${user.uid}`);
+  // Go and fetch the document from that location
+  const snapshot = await userRef.get();
+  // if the user does not exist set a user
+  if (!snapshot.exists) {
+    const likedDrinks: Cocktail[] = [];
+    const myIngredients: Ingredient[] = [];
+    const createdAt = new Date();
+    const { displayName, email, photoURL } = user;
+    console.log('user from firestore', user);
+    const newUser = {
+      displayName,
+      email,
+      photoURL,
+      createdAt,
+      likedDrinks,
+      myIngredients,
+      ...additionalData
+    };
+    console.log('newUser', newUser);
+    try {
+      await userRef.set(newUser);
+    } catch (error) {
+      console.error('error creating user', error);
+    }
+  }
+  return getUserDocument(user.uid);
+};
+
+export const getUserDocument = async (uid: string) => {
+  if (!uid) return null;
+  try {
+    const userDocument = await firestore.collection('users').doc(uid).get();
+
+    return { uid, ...userDocument.data() };
+  } catch (error) {
+    console.error('error fetching users', error.message);
+  }
 };
 
 export default firebase;

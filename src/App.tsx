@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Component } from 'react';
 import { Router, RouteComponentProps, Redirect } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import { Booze, User, Cocktail, Ingredient } from './interfaces';
@@ -30,8 +30,8 @@ const AddACocktailPage = (props: RouteComponentProps) => <AddACocktail />;
 const App: React.FC = () => {
   // define initial state for user details
   const [user, setUser] = useState<User>({
-    firstName: 'JillStephenChris',
-    lastName: 'MastersMatthewsPerry',
+    displayName: 'Chris',
+    email: 'c@test',
     myIngredients: [
       {
         categories: ['spirit', 'light'],
@@ -165,101 +165,10 @@ const App: React.FC = () => {
           'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fmint-julep.jpg?alt=media&token=acb01027-4eda-422c-ba32-7190b8faad9f',
         id: '0jCpYE2sLeojirdxPAwg',
       },
-      {
-        base: 'bourbon',
-        categories: ['refreshing', 'old-school'],
-        garnish: {
-          description: 'mint leaves or sprigs',
-          id: 'I3WfOCqGU8pDE9eWEoLE',
-        },
-        glassware: 'cup',
-        ingredients: [
-          { amount: 2.5, name: 'bourbon', unit: 'oz' },
-          { amount: 0.5, name: 'simple syrup', unit: 'oz' },
-          { unit: 'leaves', amount: 8, name: 'mint' },
-          { name: 'crushed ice', unit: 'cup', amount: 1 },
-        ],
-        ingredientsList: [
-          'cct8d5PjZqoC2XwHtTpy',
-          'A0yLqnGo6Vy4M2wojjGJ',
-          'I3WfOCqGU8pDE9eWEoLE',
-        ],
-        instructions: [
-          'in a cold cup or glass, crush the mint leaves into the simple syrup',
-          'add bourbon',
-          'stir in half the crushed ice',
-          'top with the remaining ice',
-          'garnish with more mint',
-        ],
-        name: 'mint julep',
-        imageUrl:
-          'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fmint-julep.jpg?alt=media&token=acb01027-4eda-422c-ba32-7190b8faad9f',
-        id: '0jCpYE2sLeojirdxPAwg',
-      },
-      {
-        base: 'bourbon',
-        categories: ['refreshing', 'old-school'],
-        garnish: {
-          description: 'mint leaves or sprigs',
-          id: 'I3WfOCqGU8pDE9eWEoLE',
-        },
-        glassware: 'cup',
-        ingredients: [
-          { amount: 2.5, name: 'bourbon', unit: 'oz' },
-          { amount: 0.5, name: 'simple syrup', unit: 'oz' },
-          { unit: 'leaves', amount: 8, name: 'mint' },
-          { name: 'crushed ice', unit: 'cup', amount: 1 },
-        ],
-        ingredientsList: [
-          'cct8d5PjZqoC2XwHtTpy',
-          'A0yLqnGo6Vy4M2wojjGJ',
-          'I3WfOCqGU8pDE9eWEoLE',
-        ],
-        instructions: [
-          'in a cold cup or glass, crush the mint leaves into the simple syrup',
-          'add bourbon',
-          'stir in half the crushed ice',
-          'top with the remaining ice',
-          'garnish with more mint',
-        ],
-        name: 'mint julep',
-        imageUrl:
-          'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fmint-julep.jpg?alt=media&token=acb01027-4eda-422c-ba32-7190b8faad9f',
-        id: '0jCpYE2sLeojirdxPAwg',
-      },
-      {
-        base: 'bourbon',
-        categories: ['refreshing', 'old-school'],
-        garnish: {
-          description: 'mint leaves or sprigs',
-          id: 'I3WfOCqGU8pDE9eWEoLE',
-        },
-        glassware: 'cup',
-        ingredients: [
-          { amount: 2.5, name: 'bourbon', unit: 'oz' },
-          { amount: 0.5, name: 'simple syrup', unit: 'oz' },
-          { unit: 'leaves', amount: 8, name: 'mint' },
-          { name: 'crushed ice', unit: 'cup', amount: 1 },
-        ],
-        ingredientsList: [
-          'cct8d5PjZqoC2XwHtTpy',
-          'A0yLqnGo6Vy4M2wojjGJ',
-          'I3WfOCqGU8pDE9eWEoLE',
-        ],
-        instructions: [
-          'in a cold cup or glass, crush the mint leaves into the simple syrup',
-          'add bourbon',
-          'stir in half the crushed ice',
-          'top with the remaining ice',
-          'garnish with more mint',
-        ],
-        name: 'mint julep',
-        imageUrl:
-          'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fmint-julep.jpg?alt=media&token=acb01027-4eda-422c-ba32-7190b8faad9f',
-        id: '0jCpYE2sLeojirdxPAwg',
-      },
     ],
     createdDrinks: [],
+    photoUrl: '',
+    createdAt: new Date(),
   });
 
   // define initial state for drink/ingredient details
@@ -275,6 +184,7 @@ const App: React.FC = () => {
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   const currentBooze = useMemo(() => ({ booze, setBooze }), [booze, setBooze]);
 
+  let unsubscribeFromAuth = null;
   useEffect(() => {
     CocktailService.getIngredients()
       .then((allIngredients: Ingredient[]) =>
@@ -303,6 +213,13 @@ const App: React.FC = () => {
         }));
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
+
+    unsubscribeFromAuth = CocktailService.auth.onAuthStateChanged(
+      async (userAuth) => {
+        const user = await CocktailService.createUserProfileDocument(userAuth);
+        setUser({ user });
+      },
+    );
   }, []);
 
   return (
