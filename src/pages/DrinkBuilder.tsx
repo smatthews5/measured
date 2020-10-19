@@ -95,11 +95,7 @@ const DrinkBuilder: React.FC = () => {
       </div>
       <div id="scroll">
         <Flex>
-<<<<<<< HEAD
-          <Flex width="50vw">
-=======
           <Flex width="50vw" direction="column">
->>>>>>> b157162e19b5860ef131e1e9ef992933f37ce000
             <CocktailShaker
               seasoning={seasoning}
               balance={balance}
@@ -128,32 +124,6 @@ const DrinkBuilder: React.FC = () => {
             >
               Find cocktails
             </Button>
-<<<<<<< HEAD
-            <BuilderSuggestionContainer cocktails={content} />
-          </Box>
-        <Box width="50vw" borderLeft="0.5px solid lightGray" px="5%" h="100%">
-          <Button
-            w="60%"
-            my="3%"
-            ml="20%"
-            onClick={handleButtonClick}
-            variant="unstyled"
-            bgColor="purple.400"
-            color="white"
-            fontSize={responsiveFontButton}
-            height={responsiveButtonHeight}
-          >
-            Find cocktails
-          </Button>
-          <BuilderSuggestionContainer
-            cocktails={content}
-            selection={selection}
-          />
-        </Box>
-        </Flex>
-      </div>
-  </>
-=======
           </Flex>
           <Box
             width="50vw"
@@ -171,7 +141,6 @@ const DrinkBuilder: React.FC = () => {
         </Flex>
       </div>
     </>
->>>>>>> b157162e19b5860ef131e1e9ef992933f37ce000
   );
 };
 

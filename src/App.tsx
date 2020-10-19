@@ -66,9 +66,6 @@ const App: React.FC = () => {
         imageUrl:
           'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/ingredients%2Fcointreau.jpg?alt=media&token=96a1dbf5-054b-417c-9b13-ee1ce8e7071d',
         name: 'Cointreau',
-<<<<<<< HEAD
-      }
-=======
         barCategory: 'liqueur',
         builder: ['balance'],
       },
@@ -135,7 +132,6 @@ const App: React.FC = () => {
         barCategory: 'wine & vermouth',
         builder: ['balance'],
       },
->>>>>>> b157162e19b5860ef131e1e9ef992933f37ce000
     ],
     likedDrinks: [
       {
