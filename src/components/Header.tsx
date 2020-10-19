@@ -19,7 +19,7 @@ import {
   ModalFooter,
   Modal,
 } from '@chakra-ui/core';
-import { signInWithGoogle, signOut } from '../services/firebase';
+import { signInWithGoogle } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../services/firebase';
 
@@ -32,7 +32,6 @@ const Header: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = React.useRef();
 
   const googleSignIn = () => {
     signInWithGoogle();
@@ -46,6 +45,7 @@ const Header: React.FC = () => {
       console.error(error);
     }
   };
+
   return (
     <header>
       <Flex pl={4}>
@@ -100,7 +100,7 @@ const Header: React.FC = () => {
           mb={2}
           onClick={onOpen}
         />
-        <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay>
             <ModalContent borderRadius="8px">
               <ModalHeader alignSelf="center">
@@ -110,17 +110,18 @@ const Header: React.FC = () => {
               <ModalBody pb={6}>
                 <Flex align="center" justify="center" direction="column">
                   <Button
-                    ref={initialRef}
                     isTruncated
                     leftIcon={<FcGoogle />}
                     width="100%"
                     marginLeft="5px"
                     marginTop="10px"
                     onClick={googleSignIn}
+                    boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
+                    height="55px"
                   >
-                    Login/Sign Up with Google
+                    Login with Google
                   </Button>
-                  <Text margin="10px">or</Text>
+                  <Text marginTop="30px">or</Text>
                   <FormControl mt={4} isRequired>
                     <FormLabel padding="2px" margin="2px">
                       E-MAIL
@@ -158,22 +159,22 @@ const Header: React.FC = () => {
                 >
                   <Button
                     mr={3}
+                    width="150px"
                     onClick={emailSignIn}
                     color="white"
                     bgColor="purple.400"
-                    _hover={{ bgColor: 'purple.300' }}
+                    _hover={{ bgColor: 'purple.400' }}
                   >
-                    Sign in
+                    Submit
                   </Button>
-                  <Button onClick={onClose}>Cancel</Button>
                 </Flex>
-                <Flex direction="column">
+                <Flex direction="column" margin="10px">
                   <Flex>
                     <Text textDecoration="underline">
                       Haven't got an account?
                     </Text>
                     <Link to="/welcome">
-                      <Text>Sign up</Text>
+                      <Text marginLeft="5px">Sign up!</Text>
                     </Link>
                   </Flex>
                 </Flex>
