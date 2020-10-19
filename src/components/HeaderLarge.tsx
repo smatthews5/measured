@@ -52,13 +52,13 @@ const HeaderLarge: React.FC = () => {
       console.error(error);
     }
   };
-const signUserOut = () => {
-  signOut();
-  navigate('/');
-};
+  const signUserOut = () => {
+    signOut();
+    navigate('/');
+  };
 
-const border = user.user ? '2px solid maroon' : '0px';
-const radius = user.user ? '50px' : '0px';
+  const border = user ? '2px solid maroon' : '0px';
+  const radius = user ? '50px' : '0px';
 
   return (
     <header id="large">
@@ -128,108 +128,116 @@ const radius = user.user ? '50px' : '0px';
         </Flex>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay>
-          { user.user ? (
-            <ModalContent borderRadius="16px">
-              <ModalHeader alignSelf="center" textDecoration="underline">
-                Login to your account
-              </ModalHeader>
-              <ModalCloseButton />
-              <ModalBody pb={6}>
-                <Flex align="center" justify="center" direction="column">
-                  <Button
-                    isTruncated
-                    width="100%"
-                    marginLeft="5px"
-                    marginTop="10px"
-                    onClick={signUserOut}
-                    boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
-                    height="55px"
-                  >
-                    Sign Out
-                  </Button>
-                </Flex>
-              </ModalBody>
-            </ModalContent>
-          ) : (
-            <ModalContent borderRadius="16px">
-              <ModalHeader alignSelf="center" textDecoration="underline">
-                Login to your account
-              </ModalHeader>
-              <ModalCloseButton />
-              <ModalBody pb={6}>
-                <Flex align="center" justify="center" direction="column">
-                  <Button
-                    isTruncated
-                    leftIcon={<FcGoogle />}
-                    width="100%"
-                    marginLeft="5px"
-                    marginTop="10px"
-                    onClick={googleSignIn}
-                    boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
-                    height="55px"
-                  >
-                    Login with Google
-                  </Button>
-                  <Text marginTop="30px">or</Text>
-                  <FormControl mt={4} isRequired>
-                    <FormLabel padding="2px" margin="2px">
-                      E-MAIL
-                    </FormLabel>
-                    <Input
-                      placeholder="Email"
-                      type="email"
-                      value={email}
-                      onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
-                        setEmail(value.target.value)
-                      }
-                    />
-                  </FormControl>
-                  <FormControl mt={4} isRequired>
-                    <FormLabel padding="2px" margin="2px">
-                      PASSWORD
-                    </FormLabel>
-                    <Input
-                      placeholder="Password"
-                      type="password"
-                      value={password}
-                      onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
-                        setPassword(value.target.value)
-                      }
-                    />
-                  </FormControl>
-                </Flex>
-              </ModalBody>
-              <ModalFooter borderBottomRadius="16px" flexDirection="column">
-                <Flex
-                  direction="row"
-                  width="75%"
-                  justify="space-around"
-                  margin="10px"
+            {user ? (
+              <ModalContent borderRadius="16px">
+                <ModalHeader
+                  alignSelf="center"
+                  textDecoration="underline"
+                  color="purple.400"
                 >
-                  <Button
-                    mr={3}
-                    width="150px"
-                    onClick={emailSignIn}
-                    color="white"
-                    bgColor="purple.400"
-                    _hover={{ bgColor: 'purple.400' }}
-                  >
-                    Submit
-                  </Button>
-                </Flex>
-                <Flex direction="column" margin="10px">
-                  <Flex>
-                    <Text textDecoration="underline">
-                      Haven't got an account?
-                    </Text>
-                    <Link to="/welcome">
-                      <Text marginLeft="5px">Sign up!</Text>
-                    </Link>
+                  Sign out of your account
+                </ModalHeader>
+                <ModalCloseButton />
+                <ModalBody pb={6}>
+                  <Flex align="center" justify="center" direction="column">
+                    <Button
+                      isTruncated
+                      width="100%"
+                      marginLeft="5px"
+                      marginTop="10px"
+                      onClick={signUserOut}
+                      boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
+                      height="55px"
+                    >
+                      Sign Out
+                    </Button>
                   </Flex>
-                </Flex>
-              </ModalFooter>
-            </ModalContent>
-          )}
+                </ModalBody>
+              </ModalContent>
+            ) : (
+              <ModalContent borderRadius="16px">
+                <ModalHeader
+                  alignSelf="center"
+                  textDecoration="underline"
+                  color="purple.400"
+                >
+                  Login to your account
+                </ModalHeader>
+                <ModalCloseButton />
+                <ModalBody pb={6}>
+                  <Flex align="center" justify="center" direction="column">
+                    <Button
+                      isTruncated
+                      leftIcon={<FcGoogle />}
+                      width="100%"
+                      marginLeft="5px"
+                      marginTop="10px"
+                      onClick={googleSignIn}
+                      boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
+                      height="55px"
+                    >
+                      Login with Google
+                    </Button>
+                    <Text marginTop="30px">or</Text>
+                    <FormControl mt={4} isRequired>
+                      <FormLabel padding="2px" margin="2px">
+                        E-MAIL
+                      </FormLabel>
+                      <Input
+                        placeholder="Email"
+                        type="email"
+                        value={email}
+                        onChange={(
+                          value: React.ChangeEvent<HTMLInputElement>,
+                        ) => setEmail(value.target.value)}
+                      />
+                    </FormControl>
+                    <FormControl mt={4} isRequired>
+                      <FormLabel padding="2px" margin="2px">
+                        PASSWORD
+                      </FormLabel>
+                      <Input
+                        placeholder="Password"
+                        type="password"
+                        value={password}
+                        onChange={(
+                          value: React.ChangeEvent<HTMLInputElement>,
+                        ) => setPassword(value.target.value)}
+                      />
+                    </FormControl>
+                  </Flex>
+                </ModalBody>
+                <ModalFooter borderBottomRadius="16px" flexDirection="column">
+                  <Flex
+                    direction="row"
+                    width="75%"
+                    justify="space-around"
+                    margin="10px"
+                  >
+                    <Button
+                      mr={3}
+                      width="150px"
+                      onClick={emailSignIn}
+                      color="white"
+                      bgColor="purple.400"
+                      _hover={{ bgColor: 'purple.400' }}
+                    >
+                      Submit
+                    </Button>
+                  </Flex>
+                  <Flex direction="column" margin="10px">
+                    <Flex>
+                      <Text textDecoration="underline">
+                        Haven't got an account?
+                      </Text>
+                      <Link to="/welcome">
+                        <Text marginLeft="5px">Sign up!</Text>
+                      </Link>
+                    </Flex>
+                  </Flex>
+                </ModalFooter>
+              </ModalContent>
+            )}
           </ModalOverlay>
         </Modal>
       </Flex>

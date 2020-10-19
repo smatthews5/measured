@@ -56,8 +56,8 @@ const Header: React.FC = () => {
     navigate('/');
   };
 
-  const border = user.user ? '2px solid maroon' : '0px';
-  const radius = user.user ? '50px' : '0px';
+  const border = user ? '2px solid maroon' : '0px';
+  const radius = user ? '50px' : '0px';
 
   return (
     <header>
@@ -109,8 +109,8 @@ const Header: React.FC = () => {
           borderRadius={radius}
           w={responsiveImageBorder}
           h={responsiveImageBorder}
-          justify='center'
-          align='center'
+          justify="center"
+          align="center"
         >
           <Image
             w={responsiveImage}
@@ -124,10 +124,14 @@ const Header: React.FC = () => {
         </Flex>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay>
-            {user.user ? (
+            {user ? (
               <ModalContent borderRadius="16px">
-                <ModalHeader alignSelf="center" textDecoration="underline">
-                  Login to your account
+                <ModalHeader
+                  alignSelf="center"
+                  textDecoration="underline"
+                  color="purple.400"
+                >
+                  Sign out of your account
                 </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
@@ -148,7 +152,11 @@ const Header: React.FC = () => {
               </ModalContent>
             ) : (
               <ModalContent borderRadius="16px">
-                <ModalHeader alignSelf="center" textDecoration="underline">
+                <ModalHeader
+                  alignSelf="center"
+                  textDecoration="underline"
+                  color="purple.400"
+                >
                   Login to your account
                 </ModalHeader>
                 <ModalCloseButton />
