@@ -49,14 +49,14 @@ const Header: React.FC = () => {
         .catch((error) => {
           alert(error.message);
         });
-      setTimeout(() => onClose(), 1000);
+      onClose();
     } catch (error) {
       console.error(error);
     }
   };
   const signUserOut = () => {
     signOut();
-    setTimeout(() => navigate('/'), 500);
+    navigate('/');
   };
 
   const border = user ? '2px solid maroon' : '0px';
