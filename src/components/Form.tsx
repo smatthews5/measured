@@ -55,10 +55,11 @@ const Form: React.FC = () => {
         margin="10px"
         width="50vw"
         marginTop="50px"
-        // border="1px solid black"
         borderRadius="8px"
         boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
         height="60vh"
+        minWidth='400px'
+
       >
         <Flex
           width="55%"
@@ -67,9 +68,10 @@ const Form: React.FC = () => {
           align="center"
           padding="10px"
           margin="40px"
+          minWidth='300px'
         >
           <Button
-            isTruncated
+            minWidth='200px'
             leftIcon={<FcGoogle />}
             width="50%"
             margin="20px"

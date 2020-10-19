@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from '@reach/router';
 import {
   FormControl,
@@ -18,7 +18,10 @@ import {
   ModalFooter,
   Modal,
 } from '@chakra-ui/core';
-import { signInWithGoogle } from '../services/firebase';
+import { UserContext } from '../Context';
+import { navigate } from '@reach/router';
+
+import { signInWithGoogle, signOut } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../services/firebase';
 
@@ -27,10 +30,13 @@ import icon from '../assets/images/header_icon.png';
 const responsiveFontSize = ['lg', '2xl', '3xl', '4xl'];
 const responsiveWidth = ['7.5vw', '12.5vw', '17.5vw', '20vw'];
 const responsiveImage = ['15px', '30px', '40px', ' 50px'];
+const responsiveImageBorder = ['25px', '40px', '50px', ' 60px'];
 
 const HeaderLarge: React.FC = () => {
+  const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  console.log('user', user);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -46,6 +52,13 @@ const HeaderLarge: React.FC = () => {
       console.error(error);
     }
   };
+const signUserOut = () => {
+  signOut();
+  navigate('/');
+};
+
+const border = user.user ? '2px solid maroon' : '0px';
+const radius = user.user ? '50px' : '0px';
 
   return (
     <header id="large">
@@ -95,19 +108,51 @@ const HeaderLarge: React.FC = () => {
             Explore my bar
           </Heading>
         </Link>
-        <Image
-          w={responsiveImage}
-          h={responsiveImage}
-          src={icon}
-          objectFit="cover"
-          alt="Login/signup icon"
-          mb={3}
-          onClick={onOpen}
-        />
+        <Flex
+          border={border}
+          borderRadius={radius}
+          w={responsiveImageBorder}
+          h={responsiveImageBorder}
+          justify="center"
+          align="center"
+        >
+          <Image
+            w={responsiveImage}
+            h={responsiveImage}
+            objectFit="cover"
+            src={icon}
+            alt="Login/signup icon"
+            mb={2}
+            onClick={onOpen}
+          />
+        </Flex>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay>
-            <ModalContent borderRadius="8px">
-              <ModalHeader alignSelf="center">
+          { user.user ? (
+            <ModalContent borderRadius="16px">
+              <ModalHeader alignSelf="center" textDecoration="underline">
+                Login to your account
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <Flex align="center" justify="center" direction="column">
+                  <Button
+                    isTruncated
+                    width="100%"
+                    marginLeft="5px"
+                    marginTop="10px"
+                    onClick={signUserOut}
+                    boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
+                    height="55px"
+                  >
+                    Sign Out
+                  </Button>
+                </Flex>
+              </ModalBody>
+            </ModalContent>
+          ) : (
+            <ModalContent borderRadius="16px">
+              <ModalHeader alignSelf="center" textDecoration="underline">
                 Login to your account
               </ModalHeader>
               <ModalCloseButton />
@@ -154,7 +199,7 @@ const HeaderLarge: React.FC = () => {
                   </FormControl>
                 </Flex>
               </ModalBody>
-              <ModalFooter borderBottomRadius="8px" flexDirection="column">
+              <ModalFooter borderBottomRadius="16px" flexDirection="column">
                 <Flex
                   direction="row"
                   width="75%"
@@ -184,6 +229,7 @@ const HeaderLarge: React.FC = () => {
                 </Flex>
               </ModalFooter>
             </ModalContent>
+          )}
           </ModalOverlay>
         </Modal>
       </Flex>
