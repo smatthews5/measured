@@ -21,6 +21,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
           bg="gray.100"
           direction="column"
           borderRadius="5px"
+          key={ingredient.id}
         >
           <Image
             src={ingredient.imageUrl}

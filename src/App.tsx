@@ -29,7 +29,7 @@ const AddACocktailPage = (props: RouteComponentProps) => <AddACocktail />;
 
 const App: React.FC = () => {
   // define initial state for user details
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | undefined>(undefined);
 
   // define initial state for drink/ingredient details
   const [booze, setBooze] = useState<Booze>({
@@ -77,7 +77,7 @@ const App: React.FC = () => {
     unsubscribeFromAuth = CocktailService.auth.onAuthStateChanged(
       async (userAuth) => {
         const user = await CocktailService.createUserProfileDocument(userAuth);
-        setUser({ user });
+        setUser(user);
       },
     );
   }, []);

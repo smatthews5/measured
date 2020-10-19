@@ -10,7 +10,7 @@ interface CardDetailListProps extends RouteComponentProps {
   ingredients: Ingredient[];
 }
 
-const CardDetailList: React.FC<CardDetailListProps> = ({ ingredients }) => {  
+const CardDetailList: React.FC<CardDetailListProps> = ({ ingredients }) => {
   return (
     <>
       <VStack
@@ -21,7 +21,7 @@ const CardDetailList: React.FC<CardDetailListProps> = ({ ingredients }) => {
         mx="auto"
         my="5%"
       >
-        {shuffleOrder(ingredients).map((ingredient: Ingredient) => (
+        {ingredients.map((ingredient) => (
           <CardDetail ingredient={ingredient} key={ingredient.id} />
         ))}
       </VStack>

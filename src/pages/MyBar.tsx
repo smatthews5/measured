@@ -15,8 +15,10 @@ const MyBar: React.FC = () => {
   const [isLoading, toggleLoading] = useState(true);
 
   const cocktails = booze.cocktails;
-  const userIngredients = user?.user.myIngredients;
-  
+  const ingredients = booze?.ingredients;
+
+  const userIngredients = user.myIngredients;
+
   useEffect(() => {
     if (isLoading) {
       setTimeout(() => {
@@ -33,12 +35,9 @@ const MyBar: React.FC = () => {
     'pantry',
   ];
 
-  const ingredientsList: string[] = [];
-  if (userIngredients) {
-    userIngredients.forEach((ingredient: Ingredient) =>
-      ingredientsList.push(ingredient.name),
-    );
-  }
+  let ingredientsDetail = ingredients?.filter((ingredient) =>
+    userIngredients.includes(ingredient.name),
+  );
 
   return (
     <>
@@ -75,9 +74,10 @@ const MyBar: React.FC = () => {
                     {category}
                   </Heading>
                   <IngredientsGallery
+                    key={category}
                     ingredients={
-                      userIngredients
-                        ? userIngredients.filter(
+                      ingredientsDetail
+                        ? ingredientsDetail.filter(
                             (ingredient) => ingredient.barCategory === category,
                           )
                         : []
@@ -103,7 +103,7 @@ const MyBar: React.FC = () => {
               >
                 What can I make?
               </Heading>
-              {ingredientsList.length === 0 ? (
+              {userIngredients.length === 0 ? (
                 <Text as="h4" px="6%" fontSize="2xl">
                   Add ingredients to your bar to see what cocktials you can make
                   with what you have
@@ -122,9 +122,9 @@ const MyBar: React.FC = () => {
                   </Heading>
                   <BuilderSuggestionContainer
                     cocktails={
-                      filterCocktails(cocktails, ingredientsList).allIngredients
+                      filterCocktails(cocktails, userIngredients).allIngredients
                     }
-                    selection={ingredientsList}
+                    selection={userIngredients}
                   />
                   <Heading
                     as="h4"
@@ -138,9 +138,9 @@ const MyBar: React.FC = () => {
                   </Heading>
                   <BuilderSuggestionContainer
                     cocktails={
-                      filterCocktails(cocktails, ingredientsList).missingOne
+                      filterCocktails(cocktails, userIngredients).missingOne
                     }
-                    selection={ingredientsList}
+                    selection={userIngredients}
                   />
                   <Heading
                     as="h4"
@@ -154,9 +154,9 @@ const MyBar: React.FC = () => {
                   </Heading>
                   <BuilderSuggestionContainer
                     cocktails={
-                      filterCocktails(cocktails, ingredientsList).missingTwo
+                      filterCocktails(cocktails, userIngredients).missingTwo
                     }
-                    selection={ingredientsList}
+                    selection={userIngredients}
                   />
                 </>
               )}

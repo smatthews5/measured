@@ -1,18 +1,25 @@
 import {
-  Heading
+  Heading,
   Flex,
-  Text,
   Image,
   HStack,
   Tag,
   TagLabel,
   Button,
   Stack,
+  IconButton,
 } from '@chakra-ui/core';
-import { RouteComponentProps } from '@reach/router';
-import React from 'react';
+import { navigate, RouteComponentProps } from '@reach/router';
+import React, { useContext, useEffect } from 'react';
 import { Ingredient } from '../interfaces';
-import { GiShoppingCart, GiWineBottle } from 'react-icons/gi';
+import { GiWineBottle } from 'react-icons/gi';
+import { UserContext } from '../Context';
+import {
+  addIngredient,
+  getUserDocument,
+  removeIngredient,
+} from '../services/firebase';
+import { CheckIcon } from '@chakra-ui/icons';
 
 interface CardDetailProps extends RouteComponentProps {
   ingredient: Ingredient;
@@ -21,6 +28,23 @@ interface CardDetailProps extends RouteComponentProps {
 // TODO: MAKE THIS PAGE RESPONSIVE
 
 const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
+  const { user, setUser } = useContext(UserContext);
+
+  const handleClickMyBar = async (ingredient: string) => {
+    let ingredientList = user.myIngredients.slice();
+    if (!ingredientList.includes(ingredient)) {
+      console.log(`${ingredient} not in my bar`);
+      addIngredient(user.uid, ingredient);
+    } else {
+      // const index = ingredientList.indexOf(ingredient);
+      // ingredientList.splice(index);
+      console.log(`${ingredient} already in my bar`);
+      removeIngredient(user.uid, ingredient);
+    }
+    const updatedUser = await getUserDocument(user.uid);
+    setUser(updatedUser);
+  };
+
   return (
     <Flex width="100%" justifyContent="space-between">
       <Image
@@ -31,12 +55,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
         borderRadius={2}
       />
       <Flex direction="column" ml={8} justifyContent="space-between" mr="auto">
-        <Heading
-          as="h4"
-          fontSize="2.5em"
-          fontFamily="mono"
-          fontWeight="600"
-        >
+        <Heading as="h4" fontSize="2.5em" fontFamily="mono" fontWeight="600">
           {ingredient.name}
         </Heading>
         <HStack spacing={4} pb="5%">
@@ -58,11 +77,21 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
         </HStack>
       </Flex>
       <Stack direction="row" spacing={4} align="center">
-        <Button colorScheme="gray" variant="solid" w="6vw">
-          <GiWineBottle size={30} />
-        </Button>
-        <Button colorScheme="gray" variant="solid" w="6vw">
-          <GiShoppingCart size={30} />
+        <Button
+          colorScheme="gray"
+          variant="solid"
+          w="6vw"
+          onClick={
+            user
+              ? () => handleClickMyBar(ingredient.name)
+              : () => console.log('Not logged in!')
+          }
+        >
+          {user?.myIngredients.includes(ingredient.name) ? (
+            <CheckIcon size={30} />
+          ) : (
+            <GiWineBottle size={30} />
+          )}
         </Button>
       </Stack>
     </Flex>

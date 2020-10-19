@@ -76,7 +76,7 @@ export const createUserProfileDocument = async (user, additionalData) => {
       createdAt,
       likedDrinks,
       myIngredients,
-      ...additionalData
+      ...additionalData,
     };
     console.log('newUser', newUser);
     try {
@@ -96,6 +96,32 @@ export const getUserDocument = async (uid: string) => {
     return { uid, ...userDocument.data() };
   } catch (error) {
     console.error('error fetching users', error.message);
+  }
+};
+
+export const addIngredient = async (uid: string, ingredient: string) => {
+  if (!uid) return null;
+  try {
+    const ingredientsRef = firestore.collection('users').doc(uid);
+    await ingredientsRef.update({
+      myIngredients: firebase.firestore.FieldValue.arrayUnion(ingredient),
+    });
+    console.log('successfully added ingredient');
+  } catch (error) {
+    console.error('error updating my ingredients', error.message);
+  }
+};
+
+export const removeIngredient = async (uid: string, ingredient: string) => {
+  if (!uid) return null;
+  try {
+    const ingredientsRef = firestore.collection('users').doc(uid);
+    await ingredientsRef.update({
+      myIngredients: firebase.firestore.FieldValue.arrayRemove(ingredient),
+    });
+    console.log('successfully removed ingredient');
+  } catch (error) {
+    console.error('error updating my ingredients', error.message);
   }
 };
 
