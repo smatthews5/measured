@@ -5,7 +5,7 @@ import { UserContext } from '../Context';
 
 const CardSuggestion: React.FC = ({ cocktails }) => {
   const { user } = useContext(UserContext);
-  const userIngredients = user?.myIngredients;
+  const userIngredients = user?.user.myIngredients == 'undefined' ? [] : user?.user.myIngredients;
 
   const userIngredientsNames = userIngredients?.map(
     (ingredient) => ingredient.name,

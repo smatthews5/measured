@@ -11,6 +11,8 @@ interface CardDetailListProps extends RouteComponentProps {
 }
 
 const CardDetailList: React.FC<CardDetailListProps> = ({ ingredients }) => {
+  console.log('ingredients from carddeatillist', ingredients);
+  
   return (
     <>
       <VStack
