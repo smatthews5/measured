@@ -24,7 +24,7 @@ const DrinkBuilder: React.FC = () => {
   const [coreIndex, setCoreIndex] = useState<number>(0);
 
   useEffect(() => {
-    const newCocktails: Cocktail[] = filterCocktails(selection);
+    const newCocktails = filterCocktails(selection);
     setContent(newCocktails.sort((a, b) => b.relevance - a.relevance));
   }, [selection]);
 

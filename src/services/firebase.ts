@@ -33,21 +33,21 @@ export const signOut = (): Promise<void> => auth.signOut();
 export const getCocktails = async (): Promise<Cocktail[]> => {
   const snapshot = await firestore.collection('cocktails').get();
   const cocktails = snapshot.docs.map(collectIdsAndDocs);
-  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
+  // console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return cocktails;
 };
 
 export const getIngredients = async (): Promise<Ingredient[]> => {
   const snapshot = await firestore.collection('ingredients').get();
   const ingredients = snapshot.docs.map(collectIdsAndDocs);
-  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
+  // console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return ingredients;
 };
 
 export const postCocktail = async (
   newCocktail: Partial<Cocktail>,
 ): Promise<void> => {
-  console.log('---> RAN A FIREBASE REQUEST AT', new Date());
+  // console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   await firestore
     .collection('cocktails')
     .add(newCocktail)
