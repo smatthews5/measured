@@ -15,23 +15,13 @@ import {
   ListItem,
   Text,
 } from '@chakra-ui/core';
+import { calculateFraction } from '../utilities';
 
 interface RecipeDetailProps extends RouteComponentProps {
   cocktail: Cocktail | undefined;
 }
 
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
-  // dumb-ass function but no use-case as yet for a more complex formula
-  const calculateFraction = (num: number) => {
-    const fractionString = num.toString();
-    let [integer, decimal] = fractionString.split('.');
-    integer === '0' ? (integer = '') : (integer = integer + ' ');
-    if (decimal === '25') decimal = '¼';
-    else if (decimal === '5') decimal = '½';
-    else if (decimal === '75') decimal = '¾';
-    return integer + decimal;
-  };
-
   const responsiveImage = ['15px', '30px', '40px', ' 50px'];
 
   return (
