@@ -37,6 +37,7 @@ const SearchResults = () => {
         ...matchCategories,
         ...matchSearchTerms,
       ];
+      console.log('---> allMatches', allMatches);
       const rankedMatches = removeDuplicatesAndRankResults(allMatches);
       setResults(rankedMatches);
     } catch (error) {
@@ -44,15 +45,14 @@ const SearchResults = () => {
     }
   };
 
-  // PAGE DOES NOT LOAD IF HOME PAGE HAS NOT YET BEEN ACCESSED??
   useEffect(() => {
     const [bases, categories, searchTerms] = query.split('_');
-    const baseArray = bases.split('+');
-    const categoryArray = categories.split('+');
-    const searchTermsArray = searchTerms.split(' ');
+    const baseArray = decodeURI(bases).split('+');
+    const categoryArray = decodeURI(categories).split('+');
+    const searchTermsArray = decodeURI(searchTerms).split(' ');
     if (booze?.cocktails.length)
       getMatches(baseArray, categoryArray, searchTermsArray);
-  }, [query]);
+  }, [query, booze]);
 
   return (
     <>
@@ -63,7 +63,9 @@ const SearchResults = () => {
       <div id="scroll">
         <Search existingSearch={query} />
         <CardGrid
-          cocktails={results.length ? results : []}
+          cocktails={
+            results.length ? results : booze?.cocktails ? booze.cocktails : []
+          }
           title="Search results"
         />
       </div>

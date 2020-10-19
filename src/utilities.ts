@@ -67,18 +67,24 @@ export const splitAndSearch = (cocktail: Cocktail, searchTerms: string[]) => {
   let matchedWords = 0;
   const splitCocktailName = cocktail.name.split(' ');
   splitCocktailName.forEach((word) => {
-    if (searchTerms.includes(word)) matchedWords++;
+    if (searchTerms.includes(word) && word) {
+      matchedWords++;
+    }
   });
   const ingredients = cocktail.ingredientsList;
   ingredients.forEach((ingredient) => {
     const ingredientWords = ingredient.split(' ');
     ingredientWords.forEach((word) => {
-      if (searchTerms.includes(word)) matchedWords++;
+      if (searchTerms.includes(word) && word) {
+        matchedWords++;
+      }
     });
   });
   const garnishWords = cocktail.garnish.description.split(' ');
   garnishWords.forEach((word) => {
-    if (searchTerms.includes(word)) matchedWords++;
+    if (searchTerms.includes(word) && word) {
+      matchedWords++;
+    }
   });
   cocktail.relevance = matchedWords;
   return matchedWords;
