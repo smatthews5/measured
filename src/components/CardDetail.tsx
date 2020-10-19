@@ -90,7 +90,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
                   toast({
                     title: 'Please Log In.',
                     description:
-                      'You need to log in to add ingredients to your bar.',
+                      'You need to be logged in to add ingredients to your bar.',
                     status: 'warning',
                     duration: 5000,
                     isClosable: true,
