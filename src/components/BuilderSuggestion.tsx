@@ -54,16 +54,17 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
         <Flex flexWrap="wrap" pb="5px">
           {cocktail.ingredientsList.map((ingredient) => (
             <Tag
+              variant="subtle"
+              fontWeight="600"
+              fontFamily="mono"
+              letterSpacing="0.02em"
+              fontSize="sm"
               size="md"
               key={ingredient}
-              variant="outline"
               bgColor={
                 selection.includes(ingredient) ? 'purple.200' : 'gray.100'
               }
               color={selection.includes(ingredient) ? 'purple.400' : 'gray.600'}
-              fontFamily="body"
-              textTransform="capitalize"
-              fontSize="sm"
               mr="5px"
               mb="5px"
             >
