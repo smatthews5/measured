@@ -58,8 +58,8 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
               fontWeight="600"
               fontFamily="mono"
               letterSpacing="0.02em"
-              fontSize="sm"
-              size="md"
+              fontSize="1.25em"
+              size="lg"
               key={ingredient}
               bgColor={
                 selection.includes(ingredient) ? 'purple.200' : 'gray.100'
