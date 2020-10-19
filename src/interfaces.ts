@@ -1,9 +1,11 @@
 export interface User {
-  firstName?: string;
-  lastName?: string;
+  displayName?: string;
+  email?: string;
   myIngredients?: Ingredient[];
   likedDrinks?: Cocktail[];
   createdDrinks?: Cocktail[];
+  photoUrl?: string;
+  createdAt?: Date;
 }
 
 export interface Booze {
@@ -44,7 +46,7 @@ export interface Ingredient {
   id: string;
   imageUrl: string;
   name: string;
-  builder: string[];
+  builder?: string[];
 }
 
 export interface Relevance {
