@@ -3,8 +3,6 @@ import { RouteComponentProps } from '@reach/router';
 
 import Card from '../components/Card';
 import { Cocktail, Ingredient } from '../interfaces';
-import { shuffleOrder } from '../utilities';
-
 import { Box, Heading, Flex } from '@chakra-ui/core';
 
 interface CardGalleryProps extends RouteComponentProps {
@@ -37,7 +35,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({
           {categoryHeading}
         </Heading>
         <Flex overflowX="scroll" mx="1%" mb={2}>
-          {shuffleOrder(content).map((object: Cocktail | Ingredient) => (
+          {content.map((object: Cocktail | Ingredient) => (
             <Card content={object} key={object.id} />
           ))}
         </Flex>

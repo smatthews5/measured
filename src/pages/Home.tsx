@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { BoozeContext } from '../Context';
+import { BoozeContext, UserContext } from '../Context';
 
 import HeaderLarge from '../components/HeaderLarge';
 import Banner from '../components/Banner';
@@ -11,6 +11,7 @@ import LoadingScreen from './LoadingScreen';
 
 const Home: React.FC = () => {
   const { booze } = useContext(BoozeContext);
+  const { user } = useContext(UserContext);
   const [isLoading, toggleLoading] = useState(true);
 
   useEffect(() => {
@@ -34,6 +35,14 @@ const Home: React.FC = () => {
           <div id="scroll-large">
             <Banner />
             <Search existingSearch={''} />
+            {user ? (
+              <CardGallery
+                content={booze.cocktails.filter((cocktail) =>
+                  user.likedDrinks.includes(cocktail.name),
+                )}
+                categoryHeading="top shelf — my favourites"
+              />
+            ) : null}
             <CardGallery
               content={booze.cocktails}
               categoryHeading="all cocktails"
