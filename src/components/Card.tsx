@@ -1,7 +1,14 @@
 /* eslint-disable no-prototype-builtins */
 import React, { useContext, useState } from 'react';
 
-import { Box, Flex, Image, Heading, IconButton } from '@chakra-ui/core';
+import {
+  Box,
+  Flex,
+  Image,
+  Heading,
+  IconButton,
+  useToast,
+} from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
 import { CloseIcon } from '@chakra-ui/icons';
 import { UserContext } from '../Context';
@@ -24,6 +31,8 @@ interface CardProps extends RouteComponentProps {
 const Card: React.FC<CardProps> = ({ content }) => {
   const [showBadge, toggleBadge] = useState(false);
   const { user, setUser } = useContext(UserContext);
+
+  const toast = useToast();
 
   const cardWidth = content.hasOwnProperty('base') ? '25%' : '25%';
   const cardMinWidth = content.hasOwnProperty('base') ? '25%' : '25%';
@@ -156,7 +165,15 @@ const Card: React.FC<CardProps> = ({ content }) => {
             onClick={
               user
                 ? () => handleClickMyBar(content.name)
-                : () => console.log('Not logged in!')
+                : () =>
+                    toast({
+                      title: 'Please Log In.',
+                      description:
+                        'You need to be logged in to add cocktails to your favourites.',
+                      status: 'warning',
+                      duration: 5000,
+                      isClosable: true,
+                    })
             }
           ></Image>
         ) : (
