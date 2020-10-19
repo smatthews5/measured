@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/core';
 
 import { BoozeContext, UserContext } from '../Context';
-
+import {Ingredient} from '../interfaces';
 import Header from '../components/Header';
 import IngredientsGallery from '../containers/IngredientsGallery';
 import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
