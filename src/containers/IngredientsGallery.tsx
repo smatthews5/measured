@@ -22,6 +22,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
           direction="column"
           borderRadius="5px"
           key={ingredient.id}
+          cursor="pointer"
         >
           <Image
             src={ingredient.imageUrl}
@@ -53,6 +54,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
         color="purple.400"
         fontFamily="heading"
         onClick={() => navigate('/ingredients')}
+        cursor="pointer"
       >
         +
       </Box>

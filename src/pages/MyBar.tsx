@@ -35,7 +35,7 @@ const MyBar: React.FC = () => {
     'pantry',
   ];
 
-  let ingredientsDetail = ingredients?.filter((ingredient) =>
+  const ingredientsDetail = ingredients?.filter((ingredient) =>
     userIngredients.includes(ingredient.name),
   );
 

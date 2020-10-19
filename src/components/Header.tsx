@@ -35,7 +35,6 @@ const Header: React.FC = () => {
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log('user', user);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -45,7 +44,11 @@ const Header: React.FC = () => {
   };
   const emailSignIn = async () => {
     try {
-      auth.signInWithEmailAndPassword(email, password);
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .catch((error) => {
+          alert(error.message);
+        });
       setTimeout(() => onClose(), 1000);
     } catch (error) {
       console.error(error);

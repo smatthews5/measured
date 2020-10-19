@@ -17,6 +17,7 @@ import {
   ModalBody,
   ModalFooter,
   Modal,
+  Alert,
 } from '@chakra-ui/core';
 import { UserContext } from '../Context';
 import { navigate } from '@reach/router';
@@ -36,7 +37,6 @@ const HeaderLarge: React.FC = () => {
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log('user', user);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -44,12 +44,15 @@ const HeaderLarge: React.FC = () => {
     signInWithGoogle();
     setTimeout(() => onClose(), 1000);
   };
+
   const emailSignIn = async () => {
     try {
-      auth.signInWithEmailAndPassword(email, password);
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .catch((error) => alert(error.message));
       setTimeout(() => onClose(), 1000);
     } catch (error) {
-      console.error(error);
+      console.log('error in form', error);
     }
   };
   const signUserOut = () => {

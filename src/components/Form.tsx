@@ -31,7 +31,7 @@ const Form: React.FC = () => {
       navigate('/');
     
     } catch (error) {
-      console.error('form error', error);
+      alert(error.message);
     }
     setDisplayName('');
     setNewEmail('');
