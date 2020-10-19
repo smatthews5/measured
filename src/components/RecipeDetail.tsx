@@ -38,20 +38,21 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   const responsiveImage = ['0px', '0px', '40px', ' 50px'];
 
   useEffect(() => {
-    if (user && user.likedDrinks.includes(cocktail.name)) toggleFavourite(true);
+    if (user && user.likedDrinks.includes(cocktail?.name))
+      toggleFavourite(true);
     else toggleFavourite(false);
   }, [cocktail?.name, user, user?.likedDrinks]);
 
   const handleClickMyBar = async (cocktail: string) => {
     let cocktailList = user?.likedDrinks.slice();
     if (!cocktailList?.includes(cocktail)) {
-      addCocktail(user.uid, cocktail);
+      addCocktail(user?.uid, cocktail);
       toggleFavourite(true);
     } else {
-      removeCocktail(user.uid, cocktail);
+      removeCocktail(user?.uid, cocktail);
       toggleFavourite(false);
     }
-    const updatedUser = await getUserDocument(user.uid);
+    const updatedUser = await getUserDocument(user?.uid);
     setUser(updatedUser);
   };
 

@@ -1,31 +1,49 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Flex, Heading, Text } from '@chakra-ui/core';
-
 import { BoozeContext, UserContext } from '../Context';
+import { navigate } from '@reach/router';
+import { filterCocktails } from '../utilities';
+import { Cocktail, Ingredient } from '../interfaces';
+
+import LoadingScreen from './LoadingScreen';
 import Header from '../components/Header';
 import IngredientsGallery from '../containers/IngredientsGallery';
 import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
-import { filterCocktails } from '../utilities';
-import LoadingScreen from './LoadingScreen';
+import { Box, Flex, Heading, Text, Divider } from '@chakra-ui/core';
 
 const MyBar: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   const { user } = useContext(UserContext);
   const [isLoading, toggleLoading] = useState(true);
 
-  const cocktails = booze.cocktails;
-  const ingredients = booze.ingredients;
-
-  let userIngredients: string[] = [];
-  if (user) userIngredients = user.myIngredients;
+  const [ready, setReady] = useState<Cocktail[]>([]);
+  const [oneMore, setOneMore] = useState<Cocktail[]>([]);
+  const [twoMore, setTwoMore] = useState<Cocktail[]>([]);
+  const [ingredientsDetail, setIngredientsDetail] = useState<Ingredient[]>([]);
 
   useEffect(() => {
-    if (isLoading) {
-      setTimeout(() => {
-        toggleLoading(false);
-      }, 1500);
+    if (!user) navigate('/welcome');
+    if (user) {
+      if (isLoading) {
+        setTimeout(() => {
+          toggleLoading(false);
+        }, 1500);
+      }
+      setIngredientsDetail(
+        booze?.ingredients.filter((ingredient) =>
+          user.myIngredients.includes(ingredient.name),
+        ),
+      );
+      setReady(
+        filterCocktails(booze?.cocktails, user.myIngredients).allIngredients,
+      );
+      setOneMore(
+        filterCocktails(booze?.cocktails, user.myIngredients).missingOne,
+      );
+      setTwoMore(
+        filterCocktails(booze?.cocktails, user.myIngredients).missingTwo,
+      );
     }
-  }, []);
+  }, [user]);
 
   const barCategories = [
     'spirit',
@@ -35,10 +53,6 @@ const MyBar: React.FC = () => {
     'pantry',
   ];
 
-  const ingredientsDetail = ingredients?.filter((ingredient) =>
-    userIngredients.includes(ingredient.name),
-  );
-
   return (
     <>
       {isLoading ? (
@@ -47,6 +61,7 @@ const MyBar: React.FC = () => {
         <>
           <div id="fixed">
             <Header />
+            <Divider />
           </div>
           <div id="scroll">
             <Flex
@@ -57,7 +72,7 @@ const MyBar: React.FC = () => {
               paddingRight={0}
             >
               <Flex
-                width={['100%', '100%', '100%', '65%']}
+                width={['100%', '100%', '100%', '60%']}
                 direction="column"
                 overflowX="scroll"
                 height="83vh"
@@ -65,16 +80,24 @@ const MyBar: React.FC = () => {
                 <Heading
                   as="h4"
                   alignSelf="left"
-                  mt="2vh"
+                  mt="1vh"
                   mb="3vh"
-                  fontSize="3vw"
+                  fontSize={['lg', 'xl', '2xl', '3vw']}
                   letterSpacing="-0.02em"
                 >
-                  My bar
+                  What&apos;s in my bar?
                 </Heading>
+                <hr />
                 {barCategories.map((category) => (
-                  <Box key={category}>
-                    <Heading as="h3" fontFamily="mono" mt="1%">
+                  <Box key={category} mb="2vh">
+                    <Heading
+                      as="h4"
+                      alignSelf="left"
+                      mt="2vh"
+                      fontSize={['md', 'lg', 'xl', '2xl']}
+                      letterSpacing="-0.02em"
+                      textTransform="uppercase"
+                    >
                       {category}
                     </Heading>
                     <IngredientsGallery
@@ -93,85 +116,110 @@ const MyBar: React.FC = () => {
               </Flex>
               <Flex
                 direction="column"
-                width={['100%', '100%', '100%', '35%']}
+                width={['100%', '100%', '100%', '40%']}
                 borderLeft="0.5px solid lightGray"
                 overflowX="scroll"
                 height="83vh"
+                px={4}
               >
-                <Heading
-                  as="h4"
-                  alignSelf="left"
-                  mt="2vh"
-                  mb="3vh"
-                  pl="6%"
-                  fontSize="3vw"
-                  letterSpacing="-0.02em"
+                <Flex
+                  direction="row"
+                  align="flex-start"
+                  justify="space-between"
                 >
-                  What can I make?
-                </Heading>
-                {userIngredients.length === 0 ? (
+                  <Heading
+                    as="h4"
+                    mt="1vh"
+                    mb="3vh"
+                    fontSize={['lg', 'xl', '2xl', '3vw']}
+                    letterSpacing="-0.02em"
+                  >
+                    What can I make?
+                  </Heading>
+                  <Box
+                    width="30%"
+                    cursor="pointer"
+                    onClick={() => navigate('/top-shelf')}
+                  >
+                    <Heading
+                      as="h3"
+                      fontSize={['sm', 'sm', 'md', 'md']}
+                      color="gray.400"
+                      pt={2}
+                    >
+                      See drinks I&apos;ve favourited &rarr;
+                    </Heading>
+                  </Box>
+                </Flex>
+                <hr />
+                {user && !user.myIngredients.length ? (
                   <>
-                    <Text as="h4" px="6%" fontSize="2xl">
+                    <Text as="h4" pr={4} fontSize="2xl">
                       &larr; Add any ingredients you have to your{' '}
                       <span id="title">Measured</span> bar.
                     </Text>
                     <br />
-                    <Text as="h4" px="6%" fontSize="lg">
+                    <Text as="h4" pr={4} fontSize="lg">
                       We&apos;ll let you know which cocktails you can make with
                       ingredients you already have, or with just a few more.
                     </Text>
                   </>
                 ) : (
                   <>
-                    <Heading
-                      as="h4"
-                      alignSelf="left"
-                      my="2vh"
-                      pl="6%"
-                      fontSize="3vw"
-                      letterSpacing="-0.02em"
-                    >
-                      Ready to make
-                    </Heading>
-                    <BuilderSuggestionContainer
-                      cocktails={
-                        filterCocktails(cocktails, userIngredients)
-                          .allIngredients
-                      }
-                      selection={userIngredients}
-                    />
-                    <Heading
-                      as="h4"
-                      alignSelf="left"
-                      my="2vh"
-                      pl="6%"
-                      fontSize="3vw"
-                      letterSpacing="-0.02em"
-                    >
-                      With one more ingredient
-                    </Heading>
-                    <BuilderSuggestionContainer
-                      cocktails={
-                        filterCocktails(cocktails, userIngredients).missingOne
-                      }
-                      selection={userIngredients}
-                    />
-                    <Heading
-                      as="h4"
-                      alignSelf="left"
-                      my="2vh"
-                      pl="6%"
-                      fontSize="3vw"
-                      letterSpacing="-0.02em"
-                    >
-                      With two more ingredients
-                    </Heading>
-                    <BuilderSuggestionContainer
-                      cocktails={
-                        filterCocktails(cocktails, userIngredients).missingTwo
-                      }
-                      selection={userIngredients}
-                    />
+                    {ready.length ? (
+                      <>
+                        <Heading
+                          as="h4"
+                          alignSelf="left"
+                          my="2vh"
+                          fontSize={['md', 'lg', 'xl', '2xl']}
+                          letterSpacing="-0.02em"
+                          textTransform="uppercase"
+                        >
+                          Ready to make
+                        </Heading>
+                        <BuilderSuggestionContainer
+                          cocktails={ready}
+                          selection={user ? user.myIngredients : []}
+                        />
+                      </>
+                    ) : null}
+                    {oneMore.length ? (
+                      <>
+                        <Heading
+                          as="h4"
+                          alignSelf="left"
+                          my="2vh"
+                          fontSize={['md', 'lg', 'xl', '2xl']}
+                          letterSpacing="-0.02em"
+                          textTransform="uppercase"
+                        >
+                          With one more ingredient
+                        </Heading>
+                        <BuilderSuggestionContainer
+                          cocktails={oneMore}
+                          selection={user ? user.myIngredients : []}
+                        />
+                      </>
+                    ) : null}
+                    {twoMore.length ? (
+                      <>
+                        <Heading
+                          as="h4"
+                          alignSelf="left"
+                          my="2vh"
+                          fontSize={['md', 'lg', 'xl', '2xl']}
+                          letterSpacing="-0.02em"
+                          textTransform="uppercase"
+                        >
+                          With two more ingredients
+                        </Heading>
+                        <BuilderSuggestionContainer
+                          cocktails={twoMore}
+                          selection={user ? user.myIngredients : []}
+                        />
+                      </>
+                    ) : null}
                   </>
                 )}
               </Flex>

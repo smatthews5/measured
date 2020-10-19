@@ -35,7 +35,7 @@ const Home: React.FC = () => {
           <div id="scroll-large">
             <Banner />
             <Search existingSearch={''} />
-            {user ? (
+            {user && user.likedDrinks.length ? (
               <CardGallery
                 content={booze.cocktails.filter((cocktail) =>
                   user.likedDrinks.includes(cocktail.name),

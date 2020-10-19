@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { navigate, RouteComponentProps } from '@reach/router';
 
 import Card from '../components/Card';
 import { Cocktail, Ingredient } from '../interfaces';
@@ -23,17 +23,26 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   return (
     <>
       <Box w={boxWidth} mx="auto" my="2.5vh">
-        <Heading
-          as="h3"
-          fontWeight="normal"
-          letterSpacing="0.02em"
-          color="purple.400"
-          pl="1vw"
-          py={2}
-          fontSize={['xl', '2xl', '3xl', '4xl']}
+        <Box
+          cursor="pointer"
+          onClick={
+            categoryHeading === 'top shelf — my favourites'
+              ? () => navigate('/top-shelf')
+              : () => false
+          }
         >
-          {categoryHeading}
-        </Heading>
+          <Heading
+            as="h3"
+            fontWeight="normal"
+            letterSpacing="0.02em"
+            color="purple.400"
+            pl="1vw"
+            py={2}
+            fontSize={['xl', '2xl', '3xl', '4xl']}
+          >
+            {categoryHeading}
+          </Heading>
+        </Box>
         <Flex overflowX="scroll" mx="1%" mb={2}>
           {content.map((object: Cocktail | Ingredient) => (
             <Card content={object} key={object.id} />

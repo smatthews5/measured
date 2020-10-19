@@ -83,7 +83,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
               ? () => handleClickMyBar(ingredient.name)
               : () =>
                   toast({
-                    title: 'Please Log In.',
+                    title: 'Please log in.',
                     description:
                       'You need to be logged in to add ingredients to your bar.',
                     status: 'warning',

@@ -11,6 +11,7 @@ import { getUniqueOptions } from './utilities';
 import Home from './pages/Home';
 import Ingredients from './pages/Ingredients';
 import MyBar from './pages/MyBar';
+import TopShelf from './pages/TopShelf';
 import DrinkBuilder from './pages/DrinkBuilder';
 import Recipe from './pages/Recipe';
 import SearchResults from './pages/SearchResults';
@@ -21,6 +22,7 @@ import AddACocktail from './pages/AddACocktail';
 const HomePage = (props: RouteComponentProps) => <Home />;
 const IngredientsPage = (props: RouteComponentProps) => <Ingredients />;
 const MyBarPage = (props: RouteComponentProps) => <MyBar />;
+const TopShelfPage = (props: RouteComponentProps) => <TopShelf />;
 const DrinkBuilderPage = (props: RouteComponentProps) => <DrinkBuilder />;
 const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const SearchResultsPage = (props: RouteComponentProps) => <SearchResults />;
@@ -86,6 +88,7 @@ const App: React.FC = () => {
           <HomePage path="/" />
           <IngredientsPage path="/ingredients" />
           <MyBarPage path="/my-bar" />
+          <TopShelfPage path="/top-shelf" />
           <DrinkBuilderPage path="/build-a-drink" />
           <RecipePage path="/recipes/:name" />
           <SearchResultsPage path="/search/:query" />

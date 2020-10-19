@@ -36,7 +36,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
   const { user, setUser } = useContext(UserContext);
 
   const toast = useToast();
-  
+
   const imageWidth = content.hasOwnProperty('base') ? '18vw' : '16vw';
   const imageHeight = content.hasOwnProperty('base') ? '18vw' : '16vw';
 
@@ -155,13 +155,12 @@ const Card: React.FC<CardProps> = ({ content }) => {
           mt={3}
         >
           {content.hasOwnProperty('base')
-            ? content.categories
-                .sort((a, b) => (a > b ? 1 : -1))
-                .map((category, index) => {
-                  if (index === content.categories.length - 1)
-                    return `${category}`;
-                  else return `${category} — `;
-                })
+            ? content.categories.map((category, index) => {
+                if (index > 2) return '';
+                else if (index === content.categories.length - 1 || index === 2)
+                  return `${category}`;
+                else return `${category} — `;
+              })
             : null}
         </Heading>
         {content.hasOwnProperty('base') ? (
@@ -176,22 +175,25 @@ const Card: React.FC<CardProps> = ({ content }) => {
               position="absolute"
               bottom={['22%', '22%', '3%', '3%']}
               right="10%"
+              border="2px white solid"
+              bgColor="white"
               fit="contain"
               fallbackSrc={loading}
               src={showFavourite ? full : empty}
-              alt="empty glass icon"
+              alt={showFavourite ? 'full glass icon' : 'empty glass icon'}
               w={['15px', '15px', '25px', '25px']}
               onClick={
                 user
                   ? () => handleClickMyBar(content.name)
-                  : () => toast({
-                      title: 'Please Log In.',
-                      description:
-                        'You need to be logged in to add cocktails to your favourites.',
-                      status: 'warning',
-                      duration: 5000,
-                      isClosable: true,
-                    })
+                  : () =>
+                      toast({
+                        title: 'Log in / sign up to Measured',
+                        description:
+                          'Want to add cocktails to your favourites? Create an account or login.',
+                        status: 'warning',
+                        duration: 5000,
+                        isClosable: true,
+                      })
               }
             ></Image>
           </Tooltip>
