@@ -17,7 +17,6 @@ import {
   ModalBody,
   ModalFooter,
   Modal,
-  Alert,
 } from '@chakra-ui/core';
 import { UserContext } from '../Context';
 import { navigate } from '@reach/router';
@@ -47,12 +46,12 @@ const HeaderLarge: React.FC = () => {
 
   const emailSignIn = async () => {
     try {
-      auth
-        .signInWithEmailAndPassword(email, password)
-        .catch((error) => alert(error.message));
+      auth.signInWithEmailAndPassword(email, password).catch((error) => 
+       alert(error.message));
       onClose();
     } catch (error) {
-      console.log('error in form', error);
+      // eslint-disable-next-line no-console
+      console.error('error in form', error);
     }
   };
   const signUserOut = () => {
@@ -231,7 +230,7 @@ const HeaderLarge: React.FC = () => {
                   <Flex direction="column" margin="10px">
                     <Flex>
                       <Text textDecoration="underline">
-                        Haven't got an account?
+                        Haven&apos;t got an account?
                       </Text>
                       <Link to="/welcome">
                         <Text marginLeft="5px">Sign up!</Text>

@@ -2,13 +2,11 @@ import React from 'react';
 import {
   Flex,
   Image,
-  Text,
   Heading,
-  HStack,
   Tag,
   TagLabel,
 } from '@chakra-ui/core';
-import { Cocktail, Ingredient, Relevance } from '../interfaces';
+import { Cocktail } from '../interfaces';
 import { navigate, RouteComponentProps } from '@reach/router';
 import loading from '../assets/images/loading.png';
 
@@ -26,6 +24,7 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
       mb="6%"
       h="20vh"
       onClick={() =>
+        // eslint-disable-next-line no-prototype-builtins
         cocktail.hasOwnProperty('base')
           ? navigate(`/recipes/${cocktail.name}`)
           : null

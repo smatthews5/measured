@@ -9,8 +9,8 @@ import {
   Stack,
   useToast,
 } from '@chakra-ui/core';
-import { navigate, RouteComponentProps } from '@reach/router';
-import React, { useContext, useEffect } from 'react';
+import { RouteComponentProps } from '@reach/router';
+import React, { useContext } from 'react';
 import { Ingredient } from '../interfaces';
 import { GiWineBottle } from 'react-icons/gi';
 import { UserContext } from '../Context';
@@ -33,14 +33,14 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
   const toast = useToast();
 
   const handleClickMyBar = async (ingredient: string) => {
-    let ingredientList = user.myIngredients.slice();
-    if (!ingredientList.includes(ingredient)) {
-      console.log(`${ingredient} not in my bar`);
-      addIngredient(user.uid, ingredient);
+    const ingredientList = user?.myIngredients.slice();
+    if (!ingredientList?.includes(ingredient)) {
+      // console.log(`${ingredient} not in my bar`);
+      addIngredient(user?.uid, ingredient);
     } else {
       // const index = ingredientList.indexOf(ingredient);
       // ingredientList.splice(index);
-      console.log(`${ingredient} already in my bar`);
+      // console.log(`${ingredient} already in my bar`);
       removeIngredient(user.uid, ingredient);
     }
     const updatedUser = await getUserDocument(user.uid);

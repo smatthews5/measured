@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useMemo, useEffect, Component } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Router, RouteComponentProps, Redirect } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import { Booze, User, Cocktail, Ingredient } from './interfaces';
@@ -29,7 +29,7 @@ const AddACocktailPage = (props: RouteComponentProps) => <AddACocktail />;
 
 const App: React.FC = () => {
   // define initial state for user details
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<User>();
 
   // define initial state for drink/ingredient details
   const [booze, setBooze] = useState<Booze>({
@@ -44,7 +44,6 @@ const App: React.FC = () => {
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   const currentBooze = useMemo(() => ({ booze, setBooze }), [booze, setBooze]);
 
-  let unsubscribeFromAuth = null;
   useEffect(() => {
     CocktailService.getIngredients()
       .then((allIngredients: Ingredient[]) =>
@@ -74,12 +73,10 @@ const App: React.FC = () => {
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
 
-    unsubscribeFromAuth = CocktailService.auth.onAuthStateChanged(
-      async (userAuth) => {
-        const user = await CocktailService.createUserProfileDocument(userAuth);
-        setUser(user);
-      },
-    );
+    CocktailService.auth.onAuthStateChanged(async (userAuth) => {
+      const user = await CocktailService.createUserProfileDocument(userAuth);
+      setUser(user);
+    });
   }, []);
 
   return (
