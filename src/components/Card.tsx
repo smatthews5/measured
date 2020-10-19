@@ -1,15 +1,21 @@
 /* eslint-disable no-prototype-builtins */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Box, Flex, Image, Heading, IconButton } from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
 import { CloseIcon } from '@chakra-ui/icons';
+import { UserContext } from '../Context';
 
 import ingredients from '../assets/images/ingredients.png';
 import like from '../assets/images/like.png';
 import loading from '../assets/images/loading.png';
 
 import { Cocktail, Ingredient } from '../interfaces';
+import {
+  addCocktail,
+  getUserDocument,
+  removeCocktail,
+} from '../services/firebase';
 
 interface CardProps extends RouteComponentProps {
   content: Cocktail | Ingredient;
@@ -17,6 +23,7 @@ interface CardProps extends RouteComponentProps {
 
 const Card: React.FC<CardProps> = ({ content }) => {
   const [showBadge, toggleBadge] = useState(false);
+  const { user, setUser } = useContext(UserContext);
 
   const cardWidth = content.hasOwnProperty('base') ? '25%' : '25%';
   const cardMinWidth = content.hasOwnProperty('base') ? '25%' : '25%';
@@ -26,6 +33,19 @@ const Card: React.FC<CardProps> = ({ content }) => {
 
   const responsiveBadge = ['0px', '0px', '60px', '60px'];
   const responsiveHeading = ['0px', '0px', '58px', '58px'];
+
+  const handleClickMyBar = async (cocktail: string) => {
+    let cocktailList = user?.likedDrinks.slice();
+    if (!cocktailList.includes(cocktail)) {
+      console.log(`${cocktail} not in my favourites`);
+      addCocktail(user.uid, cocktail);
+    } else {
+      console.log(`${cocktail} already in my favourites`);
+      removeCocktail(user.uid, cocktail);
+    }
+    const updatedUser = await getUserDocument(user.uid);
+    setUser(updatedUser);
+  };
 
   return (
     <Flex
@@ -133,6 +153,11 @@ const Card: React.FC<CardProps> = ({ content }) => {
             src={like}
             alt="like button"
             w="20px"
+            onClick={
+              user
+                ? () => handleClickMyBar(content.name)
+                : () => console.log('Not logged in!')
+            }
           ></Image>
         ) : (
           <IconButton
