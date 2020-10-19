@@ -7,7 +7,7 @@ import {
   TagLabel,
   Button,
   Stack,
-  IconButton,
+  useToast,
 } from '@chakra-ui/core';
 import { navigate, RouteComponentProps } from '@reach/router';
 import React, { useContext, useEffect } from 'react';
@@ -29,6 +29,8 @@ interface CardDetailProps extends RouteComponentProps {
 
 const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
   const { user, setUser } = useContext(UserContext);
+
+  const toast = useToast();
 
   const handleClickMyBar = async (ingredient: string) => {
     let ingredientList = user.myIngredients.slice();
@@ -84,7 +86,15 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
           onClick={
             user
               ? () => handleClickMyBar(ingredient.name)
-              : () => console.log('Not logged in!')
+              : () =>
+                  toast({
+                    title: 'Please Log In.',
+                    description:
+                      'You need to be logged in to add ingredients to your bar.',
+                    status: 'warning',
+                    duration: 5000,
+                    isClosable: true,
+                  })
           }
         >
           {user?.myIngredients.includes(ingredient.name) ? (
