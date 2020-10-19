@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, UseEffect } from 'react';
 import { Link } from '@reach/router';
 import icon from '../assets/images/header_icon.png';
 import {
@@ -18,6 +18,7 @@ import {
   ModalBody,
   ModalFooter,
   Modal,
+  useToast,
 } from '@chakra-ui/core';
 import { UserContext } from '../Context';
 import { navigate } from '@reach/router';
@@ -32,9 +33,12 @@ const responsiveImage = ['15px', '30px', '40px', ' 50px'];
 const responsiveImageBorder = ['25px', '40px', '50px', ' 60px'];
 
 const Header: React.FC = () => {
+  const toast = useToast();
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -42,19 +46,31 @@ const Header: React.FC = () => {
     signInWithGoogle();
     setTimeout(() => onClose(), 1000);
   };
+  const showErrors = (errorMessage: string) => {
+    const errors = toast({
+      title: 'Error in form. Please try again..',
+      description: errorMessage,
+      duration: 9000,
+      isClosable: true,
+    });
+    return errors;
+  };
+
   const emailSignIn = async () => {
     try {
-      auth
-        .signInWithEmailAndPassword(email, password)
-        .catch((error) => {
-          alert(error.message);
-        });
-      onClose();
+      await auth.signInWithEmailAndPassword(email, password).catch((error) => {
+        const errors = error.message;
+        setErrors(errors);
+        if (errors) {
+          showErrors(errors);
+        } else setTimeout(() => onClose(), 1000);
+      });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
     }
   };
+
   const signUserOut = () => {
     signOut();
     navigate('/');
@@ -228,7 +244,7 @@ const Header: React.FC = () => {
                   <Flex direction="column" margin="10px">
                     <Flex>
                       <Text textDecoration="underline">
-                        Haven&abos;t got an account?
+                        Haven&apos;t got an account?
                       </Text>
                       <Link to="/welcome">
                         <Text marginLeft="5px">Sign up!</Text>

@@ -45,13 +45,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
   const responsiveHeading = ['0px', '0px', '58px', '58px'];
 
   const handleClickMyBar = async (cocktail: string) => {
-<<<<<<< HEAD
-    const cocktailList = user?.likedDrinks.slice();
-    if (!cocktailList?.includes(cocktail)) {
-      // console.log(`${cocktail} not in my favourites`);
-=======
     if (!user?.likedDrinks.includes(cocktail)) {
->>>>>>> 0d624a549e69b4689cf4cb0b41f9e6b3c5bde927
       addCocktail(user.uid, cocktail);
       toggleFavourite(true);
     } else {

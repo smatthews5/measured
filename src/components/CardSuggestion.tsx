@@ -8,7 +8,7 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
   const userIngredients =
     user?.myIngredients == 'undefined' ? [] : user?.myIngredients;
 
-  const userIngredientsNames = userIngredients?.map(
+  const userIngredientsNames = userIngredients.map(
     (ingredient: string) => ingredient.name,
   );
   const cocks: Cocktail[] = [];
