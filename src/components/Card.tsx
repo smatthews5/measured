@@ -44,12 +44,9 @@ const Card: React.FC<CardProps> = ({ content }) => {
   const responsiveHeading = ['0px', '0px', '58px', '58px'];
 
   const handleClickMyBar = async (cocktail: string) => {
-    let cocktailList = user?.likedDrinks.slice();
-    if (!cocktailList.includes(cocktail)) {
-      console.log(`${cocktail} not in my favourites`);
+    if (!user?.likedDrinks.includes(cocktail)) {
       addCocktail(user.uid, cocktail);
     } else {
-      console.log(`${cocktail} already in my favourites`);
       removeCocktail(user.uid, cocktail);
     }
     const updatedUser = await getUserDocument(user.uid);

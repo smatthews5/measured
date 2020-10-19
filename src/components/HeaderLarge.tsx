@@ -36,7 +36,6 @@ const HeaderLarge: React.FC = () => {
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log('user', user);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
