@@ -53,7 +53,7 @@ const Header: React.FC = () => {
   };
   const signUserOut = () => {
     signOut();
-    navigate('/');
+    setTimeout(() => navigate('/'), 500);
   };
 
   const border = user ? '2px solid maroon' : '0px';
