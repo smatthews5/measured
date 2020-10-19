@@ -122,9 +122,9 @@ const customTheme = extendTheme({
       },
       select: {
         isTruncated: 'true',
-        color: 'purple.300',
+        color: 'black',
         fontFamily: 'body',
-        focusBorderColor: 'purple.200',
+        focusBorderColor: 'purple.400',
         fontSize: ['10px', '16px', '16px', '16px'],
         textTransform: 'lowercase',
         multiple: 'true',

@@ -4,13 +4,13 @@ import { navigate } from '@reach/router';
 import { BoozeContext } from '../Context';
 import {
   Divider,
-  Box,
   Flex,
   Heading,
   Button,
   Input,
   FormLabel,
   FormControl,
+  FormHelperText,
   Select,
   Menu,
   MenuList,
@@ -30,14 +30,6 @@ import Header from '../components/Header';
 import { Cocktail, IngredientDetails, Garnish } from '../interfaces';
 import { postCocktail } from '../services/firebase';
 
-// TODO:
-// add instructions array
-// fix setting of ingredients array
-// fix setting of unit
-// make select colour black
-// auto add base to ingredients array and prepopulate select
-// display selected terms under menu button
-
 const AddACocktail: React.FC = () => {
   const { booze } = useContext(BoozeContext);
 
@@ -47,21 +39,26 @@ const AddACocktail: React.FC = () => {
   const [glassware, setGlassware] = useState<string>('');
   const [categories, setCategories] = useState<string[]>([]);
   const [ingredientsList, setIngredientsList] = useState<string[]>([]);
+  const [instructions, setInstructions] = useState<{ [key: number]: string }>(
+    {},
+  );
   const [garnish, setGarnish] = useState<Garnish>({
     name: '',
     description: '',
   });
-  const [instructions, setInstructions] = useState<string[]>([]);
 
   const [units, setUnits] = useState<string[]>([]);
+  const [steps, setSteps] = useState(0);
   const [tempAmounts, setTempAmounts] = useState<{ [key: string]: number }>({});
   const [tempUnits, setTempUnits] = useState<{ [key: string]: string }>({});
+  const [tempInstructions, setTempInstructions] = useState<string[]>([]);
 
   const [showGarnishSection, toggleGarnishSection] = useState(false);
   const [showIngredientSection, toggleIngredientSection] = useState(false);
+  const [showInstructionSection, toggleInstructionSection] = useState(false);
 
   const getUnits = () => {
-    let allUnits: string[] = [];
+    const allUnits: string[] = [];
     booze?.cocktails.forEach((cocktail) => {
       cocktail.ingredients.forEach((ingredient) => {
         allUnits.push(ingredient.unit);
@@ -74,8 +71,8 @@ const AddACocktail: React.FC = () => {
     return sortedUnits;
   };
 
-  const addMyCocktail = () => {
-    let allIngredients: IngredientDetails[] = [];
+  const addMyCocktail = async () => {
+    const allIngredients: IngredientDetails[] = [];
     ingredientsList.forEach((ingredient) => {
       const ingredientObj = {
         name: ingredient,
@@ -83,23 +80,25 @@ const AddACocktail: React.FC = () => {
         unit: tempUnits[ingredient],
       };
       allIngredients.push(ingredientObj);
-      console.log('---> allIngredients', allIngredients);
     });
     const newCocktail: Cocktail = {
       name: name.toLowerCase(),
       ingredients: allIngredients,
+      instructions: Object.values(instructions),
       base,
       imageUrl,
       glassware,
       categories,
       ingredientsList,
       garnish,
-      instructions,
     };
     console.log('---> newCocktail:', newCocktail);
-    // try catch postCocktail(newCocktail);
-    // REDIRECT (TRIGGER RE-FETCH??)
-    // navigate('/');
+    try {
+      await postCocktail(newCocktail);
+      navigate('/');
+    } catch (error) {
+      console.log('---> error posting new cocktail to db', error);
+    }
   };
 
   return (
@@ -151,6 +150,45 @@ const AddACocktail: React.FC = () => {
             <FormLabel mt={5} as="h3" fontFamily="heading">
               Cocktail details
             </FormLabel>
+            {base.length || categories.length || glassware.length ? (
+              <Flex marginTop="10px" width="100%" overflowX="scroll">
+                {base ? (
+                  <Heading
+                    as="h5"
+                    textTransform="uppercase"
+                    color="gray.500"
+                    fontSize={['8px', '12px', '14px', '16px']}
+                  >
+                    {base}
+                  </Heading>
+                ) : null}
+                {categories
+                  ? categories.map((selection) => (
+                      <Heading
+                        as="h5"
+                        key={selection}
+                        pl={3}
+                        textTransform="uppercase"
+                        color="gray.400"
+                        fontSize={['8px', '12px', '14px', '16px']}
+                      >
+                        {selection}
+                      </Heading>
+                    ))
+                  : null}
+                {glassware ? (
+                  <Heading
+                    as="h5"
+                    pl={3}
+                    textTransform="uppercase"
+                    color="gray.500"
+                    fontSize={['8px', '12px', '14px', '16px']}
+                  >
+                    {glassware}
+                  </Heading>
+                ) : null}
+              </Flex>
+            ) : null}
             <Flex width="100%" justify="space-between" align="center" py={1}>
               <Menu closeOnSelect={true}>
                 <MenuButton
@@ -236,6 +274,7 @@ const AddACocktail: React.FC = () => {
             <FormLabel mt={5} as="h3" fontFamily="heading">
               Cocktail ingredients
             </FormLabel>
+
             <Flex
               width="100%"
               justify="center"
@@ -253,29 +292,38 @@ const AddACocktail: React.FC = () => {
                   color="white"
                   size="lg"
                 >
-                  Core ingredients
+                  All core ingredients
                 </MenuButton>
+
                 <MenuList overflowY="scroll" maxHeight="30vh">
                   <MenuOptionGroup
                     title="Select all"
                     type="checkbox"
                     onChange={(value) => {
+                      toggleIngredientSection(true);
                       setIngredientsList(value);
                       setUnits(getUnits());
-                      toggleIngredientSection(true);
                     }}
                   >
-                    {booze?.ingredients.map((ingredient) => (
-                      <MenuItemOption
-                        value={ingredient.name}
-                        key={ingredient.name}
-                      >
-                        {ingredient.name}
-                      </MenuItemOption>
-                    ))}
+                    {booze?.ingredients
+                      .sort((a, b) =>
+                        a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
+                      )
+                      .map((ingredient) => (
+                        <MenuItemOption
+                          value={ingredient.name}
+                          key={ingredient.name}
+                        >
+                          {ingredient.name}
+                        </MenuItemOption>
+                      ))}
                   </MenuOptionGroup>
                 </MenuList>
               </Menu>
+              <FormHelperText>
+                Include every ingredient required for making the cocktail,
+                including the base but excluding the garnish.
+              </FormHelperText>
               {showIngredientSection && ingredientsList.length
                 ? ingredientsList.map((ingredient: string) => (
                     <Flex
@@ -283,23 +331,22 @@ const AddACocktail: React.FC = () => {
                       width="100%"
                       align="center"
                       justify="space-evenly"
+                      mt={4}
                     >
-                      <FormLabel mt={5} width="33%">
+                      <FormLabel mt={5} width="30%" textAlign="center">
                         How much {ingredient}?
                       </FormLabel>
-                      <FormControl isRequired>
+                      <FormControl isRequired width="30%">
                         <NumberInput
                           step={0.25}
                           min={0}
                           max={1000}
-                          width="18%"
                           height="100%"
                           onChange={(value) => {
                             setTempAmounts((prevObj) => ({
                               ...prevObj,
                               [ingredient]: value,
                             }));
-                            console.log('---> tempAmounts', tempAmounts);
                           }}
                         >
                           <NumberInputField />
@@ -310,18 +357,14 @@ const AddACocktail: React.FC = () => {
                         </NumberInput>
                       </FormControl>
                       <Select
-                        width="33%"
+                        width="30%"
                         onChange={(event) => {
                           setTempUnits((prevObj) => ({
                             ...prevObj,
                             [ingredient]: event.target.value,
                           }));
-                          console.log('---> tempUnits', tempUnits);
                         }}
                       >
-                        <option value="0" key="default">
-                          Unit of measurement
-                        </option>
                         {units.map((unit) => (
                           <option value={unit} key={unit}>
                             {unit}
@@ -385,7 +428,9 @@ const AddACocktail: React.FC = () => {
               </Menu>
               {showGarnishSection ? (
                 <>
-                  <FormLabel mt={5}>Garnish description:</FormLabel>
+                  <FormLabel mt={5}>
+                    How should you prepare the garnish?
+                  </FormLabel>
                   <Input
                     id="cocktail-garnish"
                     placeholder="lemon twist / spiral"
@@ -400,6 +445,60 @@ const AddACocktail: React.FC = () => {
                 </>
               ) : null}
             </Flex>
+          </FormControl>
+          <FormControl id="cocktail-instructions" isRequired>
+            <FormLabel mt={5} as="h3" fontFamily="heading">
+              Cocktail instructions
+            </FormLabel>
+            <Flex width="100%" justify="space-between" align="center">
+              <FormLabel mt={5} textAlign="center" width="40%">
+                How many steps to make{' '}
+                {name.length ? `a ${name}` : 'the cocktail'}?
+              </FormLabel>
+              <NumberInput
+                step={1}
+                min={0}
+                max={10}
+                width="20%"
+                onChange={(value) => setSteps(parseInt(value))}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              <Button
+                w="25%"
+                onClick={() => {
+                  setTempInstructions(Array(steps).fill(''));
+                  toggleInstructionSection(true);
+                }}
+                rightIcon={<ChevronDownIcon />}
+                variant="unstyled"
+                bgColor="purple.400"
+                color="gray.100"
+                size="md"
+              >
+                Add instructions
+              </Button>
+            </Flex>
+            {showInstructionSection
+              ? tempInstructions.map((_, index) => (
+                  <Input
+                    my={2}
+                    id={`cocktail-instruction-${index}`}
+                    key={index}
+                    placeholder={`Step ${index + 1}`}
+                    onChange={(event) =>
+                      setInstructions((prevObj) => ({
+                        ...prevObj,
+                        [index]: event.target.value.toLowerCase(),
+                      }))
+                    }
+                  />
+                ))
+              : null}
           </FormControl>
           <Button
             w="100%"
