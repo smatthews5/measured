@@ -69,7 +69,6 @@ export const createUserProfileDocument = async (user, additionalData) => {
     const myIngredients: Ingredient[] = [];
     const createdAt = new Date();
     const { displayName, email, photoURL } = user;
-    console.log('user from firestore', user);
     const newUser = {
       displayName,
       email,

@@ -14,9 +14,9 @@ const MyBar: React.FC = () => {
   const { user } = useContext(UserContext);
   const [isLoading, toggleLoading] = useState(true);
 
-  const cocktails = booze?.cocktails;
+  const cocktails = booze.cocktails;
   const userIngredients = user?.user.myIngredients;
-
+  
   useEffect(() => {
     if (isLoading) {
       setTimeout(() => {
@@ -33,19 +33,12 @@ const MyBar: React.FC = () => {
     'pantry',
   ];
 
-<<<<<<< HEAD
   const ingredientsList: string[] = [];
-  userIngredients.forEach((ingredient: Ingredient) =>
-    ingredientsList.push(ingredient.name),
-  );
-=======
-  let ingredientsList: string[] = [];
   if (userIngredients) {
-    userIngredients.forEach((ingredient) =>
+    userIngredients.forEach((ingredient: Ingredient) =>
       ingredientsList.push(ingredient.name),
     );
   }
->>>>>>> aad3ed7a53d28f1bc74e7590147322f8f8f043ab
 
   return (
     <>
@@ -82,11 +75,6 @@ const MyBar: React.FC = () => {
                     {category}
                   </Heading>
                   <IngredientsGallery
-<<<<<<< HEAD
-                    ingredients={userIngredients.filter(
-                      (ingredient: Ingredient) => ingredient.barCategory === category,
-                    )}
-=======
                     ingredients={
                       userIngredients
                         ? userIngredients.filter(
@@ -94,7 +82,6 @@ const MyBar: React.FC = () => {
                           )
                         : []
                     }
->>>>>>> aad3ed7a53d28f1bc74e7590147322f8f8f043ab
                   />
                 </>
               ))}
