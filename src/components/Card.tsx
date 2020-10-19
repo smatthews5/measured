@@ -8,6 +8,7 @@ import {
   Heading,
   IconButton,
   Tooltip,
+  useToast,
 } from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
 import { CloseIcon } from '@chakra-ui/icons';
@@ -34,6 +35,8 @@ const Card: React.FC<CardProps> = ({ content }) => {
   const [showFavourite, toggleFavourite] = useState<boolean>(false);
   const { user, setUser } = useContext(UserContext);
 
+  const toast = useToast();
+  
   const imageWidth = content.hasOwnProperty('base') ? '18vw' : '16vw';
   const imageHeight = content.hasOwnProperty('base') ? '18vw' : '16vw';
 
@@ -182,7 +185,14 @@ const Card: React.FC<CardProps> = ({ content }) => {
               onClick={
                 user
                   ? () => handleClickMyBar(content.name)
-                  : () => console.log('Not logged in!')
+                  : () => toast({
+                      title: 'Please Log In.',
+                      description:
+                        'You need to be logged in to add cocktails to your favourites.',
+                      status: 'warning',
+                      duration: 5000,
+                      isClosable: true,
+                    })
               }
             ></Image>
           </Tooltip>
