@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/core';
 
 import { BoozeContext, UserContext } from '../Context';
-import {Ingredient} from '../interfaces';
+import { Ingredient } from '../interfaces';
 import Header from '../components/Header';
 import IngredientsGallery from '../containers/IngredientsGallery';
 import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
@@ -94,19 +94,19 @@ const MyBar: React.FC = () => {
               overflowX="scroll"
               height="83vh"
             >
-              <Heading
-                as="h4"
-                alignSelf="left"
-                mt="2vh"
-                mb="3vh"
-                pl="6%"
-                fontSize="3vw"
-                letterSpacing="-0.02em"
-              >
-                What can I make?
-              </Heading>
               {userIngredients.length === 0 ? (
                 <>
+                  <Heading
+                    as="h4"
+                    alignSelf="left"
+                    mt="2vh"
+                    mb="3vh"
+                    pl="6%"
+                    fontSize="3vw"
+                    letterSpacing="-0.02em"
+                  >
+                    What can I make?
+                  </Heading>
                   <Text as="h4" px="6%" fontSize="2xl">
                     &larr; Add any ingredients you have to your{' '}
                     <span id="title">Measured</span> bar.
