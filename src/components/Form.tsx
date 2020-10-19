@@ -60,7 +60,6 @@ const Form: React.FC = () => {
 
   return (
     <Flex justify="center" align="center" direction="column" margin="10px">
-      <Text fontSize="40px"> SIGN IN </Text>
       <FormControl width="50%" isRequired>
         <FormLabel padding="2px" margin="2px">
           Email address
