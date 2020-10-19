@@ -22,7 +22,6 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
           direction="column"
           borderRadius="5px"
           key={ingredient.id}
-          cursor="pointer"
         >
           <Image
             src={ingredient.imageUrl}
