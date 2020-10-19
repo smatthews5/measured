@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/core';
+import { Flex, Heading, Text } from '@chakra-ui/core';
 
 import { BoozeContext, UserContext } from '../Context';
 import {Ingredient} from '../interfaces';
@@ -21,7 +21,7 @@ const MyBar: React.FC = () => {
     if (isLoading) {
       setTimeout(() => {
         toggleLoading(false);
-      }, 500);
+      }, 1500);
     }
   }, []);
 
@@ -33,16 +33,24 @@ const MyBar: React.FC = () => {
     'pantry',
   ];
 
+<<<<<<< HEAD
   const ingredientsList: string[] = [];
   userIngredients.forEach((ingredient: Ingredient) =>
     ingredientsList.push(ingredient.name),
   );
+=======
+  let ingredientsList: string[] = [];
+  if (userIngredients) {
+    userIngredients.forEach((ingredient) =>
+      ingredientsList.push(ingredient.name),
+    );
+  }
+>>>>>>> aad3ed7a53d28f1bc74e7590147322f8f8f043ab
 
   return (
     <>
       {isLoading ? (
-        // <LoadingScreen />
-        <Header />
+        <LoadingScreen />
       ) : (
         <>
           <Header />
@@ -74,9 +82,19 @@ const MyBar: React.FC = () => {
                     {category}
                   </Heading>
                   <IngredientsGallery
+<<<<<<< HEAD
                     ingredients={userIngredients.filter(
                       (ingredient: Ingredient) => ingredient.barCategory === category,
                     )}
+=======
+                    ingredients={
+                      userIngredients
+                        ? userIngredients.filter(
+                            (ingredient) => ingredient.barCategory === category,
+                          )
+                        : []
+                    }
+>>>>>>> aad3ed7a53d28f1bc74e7590147322f8f8f043ab
                   />
                 </>
               ))}
@@ -96,46 +114,65 @@ const MyBar: React.FC = () => {
                 fontSize="3vw"
                 letterSpacing="-0.02em"
               >
-                Ready to make
+                What can I make?
               </Heading>
-              <BuilderSuggestionContainer
-                cocktails={
-                  filterCocktails(cocktails, ingredientsList).allIngredients
-                }
-                selection={ingredientsList}
-              />
-              <Heading
-                as="h4"
-                alignSelf="left"
-                my="2vh"
-                pl="6%"
-                fontSize="3vw"
-                letterSpacing="-0.02em"
-              >
-                Missing 1 ingredient
-              </Heading>
-              <BuilderSuggestionContainer
-                cocktails={
-                  filterCocktails(cocktails, ingredientsList).missingOne
-                }
-                selection={ingredientsList}
-              />
-              <Heading
-                as="h4"
-                alignSelf="left"
-                my="2vh"
-                pl="6%"
-                fontSize="3vw"
-                letterSpacing="-0.02em"
-              >
-                Missing 2 ingredients
-              </Heading>
-              <BuilderSuggestionContainer
-                cocktails={
-                  filterCocktails(cocktails, ingredientsList).missingTwo
-                }
-                selection={ingredientsList}
-              />
+              {ingredientsList.length === 0 ? (
+                <Text as="h4" px="6%" fontSize="2xl">
+                  Add ingredients to your bar to see what cocktials you can make
+                  with what you have
+                </Text>
+              ) : (
+                <>
+                  <Heading
+                    as="h4"
+                    alignSelf="left"
+                    my="2vh"
+                    pl="6%"
+                    fontSize="3vw"
+                    letterSpacing="-0.02em"
+                  >
+                    Ready to make
+                  </Heading>
+                  <BuilderSuggestionContainer
+                    cocktails={
+                      filterCocktails(cocktails, ingredientsList).allIngredients
+                    }
+                    selection={ingredientsList}
+                  />
+                  <Heading
+                    as="h4"
+                    alignSelf="left"
+                    my="2vh"
+                    pl="6%"
+                    fontSize="3vw"
+                    letterSpacing="-0.02em"
+                  >
+                    Missing 1 ingredient
+                  </Heading>
+                  <BuilderSuggestionContainer
+                    cocktails={
+                      filterCocktails(cocktails, ingredientsList).missingOne
+                    }
+                    selection={ingredientsList}
+                  />
+                  <Heading
+                    as="h4"
+                    alignSelf="left"
+                    my="2vh"
+                    pl="6%"
+                    fontSize="3vw"
+                    letterSpacing="-0.02em"
+                  >
+                    Missing 2 ingredients
+                  </Heading>
+                  <BuilderSuggestionContainer
+                    cocktails={
+                      filterCocktails(cocktails, ingredientsList).missingTwo
+                    }
+                    selection={ingredientsList}
+                  />
+                </>
+              )}
             </Flex>
           </Flex>
         </>

@@ -112,7 +112,10 @@ export const filterCocktails = (
     if (ingredientsLength === matchedIngredients) allIngredients.push(cocktail);
     else if (ingredientsLength === matchedIngredients + 1)
       missingOne.push(cocktail);
-    else if (ingredientsLength === matchedIngredients + 2)
+    else if (
+      ingredientsLength === matchedIngredients + 2 &&
+      ingredientsLength > 2
+    )
       missingTwo.push(cocktail);
   });
 
