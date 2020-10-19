@@ -95,33 +95,7 @@ const DrinkBuilder: React.FC = () => {
       </div>
       <div id="scroll">
         <Flex>
-          <Flex width="50vw">
-            {/* <Box width="15vw" pl="5%" textAlign="center">
-            <Text
-              pt="15vh"
-              fontFamily="heading"
-              fontSize="5vh"
-              textTransform="uppercase"
-            >
-              Seasoning
-            </Text>
-            <Text
-              pt="16vh"
-              fontFamily="heading"
-              fontSize="5vh"
-              textTransform="uppercase"
-            >
-              Balance
-            </Text>
-            <Text
-              pt="10vh"
-              fontFamily="heading"
-              fontSize="5vh"
-              textTransform="uppercase"
-            >
-              Core
-            </Text>
-          </Box> */}
+          <Flex width="50vw" direction="column">
             <CocktailShaker
               seasoning={seasoning}
               balance={balance}
@@ -136,39 +110,29 @@ const DrinkBuilder: React.FC = () => {
               handleLeftClick={handleLeftClick}
               handleRightClick={handleRightClick}
             />
+            <Button
+              w="60%"
+              my="3%"
+              ml="20%"
+              onClick={handleButtonClick}
+              variant="unstyled"
+              bgColor="purple.400"
+              color="white"
+              fontSize={responsiveFontButton}
+              height={responsiveButtonHeight}
+              zIndex={4}
+            >
+              Find cocktails
+            </Button>
           </Flex>
-          <Box width="50vw" borderLeft="0.5px solid lightGray" px="5%" h="100%">
-            <Button
-              w="60%"
-              my="3%"
-              ml="20%"
-              onClick={handleButtonClick}
-              variant="unstyled"
-              bgColor="purple.400"
-              color="white"
-              fontSize={responsiveFontButton}
-              height={responsiveButtonHeight}
-            >
-              Find cocktails
-            </Button>
-            {/* <CardSuggestionContainer cocktails={content} /> */}
-            <BuilderSuggestionContainer cocktails={content} />
-          </Box>
-          <Box width="50vw" borderLeft="0.5px solid lightGray" px="5%" h="100%">
-            <Button
-              w="60%"
-              my="3%"
-              ml="20%"
-              onClick={handleButtonClick}
-              variant="unstyled"
-              bgColor="purple.400"
-              color="white"
-              fontSize={responsiveFontButton}
-              height={responsiveButtonHeight}
-            >
-              Find cocktails
-            </Button>
-            {/* <CardSuggestionContainer cocktails={content} /> */}
+          <Box
+            width="50vw"
+            borderLeft="0.5px solid lightGray"
+            px="5%"
+            pt="2%"
+            h="85vh"
+            overflowX="scroll"
+          >
             <BuilderSuggestionContainer
               cocktails={content}
               selection={selection}

@@ -83,3 +83,42 @@ export const splitAndSearch = (cocktail: Cocktail, searchTerms: string[]) => {
   cocktail.relevance = matchedWords;
   return matchedWords;
 };
+
+// dumb-ass function but no use-case as yet for a more complex formula
+export const calculateFraction = (num: number) => {
+  const fractionString = num.toString();
+  let [integer, decimal] = fractionString.split('.');
+  integer === '0' ? (integer = '') : (integer = integer + ' ');
+  if (decimal === '25') decimal = '¼';
+  else if (decimal === '5') decimal = '½';
+  else if (decimal === '75') decimal = '¾';
+  return integer + decimal;
+};
+
+export const filterCocktails = (
+  cocktails: Cocktail[],
+  ingredients: string[],
+) => {
+  let allIngredients: Cocktail[] = [];
+  let missingOne: Cocktail[] = [];
+  let missingTwo: Cocktail[] = [];
+
+  cocktails.forEach((cocktail) => {
+    const ingredientsLength = cocktail.ingredientsList.length;
+    let matchedIngredients = 0;
+    cocktail.ingredientsList.forEach((ingredient) => {
+      if (ingredients.includes(ingredient)) matchedIngredients++;
+    });
+    if (ingredientsLength === matchedIngredients) allIngredients.push(cocktail);
+    else if (ingredientsLength === matchedIngredients + 1)
+      missingOne.push(cocktail);
+    else if (ingredientsLength === matchedIngredients + 2)
+      missingTwo.push(cocktail);
+  });
+
+  return {
+    allIngredients,
+    missingOne,
+    missingTwo,
+  };
+};
