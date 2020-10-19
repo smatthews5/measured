@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Flex, Heading, Text } from '@chakra-ui/core';
+import { Box, Flex, Heading, Text } from '@chakra-ui/core';
 
 import { BoozeContext, UserContext } from '../Context';
 import {Ingredient} from '../interfaces';
@@ -62,14 +62,15 @@ const MyBar: React.FC = () => {
               <Heading
                 as="h4"
                 alignSelf="left"
-                my="2vh"
+                mt="2vh"
+                mb="3vh"
                 fontSize="3vw"
                 letterSpacing="-0.02em"
               >
-                My ingredients
+                My bar
               </Heading>
               {barCategories.map((category) => (
-                <>
+                <Box key={category}>
                   <Heading as="h3" fontFamily="mono" mt="1%">
                     {category}
                   </Heading>
@@ -83,7 +84,7 @@ const MyBar: React.FC = () => {
                         : []
                     }
                   />
-                </>
+                </Box>
               ))}
             </Flex>
             <Flex
@@ -96,18 +97,26 @@ const MyBar: React.FC = () => {
               <Heading
                 as="h4"
                 alignSelf="left"
-                my="2vh"
+                mt="2vh"
+                mb="3vh"
                 pl="6%"
                 fontSize="3vw"
                 letterSpacing="-0.02em"
               >
                 What can I make?
               </Heading>
-              {userIngredients.length === 0 ? (
-                <Text as="h4" px="6%" fontSize="2xl">
-                  Add ingredients to your bar to see what cocktials you can make
-                  with what you have
-                </Text>
+              {ingredientsList.length === 0 ? (
+                <>
+                  <Text as="h4" px="6%" fontSize="2xl">
+                    &larr; Add any ingredients you have to your{' '}
+                    <span id="title">Measured</span> bar.
+                  </Text>
+                  <br />
+                  <Text as="h4" px="6%" fontSize="lg">
+                    We&apos;ll let you know which cocktails you can make with
+                    ingredients you already have, or with just a few more.
+                  </Text>
+                </>
               ) : (
                 <>
                   <Heading
@@ -134,7 +143,7 @@ const MyBar: React.FC = () => {
                     fontSize="3vw"
                     letterSpacing="-0.02em"
                   >
-                    Missing 1 ingredient
+                    With one more ingredient
                   </Heading>
                   <BuilderSuggestionContainer
                     cocktails={
@@ -150,7 +159,7 @@ const MyBar: React.FC = () => {
                     fontSize="3vw"
                     letterSpacing="-0.02em"
                   >
-                    Missing 2 ingredients
+                    With two more ingredients
                   </Heading>
                   <BuilderSuggestionContainer
                     cocktails={

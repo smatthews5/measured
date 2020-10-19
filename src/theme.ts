@@ -120,6 +120,13 @@ const customTheme = extendTheme({
       'hr[id="wide"]': {
         width: '90%',
       },
+      'span[id="title"]': {
+        fontFamily: 'heading',
+        textTransform: 'uppercase',
+        fontWeight: '600',
+        fontSize: '3xl',
+        px: '5px',
+      },
       select: {
         isTruncated: 'true',
         color: 'black',
