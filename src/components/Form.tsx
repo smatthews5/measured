@@ -6,6 +6,7 @@ import {
   Input,
   Flex,
   Button,
+<<<<<<< HEAD
   Text,
   useDisclosure,
   ModalOverlay,
@@ -15,6 +16,8 @@ import {
   ModalBody,
   ModalFooter,
   Modal,
+=======
+>>>>>>> b157162e19b5860ef131e1e9ef992933f37ce000
 } from '@chakra-ui/core';
 import { signInWithGoogle, signOut } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
@@ -86,6 +89,7 @@ const Form: React.FC = () => {
         />
       </FormControl>
 
+<<<<<<< HEAD
       <Flex width="100%" justify="center" align="center">
         <Button width="25%" margin="5px" onClick={onSignIn}>
           Sign in
@@ -98,6 +102,11 @@ const Form: React.FC = () => {
           onClick={signInWithGoogle}
         >
           Google sign in
+=======
+      <Flex width="100%" justify="center">
+        <Button width="25%" margin="5px">
+          Sign up
+>>>>>>> b157162e19b5860ef131e1e9ef992933f37ce000
         </Button>
       </Flex>
       <Flex justify="center" align="center">
@@ -161,6 +170,17 @@ const Form: React.FC = () => {
           </ModalOverlay>
         </Modal>
       </Flex>
+<<<<<<< HEAD
+=======
+      <Button
+        leftIcon={<FcGoogle />}
+        width="25%"
+        margin="5px"
+        onClick={signInWithGoogle}
+      >
+        Sign up with google
+      </Button>
+>>>>>>> b157162e19b5860ef131e1e9ef992933f37ce000
     </Flex>
   );
 };

@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/core';
 import { Cocktail, Ingredient, Relevance } from '../interfaces';
 import { navigate, RouteComponentProps } from '@reach/router';
+import loading from '../assets/images/loading.png';
 
 interface BuilderSuggestionProps extends RouteComponentProps {
   cocktail: Cocktail;
@@ -22,8 +23,8 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
 }) => {
   return (
     <Flex
-      mb="3%"
-      h="18vh"
+      mb="6%"
+      h="20vh"
       onClick={() =>
         cocktail.hasOwnProperty('base')
           ? navigate(`/recipes/${cocktail.name}`)
@@ -34,14 +35,15 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
     >
       <Image
         src={cocktail.imageUrl}
+        fallbackSrc={loading}
         objectFit="cover"
         h="100%"
-        w="18vw"
+        w="15vw"
         borderRadius="5px"
       />
-      <Flex direction="column" justifyContent="space-between" pl="2vw">
+      <Flex direction="column" justifyContent="space-between" pl="1vw">
         <Heading
-          fontSize="3vw"
+          fontSize="2.5vw"
           fontFamily="mono"
           as="h3"
           color="purple.400"
