@@ -14,7 +14,7 @@ const BuilderSuggestionContainer: React.FC<BuilderSuggestionContainerProps> = ({
   selection,
 }) => {
   return (
-    <Flex direction="column" px="6%" mt="2%">
+    <Flex direction="column" mt="2%">
       {cocktails.map((cocktail) => (
         <BuilderSuggestion
           cocktail={cocktail}

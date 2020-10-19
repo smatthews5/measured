@@ -74,17 +74,14 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
-        <InputGroup width="100%" size="sm">
-          <Input
-            borderRadius="8px"
-            height={responsiveButtonHeight}
-            value={searchTerms}
-            onChange={(event) => setSearchTerms(event.target.value)}
-          />
-          <InputRightElement>
-            <SearchIcon name="search" color="grey" />
-          </InputRightElement>
-        </InputGroup>
+        <Input
+          borderRadius="8px"
+          width="100%"
+          size="sm"
+          height={responsiveButtonHeight}
+          value={searchTerms}
+          onChange={(event) => setSearchTerms(event.target.value)}
+        />
       </Flex>
       <Flex
         direction={{ base: 'column', md: 'row' }}
