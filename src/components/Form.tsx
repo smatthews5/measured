@@ -56,7 +56,7 @@ const Form: React.FC = () => {
   };
   const successfullLogin = () => {
     const message = toast({
-      title: `Hey, you're logged in!!`,
+      title: "Hey, you're logged in!",
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -98,9 +98,13 @@ const Form: React.FC = () => {
       await auth
         .signInWithEmailAndPassword(email, password)
         .then(() => {
+          onClose();
           setTimeout(() => successfullLogin(), 1000);
-          setTimeout(() => onClose(), 1000);
           setTimeout(() => navigate('/'), 1000);
+          setTimeout(() => {
+            setEmail('');
+            setPassword('');
+          }, 1000);
         })
         .catch((error) => {
           const errors = error.message;
@@ -175,7 +179,7 @@ const Form: React.FC = () => {
             <Input
               marginBottom="20px"
               placeholder="Display name"
-              color='white'
+              color="white"
               value={displayName}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setDisplayName(value.target.value)
@@ -188,7 +192,7 @@ const Form: React.FC = () => {
               marginBottom="20px"
               placeholder="Email"
               type="email"
-              color='white'
+              color="white"
               value={newEmail}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setNewEmail(value.target.value)
@@ -200,7 +204,7 @@ const Form: React.FC = () => {
             <Input
               placeholder="Password"
               type="password"
-              color='white'
+              color="white"
               value={newPassword}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setNewPassword(value.target.value)
@@ -251,7 +255,7 @@ const Form: React.FC = () => {
                   zIndex="0"
                   bgColor="#9F465F"
                 >
-                  Login to your account
+                  Log in to your account
                 </ModalHeader>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
@@ -266,7 +270,7 @@ const Form: React.FC = () => {
                       boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
                       height="55px"
                     >
-                      Login with Google
+                      Log in with Google
                     </Button>
                     <Text marginTop="30px" color="white" zIndex="0">
                       or
@@ -278,7 +282,7 @@ const Form: React.FC = () => {
                       <Input
                         placeholder="Email"
                         type="email"
-                        color='white'
+                        color="white"
                         value={email}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
@@ -292,7 +296,7 @@ const Form: React.FC = () => {
                       <Input
                         placeholder="Password"
                         type="password"
-                        color='white'
+                        color="white"
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,

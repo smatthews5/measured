@@ -34,13 +34,12 @@ const Header: React.FC = () => {
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const successfullLogin = () => {
     const message = toast({
-      title: "Hey, you're logged in!!",
+      title: "Hey, you're logged in!",
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -72,15 +71,16 @@ const Header: React.FC = () => {
       await auth
         .signInWithEmailAndPassword(email, password)
         .then(() => {
+          onClose();
           setTimeout(() => successfullLogin(), 1000);
-          setTimeout(() => onClose(), 1000);
           setTimeout(() => navigate('/'), 1000);
-          setEmail('');
-          setPassword('');
+          setTimeout(() => {
+            setEmail('');
+            setPassword('');
+          }, 1000);
         })
         .catch((error) => {
           const errors = error.message;
-          setErrors(errors);
           if (errors) {
             showErrors(errors);
           }
@@ -182,6 +182,7 @@ const Header: React.FC = () => {
             alt="Login/signup icon"
             mb={2}
             onClick={onOpen}
+            cursor="pointer"
           />
         </Flex>
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -206,11 +207,27 @@ const Header: React.FC = () => {
                   fontSize="30px"
                   marginTop="10px"
                 >
-                  Sign out
+                  Log out 
                 </Text>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
+                    <Flex width="100%" align="center" justify="center" justifyContent='space-evenly'>
+                      <Text
+                        color="white"
+                        zIndex="0"
+                        fontSize="20px"
+                      >
+                        {user.displayName}
+                      </Text>
+                      <Text
+                        color="white"
+                        zIndex="0"
+                        fontSize="20px"
+                      >
+                        {user.email}
+                      </Text>
+                    </Flex>
                     <Button
                       isTruncated
                       width="100%"
@@ -220,7 +237,7 @@ const Header: React.FC = () => {
                       boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
                       height="55px"
                     >
-                      Sign Out
+                      Log Out
                     </Button>
                   </Flex>
                 </ModalBody>
@@ -244,7 +261,7 @@ const Header: React.FC = () => {
                   zIndex="0"
                   bgColor="#9F465F"
                 >
-                  Login to your account
+                  Log in to your account
                 </ModalHeader>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
@@ -259,7 +276,7 @@ const Header: React.FC = () => {
                       boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
                       height="55px"
                     >
-                      Login with Google
+                      Log in with Google
                     </Button>
                     <Text marginTop="30px" color="white" zIndex="0">
                       or
@@ -272,7 +289,7 @@ const Header: React.FC = () => {
                         placeholder="Email"
                         type="email"
                         value={email}
-                        color='white'
+                        color="white"
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
                         ) => setEmail(value.target.value)}
@@ -285,7 +302,7 @@ const Header: React.FC = () => {
                       <Input
                         placeholder="Password"
                         type="password"
-                        color='white'
+                        color="white"
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,

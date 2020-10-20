@@ -1,5 +1,5 @@
 import React from 'react';
-import { navigate, RouteComponentProps } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 
 import {
   Flex,
@@ -19,7 +19,7 @@ const responsiveButtonHeight = ['20px', '30px', '40px'];
 
 interface IngredientSearchProps extends RouteComponentProps {
   barCategories: string[];
-  category: string | string[];
+  category: string[] | string[];
   handleSelect: (category: string | string[]) => void;
   clearCategories: () => void;
 }
@@ -41,6 +41,7 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
           <Flex>
             <Menu closeOnSelect={false}>
               <MenuButton
+                isTruncated
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
                 variant="unstyled"
@@ -91,6 +92,43 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
             >
               Show all
             </Button>
+          </Flex>
+          <Flex>
+            <Flex marginTop="10px" width="100%" overflowX="scroll">
+              <Flex>
+                <Heading
+                  as="h5"
+                  color="gray.500"
+                  fontSize={responsiveFontButton}
+                  textTransform="uppercase"
+                >
+                  Show me...
+                </Heading>
+              </Flex>
+              {category.length > 0 ?
+                category.map((selection) => (
+                <Heading
+                  as="h5"
+                  key={selection}
+                  pl={3}
+                  textTransform="uppercase"
+                  color="gray.400"
+                  fontSize={responsiveFontButton}
+                >
+                  {selection}
+                </Heading>
+              )) : (
+                <Heading
+                as="h5"
+                pl={3}
+                textTransform="uppercase"
+                color="gray.400"
+                fontSize={responsiveFontButton}
+              >
+                all
+              </Heading>
+              )}
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
