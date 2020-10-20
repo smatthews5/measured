@@ -55,23 +55,18 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
         <Heading as="h4" fontSize="2.5em" fontFamily="mono" fontWeight="600">
           {ingredient.name}
         </Heading>
-        <HStack spacing={4} pb="5%">
-          {ingredient.categories.map((category) => (
-            <Tag
-              size="lg"
-              key={category}
-              variant="subtle"
-              bgColor="purple.200"
-              color="purple.400"
-              fontWeight="600"
-              fontFamily="mono"
-              letterSpacing="0.02em"
-              fontSize="1.25em"
-            >
-              <TagLabel>{category}</TagLabel>
-            </Tag>
-          ))}
-        </HStack>
+        <Tag
+          size="lg"
+          variant="subtle"
+          bgColor="purple.200"
+          color="purple.400"
+          fontWeight="600"
+          fontFamily="mono"
+          letterSpacing="0.02em"
+          fontSize="1.25em"
+        >
+          <TagLabel>{ingredient.barCategory}</TagLabel>
+        </Tag>
       </Flex>
       <Stack direction="row" spacing={4} align="center">
         <Button
