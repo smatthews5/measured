@@ -38,16 +38,16 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
         fallbackSrc={loading}
         objectFit="cover"
         h="100%"
-        w="15vw"
+        w={['30vw', '30vw', '30vw', '15vw']}
         borderRadius="5px"
       />
-      <Flex direction="column" justifyContent="space-between" pl="1vw">
+      <Flex direction="column" justifyContent="space-between" pl={4}>
         <Heading
-          fontSize="2.5vw"
+          fontSize={['4xl', '3xl', '3xl', '2.5vw']}
           fontFamily="mono"
           as="h3"
           color="purple.400"
-          py="2%"
+          py={2}
         >
           {cocktail.name}
         </Heading>
