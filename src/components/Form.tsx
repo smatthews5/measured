@@ -222,15 +222,27 @@ const Form: React.FC = () => {
           </Flex>
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay>
-              <ModalContent borderRadius="16px">
+              <ModalContent borderRadius="16px" position="relative">
+                <Image
+                  src={loginBG}
+                  objectFit="cover"
+                  position="absolute"
+                  top="0px"
+                  left="0px"
+                  width="100%"
+                  height="100%"
+                  borderRadius="16px"
+                ></Image>
                 <ModalHeader
                   alignSelf="center"
                   textDecoration="underline"
-                  color="purple.400"
+                  color="white"
+                  zIndex="0"
+                  bgColor="#9F465F"
                 >
                   Login to your account
                 </ModalHeader>
-                <ModalCloseButton />
+                <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
                     <Button
@@ -245,10 +257,10 @@ const Form: React.FC = () => {
                     >
                       Login with Google
                     </Button>
-                    <Text marginTop="30px">or</Text>
+                    <Text marginTop="30px" color="white" zIndex="0">or</Text>
                     <FormControl mt={4} isRequired>
-                      <FormLabel padding="2px" margin="2px">
-                        E-MAIL
+                      <FormLabel padding="2px" margin="2px" color="white">
+                        email
                       </FormLabel>
                       <Input
                         placeholder="Email"
@@ -260,8 +272,8 @@ const Form: React.FC = () => {
                       />
                     </FormControl>
                     <FormControl mt={4} isRequired>
-                      <FormLabel padding="2px" margin="2px">
-                        PASSWORD
+                      <FormLabel padding="2px" margin="2px" color="white">
+                        password
                       </FormLabel>
                       <Input
                         placeholder="Password"

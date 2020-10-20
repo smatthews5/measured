@@ -11,7 +11,6 @@ import {
   FormLabel,
   Input,
   Flex,
-  Image,
   Heading,
   Button,
   Text,
