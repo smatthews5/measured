@@ -32,7 +32,17 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
     setUser(updatedUser);
   };
   return (
-    <Grid templateColumns="repeat(6, 1fr)" gap={6} pr="2%" pt="1%">
+    <Grid
+      templateColumns={[
+        'repeat(4, 1fr)',
+        'repeat(4, 1fr)',
+        'repeat(5, 1fr)',
+        'repeat(5, 1fr)',
+      ]}
+      gap={6}
+      pr="2%"
+      pt="1%"
+    >
       {ingredients.map((ingredient) => (
         <Flex
           w="100%"
