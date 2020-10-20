@@ -1,5 +1,5 @@
 import React from 'react';
-import { navigate, RouteComponentProps } from '@reach/router';
+import { RouteComponentProps } from '@reach/router';
 
 import {
   Flex,
@@ -19,7 +19,7 @@ const responsiveButtonHeight = ['20px', '30px', '40px'];
 
 interface IngredientSearchProps extends RouteComponentProps {
   barCategories: string[];
-  category: string | string[];
+  category: string[] | string[];
   handleSelect: (category: string | string[]) => void;
   clearCategories: () => void;
 }
@@ -105,7 +105,8 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
                   Show me...
                 </Heading>
               </Flex>
-              {category.map((selection) => (
+              {category.length > 0 ?
+                category.map((selection) => (
                 <Heading
                   as="h5"
                   key={selection}
@@ -116,7 +117,17 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
                 >
                   {selection}
                 </Heading>
-              ))}
+              )) : (
+                <Heading
+                as="h5"
+                pl={3}
+                textTransform="uppercase"
+                color="gray.400"
+                fontSize={responsiveFontButton}
+              >
+                all
+              </Heading>
+              )}
             </Flex>
           </Flex>
         </Flex>

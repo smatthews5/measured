@@ -6,8 +6,6 @@ import {
   Flex,
   Heading,
   Input,
-  InputRightElement,
-  InputGroup,
   Button,
   Menu,
   MenuButton,
@@ -17,7 +15,6 @@ import {
 } from '@chakra-ui/core';
 
 import {
-  SearchIcon,
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
@@ -57,9 +54,9 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) {
     event.preventDefault();
-    const basesURI = base.map((name) => encodeURI(name));
+    const basesURI = base.map((name: string) => encodeURI(name));
     const basesString = basesURI.join('+');
-    const categoriesURI = category.map((name) => encodeURI(name));
+    const categoriesURI = category.map((name: string) => encodeURI(name));
     const categoriesString = categoriesURI.join('+');
     const searchTermsString = searchTerms
       .replace(/[\W]/g, ' ')
@@ -185,7 +182,7 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
                 </Heading>
               </Flex>
               {base
-                ? base.map((selection) => (
+                ? base.map((selection: string) => (
                     <Heading
                       as="h5"
                       key={selection}
@@ -199,7 +196,7 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
                   ))
                 : null}
               {category
-                ? category.map((selection) => (
+                ? category.map((selection: string) => (
                     <Heading
                       as="h5"
                       key={selection}
