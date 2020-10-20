@@ -85,25 +85,33 @@ const Form: React.FC = () => {
     setNewEmail('');
     setNewPassword('');
   };
-  const googleSignIn = () => {
-    signInWithGoogle();
-    setTimeout(() => successfullLogin(), 1000);
-    setTimeout(() => onClose(), 1000);
-    navigate('/');
+  const googleSignIn = async () => {
+    signInWithGoogle().then(() => {
+      setTimeout(() => successfullLogin(), 1000);
+      setTimeout(() => onClose(), 1000);
+      setTimeout(() => navigate('/'), 1000);
+    });
   };
 
   const emailSignIn = async () => {
     try {
-      await auth.signInWithEmailAndPassword(email, password).catch((error) => {
-        const errors = error.message;
-        setErrors(errors);
-        if (errors) {
-          showErrors(errors);
-        } else setTimeout(() => onClose(), 1000);
-      });
+      await auth
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+            setTimeout(() => successfullLogin(), 1000);
+            setTimeout(() => onClose(), 1000);
+            setTimeout(() => navigate('/'), 1000);
+        })
+        .catch((error) => {
+          const errors = error.message;
+          setErrors(errors);
+          if (errors) {
+            showErrors(errors);
+          }
+        });
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error(error);
+      console.error('error in modal signup', error);
     }
   };
   return (
@@ -257,7 +265,9 @@ const Form: React.FC = () => {
                     >
                       Login with Google
                     </Button>
-                    <Text marginTop="30px" color="white" zIndex="0">or</Text>
+                    <Text marginTop="30px" color="white" zIndex="0">
+                      or
+                    </Text>
                     <FormControl mt={4} isRequired>
                       <FormLabel padding="2px" margin="2px" color="white">
                         email
