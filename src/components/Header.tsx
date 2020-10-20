@@ -5,16 +5,15 @@ import { UserContext } from '../Context';
 import { signInWithGoogle, signOut } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../services/firebase';
-
 import {
   FormControl,
   FormLabel,
   Input,
   Flex,
-  Image,
   Heading,
   Button,
   Text,
+  Image,
   useDisclosure,
   ModalOverlay,
   ModalContent,
@@ -28,26 +27,41 @@ import {
 
 import icon from '../assets/images/header_icon.png';
 import loading from '../assets/images/loading.png';
+import loginBG from '../assets/images/loginBg.png';
 
 const Header: React.FC = () => {
   const toast = useToast();
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const googleSignIn = () => {
-    signInWithGoogle();
-    setTimeout(() => onClose(), 1000);
+  const successfullLogin = () => {
+    const message = toast({
+      title: "Hey, you're logged in!!",
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+    });
+    return message;
   };
+
+  const googleSignIn = async () => {
+    signInWithGoogle().then(() => {
+      onClose();
+      setTimeout(() => successfullLogin(), 1000);
+      setTimeout(() => navigate('/'), 1000);
+    });
+  };
+
   const showErrors = (errorMessage: string) => {
     const errors = toast({
       title: 'Error in form. Please try again..',
       description: errorMessage,
       duration: 9000,
+      status: 'warning',
       isClosable: true,
     });
     return errors;
@@ -55,16 +69,25 @@ const Header: React.FC = () => {
 
   const emailSignIn = async () => {
     try {
-      await auth.signInWithEmailAndPassword(email, password).catch((error) => {
-        const errors = error.message;
-        setErrors(errors);
-        if (errors) {
-          showErrors(errors);
-        } else setTimeout(() => onClose(), 1000);
-      });
+      await auth
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          setTimeout(() => successfullLogin(), 1000);
+          setTimeout(() => onClose(), 1000);
+          setTimeout(() => navigate('/'), 1000);
+          setEmail('');
+          setPassword('');
+        })
+        .catch((error) => {
+          const errors = error.message;
+          setErrors(errors);
+          if (errors) {
+            showErrors(errors);
+          }
+        });
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error(error);
+      console.error('error in modal signup', error);
     }
   };
 
@@ -164,15 +187,28 @@ const Header: React.FC = () => {
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay>
             {user ? (
-              <ModalContent borderRadius="16px">
-                <ModalHeader
+              <ModalContent borderRadius="16px" position="relative">
+                <Image
+                  src={loginBG}
+                  objectFit="cover"
+                  position="absolute"
+                  top="0px"
+                  left="0px"
+                  width="100%"
+                  height="100%"
+                  borderRadius="16px"
+                ></Image>
+                <Text
                   alignSelf="center"
                   textDecoration="underline"
-                  color="purple.400"
+                  color="white"
+                  zIndex="0"
+                  fontSize="30px"
+                  marginTop="10px"
                 >
-                  Sign out of your account
-                </ModalHeader>
-                <ModalCloseButton />
+                  Sign out
+                </Text>
+                <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
                     <Button
@@ -190,15 +226,27 @@ const Header: React.FC = () => {
                 </ModalBody>
               </ModalContent>
             ) : (
-              <ModalContent borderRadius="16px">
+              <ModalContent borderRadius="16px" position="relative">
+                <Image
+                  src={loginBG}
+                  objectFit="cover"
+                  position="absolute"
+                  top="0px"
+                  left="0px"
+                  width="100%"
+                  height="100%"
+                  borderRadius="16px"
+                ></Image>
                 <ModalHeader
                   alignSelf="center"
                   textDecoration="underline"
-                  color="purple.400"
+                  color="white"
+                  zIndex="0"
+                  bgColor="#9F465F"
                 >
                   Login to your account
                 </ModalHeader>
-                <ModalCloseButton />
+                <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
                     <Button
@@ -213,27 +261,31 @@ const Header: React.FC = () => {
                     >
                       Login with Google
                     </Button>
-                    <Text marginTop="30px">or</Text>
+                    <Text marginTop="30px" color="white" zIndex="0">
+                      or
+                    </Text>
                     <FormControl mt={4} isRequired>
-                      <FormLabel padding="2px" margin="2px">
+                      <FormLabel padding="2px" margin="2px" color="white">
                         email
                       </FormLabel>
                       <Input
                         placeholder="Email"
                         type="email"
                         value={email}
+                        color='white'
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
                         ) => setEmail(value.target.value)}
                       />
                     </FormControl>
                     <FormControl mt={4} isRequired>
-                      <FormLabel padding="2px" margin="2px">
+                      <FormLabel padding="2px" margin="2px" color="white">
                         password
                       </FormLabel>
                       <Input
                         placeholder="Password"
                         type="password"
+                        color='white'
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
@@ -260,13 +312,15 @@ const Header: React.FC = () => {
                       Submit
                     </Button>
                   </Flex>
-                  <Flex direction="column" margin="10px">
+                  <Flex direction="column" margin="10px" zIndex="0">
                     <Flex>
-                      <Text textDecoration="underline">
+                      <Text textDecoration="underline" color="white">
                         Haven&apos;t got an account?
                       </Text>
                       <Link to="/welcome">
-                        <Text marginLeft="5px">Sign up!</Text>
+                        <Text marginLeft="5px" color="white">
+                          Sign up!
+                        </Text>
                       </Link>
                     </Flex>
                   </Flex>
