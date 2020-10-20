@@ -76,14 +76,14 @@ const Form: React.FC = () => {
       createUserProfileDocument(user, { displayName });
       newAccountMessage(displayName);
       navigate('/');
+      setDisplayName('');
+      setNewEmail('');
+      setNewPassword('');
     } catch (error) {
       const errors = error.message;
       setErrors(errors);
       showErrors(errors);
     }
-    setDisplayName('');
-    setNewEmail('');
-    setNewPassword('');
   };
   const googleSignIn = async () => {
     signInWithGoogle().then(() => {
