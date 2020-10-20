@@ -175,6 +175,7 @@ const Form: React.FC = () => {
             <Input
               marginBottom="20px"
               placeholder="Display name"
+              color='white'
               value={displayName}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setDisplayName(value.target.value)
@@ -187,6 +188,7 @@ const Form: React.FC = () => {
               marginBottom="20px"
               placeholder="Email"
               type="email"
+              color='white'
               value={newEmail}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setNewEmail(value.target.value)
@@ -198,6 +200,7 @@ const Form: React.FC = () => {
             <Input
               placeholder="Password"
               type="password"
+              color='white'
               value={newPassword}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setNewPassword(value.target.value)
@@ -275,6 +278,7 @@ const Form: React.FC = () => {
                       <Input
                         placeholder="Email"
                         type="email"
+                        color='white'
                         value={email}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
@@ -288,6 +292,7 @@ const Form: React.FC = () => {
                       <Input
                         placeholder="Password"
                         type="password"
+                        color='white'
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,

@@ -272,6 +272,7 @@ const Header: React.FC = () => {
                         placeholder="Email"
                         type="email"
                         value={email}
+                        color='white'
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
                         ) => setEmail(value.target.value)}
@@ -284,6 +285,7 @@ const Header: React.FC = () => {
                       <Input
                         placeholder="Password"
                         type="password"
+                        color='white'
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
