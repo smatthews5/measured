@@ -12,6 +12,7 @@ import glass from '../assets/images/glass.png';
 import empty from '../assets/images/empty.png';
 import full from '../assets/images/full.png';
 import loading from '../assets/images/loading.png';
+import measurements from '../assets/images/measurements.png';
 
 import { Cocktail } from '../interfaces';
 
@@ -24,6 +25,7 @@ import {
   ListItem,
   Text,
   Tooltip,
+  useToast,
 } from '@chakra-ui/core';
 import { calculateFraction } from '../utilities';
 
@@ -34,8 +36,11 @@ interface RecipeDetailProps extends RouteComponentProps {
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   const { user, setUser } = useContext(UserContext);
   const [showFavourite, toggleFavourite] = useState<boolean>(false);
+  const [showMetric, toggleMetric] = useState<boolean>(false);
 
   const responsiveImage = ['0px', '0px', '40px', ' 50px'];
+
+  const toast = useToast();
 
   useEffect(() => {
     if (user && user.likedDrinks.includes(cocktail?.name))
@@ -47,13 +52,23 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
     let cocktailList = user?.likedDrinks.slice();
     if (!cocktailList?.includes(cocktail)) {
       addCocktail(user?.uid, cocktail);
-      toggleFavourite(true);
     } else {
       removeCocktail(user?.uid, cocktail);
-      toggleFavourite(false);
     }
     const updatedUser = await getUserDocument(user?.uid);
     setUser(updatedUser);
+  };
+
+  const convertOzToMl = (measurement: number, unit: string) => {
+    if (unit !== 'oz' || !showMetric) {
+      if (measurement % 1 === 0) return `${Math.round(measurement)} ${unit} `;
+      else return `${calculateFraction(measurement)} ${unit} `;
+    } else {
+      const mls = measurement * 29.57;
+      const rounder = mls > 10 ? 5 : 2.5;
+      const roundedMls = Math.ceil(mls / rounder) * rounder;
+      return `${roundedMls} ml `;
+    }
   };
 
   return (
@@ -70,7 +85,14 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
       overflowY="scroll"
       position="relative"
     >
-      <Box position="absolute" top="5%" right="2.5%">
+      <Flex
+        position="absolute"
+        top="5%"
+        right="1.5%"
+        direction={['row', 'row', 'column', 'column']}
+        align="center"
+        justify={['center', 'center', 'space-between', 'space-between']}
+      >
         <Tooltip
           label={showFavourite ? 'Remove from favourites' : 'Add to favourites'}
           fontSize="sm"
@@ -81,16 +103,39 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             fallbackSrc={loading}
             src={showFavourite ? full : empty}
             alt="empty glass icon"
+            m={['1', '1', '4', '4']}
             w={['25px', '25px', '40px', '50px']}
             onClick={
               user
                 ? () => handleClickMyBar(cocktail.name)
-                // eslint-disable-next-line no-console
-                : () => console.log('Not logged in!')
+                : () =>
+                    toast({
+                      title: 'Log in / sign up to Measured',
+                      description:
+                        'Want to add cocktails to your favourites? Create an account or login.',
+                      status: 'warning',
+                      duration: 5000,
+                      isClosable: true,
+                    })
             }
           ></Image>
         </Tooltip>
-      </Box>
+        <Tooltip
+          label={showMetric ? 'Convert to imperial' : 'Convert to metric'}
+          fontSize="sm"
+          bgColor="purple.400"
+        >
+          <Image
+            fit="contain"
+            fallbackSrc={loading}
+            src={measurements}
+            alt="toggle measurements icon"
+            w={['25px', '25px', '40px', '50px']}
+            m={['1', '1', '4', '4']}
+            onClick={() => toggleMetric(!showMetric)}
+          ></Image>
+        </Tooltip>
+      </Flex>
       <Flex
         w={['80%', '60%', '40%', '40%']}
         minWidth="338px"
@@ -141,10 +186,8 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             {cocktail?.ingredients.map((ingredient) => (
               <ListItem key={ingredient.name}>
                 <Text ml={2}>
-                  {ingredient.amount % 1 === 0
-                    ? Math.round(ingredient.amount)
-                    : calculateFraction(ingredient.amount)}{' '}
-                  {ingredient.unit} {ingredient.name}
+                  {convertOzToMl(ingredient.amount, ingredient.unit)}
+                  {ingredient.name}
                 </Text>
               </ListItem>
             ))}
