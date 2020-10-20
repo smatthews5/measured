@@ -9,8 +9,8 @@ import {
   Stack,
   useToast,
 } from '@chakra-ui/core';
-import { navigate, RouteComponentProps } from '@reach/router';
-import React, { useContext, useEffect } from 'react';
+import { RouteComponentProps } from '@reach/router';
+import React, { useContext } from 'react';
 import { Ingredient } from '../interfaces';
 import { GiWineBottle } from 'react-icons/gi';
 import { UserContext } from '../Context';
@@ -83,7 +83,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
               ? () => handleClickMyBar(ingredient.name)
               : () =>
                   toast({
-                    title: 'Please Log In.',
+                    title: 'Please log in.',
                     description:
                       'You need to be logged in to add ingredients to your bar.',
                     status: 'warning',

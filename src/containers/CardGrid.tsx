@@ -6,17 +6,18 @@ import { Cocktail } from '../interfaces';
 import Card from '../components/Card';
 
 interface CardGridProps extends RouteComponentProps {
+  title: string;
   cocktails: Cocktail[];
 }
 
-const CardGrid: React.FC<CardGridProps> = ({ cocktails }) => {
+const CardGrid: React.FC<CardGridProps> = ({ cocktails, title }) => {
   return (
     <>
       {cocktails.length > 0 ? (
         <>
           <Flex width="100%" justify="center">
             <Heading as="h3" pb={8}>
-              Search results
+              {title}
             </Heading>
           </Flex>
           <Flex

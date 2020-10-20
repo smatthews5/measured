@@ -6,10 +6,10 @@ import { UserContext } from '../Context';
 const CardSuggestion: React.FC = ({ cocktails }) => {
   const { user } = useContext(UserContext);
   const userIngredients =
-    user?.user.myIngredients == 'undefined' ? [] : user?.user.myIngredients;
+    user?.myIngredients == 'undefined' ? [] : user?.myIngredients;
 
-  const userIngredientsNames = userIngredients?.map(
-    (ingredient) => ingredient.name,
+  const userIngredientsNames = userIngredients.map(
+    (ingredient: string) => ingredient.name,
   );
   const cocks: Cocktail[] = [];
   for (let i = 0; i < cocktails.length; i++) {
@@ -84,7 +84,7 @@ const CardSuggestion: React.FC = ({ cocktails }) => {
               <Text color="gray.600" fontSize={['0px', '0px', '0px', '20px']}>
                 Ingredients:
               </Text>
-              {cocktail.ingredients.map((ingredient, index: number) => (
+              {cocktail.ingredients.map((ingredient) => (
                 <Text
                   color="gray.400"
                   key={ingredient.name}

@@ -39,22 +39,19 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
     if (existingSearch) {
       const [bases, categories, keywords] = existingSearch.split('_');
       if (bases) {
-        console.log('---> bases', bases);
         const baseArray = bases.split('+');
         setBase(baseArray);
       }
       if (categories) {
-        console.log('---> categories', categories);
         const categoryArray = categories.split('+');
         setCategory(categoryArray);
       }
       if (keywords) {
-        console.log('---> keywords', keywords);
         const keywordsStr = decodeURI(keywords);
         setSearchTerms(keywordsStr);
       }
     }
-  }, []);
+  }, [existingSearch]);
 
   function setSearchCriteria(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -74,17 +71,14 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
       <Flex width="70%" justify="center" align="center">
-        <InputGroup width="100%" size="sm">
-          <Input
-            borderRadius="8px"
-            height={responsiveButtonHeight}
-            value={searchTerms}
-            onChange={(event) => setSearchTerms(event.target.value)}
-          />
-          <InputRightElement>
-            <SearchIcon name="search" color="grey" />
-          </InputRightElement>
-        </InputGroup>
+        <Input
+          borderRadius="8px"
+          width="100%"
+          size="sm"
+          height={responsiveButtonHeight}
+          value={searchTerms}
+          onChange={(event) => setSearchTerms(event.target.value)}
+        />
       </Flex>
       <Flex
         direction={{ base: 'column', md: 'row' }}

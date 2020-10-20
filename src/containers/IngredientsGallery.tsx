@@ -1,24 +1,17 @@
 import React, { useContext } from 'react';
 import { RouteComponentProps, navigate } from '@reach/router';
-
-import { Cocktail, Ingredient } from '../interfaces';
-
-import {
-  Box,
-  Heading,
-  Flex,
-  Grid,
-  Image,
-  Text,
-  IconButton,
-} from '@chakra-ui/core';
-import { CloseIcon } from '@chakra-ui/icons';
 import {
   addIngredient,
   getUserDocument,
   removeIngredient,
 } from '../services/firebase';
 import { UserContext } from '../Context';
+
+import { Ingredient } from '../interfaces';
+
+import { Box, Heading, Flex, Grid, Image, IconButton } from '@chakra-ui/core';
+import { CloseIcon } from '@chakra-ui/icons';
+import loading from '../assets/images/loading.png';
 
 interface IngredientsGalleryProps extends RouteComponentProps {
   ingredients: Ingredient[];
@@ -52,6 +45,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
         >
           <Image
             src={ingredient.imageUrl}
+            fallbackSrc={loading}
             h="80%"
             objectFit="cover"
             borderTopRadius="5px"
@@ -59,7 +53,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
           <IconButton
             icon={<CloseIcon />}
             alignSelf="flex-end"
-            color="purple.400"
+            color="white"
             mr="6%"
             mt="6%"
             p="1%"
@@ -68,19 +62,17 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
             position="absolute"
             variant="ghost"
             borderRadius="5px"
-            _hover={{ bgColor: 'rgb(255,255,255,0.6)' }}
+            _hover={{ bgColor: 'purple.400' }}
             onClick={() => handleClick(ingredient.name)}
           />
-          <Text
-            h="20%"
-            alignSelf="center"
-            textAlign="center"
-            fontFamily="body"
-            fontSize="md"
-            color="purple.400"
+          <Heading
+            as="h4"
+            fontSize={['lg', 'xl', '2xl', '2xl']}
+            fontFamily="mono"
+            fontWeight="600"
           >
             {ingredient.name}
-          </Text>
+          </Heading>
         </Flex>
       ))}
       <Box
@@ -95,6 +87,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
         color="purple.400"
         fontFamily="heading"
         onClick={() => navigate('/ingredients')}
+        cursor="pointer"
       >
         +
       </Box>

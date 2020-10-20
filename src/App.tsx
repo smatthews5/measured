@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useMemo, useEffect, Component } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Router, RouteComponentProps, Redirect } from '@reach/router';
 import { UserContext, BoozeContext } from './Context';
 import { Booze, User, Cocktail, Ingredient } from './interfaces';
@@ -11,6 +11,7 @@ import { getUniqueOptions } from './utilities';
 import Home from './pages/Home';
 import Ingredients from './pages/Ingredients';
 import MyBar from './pages/MyBar';
+import TopShelf from './pages/TopShelf';
 import DrinkBuilder from './pages/DrinkBuilder';
 import Recipe from './pages/Recipe';
 import SearchResults from './pages/SearchResults';
@@ -21,6 +22,7 @@ import AddACocktail from './pages/AddACocktail';
 const HomePage = (props: RouteComponentProps) => <Home />;
 const IngredientsPage = (props: RouteComponentProps) => <Ingredients />;
 const MyBarPage = (props: RouteComponentProps) => <MyBar />;
+const TopShelfPage = (props: RouteComponentProps) => <TopShelf />;
 const DrinkBuilderPage = (props: RouteComponentProps) => <DrinkBuilder />;
 const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const SearchResultsPage = (props: RouteComponentProps) => <SearchResults />;
@@ -29,7 +31,7 @@ const AddACocktailPage = (props: RouteComponentProps) => <AddACocktail />;
 
 const App: React.FC = () => {
   // define initial state for user details
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<User>();
 
   // define initial state for drink/ingredient details
   const [booze, setBooze] = useState<Booze>({
@@ -44,7 +46,6 @@ const App: React.FC = () => {
   const currentUser = useMemo(() => ({ user, setUser }), [user, setUser]);
   const currentBooze = useMemo(() => ({ booze, setBooze }), [booze, setBooze]);
 
-  let unsubscribeFromAuth = null;
   useEffect(() => {
     CocktailService.getIngredients()
       .then((allIngredients: Ingredient[]) =>
@@ -74,12 +75,10 @@ const App: React.FC = () => {
       })
       .catch((error) => console.log('---> error getting all cocktails', error));
 
-    unsubscribeFromAuth = CocktailService.auth.onAuthStateChanged(
-      async (userAuth) => {
-        const user = await CocktailService.createUserProfileDocument(userAuth);
-        setUser(user);
-      },
-    );
+    CocktailService.auth.onAuthStateChanged(async (userAuth) => {
+      const user = await CocktailService.createUserProfileDocument(userAuth);
+      setUser(user);
+    });
   }, []);
 
   return (
@@ -89,6 +88,7 @@ const App: React.FC = () => {
           <HomePage path="/" />
           <IngredientsPage path="/ingredients" />
           <MyBarPage path="/my-bar" />
+          <TopShelfPage path="/top-shelf" />
           <DrinkBuilderPage path="/build-a-drink" />
           <RecipePage path="/recipes/:name" />
           <SearchResultsPage path="/search/:query" />

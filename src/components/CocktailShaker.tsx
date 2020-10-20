@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { BoozeContext } from '../Context';
-import { Flex, Image, Box, IconButton, Button } from '@chakra-ui/core';
+import React from 'react';
+import { Flex, Image, Box, IconButton } from '@chakra-ui/core';
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import shaker from '../assets/images/shaker.jpg';
 
@@ -39,7 +38,6 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
   seasoningIndex,
   balanceIndex,
   coreIndex,
-  handleButtonClick,
   setSeasoningIndex,
   setBalanceIndex,
   setCoreIndex,
