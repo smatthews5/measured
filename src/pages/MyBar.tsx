@@ -71,17 +71,19 @@ const MyBar: React.FC = () => {
           <div id="scroll">
             <Flex
               width="100%"
+              height="100%"
               borderTop="0.5px solid gray.300"
               direction={['column', 'column', 'column', 'row']}
-              p={4}
+              pl={4}
               pr={0}
-              pt={['6', '6', '6', '0']}
+              pt={6}
             >
               <Flex
                 width={['100%', '100%', '100%', '60%']}
                 direction="column"
                 overflowX="scroll"
-                height="83vh"
+                height="100%"
+                pl={4}
               >
                 <Heading
                   as="h4"
@@ -133,7 +135,7 @@ const MyBar: React.FC = () => {
                 ]}
                 pt={['6', '6', '6', '0']}
                 overflowX="scroll"
-                height="83vh"
+                height="100%"
                 px={4}
               >
                 <Flex
@@ -158,7 +160,7 @@ const MyBar: React.FC = () => {
                     <Heading
                       as="h3"
                       fontSize={['sm', 'sm', 'md', 'md']}
-                      color="gray.400"
+                      color="gray.600"
                       py={2}
                       textAlign="right"
                     >

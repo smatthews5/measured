@@ -12,7 +12,11 @@ import { Ingredient } from '../interfaces';
 const Ingredients: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   let ingredients: Ingredient[] = [];
-  if (booze) ingredients = booze.ingredients;
+
+  if (booze)
+    ingredients = booze.ingredients.sort((a, b) =>
+      a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
+    );
   const location = useLocation();
 
   const barCategories = [
@@ -41,7 +45,8 @@ const Ingredients: React.FC = () => {
   ) => {
     const filteredIngredients = ingredients.filter((ingredient) =>
       searchTerms.includes(ingredient.barCategory),
-    );
+    ).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));;
+
     return filteredIngredients;
   };
 
