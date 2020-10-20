@@ -6,6 +6,7 @@ import {
   Input,
   Flex,
   Image,
+  Box,
   Heading,
   Button,
   Text,
@@ -27,6 +28,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../services/firebase';
 
 import icon from '../assets/images/header_icon.png';
+import loginBG from '../assets/images/loginBG.png';
 
 const responsiveFontSize = ['lg', '2xl', '3xl', '4xl'];
 const responsiveWidth = ['7.5vw', '12.5vw', '17.5vw', '20vw'];
@@ -44,6 +46,7 @@ const HeaderLarge: React.FC = () => {
 
   const googleSignIn = () => {
     signInWithGoogle();
+    setTimeout(() => successfullLogin(), 1000);
     setTimeout(() => onClose(), 1000);
   };
   const showErrors = (errorMessage: string) => {
@@ -51,9 +54,19 @@ const HeaderLarge: React.FC = () => {
       title: 'Error in form. Please try again!',
       description: errorMessage,
       duration: 9000,
+      status: 'warning',
       isClosable: true,
     });
     return errors;
+  };
+  const successfullLogin = () => {
+    const message = toast({
+      title: "Hey, you're logged in!!",
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+    });
+    return message;
   };
 
   const emailSignIn = async () => {
@@ -63,7 +76,10 @@ const HeaderLarge: React.FC = () => {
         setErrors(errors);
         if (errors) {
           showErrors(errors);
-        } else setTimeout(() => onClose(), 1000);
+        } else {
+          setTimeout(() => successfullLogin(), 1000);
+          setTimeout(() => onClose(), 1000);
+        }
       });
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -173,7 +189,7 @@ const HeaderLarge: React.FC = () => {
                 </ModalBody>
               </ModalContent>
             ) : (
-              <ModalContent borderRadius="16px">
+              <ModalContent borderRadius="16px" position="relative">
                 <ModalHeader
                   alignSelf="center"
                   textDecoration="underline"
@@ -182,6 +198,16 @@ const HeaderLarge: React.FC = () => {
                   Login to your account
                 </ModalHeader>
                 <ModalCloseButton />
+                <Image
+                  src={loginBG}
+                  objectFit="cover"
+                  position="absolute"
+                  top="0px"
+                  left="0px"
+                  width="100%"
+                  height="100%"
+                  borderRadius="16px"
+                ></Image>
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
                     <Button

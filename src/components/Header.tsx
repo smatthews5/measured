@@ -10,6 +10,7 @@ import {
   Heading,
   Button,
   Text,
+  Image,
   useDisclosure,
   ModalOverlay,
   ModalContent,
@@ -26,6 +27,7 @@ import { navigate } from '@reach/router';
 import { signInWithGoogle, signOut } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../services/firebase';
+import loginBG from '../assets/images/loginBG.png';
 
 const responsiveFontSize = ['lg', 'xl', '3xl', '4xl'];
 const responsiveWidth = ['7.5vw', '12.5vw', '17.5vw', '20vw'];
@@ -37,13 +39,23 @@ const Header: React.FC = () => {
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const successfullLogin = () => {
+    const message = toast({
+      title: "Hey, you're logged in!!",
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+    });
+    return message;
+  };
+
   const googleSignIn = () => {
     signInWithGoogle();
+    setTimeout(() => successfullLogin(), 1000);
     setTimeout(() => onClose(), 1000);
   };
   const showErrors = (errorMessage: string) => {
@@ -51,6 +63,7 @@ const Header: React.FC = () => {
       title: 'Error in form. Please try again..',
       description: errorMessage,
       duration: 9000,
+      status: 'warning',
       isClosable: true,
     });
     return errors;
@@ -63,7 +76,10 @@ const Header: React.FC = () => {
         setErrors(errors);
         if (errors) {
           showErrors(errors);
-        } else setTimeout(() => onClose(), 1000);
+        } else {
+          setTimeout(() => successfullLogin(), 1000);
+          setTimeout(() => onClose(), 1000);
+        }
       });
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -145,15 +161,27 @@ const Header: React.FC = () => {
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay>
             {user ? (
-              <ModalContent borderRadius="16px">
-                <ModalHeader
+              <ModalContent borderRadius="16px" position="relative">
+                <Image
+                  src={loginBG}
+                  objectFit="cover"
+                  position="absolute"
+                  top="0px"
+                  left="0px"
+                  width="100%"
+                  height="100%"
+                  borderRadius="16px"
+                ></Image>
+                <Text
                   alignSelf="center"
                   textDecoration="underline"
-                  color="purple.400"
+                  color="white"
+                  zIndex='0'
+                  fontSize='30px'
                 >
-                  Sign out of your account
-                </ModalHeader>
-                <ModalCloseButton />
+                  Sign out
+                </Text>
+                <ModalCloseButton color="white"/>
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
                     <Button
@@ -171,15 +199,27 @@ const Header: React.FC = () => {
                 </ModalBody>
               </ModalContent>
             ) : (
-              <ModalContent borderRadius="16px">
+              <ModalContent borderRadius="16px" position="relative">
+                <Image
+                  src={loginBG}
+                  objectFit="cover"
+                  position="absolute"
+                  top="0px"
+                  left="0px"
+                  width="100%"
+                  height="100%"
+                  borderRadius="16px"
+                ></Image>
                 <ModalHeader
                   alignSelf="center"
                   textDecoration="underline"
-                  color="purple.400"
+                  color="white"
+                  zIndex="0"
+                  bgColor="#9F465F"
                 >
                   Login to your account
                 </ModalHeader>
-                <ModalCloseButton />
+                <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
                     <Button
@@ -194,9 +234,11 @@ const Header: React.FC = () => {
                     >
                       Login with Google
                     </Button>
-                    <Text marginTop="30px">or</Text>
+                    <Text marginTop="30px" color="white" zIndex="0">
+                      or
+                    </Text>
                     <FormControl mt={4} isRequired>
-                      <FormLabel padding="2px" margin="2px">
+                      <FormLabel padding="2px" margin="2px" color="white">
                         E-MAIL
                       </FormLabel>
                       <Input
@@ -209,7 +251,7 @@ const Header: React.FC = () => {
                       />
                     </FormControl>
                     <FormControl mt={4} isRequired>
-                      <FormLabel padding="2px" margin="2px">
+                      <FormLabel padding="2px" margin="2px" color="white">
                         PASSWORD
                       </FormLabel>
                       <Input
@@ -241,13 +283,13 @@ const Header: React.FC = () => {
                       Submit
                     </Button>
                   </Flex>
-                  <Flex direction="column" margin="10px">
+                  <Flex direction="column" margin="10px" zIndex='0'>
                     <Flex>
-                      <Text textDecoration="underline">
+                      <Text textDecoration="underline" color='white'>
                         Haven&apos;t got an account?
                       </Text>
                       <Link to="/welcome">
-                        <Text marginLeft="5px">Sign up!</Text>
+                        <Text marginLeft="5px" color="white">Sign up!</Text>
                       </Link>
                     </Flex>
                   </Flex>
