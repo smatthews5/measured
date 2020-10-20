@@ -255,7 +255,7 @@ const Form: React.FC = () => {
                   zIndex="0"
                   bgColor="#9F465F"
                 >
-                  Login to your account
+                  Log in to your account
                 </ModalHeader>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
@@ -270,7 +270,7 @@ const Form: React.FC = () => {
                       boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
                       height="55px"
                     >
-                      Login with Google
+                      Log in with Google
                     </Button>
                     <Text marginTop="30px" color="white" zIndex="0">
                       or
