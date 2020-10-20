@@ -34,7 +34,6 @@ const Header: React.FC = () => {
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -51,6 +50,7 @@ const Header: React.FC = () => {
   const successfulLogout = () => {
     const message = toast({
       title: 'Until next time! Thanks for using Measured',
+
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -82,15 +82,16 @@ const Header: React.FC = () => {
       await auth
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          setTimeout(() => successfulLogin(), 1000);
-          setTimeout(() => onClose(), 1000);
+          onClose();
+          setTimeout(() => successfullLogin(), 1000);
           setTimeout(() => navigate('/'), 1000);
-          setEmail('');
-          setPassword('');
+          setTimeout(() => {
+            setEmail('');
+            setPassword('');
+          }, 1000);
         })
         .catch((error) => {
           const errors = error.message;
-          setErrors(errors);
           if (errors) {
             showErrors(errors);
           }
@@ -211,6 +212,7 @@ const Header: React.FC = () => {
             alt="Login/signup icon"
             mb={2}
             onClick={onOpen}
+            cursor="pointer"
           />
         </Flex>
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -233,6 +235,7 @@ const Header: React.FC = () => {
                   zIndex="0"
                   marginTop="10px"
                 >
+
                   Ready to go?
                 </Heading>
                 <ModalCloseButton color="white" />
@@ -244,6 +247,20 @@ const Header: React.FC = () => {
                       justify="space-between"
                       direction="column"
                     >
+                      <Text
+                        color="white"
+                        zIndex="0"
+                        fontSize="20px"
+                      >
+                        {user.displayName}
+                      </Text>
+                      <Text
+                        color="white"
+                        zIndex="0"
+                        fontSize="20px"
+                      >
+                        {user.email}
+                      </Text>
                       <Heading
                         mt={2}
                         color="white"
@@ -316,6 +333,8 @@ const Header: React.FC = () => {
                   bgColor="purple.400"
                 >
                   <Heading textTransform="uppercase">Login to Measured</Heading>
+
+
                 </ModalHeader>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
@@ -330,7 +349,7 @@ const Header: React.FC = () => {
                       boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
                       height="55px"
                     >
-                      Login with Google
+                      Log in with Google
                     </Button>
                     <Heading
                       mt={2}

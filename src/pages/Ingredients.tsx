@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BoozeContext } from '../Context';
+import { useLocation } from '@reach/router';
 
 import { Divider } from '@chakra-ui/core';
 
@@ -11,10 +12,12 @@ import { Ingredient } from '../interfaces';
 const Ingredients: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   let ingredients: Ingredient[] = [];
+
   if (booze)
     ingredients = booze.ingredients.sort((a, b) =>
       a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
     );
+  const location = useLocation();
 
   const barCategories = [
     'spirit',
@@ -23,28 +26,32 @@ const Ingredients: React.FC = () => {
     'fresh',
     'pantry',
   ];
-  const [category, setCategory] = useState<string | string[]>([]);
+  const { category } = location.state;
+  const initialValue = category === undefined ? [] : [category];
+
+  const [searchTerms, setSearchTerms] = useState<string | string[]>(initialValue);
   const [filteredIngredients, setFilteredIngredients] = useState<Ingredient[]>(
     ingredients,
   );
 
   useEffect(() => {
-    const updatedIngredients = filterIngredients(ingredients, category);
+    const updatedIngredients = filterIngredients(ingredients, searchTerms);
     setFilteredIngredients(updatedIngredients);
-  }, [category]);
+  }, [searchTerms, category, ingredients]);
 
   const filterIngredients = (
     ingredients: Ingredient[],
-    category: string | string[],
+    searchTerms: string | string[],
   ) => {
-    const filteredIngredients = ingredients
-      .filter((ingredient) => category.includes(ingredient.barCategory))
-      .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
+    const filteredIngredients = ingredients.filter((ingredient) =>
+      searchTerms.includes(ingredient.barCategory),
+    ).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));;
+
     return filteredIngredients;
   };
 
-  const handleSelect = (category: string | string[]) => {
-    setCategory(category);
+  const handleSelect = (searchTerms: string | string[]) => {
+    setSearchTerms(searchTerms);
   };
 
   return (
@@ -56,12 +63,14 @@ const Ingredients: React.FC = () => {
       <div id="scroll">
         <IngredientSearch
           barCategories={barCategories}
-          category={category}
+          category={searchTerms}
           handleSelect={handleSelect}
-          clearCategories={() => setCategory([])}
+          clearCategories={() => setSearchTerms([])}
         />
         <CardDetailList
-          ingredients={category.length > 0 ? filteredIngredients : ingredients}
+          ingredients={
+            searchTerms.length > 0 ? filteredIngredients : ingredients
+          }
         />
       </div>
     </>

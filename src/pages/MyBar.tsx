@@ -109,6 +109,7 @@ const MyBar: React.FC = () => {
                       {category}
                     </Heading>
                     <IngredientsGallery
+                    category={category}
                       key={category}
                       ingredients={
                         ingredientsDetail
