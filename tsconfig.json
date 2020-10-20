@@ -15,11 +15,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "strict": true,
-
     "noImplicitAny": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictBindCallApply": true
   },
-  "include": ["src"]
+  "include": ["src", "src/.d.ts"]
 }
