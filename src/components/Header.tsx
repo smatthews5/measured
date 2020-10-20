@@ -5,7 +5,7 @@ import { UserContext } from '../Context';
 import { signInWithGoogle, signOut } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../services/firebase';
-
+import loginBG from '../assets/images/loginBg.png'
 import {
   FormControl,
   FormLabel,
