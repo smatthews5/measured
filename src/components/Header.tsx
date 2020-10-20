@@ -34,13 +34,12 @@ const Header: React.FC = () => {
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const successfullLogin = () => {
     const message = toast({
-      title: "Hey, you're logged in!!",
+      title: "Hey, you're logged in!",
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -72,15 +71,16 @@ const Header: React.FC = () => {
       await auth
         .signInWithEmailAndPassword(email, password)
         .then(() => {
+          onClose();
           setTimeout(() => successfullLogin(), 1000);
-          setTimeout(() => onClose(), 1000);
           setTimeout(() => navigate('/'), 1000);
-          setEmail('');
-          setPassword('');
+          setTimeout(() => {
+            setEmail('');
+            setPassword('');
+          }, 1000);
         })
         .catch((error) => {
           const errors = error.message;
-          setErrors(errors);
           if (errors) {
             showErrors(errors);
           }
@@ -272,7 +272,7 @@ const Header: React.FC = () => {
                         placeholder="Email"
                         type="email"
                         value={email}
-                        color='white'
+                        color="white"
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
                         ) => setEmail(value.target.value)}
@@ -285,7 +285,7 @@ const Header: React.FC = () => {
                       <Input
                         placeholder="Password"
                         type="password"
-                        color='white'
+                        color="white"
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
