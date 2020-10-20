@@ -1,14 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { BoozeContext } from '../Context';
+import React from 'react';
 import { navigate, RouteComponentProps } from '@reach/router';
 
 import {
   Flex,
-  Text,
   Heading,
-  Input,
-  InputRightElement,
-  InputGroup,
   Button,
   Menu,
   MenuButton,
@@ -17,20 +12,24 @@ import {
   MenuOptionGroup,
 } from '@chakra-ui/core';
 
-import {
-  SearchIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 const responsiveFontButton = ['8px', '12px', '14px', '16px'];
 const responsiveButtonHeight = ['20px', '30px', '40px'];
 
-const IngredientSearch: React.FC = () => {
-  const { booze } = useContext(BoozeContext);
-  const [barCategory, setBarCategory] = useState<string>('');
-  const [heading, setHeading] = useState<string>('All ingredients');
+interface IngredientSearchProps extends RouteComponentProps {
+  barCategories: string[];
+  category: string | string[];
+  handleSelect: (category: string | string[]) => void;
+  clearCategories: () => void;
+}
 
+const IngredientSearch: React.FC<IngredientSearchProps> = ({
+  barCategories,
+  category,
+  handleSelect,
+  clearCategories,
+}) => {
   return (
     <Flex justify="center" align="center" direction="column" pt="5vh">
       <Flex
@@ -39,45 +38,60 @@ const IngredientSearch: React.FC = () => {
         align="center"
       >
         <Flex direction="column" width="100%" mt={2}>
-          <Menu closeOnSelect={false}>
-            <MenuButton
-              as={Button}
-              rightIcon={<ChevronDownIcon />}
-              variant="unstyled"
-              bgColor="purple.400"
-              color="white"
-              width="33%"
-              id="base-ingedient"
-              fontSize={responsiveFontButton}
-              size="lg"
-              height={responsiveButtonHeight}
-              marginRight="5px"
-            >
-              Select a category
-            </MenuButton>
-            <MenuList
-              maxHeight="200px"
-              overflowY="scroll"
-              fontSize={responsiveFontButton}
-            >
-              {/* <MenuOptionGroup
+          <Flex>
+            <Menu closeOnSelect={false}>
+              <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                variant="unstyled"
+                bgColor="purple.400"
+                color="white"
+                width="33%"
+                id="base-ingedient"
+                fontSize={responsiveFontButton}
+                size="lg"
+                height={responsiveButtonHeight}
+                marginRight="5px"
+              >
+                Select ingredient categories
+              </MenuButton>
+              <MenuList
+                maxHeight="200px"
+                overflowY="scroll"
+                fontSize={responsiveFontButton}
+              >
+                <MenuOptionGroup
                   type="checkbox"
-                  defaultValue={barCategory}
-                  onChange={(value) => {
-                    setBarCategory(value);
-                  }}
+                  defaultValue={category}
+                  value={category}
+                  onChange={(value) => handleSelect(value)}
                 >
-                  {booze.bases.map((base: string, index: number) => (
-                    <MenuItemOption key={index} value={base}>
-                      {base}
+                  {barCategories.map((item: string) => (
+                    <MenuItemOption
+                      key={item}
+                      value={item}
+                      type="checkbox"
+                      textTransform="capitalize"
+                    >
+                      {item}
                     </MenuItemOption>
                   ))}
-                </MenuOptionGroup> */}
-            </MenuList>
-          </Menu>
-          <Heading as="h4" fontFamily="mono" mt="3vh" fontSize="8vh">
-            {heading}
-          </Heading>
+                </MenuOptionGroup>
+              </MenuList>
+            </Menu>
+            <Button
+              onClick={clearCategories}
+              variant="outline"
+              color="purple.400"
+              width="15%"
+              ml="2%"
+              fontSize={responsiveFontButton}
+              height={responsiveButtonHeight}
+              size="lg"
+            >
+              Show all
+            </Button>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>

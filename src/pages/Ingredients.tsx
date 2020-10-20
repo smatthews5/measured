@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BoozeContext } from '../Context';
 
 import { Box, Divider } from '@chakra-ui/core';
@@ -6,10 +6,43 @@ import { Box, Divider } from '@chakra-ui/core';
 import Header from '../components/Header';
 import CardDetailList from '../containers/CardDetailList';
 import IngredientSearch from '../components/IngredientSearch';
+import { Ingredient } from '../interfaces';
 
 const Ingredients: React.FC = () => {
   const { booze } = useContext(BoozeContext);
-  const ingredients = booze.ingredients;
+  let ingredients: Ingredient[] = [];
+  if (booze) ingredients = booze.ingredients;
+
+  const barCategories = [
+    'spirit',
+    'liqueur',
+    'wine & vermouth',
+    'fresh',
+    'pantry',
+  ];
+  const [category, setCategory] = useState<string | string[]>([]);
+  const [filteredIngredients, setFilteredIngredients] = useState<Ingredient[]>(
+    ingredients,
+  );
+
+  useEffect(() => {
+    const updatedIngredients = filterIngredients(ingredients, category);
+    setFilteredIngredients(updatedIngredients);
+  }, [category]);
+
+  const filterIngredients = (
+    ingredients: Ingredient[],
+    category: string | string[],
+  ) => {
+    const filteredIngredients = ingredients.filter((ingredient) =>
+      category.includes(ingredient.barCategory),
+    );
+    return filteredIngredients;
+  };
+
+  const handleSelect = (category: string | string[]) => {
+    setCategory(category);
+  };
 
   return (
     <>
@@ -18,8 +51,15 @@ const Ingredients: React.FC = () => {
         <Divider />
       </div>
       <div id="scroll">
-        <IngredientSearch />
-        <CardDetailList ingredients={ingredients} />
+        <IngredientSearch
+          barCategories={barCategories}
+          category={category}
+          handleSelect={handleSelect}
+          clearCategories={() => setCategory([])}
+        />
+        <CardDetailList
+          ingredients={category.length > 0 ? filteredIngredients : ingredients}
+        />
       </div>
     </>
   );
