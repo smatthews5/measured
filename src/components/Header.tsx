@@ -5,7 +5,6 @@ import { UserContext } from '../Context';
 import { signInWithGoogle, signOut } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../services/firebase';
-import loginBG from '../assets/images/loginBg.png'
 import {
   FormControl,
   FormLabel,
@@ -28,6 +27,7 @@ import {
 
 import icon from '../assets/images/header_icon.png';
 import loading from '../assets/images/loading.png';
+import loginBG from '../assets/images/loginBg.png'
 
 const Header: React.FC = () => {
   const toast = useToast();
