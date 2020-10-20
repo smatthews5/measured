@@ -19,7 +19,7 @@ const CardDetailList: React.FC<CardDetailListProps> = ({ ingredients }) => {
         align="stretch"
         width="70vw"
         mx="auto"
-        my="5%"
+        my="3%"
       >
         {ingredients.map((ingredient) => (
           <CardDetail ingredient={ingredient} key={ingredient.id} />

@@ -4,8 +4,8 @@ import { BoozeContext } from '../Context';
 import { Box, Divider } from '@chakra-ui/core';
 
 import Header from '../components/Header';
-import Search from '../components/Search';
 import CardDetailList from '../containers/CardDetailList';
+import IngredientSearch from '../components/IngredientSearch';
 
 const Ingredients: React.FC = () => {
   const { booze } = useContext(BoozeContext);
@@ -18,7 +18,7 @@ const Ingredients: React.FC = () => {
         <Divider />
       </div>
       <div id="scroll">
-        <Search existingSearch={''} />
+        <IngredientSearch />
         <CardDetailList ingredients={ingredients} />
       </div>
     </>
