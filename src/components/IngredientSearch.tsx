@@ -41,6 +41,7 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
           <Flex>
             <Menu closeOnSelect={false}>
               <MenuButton
+                isTruncated
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
                 variant="unstyled"
@@ -91,6 +92,32 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
             >
               Show all
             </Button>
+          </Flex>
+          <Flex>
+            <Flex marginTop="10px" width="100%" overflowX="scroll">
+              <Flex>
+                <Heading
+                  as="h5"
+                  color="gray.500"
+                  fontSize={responsiveFontButton}
+                  textTransform="uppercase"
+                >
+                  Show me...
+                </Heading>
+              </Flex>
+              {category.map((selection) => (
+                <Heading
+                  as="h5"
+                  key={selection}
+                  pl={3}
+                  textTransform="uppercase"
+                  color="gray.400"
+                  fontSize={responsiveFontButton}
+                >
+                  {selection}
+                </Heading>
+              ))}
+            </Flex>
           </Flex>
         </Flex>
       </Flex>
