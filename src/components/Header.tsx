@@ -38,9 +38,19 @@ const Header: React.FC = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const successfullLogin = () => {
+  const successfulLogin = () => {
     const message = toast({
-      title: "Hey, you're logged in!!",
+      title: 'Welcome back to Measured',
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+    });
+    return message;
+  };
+
+  const successfulLogout = () => {
+    const message = toast({
+      title: 'Until next time! Thanks for using Measured',
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -51,7 +61,7 @@ const Header: React.FC = () => {
   const googleSignIn = async () => {
     signInWithGoogle().then(() => {
       onClose();
-      setTimeout(() => successfullLogin(), 1000);
+      setTimeout(() => successfulLogin(), 1000);
       setTimeout(() => navigate('/'), 1000);
     });
   };
@@ -72,7 +82,7 @@ const Header: React.FC = () => {
       await auth
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          setTimeout(() => successfullLogin(), 1000);
+          setTimeout(() => successfulLogin(), 1000);
           setTimeout(() => onClose(), 1000);
           setTimeout(() => navigate('/'), 1000);
           setEmail('');
@@ -92,8 +102,11 @@ const Header: React.FC = () => {
   };
 
   const signUserOut = () => {
-    signOut();
-    navigate('/');
+    signOut().then(() => {
+      onClose();
+      navigate('/');
+      setTimeout(() => successfulLogout(), 1000);
+    });
   };
 
   const onHomepage = location.pathname === '/';
@@ -200,7 +213,7 @@ const Header: React.FC = () => {
             onClick={onOpen}
           />
         </Flex>
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered>
           <ModalOverlay>
             {user ? (
               <ModalContent borderRadius="16px" position="relative">
@@ -214,29 +227,71 @@ const Header: React.FC = () => {
                   height="100%"
                   borderRadius="16px"
                 ></Image>
-                <Text
+                <Heading
                   alignSelf="center"
-                  textDecoration="underline"
                   color="white"
                   zIndex="0"
-                  fontSize="30px"
                   marginTop="10px"
                 >
-                  Sign out
-                </Text>
+                  Ready to go?
+                </Heading>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
-                    <Button
-                      isTruncated
-                      width="100%"
-                      marginLeft="5px"
-                      marginTop="10px"
-                      onClick={signUserOut}
-                      boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
-                      height="55px"
+                    <Flex
+                      height="30vh"
+                      align="center"
+                      justify="space-between"
+                      direction="column"
                     >
-                      Sign Out
+                      <Heading
+                        mt={2}
+                        color="white"
+                        fontSize="2xl"
+                        zIndex="0"
+                        textAlign="center"
+                      >
+                        Thanks for visiting Measured.
+                      </Heading>
+                      <Image
+                        zIndex="0"
+                        w="110px"
+                        h="110px"
+                        objectFit="cover"
+                        fallbackSrc={loading}
+                        src={icon}
+                        alt="Login/signup icon"
+                        mb={2}
+                      />
+                      <Heading
+                        my={2}
+                        color="white"
+                        fontSize="2xl"
+                        zIndex="0"
+                        textAlign="center"
+                      >
+                        Happy stirring.
+                      </Heading>
+                    </Flex>
+                    <Button
+                      my={4}
+                      width="100%"
+                      onClick={() => navigate('/my-bar')}
+                      color="purple.400"
+                      height="55px"
+                      _hover={{ bgColor: 'gray.300' }}
+                    >
+                      &larr; Back to my bar
+                    </Button>
+                    <Button
+                      my={4}
+                      width="100%"
+                      onClick={signUserOut}
+                      color="purple.400"
+                      height="55px"
+                      _hover={{ bgColor: 'gray.300' }}
+                    >
+                      Sign out &rarr;
                     </Button>
                   </Flex>
                 </ModalBody>
@@ -245,6 +300,7 @@ const Header: React.FC = () => {
               <ModalContent borderRadius="16px" position="relative">
                 <Image
                   src={loginBG}
+                  fallbackSrc={loading}
                   objectFit="cover"
                   position="absolute"
                   top="0px"
@@ -255,12 +311,11 @@ const Header: React.FC = () => {
                 ></Image>
                 <ModalHeader
                   alignSelf="center"
-                  textDecoration="underline"
                   color="white"
                   zIndex="0"
-                  bgColor="#9F465F"
+                  bgColor="purple.400"
                 >
-                  Login to your account
+                  <Heading textTransform="uppercase">Login to Measured</Heading>
                 </ModalHeader>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
@@ -277,15 +332,20 @@ const Header: React.FC = () => {
                     >
                       Login with Google
                     </Button>
-                    <Text marginTop="30px" color="white" zIndex="0">
+                    <Heading
+                      mt={2}
+                      color="white"
+                      fontSize="2xl"
+                      zIndex="0"
+                      textTransform="uppercase"
+                    >
                       or
-                    </Text>
-                    <FormControl mt={4} isRequired>
+                    </Heading>
+                    <FormControl mt={1} isRequired>
                       <FormLabel padding="2px" margin="2px" color="white">
-                        email
+                        Email
                       </FormLabel>
                       <Input
-                        placeholder="Email"
                         type="email"
                         value={email}
                         color="white"
@@ -294,12 +354,11 @@ const Header: React.FC = () => {
                         ) => setEmail(value.target.value)}
                       />
                     </FormControl>
-                    <FormControl mt={4} isRequired>
+                    <FormControl my={2} isRequired>
                       <FormLabel padding="2px" margin="2px" color="white">
-                        password
+                        Password
                       </FormLabel>
                       <Input
-                        placeholder="Password"
                         type="password"
                         color="white"
                         value={password}
@@ -308,35 +367,36 @@ const Header: React.FC = () => {
                         ) => setPassword(value.target.value)}
                       />
                     </FormControl>
+                    <Button
+                      mt={3}
+                      height="55px"
+                      onClick={emailSignIn}
+                      color="purple.400"
+                      bgColor="white"
+                      _hover={{ bgColor: 'gray.300' }}
+                      width="100%"
+                    >
+                      Login with a <span id="title">Measured</span> account
+                    </Button>
                   </Flex>
                 </ModalBody>
                 <ModalFooter borderBottomRadius="16px" flexDirection="column">
-                  <Flex
-                    direction="row"
-                    width="75%"
-                    justify="space-around"
-                    margin="10px"
-                  >
-                    <Button
-                      mr={3}
-                      width="150px"
-                      onClick={emailSignIn}
-                      color="white"
-                      bgColor="purple.400"
-                      _hover={{ bgColor: 'purple.400' }}
-                    >
-                      Submit
-                    </Button>
-                  </Flex>
-                  <Flex direction="column" margin="10px" zIndex="0">
-                    <Flex>
-                      <Text textDecoration="underline" color="white">
-                        Haven&apos;t got an account?
+                  <Flex direction="column" m={2} zIndex="0">
+                    <Flex align="center" justify="center">
+                      <Text color="white">
+                        Haven&apos;t got an account yet?
                       </Text>
                       <Link to="/welcome">
-                        <Text marginLeft="5px" color="white">
-                          Sign up!
-                        </Text>
+                        <Heading
+                          pl={2}
+                          color="white"
+                          fontSize="2xl"
+                          zIndex="0"
+                          textTransform="uppercase"
+                          _hover={{ color: 'gray.300' }}
+                        >
+                          Sign up &rarr;
+                        </Heading>
                       </Link>
                     </Flex>
                   </Flex>
