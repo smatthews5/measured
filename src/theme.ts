@@ -31,7 +31,7 @@ const customTheme = extendTheme({
         margin: '0',
         padding: '0',
       },
-      'html, body': {
+      body: {
         font: 'body',
         height: '100vh',
         width: '100vw',
@@ -62,6 +62,7 @@ const customTheme = extendTheme({
       },
       'div[id="scroll"]': {
         pt: '12vh',
+        height: '100vh',
       },
       'div[id="scroll-large"]': {
         pt: '16vh',
