@@ -15,13 +15,13 @@ import loading from '../assets/images/loading.png';
 
 interface IngredientsGalleryProps extends RouteComponentProps {
   ingredients: Ingredient[];
+  category: string;
 }
 
 const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
-  ingredients,
+  ingredients, category
 }) => {
   const { user, setUser } = useContext(UserContext);
-
   const handleClick = async (ingredient: string) => {
     if (!user.myIngredients.includes(ingredient)) {
       addIngredient(user.uid, ingredient);
@@ -96,7 +96,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
         fontSize="15vh"
         color="purple.400"
         fontFamily="heading"
-        onClick={() => navigate('/ingredients')}
+        onClick={() => navigate('/ingredients', {state: {category: category}})}
         cursor="pointer"
       >
         +
