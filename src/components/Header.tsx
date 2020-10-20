@@ -23,15 +23,19 @@ import {
   ModalBody,
   ModalFooter,
   Modal,
+  useToast,
 } from '@chakra-ui/core';
 
 import icon from '../assets/images/header_icon.png';
 import loading from '../assets/images/loading.png';
 
 const Header: React.FC = () => {
+  const toast = useToast();
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -39,17 +43,34 @@ const Header: React.FC = () => {
     signInWithGoogle();
     setTimeout(() => onClose(), 1000);
   };
+  const showErrors = (errorMessage: string) => {
+    const errors = toast({
+      title: 'Error in form. Please try again..',
+      description: errorMessage,
+      duration: 9000,
+      isClosable: true,
+    });
+    return errors;
+  };
+
   const emailSignIn = async () => {
     try {
-      auth.signInWithEmailAndPassword(email, password);
-      setTimeout(() => onClose(), 1000);
+      await auth.signInWithEmailAndPassword(email, password).catch((error) => {
+        const errors = error.message;
+        setErrors(errors);
+        if (errors) {
+          showErrors(errors);
+        } else setTimeout(() => onClose(), 1000);
+      });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   };
+
   const signUserOut = () => {
     signOut();
-    setTimeout(() => navigate('/'), 500);
+    navigate('/');
   };
 
   const onHomepage = location.pathname === '/';
@@ -242,7 +263,7 @@ const Header: React.FC = () => {
                   <Flex direction="column" margin="10px">
                     <Flex>
                       <Text textDecoration="underline">
-                        Haven't got an account?
+                        Haven&apos;t got an account?
                       </Text>
                       <Link to="/welcome">
                         <Text marginLeft="5px">Sign up!</Text>

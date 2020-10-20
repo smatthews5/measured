@@ -9,8 +9,8 @@ import {
   Stack,
   useToast,
 } from '@chakra-ui/core';
-import { navigate, RouteComponentProps } from '@reach/router';
-import React, { useContext, useEffect } from 'react';
+import { RouteComponentProps } from '@reach/router';
+import React, { useContext } from 'react';
 import { Ingredient } from '../interfaces';
 import { GiWineBottle } from 'react-icons/gi';
 import { UserContext } from '../Context';

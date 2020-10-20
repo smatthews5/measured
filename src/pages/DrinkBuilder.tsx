@@ -3,25 +3,25 @@ import { BoozeContext } from '../Context';
 
 import Header from '../components/Header';
 import CocktailShaker from '../components/CocktailShaker';
-import CardSuggestionContainer from '../containers/CardSuggestionContainer';
-import { Box, Divider, Flex, Button, Text } from '@chakra-ui/core';
-import { Ingredient } from '../interfaces';
+import { Box, Divider, Flex, Button } from '@chakra-ui/core';
+import { Cocktail, Ingredient } from '../interfaces';
 import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
+// import CardSuggestionContainer from '../containers/CardSuggestionContainer';
 
 const responsiveFontButton = ['8px', '12px', '14px', '16px'];
 const responsiveButtonHeight = ['20px', '30px', '40px'];
 
 const DrinkBuilder: React.FC = () => {
   const { booze } = useContext(BoozeContext);
-  const cocktails = booze.cocktails;
-  const ingredients = booze.ingredients;
+  const cocktails = booze?.cocktails;
+  const ingredients = booze?.ingredients;
 
-  const [selection, setSelection] = useState([]);
-  const [content, setContent] = useState([]);
+  const [selection, setSelection] = useState<string[]>([]);
+  const [content, setContent] = useState<Cocktail[]>([]);
 
-  const [seasoningIndex, setSeasoningIndex] = useState(0);
-  const [balanceIndex, setBalanceIndex] = useState(0);
-  const [coreIndex, setCoreIndex] = useState(0);
+  const [seasoningIndex, setSeasoningIndex] = useState<number>(0);
+  const [balanceIndex, setBalanceIndex] = useState<number>(0);
+  const [coreIndex, setCoreIndex] = useState<number>(0);
 
   useEffect(() => {
     const newCocktails = filterCocktails(selection);
@@ -70,7 +70,7 @@ const DrinkBuilder: React.FC = () => {
 
   const filterCocktails = (filters: string[]) => {
     let counter = 0;
-    let filteredCocktails = [];
+    const filteredCocktails: Cocktail[] = [];
     for (let i = 0; i < cocktails.length; i++) {
       for (let j = 0; j < filters.length; j++) {
         if (cocktails[i].ingredientsList.includes(filters[j])) {

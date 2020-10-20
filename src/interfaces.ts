@@ -1,12 +1,12 @@
 export interface User {
   uid: string;
   displayName?: string;
-  email?: string;
+  email: string;
   myIngredients: string[];
   likedDrinks: string[];
-  createdDrinks?: Cocktail[];
-  photoUrl?: string;
-  createdAt?: Date;
+  createdDrinks: Cocktail[];
+  photoUrl: string;
+  createdAt: Date;
 }
 
 export interface Booze {
