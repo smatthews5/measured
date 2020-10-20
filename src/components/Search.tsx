@@ -112,7 +112,7 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
                     setBase(value);
                   }}
                 >
-                  {booze.bases.map((base: string, index: number) => (
+                  {booze?.bases.map((base: string, index: number) => (
                     <MenuItemOption key={index} value={base}>
                       {base}
                     </MenuItemOption>

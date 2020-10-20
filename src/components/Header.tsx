@@ -207,24 +207,21 @@ const Header: React.FC = () => {
                   fontSize="30px"
                   marginTop="10px"
                 >
-                  Log out 
+                  Log out
                 </Text>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
-                    <Flex width="100%" align="center" justify="center" justifyContent='space-evenly'>
-                      <Text
-                        color="white"
-                        zIndex="0"
-                        fontSize="20px"
-                      >
+                    <Flex
+                      width="100%"
+                      align="center"
+                      justify="center"
+                      justifyContent="space-evenly"
+                    >
+                      <Text color="white" zIndex="0" fontSize="20px">
                         {user.displayName}
                       </Text>
-                      <Text
-                        color="white"
-                        zIndex="0"
-                        fontSize="20px"
-                      >
+                      <Text color="white" zIndex="0" fontSize="20px">
                         {user.email}
                       </Text>
                     </Flex>
