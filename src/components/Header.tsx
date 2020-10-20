@@ -152,19 +152,35 @@ const Header: React.FC = () => {
             </Heading>
           </Flex>
         </Link>
-        <Link to="/my-bar">
-          <Flex
-            wrap="wrap"
-            align="center"
-            justify="center"
-            textAlign="center"
-            maxWidth={responsiveWidth}
-          >
-            <Heading as="h3" fontSize={responsiveFontSize}>
-              explore my bar
-            </Heading>
-          </Flex>
-        </Link>
+        {user ? (
+          <Link to="/my-bar">
+            <Flex
+              wrap="wrap"
+              align="center"
+              justify="center"
+              textAlign="center"
+              maxWidth={responsiveWidth}
+            >
+              <Heading as="h3" fontSize={responsiveFontSize}>
+                explore my bar
+              </Heading>
+            </Flex>
+          </Link>
+        ) : (
+          <Link to="/about">
+            <Flex
+              wrap="wrap"
+              align="center"
+              justify="center"
+              textAlign="center"
+              maxWidth={responsiveWidth}
+            >
+              <Heading as="h3" fontSize={responsiveFontSize}>
+                about Measured
+              </Heading>
+            </Flex>
+          </Link>
+        )}
         <Flex
           border={border}
           borderRadius={radius}
@@ -272,7 +288,7 @@ const Header: React.FC = () => {
                         placeholder="Email"
                         type="email"
                         value={email}
-                        color='white'
+                        color="white"
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
                         ) => setEmail(value.target.value)}
@@ -285,7 +301,7 @@ const Header: React.FC = () => {
                       <Input
                         placeholder="Password"
                         type="password"
-                        color='white'
+                        color="white"
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BoozeContext } from '../Context';
 
-import { Box, Divider } from '@chakra-ui/core';
+import { Divider } from '@chakra-ui/core';
 
 import Header from '../components/Header';
 import CardDetailList from '../containers/CardDetailList';
@@ -11,7 +11,10 @@ import { Ingredient } from '../interfaces';
 const Ingredients: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   let ingredients: Ingredient[] = [];
-  if (booze) ingredients = booze.ingredients;
+  if (booze)
+    ingredients = booze.ingredients.sort((a, b) =>
+      a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
+    );
 
   const barCategories = [
     'spirit',
@@ -34,9 +37,9 @@ const Ingredients: React.FC = () => {
     ingredients: Ingredient[],
     category: string | string[],
   ) => {
-    const filteredIngredients = ingredients.filter((ingredient) =>
-      category.includes(ingredient.barCategory),
-    );
+    const filteredIngredients = ingredients
+      .filter((ingredient) => category.includes(ingredient.barCategory))
+      .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
     return filteredIngredients;
   };
 

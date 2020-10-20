@@ -9,6 +9,7 @@ import { getUniqueOptions } from './utilities';
 
 // import full-screen pages
 import Home from './pages/Home';
+import About from './pages/About';
 import Ingredients from './pages/Ingredients';
 import MyBar from './pages/MyBar';
 import TopShelf from './pages/TopShelf';
@@ -20,6 +21,7 @@ import AddACocktail from './pages/AddACocktail';
 
 // set up page prop-types for routing
 const HomePage = (props: RouteComponentProps) => <Home />;
+const AboutPage = (props: RouteComponentProps) => <About />;
 const IngredientsPage = (props: RouteComponentProps) => <Ingredients />;
 const MyBarPage = (props: RouteComponentProps) => <MyBar />;
 const TopShelfPage = (props: RouteComponentProps) => <TopShelf />;
@@ -86,6 +88,7 @@ const App: React.FC = () => {
       <BoozeContext.Provider value={currentBooze}>
         <Router>
           <HomePage path="/" />
+          <AboutPage path="/about" />
           <IngredientsPage path="/ingredients" />
           <MyBarPage path="/my-bar" />
           <TopShelfPage path="/top-shelf" />
