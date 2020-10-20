@@ -1,6 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { Link } from '@reach/router';
-import icon from '../assets/images/header_icon.png';
+import { Link, navigate } from '@reach/router';
+import { UserContext } from '../Context';
+
+import { signInWithGoogle, signOut } from '../services/firebase';
+import { FcGoogle } from 'react-icons/fc';
+import { auth } from '../services/firebase';
+
 import {
   FormControl,
   FormLabel,
@@ -19,17 +24,9 @@ import {
   ModalFooter,
   Modal,
 } from '@chakra-ui/core';
-import { UserContext } from '../Context';
-import { navigate } from '@reach/router';
 
-import { signInWithGoogle, signOut } from '../services/firebase';
-import { FcGoogle } from 'react-icons/fc';
-import { auth } from '../services/firebase';
-
-const responsiveFontSize = ['lg', 'xl', '3xl', '4xl'];
-const responsiveWidth = ['7.5vw', '12.5vw', '17.5vw', '20vw'];
-const responsiveImage = ['15px', '30px', '40px', ' 50px'];
-const responsiveImageBorder = ['25px', '40px', '50px', ' 60px'];
+import icon from '../assets/images/header_icon.png';
+import loading from '../assets/images/loading.png';
 
 const Header: React.FC = () => {
   const { user } = useContext(UserContext);
@@ -55,53 +52,74 @@ const Header: React.FC = () => {
     setTimeout(() => navigate('/'), 500);
   };
 
-  const border = user ? '2px solid maroon' : '0px';
+  const onHomepage = location.pathname === '/';
+  const responsiveFontSize = ['md', 'lg', '3xl', '4xl'];
+  const responsiveWidth = ['7vw', '12vw', '17vw', '20vw'];
+  const responsiveImage = ['15px', '30px', '40px', ' 50px'];
+  const responsiveImageBorder = ['25px', '40px', '50px', ' 60px'];
+  const border = user ? '2px solid #9f465f' : '0px'; //purple.400
   const radius = user ? '50px' : '0px';
 
   return (
-    <header>
-      <Flex pl={4}>
+    <header id={onHomepage ? 'large' : 'normal'}>
+      <Flex pl={4} width={['15vw', '20vw', '25vw', '25vw']} align="center">
         <Link to="/">
-          <Heading as="h1" fontSize={['3xl', '4xl', '6xl', '8xl']}>
+          <Heading
+            as="h1"
+            fontSize={
+              onHomepage
+                ? ['4xl', '5xl', '8xl', '6vw']
+                : ['3xl', '4xl', '6xl', '8xl']
+            }
+          >
             Measured
           </Heading>
         </Link>
       </Flex>
       <Flex
+        pr={4}
         justify="space-between"
         align="center"
-        width={['45vw', '55vw', '60vw', '65vw']}
-        pr={4}
+        width={['55vw', '55vw', '65vw', '70vw']}
       >
         <Link to="/ingredients">
-          <Heading
-            as="h3"
-            fontSize={responsiveFontSize}
+          <Flex
+            wrap="wrap"
+            align="center"
+            justify="center"
+            textAlign="center"
             maxWidth={responsiveWidth}
-            isTruncated
           >
-            browse ingredients
-          </Heading>
+            <Heading as="h3" fontSize={responsiveFontSize}>
+              browse ingredients
+            </Heading>
+          </Flex>
         </Link>
         <Link to="/build-a-drink">
-          <Heading
-            as="h3"
-            fontSize={responsiveFontSize}
+          <Flex
+            wrap="wrap"
+            align="center"
+            justify="center"
+            textAlign="center"
             maxWidth={responsiveWidth}
-            isTruncated
           >
-            build a cocktail
-          </Heading>
+            <Heading as="h3" fontSize={responsiveFontSize}>
+              build a cocktail
+            </Heading>
+          </Flex>
         </Link>
         <Link to="/my-bar">
-          <Heading
-            as="h3"
-            fontSize={responsiveFontSize}
+          <Flex
+            wrap="wrap"
+            align="center"
+            justify="center"
+            textAlign="center"
             maxWidth={responsiveWidth}
-            isTruncated
           >
-            explore my bar
-          </Heading>
+            <Heading as="h3" fontSize={responsiveFontSize}>
+              explore my bar
+            </Heading>
+          </Flex>
         </Link>
         <Flex
           border={border}
@@ -115,6 +133,7 @@ const Header: React.FC = () => {
             w={responsiveImage}
             h={responsiveImage}
             objectFit="cover"
+            fallbackSrc={loading}
             src={icon}
             alt="Login/signup icon"
             mb={2}
@@ -176,7 +195,7 @@ const Header: React.FC = () => {
                     <Text marginTop="30px">or</Text>
                     <FormControl mt={4} isRequired>
                       <FormLabel padding="2px" margin="2px">
-                        E-MAIL
+                        email
                       </FormLabel>
                       <Input
                         placeholder="Email"
@@ -189,7 +208,7 @@ const Header: React.FC = () => {
                     </FormControl>
                     <FormControl mt={4} isRequired>
                       <FormLabel padding="2px" margin="2px">
-                        PASSWORD
+                        password
                       </FormLabel>
                       <Input
                         placeholder="Password"

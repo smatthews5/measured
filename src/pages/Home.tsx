@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { BoozeContext, UserContext } from '../Context';
 
-import HeaderLarge from '../components/HeaderLarge';
+import Header from '../components/Header';
 import Banner from '../components/Banner';
 import Search from '../components/Search';
 import CardGallery from '../containers/CardGallery';
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
       ) : (
         <>
           <div id="fixed">
-            <HeaderLarge />
+            <Header />
             <Divider />
           </div>
           <div id="scroll-large">
