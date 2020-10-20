@@ -87,8 +87,8 @@ const Form: React.FC = () => {
   };
   const googleSignIn = async () => {
     signInWithGoogle().then(() => {
+      onClose();
       setTimeout(() => successfullLogin(), 1000);
-      setTimeout(() => onClose(), 1000);
       setTimeout(() => navigate('/'), 1000);
     });
   };
@@ -98,9 +98,9 @@ const Form: React.FC = () => {
       await auth
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-            setTimeout(() => successfullLogin(), 1000);
-            setTimeout(() => onClose(), 1000);
-            setTimeout(() => navigate('/'), 1000);
+          setTimeout(() => successfullLogin(), 1000);
+          setTimeout(() => onClose(), 1000);
+          setTimeout(() => navigate('/'), 1000);
         })
         .catch((error) => {
           const errors = error.message;

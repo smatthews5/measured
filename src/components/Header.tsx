@@ -50,8 +50,8 @@ const Header: React.FC = () => {
 
   const googleSignIn = async () => {
     signInWithGoogle().then(() => {
+      onClose();
       setTimeout(() => successfullLogin(), 1000);
-      setTimeout(() => onClose(), 1000);
       setTimeout(() => navigate('/'), 1000);
     });
   };
