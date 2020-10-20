@@ -27,7 +27,7 @@ import {
 
 import icon from '../assets/images/header_icon.png';
 import loading from '../assets/images/loading.png';
-import loginBG from '../assets/images/loginBg.png'
+import loginBG from '../assets/images/loginBg.png';
 
 const Header: React.FC = () => {
   const toast = useToast();
@@ -48,11 +48,14 @@ const Header: React.FC = () => {
     return message;
   };
 
-  const googleSignIn = () => {
-    signInWithGoogle();
-    setTimeout(() => successfullLogin(), 1000);
-    setTimeout(() => onClose(), 1000);
+  const googleSignIn = async () => {
+    signInWithGoogle().then(() => {
+      onClose();
+      setTimeout(() => successfullLogin(), 1000);
+      setTimeout(() => navigate('/'), 1000);
+    });
   };
+
   const showErrors = (errorMessage: string) => {
     const errors = toast({
       title: 'Error in form. Please try again..',
@@ -66,19 +69,25 @@ const Header: React.FC = () => {
 
   const emailSignIn = async () => {
     try {
-      await auth.signInWithEmailAndPassword(email, password).catch((error) => {
-        const errors = error.message;
-        setErrors(errors);
-        if (errors) {
-          showErrors(errors);
-        } else {
+      await auth
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
           setTimeout(() => successfullLogin(), 1000);
           setTimeout(() => onClose(), 1000);
-        }
-      });
+          setTimeout(() => navigate('/'), 1000);
+          setEmail('');
+          setPassword('');
+        })
+        .catch((error) => {
+          const errors = error.message;
+          setErrors(errors);
+          if (errors) {
+            showErrors(errors);
+          }
+        });
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error(error);
+      console.error('error in modal signup', error);
     }
   };
 
@@ -193,12 +202,13 @@ const Header: React.FC = () => {
                   alignSelf="center"
                   textDecoration="underline"
                   color="white"
-                  zIndex='0'
-                  fontSize='30px'
+                  zIndex="0"
+                  fontSize="30px"
+                  marginTop="10px"
                 >
                   Sign out
                 </Text>
-                <ModalCloseButton color="white"/>
+                <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
                     <Button
@@ -262,6 +272,7 @@ const Header: React.FC = () => {
                         placeholder="Email"
                         type="email"
                         value={email}
+                        color='white'
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
                         ) => setEmail(value.target.value)}
@@ -274,6 +285,7 @@ const Header: React.FC = () => {
                       <Input
                         placeholder="Password"
                         type="password"
+                        color='white'
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
@@ -300,13 +312,15 @@ const Header: React.FC = () => {
                       Submit
                     </Button>
                   </Flex>
-                  <Flex direction="column" margin="10px" zIndex='0'>
+                  <Flex direction="column" margin="10px" zIndex="0">
                     <Flex>
-                      <Text textDecoration="underline" color='white'>
+                      <Text textDecoration="underline" color="white">
                         Haven&apos;t got an account?
                       </Text>
                       <Link to="/welcome">
-                        <Text marginLeft="5px" color="white">Sign up!</Text>
+                        <Text marginLeft="5px" color="white">
+                          Sign up!
+                        </Text>
                       </Link>
                     </Flex>
                   </Flex>

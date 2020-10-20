@@ -76,34 +76,42 @@ const Form: React.FC = () => {
       createUserProfileDocument(user, { displayName });
       newAccountMessage(displayName);
       navigate('/');
+      setDisplayName('');
+      setNewEmail('');
+      setNewPassword('');
     } catch (error) {
       const errors = error.message;
       setErrors(errors);
       showErrors(errors);
     }
-    setDisplayName('');
-    setNewEmail('');
-    setNewPassword('');
   };
-  const googleSignIn = () => {
-    signInWithGoogle();
-    setTimeout(() => successfullLogin(), 1000);
-    setTimeout(() => onClose(), 1000);
-    navigate('/');
+  const googleSignIn = async () => {
+    signInWithGoogle().then(() => {
+      onClose();
+      setTimeout(() => successfullLogin(), 1000);
+      setTimeout(() => navigate('/'), 1000);
+    });
   };
 
   const emailSignIn = async () => {
     try {
-      await auth.signInWithEmailAndPassword(email, password).catch((error) => {
-        const errors = error.message;
-        setErrors(errors);
-        if (errors) {
-          showErrors(errors);
-        } else setTimeout(() => onClose(), 1000);
-      });
+      await auth
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          setTimeout(() => successfullLogin(), 1000);
+          setTimeout(() => onClose(), 1000);
+          setTimeout(() => navigate('/'), 1000);
+        })
+        .catch((error) => {
+          const errors = error.message;
+          setErrors(errors);
+          if (errors) {
+            showErrors(errors);
+          }
+        });
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error(error);
+      console.error('error in modal signup', error);
     }
   };
   return (
@@ -167,6 +175,7 @@ const Form: React.FC = () => {
             <Input
               marginBottom="20px"
               placeholder="Display name"
+              color='white'
               value={displayName}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setDisplayName(value.target.value)
@@ -179,6 +188,7 @@ const Form: React.FC = () => {
               marginBottom="20px"
               placeholder="Email"
               type="email"
+              color='white'
               value={newEmail}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setNewEmail(value.target.value)
@@ -190,6 +200,7 @@ const Form: React.FC = () => {
             <Input
               placeholder="Password"
               type="password"
+              color='white'
               value={newPassword}
               onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
                 setNewPassword(value.target.value)
@@ -257,7 +268,9 @@ const Form: React.FC = () => {
                     >
                       Login with Google
                     </Button>
-                    <Text marginTop="30px" color="white" zIndex="0">or</Text>
+                    <Text marginTop="30px" color="white" zIndex="0">
+                      or
+                    </Text>
                     <FormControl mt={4} isRequired>
                       <FormLabel padding="2px" margin="2px" color="white">
                         email
@@ -265,6 +278,7 @@ const Form: React.FC = () => {
                       <Input
                         placeholder="Email"
                         type="email"
+                        color='white'
                         value={email}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
@@ -278,6 +292,7 @@ const Form: React.FC = () => {
                       <Input
                         placeholder="Password"
                         type="password"
+                        color='white'
                         value={password}
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
