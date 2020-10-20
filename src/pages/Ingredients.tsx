@@ -23,9 +23,9 @@ const Ingredients: React.FC = () => {
     'pantry',
   ];
   const { category } = location.state;
-  const intitialValue = category === undefined ? [] : category;
+  const initialValue = category === undefined ? [] : [category];
 
-  const [searchTerms, setSearchTerms] = useState<string | string[]>(intitialValue);
+  const [searchTerms, setSearchTerms] = useState<string | string[]>(initialValue);
   const [filteredIngredients, setFilteredIngredients] = useState<Ingredient[]>(
     ingredients,
   );

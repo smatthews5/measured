@@ -182,7 +182,7 @@ const Header: React.FC = () => {
             alt="Login/signup icon"
             mb={2}
             onClick={onOpen}
-            cursor='pointer'
+            cursor="pointer"
           />
         </Flex>
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -207,11 +207,27 @@ const Header: React.FC = () => {
                   fontSize="30px"
                   marginTop="10px"
                 >
-                  Sign out
+                  Log out 
                 </Text>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
+                    <Flex width="100%" align="center" justify="center" justifyContent='space-evenly'>
+                      <Text
+                        color="white"
+                        zIndex="0"
+                        fontSize="20px"
+                      >
+                        {user.displayName}
+                      </Text>
+                      <Text
+                        color="white"
+                        zIndex="0"
+                        fontSize="20px"
+                      >
+                        {user.email}
+                      </Text>
+                    </Flex>
                     <Button
                       isTruncated
                       width="100%"
@@ -221,7 +237,7 @@ const Header: React.FC = () => {
                       boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
                       height="55px"
                     >
-                      Sign Out
+                      Log Out
                     </Button>
                   </Flex>
                 </ModalBody>
