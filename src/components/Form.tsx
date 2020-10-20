@@ -6,6 +6,7 @@ import {
   Flex,
   Button,
   Text,
+  useToast,
 } from '@chakra-ui/core';
 import { signInWithGoogle } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
@@ -13,15 +14,26 @@ import { auth, createUserProfileDocument } from '../services/firebase';
 import { navigate } from '@reach/router';
 
 const Form: React.FC = () => {
+  const toast = useToast();
   const [displayName, setDisplayName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [errors, setErrors] = useState('');
+
+  const showErrors = (errorMessage: string) => {
+    const errors = toast({
+      title: 'Error in form. Please try again!',
+      description: errorMessage,
+      duration: 9000,
+      isClosable: true,
+    });
+    return errors;
+  };
 
   const onSubmit = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
-
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
         newEmail,
@@ -30,7 +42,9 @@ const Form: React.FC = () => {
       createUserProfileDocument(user, { displayName });
       navigate('/');
     } catch (error) {
-      alert(error.message);
+      const errors = error.message;
+      setErrors(errors);
+      showErrors(errors);
     }
     setDisplayName('');
     setNewEmail('');
