@@ -29,7 +29,15 @@ const Form: React.FC = () => {
     });
     return errors;
   };
-
+  const newAccountMessage = (displayName: string | null) => {
+    const message = toast({
+      title: `Hey ${displayName} you've successfully set up an account!`,
+      description: 'woop de woop',
+      duration: 9000,
+      isClosable: true,
+    });
+    return message;
+  };
   const onSubmit = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
@@ -40,6 +48,7 @@ const Form: React.FC = () => {
         newPassword,
       );
       createUserProfileDocument(user, { displayName });
+      newAccountMessage(displayName);
       navigate('/');
     } catch (error) {
       const errors = error.message;

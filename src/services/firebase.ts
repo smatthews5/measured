@@ -80,7 +80,6 @@ export const createUserProfileDocument = async (user: User, additionalData: {[ke
       myIngredients,
       ...additionalData,
     };
-    console.log('newUser', newUser);
     try {
       await userRef.set(newUser);
     } catch (error) {
