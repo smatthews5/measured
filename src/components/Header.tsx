@@ -1,4 +1,4 @@
-import React, { useState, useContext, UseEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from '@reach/router';
 import icon from '../assets/images/header_icon.png';
 import {

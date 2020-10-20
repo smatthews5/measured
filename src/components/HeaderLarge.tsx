@@ -48,7 +48,7 @@ const HeaderLarge: React.FC = () => {
   };
   const showErrors = (errorMessage: string) => {
     const errors = toast({
-      title: 'Error in form. Please try again..',
+      title: 'Error in form. Please try again!',
       description: errorMessage,
       duration: 9000,
       isClosable: true,
