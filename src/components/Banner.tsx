@@ -26,7 +26,7 @@ const Banner: React.FC = () => {
       const recipeOfTheDay = booze.cocktails[index];
       setFeatureCocktail(recipeOfTheDay);
     }
-  }, [todayDate, booze?.cocktails.length]);
+  }, [todayDate, booze?.cocktails.length, booze?.cocktails]);
 
   return (
     <Center pt={['2vh', '3vh', '4vh', '8vh']}>

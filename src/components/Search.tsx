@@ -39,22 +39,19 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
     if (existingSearch) {
       const [bases, categories, keywords] = existingSearch.split('_');
       if (bases) {
-        console.log('---> bases', bases);
         const baseArray = bases.split('+');
         setBase(baseArray);
       }
       if (categories) {
-        console.log('---> categories', categories);
         const categoryArray = categories.split('+');
         setCategory(categoryArray);
       }
       if (keywords) {
-        console.log('---> keywords', keywords);
         const keywordsStr = decodeURI(keywords);
         setSearchTerms(keywordsStr);
       }
     }
-  }, []);
+  }, [existingSearch]);
 
   function setSearchCriteria(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,

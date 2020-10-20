@@ -206,7 +206,7 @@ const AddACocktail: React.FC = () => {
                   <MenuOptionGroup
                     title="Select one"
                     type="radio"
-                    onChange={(value) => setBase(value)}
+                    onChange={(value: React.SetStateAction<string>) => setBase(value)}
                   >
                     {booze?.bases.map((base) => (
                       <MenuItemOption value={base} key={base}>

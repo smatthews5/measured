@@ -30,7 +30,7 @@ const Form: React.FC = () => {
       createUserProfileDocument(user, { displayName });
       navigate('/');
     } catch (error) {
-      console.error('form error', error);
+      alert(error.message);
     }
     setDisplayName('');
     setNewEmail('');

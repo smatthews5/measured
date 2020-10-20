@@ -41,7 +41,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
     if (user && user.likedDrinks.includes(cocktail?.name))
       toggleFavourite(true);
     else toggleFavourite(false);
-  }, [user?.likedDrinks]);
+  }, [cocktail?.name, user, user?.likedDrinks]);
 
   const handleClickMyBar = async (cocktail: string) => {
     let cocktailList = user?.likedDrinks.slice();
@@ -85,6 +85,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             onClick={
               user
                 ? () => handleClickMyBar(cocktail.name)
+                // eslint-disable-next-line no-console
                 : () => console.log('Not logged in!')
             }
           ></Image>

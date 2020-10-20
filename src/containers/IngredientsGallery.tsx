@@ -87,6 +87,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
         color="purple.400"
         fontFamily="heading"
         onClick={() => navigate('/ingredients')}
+        cursor="pointer"
       >
         +
       </Box>
