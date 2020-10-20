@@ -182,6 +182,7 @@ const Header: React.FC = () => {
             alt="Login/signup icon"
             mb={2}
             onClick={onOpen}
+            cursor='pointer'
           />
         </Flex>
         <Modal isOpen={isOpen} onClose={onClose}>
