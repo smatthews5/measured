@@ -55,18 +55,20 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
         <Heading as="h4" fontSize="2.5em" fontFamily="mono" fontWeight="600">
           {ingredient.name}
         </Heading>
-        <Tag
-          size="lg"
-          variant="subtle"
-          bgColor="purple.200"
-          color="purple.400"
-          fontWeight="600"
-          fontFamily="mono"
-          letterSpacing="0.02em"
-          fontSize="1.25em"
-        >
-          <TagLabel>{ingredient.barCategory}</TagLabel>
-        </Tag>
+        <div>
+          <Tag
+            size="lg"
+            variant="subtle"
+            bgColor="purple.200"
+            color="purple.400"
+            fontWeight="600"
+            fontFamily="mono"
+            letterSpacing="0.02em"
+            fontSize="1.25em"
+          >
+            <TagLabel width="auto">{ingredient.barCategory}</TagLabel>
+          </Tag>
+        </div>
       </Flex>
       <Stack direction="row" spacing={4} align="center">
         <Button
