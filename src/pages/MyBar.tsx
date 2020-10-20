@@ -20,14 +20,19 @@ const MyBar: React.FC = () => {
   const [twoMore, setTwoMore] = useState<Cocktail[]>([]);
   const [ingredientsDetail, setIngredientsDetail] = useState<Ingredient[]>([]);
 
+  const responsiveLargeText = ['4xl', '4xl', '4xl', '3vw'];
+  const responsiveMedText = ['3xl', '2xl', '2xl', '3xl'];
+
+  //TODO: Responsiveness ---> make the What can I make section an accordion/drawer in small screens
+
   useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        toggleLoading(false);
+      }, 1500);
+    }
     if (!user) navigate('/welcome');
     if (user) {
-      if (isLoading) {
-        setTimeout(() => {
-          toggleLoading(false);
-        }, 1500);
-      }
       setIngredientsDetail(
         booze?.ingredients.filter((ingredient) =>
           user.myIngredients.includes(ingredient.name),
@@ -66,10 +71,11 @@ const MyBar: React.FC = () => {
           <div id="scroll">
             <Flex
               width="100%"
-              borderTop="0.5px solid lightGray"
+              borderTop="0.5px solid gray.300"
               direction={['column', 'column', 'column', 'row']}
-              padding="2%"
-              paddingRight={0}
+              p={4}
+              pr={0}
+              pt={['6', '6', '6', '0']}
             >
               <Flex
                 width={['100%', '100%', '100%', '60%']}
@@ -79,22 +85,22 @@ const MyBar: React.FC = () => {
               >
                 <Heading
                   as="h4"
+                  height="15vh"
                   alignSelf="left"
-                  mt="1vh"
-                  mb="3vh"
-                  fontSize={['lg', 'xl', '2xl', '3vw']}
+                  my="2.5vh"
+                  fontSize={responsiveLargeText}
                   letterSpacing="-0.02em"
                 >
                   What&apos;s in my bar?
                 </Heading>
-                <hr />
+                <hr id="wide" />
                 {barCategories.map((category) => (
                   <Box key={category} mb="2vh">
                     <Heading
                       as="h4"
                       alignSelf="left"
                       mt="2vh"
-                      fontSize={['md', 'lg', 'xl', '2xl']}
+                      fontSize={responsiveMedText}
                       letterSpacing="-0.02em"
                       textTransform="uppercase"
                     >
@@ -117,21 +123,28 @@ const MyBar: React.FC = () => {
               <Flex
                 direction="column"
                 width={['100%', '100%', '100%', '40%']}
-                borderLeft="0.5px solid lightGray"
+                borderLeft={['none', 'none', 'none', '0.5px solid gray.300']}
+                borderTop={[
+                  '0.5px solid gray.300',
+                  '0.5px solid gray.300',
+                  '0.5px solid gray.300',
+                  'none',
+                ]}
+                pt={['6', '6', '6', '0']}
                 overflowX="scroll"
                 height="83vh"
                 px={4}
               >
                 <Flex
                   direction="row"
-                  align="flex-start"
+                  align="flex-end"
                   justify="space-between"
+                  height="15vh"
                 >
                   <Heading
                     as="h4"
-                    mt="1vh"
-                    mb="3vh"
-                    fontSize={['lg', 'xl', '2xl', '3vw']}
+                    my="2.5vh"
+                    fontSize={responsiveLargeText}
                     letterSpacing="-0.02em"
                   >
                     What can I make?
@@ -145,13 +158,14 @@ const MyBar: React.FC = () => {
                       as="h3"
                       fontSize={['sm', 'sm', 'md', 'md']}
                       color="gray.400"
-                      pt={2}
+                      py={2}
+                      textAlign="right"
                     >
                       See drinks I&apos;ve favourited &rarr;
                     </Heading>
                   </Box>
                 </Flex>
-                <hr />
+                <hr id="wide" />
                 {user && !user.myIngredients.length ? (
                   <>
                     <Text as="h4" pr={4} fontSize="2xl">
@@ -171,8 +185,8 @@ const MyBar: React.FC = () => {
                         <Heading
                           as="h4"
                           alignSelf="left"
-                          my="2vh"
-                          fontSize={['md', 'lg', 'xl', '2xl']}
+                          mt="2vh"
+                          fontSize={responsiveMedText}
                           letterSpacing="-0.02em"
                           textTransform="uppercase"
                         >
@@ -189,8 +203,8 @@ const MyBar: React.FC = () => {
                         <Heading
                           as="h4"
                           alignSelf="left"
-                          my="2vh"
-                          fontSize={['md', 'lg', 'xl', '2xl']}
+                          mt="2vh"
+                          fontSize={responsiveMedText}
                           letterSpacing="-0.02em"
                           textTransform="uppercase"
                         >
@@ -207,8 +221,8 @@ const MyBar: React.FC = () => {
                         <Heading
                           as="h4"
                           alignSelf="left"
-                          my="2vh"
-                          fontSize={['md', 'lg', 'xl', '2xl']}
+                          mt="2vh"
+                          fontSize={responsiveMedText}
                           letterSpacing="-0.02em"
                           textTransform="uppercase"
                         >

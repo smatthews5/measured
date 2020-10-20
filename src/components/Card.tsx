@@ -47,10 +47,8 @@ const Card: React.FC<CardProps> = ({ content }) => {
   const handleClickMyBar = async (cocktail: string) => {
     if (!user?.likedDrinks.includes(cocktail)) {
       addCocktail(user.uid, cocktail);
-      toggleFavourite(true);
     } else {
       removeCocktail(user.uid, cocktail);
-      toggleFavourite(false);
     }
     const updatedUser = await getUserDocument(user.uid);
     setUser(updatedUser);
