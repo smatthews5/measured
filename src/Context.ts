@@ -2,16 +2,17 @@ import { createContext } from 'react';
 
 import { Booze, User } from './interfaces';
 
-interface Person {
-  user: User;
-  setUser: (user: User) => User;
-}
-interface Drink {
-  booze: Booze;
-  setBooze: (booze: Booze) => Booze;
+interface IUser {
+  user: User | undefined;
+  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
 }
 
-const UserContext = createContext<Partial<Person>>({});
-const BoozeContext = createContext<Partial<Drink>>({});
+interface IBooze {
+  booze: Booze;
+  setBooze: React.Dispatch<React.SetStateAction<Booze>>;
+}
+
+const UserContext = createContext({} as IUser);
+const BoozeContext = createContext({} as IBooze);
 
 export { UserContext, BoozeContext };

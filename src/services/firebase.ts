@@ -60,9 +60,9 @@ export const postCocktail = async (
 };
 
 export const createUserProfileDocument = async (
-  user: User,
+  user: firebase.User,
   additionalData: { [key: string]: string },
-): Promise<> => {
+): Promise<User | undefined> => {
   if (!user) return;
   // get a reference to the place in the database where the user profile might be
   const userRef = firestore.doc(`users/${user.uid}`);
@@ -99,7 +99,19 @@ export const getUserDocument = async (
   try {
     const userDocument = await firestore.collection('users').doc(uid).get();
 
-    return { uid, ...userDocument.data() };
+    const data = userDocument.data();
+
+    if (data) {
+      return {
+        uid: uid,
+        displayName: data.displayName,
+        email: data.email,
+        myIngredients: data.myIngredients,
+        likedDrinks: data.likedDrinks,
+        photoURL: data.photoURL,
+        createdAt: data.createdAt,
+      };
+    }
   } catch (error) {
     console.error('error fetching users', error.message);
   }
