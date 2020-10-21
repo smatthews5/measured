@@ -1,14 +1,9 @@
 import React from 'react';
 import Header from '../components/Header';
 import { Divider, Image, Flex, Heading } from '@chakra-ui/core';
+import AboutGallery from '../components/AboutGallery';
 
 import banner from '../assets/images/banner.png';
-import one from '../assets/images/one.png';
-import two from '../assets/images/two.png';
-import three from '../assets/images/three.png';
-import four from '../assets/images/four.png';
-import five from '../assets/images/five.png';
-import six from '../assets/images/six.png';
 import loading from '../assets/images/loading.png';
 
 const About: React.FC = () => {
@@ -95,54 +90,9 @@ const About: React.FC = () => {
               can filter for the ingredients you have and the kind of drinks
               that you like:
             </Heading>
-            <Image
-              w="100%"
-              py={4}
-              fit="cover"
-              fallbackSrc={loading}
-              src={one}
-              alt="welcome to Measured"
-            />
-            <Image
-              w="100%"
-              py={4}
-              fit="cover"
-              fallbackSrc={loading}
-              src={two}
-              alt="welcome to Measured"
-            />
-            <Image
-              w="100%"
-              py={4}
-              fit="cover"
-              fallbackSrc={loading}
-              src={three}
-              alt="welcome to Measured"
-            />
-            <Image
-              w="100%"
-              py={4}
-              fit="cover"
-              fallbackSrc={loading}
-              src={four}
-              alt="welcome to Measured"
-            />
-            <Image
-              w="100%"
-              py={4}
-              fit="cover"
-              fallbackSrc={loading}
-              src={five}
-              alt="welcome to Measured"
-            />
-            <Image
-              w="100%"
-              py={4}
-              fit="cover"
-              fallbackSrc={loading}
-              src={six}
-              alt="welcome to Measured"
-            />
+            <Flex width="100%" height="60vh" justify="center" align="center" margin={['0px', '50px']}>
+              <AboutGallery />
+            </Flex>
           </Flex>
         </Flex>
       </div>
