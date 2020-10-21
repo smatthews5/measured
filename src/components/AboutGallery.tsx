@@ -39,7 +39,7 @@ const About: React.FC = () => {
       minWidth="350px"
       align="center"
       justify="center"
-      margin={['0px','100px']}
+      margin={['0px', '100px']}
     >
       <IconButton
         aria-label="Change index"

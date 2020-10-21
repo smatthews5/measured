@@ -101,7 +101,12 @@ const DrinkBuilder: React.FC = () => {
         <Divider />
       </div>
       <div id="scroll">
-        <Flex width="100%" direction={['column', 'column', 'column', 'row']}>
+        <Flex
+          width="100%"
+          direction={['column', 'column', 'column', 'row']}
+          h="88vh"
+          overflowY="scroll"
+        >
           <Flex
             width={['100%', '100%', '100%', '50%']}
             direction="column"
@@ -156,7 +161,6 @@ const DrinkBuilder: React.FC = () => {
           </Flex>
           <Flex
             width={['100%', '100%', '100%', '50%']}
-            overflowX="scroll"
             borderLeft="0.5px solid gray.400"
           >
             {selection.length === 0 ? (
