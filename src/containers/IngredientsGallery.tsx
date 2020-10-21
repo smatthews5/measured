@@ -19,17 +19,20 @@ interface IngredientsGalleryProps extends RouteComponentProps {
 }
 
 const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
-  ingredients, category
+  ingredients,
+  category,
 }) => {
   const { user, setUser } = useContext(UserContext);
   const handleClick = async (ingredient: string) => {
-    if (!user.myIngredients.includes(ingredient)) {
-      addIngredient(user.uid, ingredient);
-    } else {
-      removeIngredient(user.uid, ingredient);
+    if (user) {
+      if (!user.myIngredients.includes(ingredient)) {
+        addIngredient(user.uid, ingredient);
+      } else {
+        removeIngredient(user.uid, ingredient);
+      }
+      const updatedUser = await getUserDocument(user.uid);
+      if (updatedUser && setUser) setUser(updatedUser);
     }
-    const updatedUser = await getUserDocument(user.uid);
-    setUser(updatedUser);
   };
   return (
     <Grid
@@ -61,6 +64,7 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
             borderTopRadius="5px"
           />
           <IconButton
+            aria-label="Remove ingredient"
             icon={<CloseIcon />}
             alignSelf="flex-end"
             color="white"
@@ -96,7 +100,9 @@ const IngredientsGallery: React.FC<IngredientsGalleryProps> = ({
         fontSize="15vh"
         color="purple.400"
         fontFamily="heading"
-        onClick={() => navigate('/ingredients', {state: {category: category}})}
+        onClick={() =>
+          navigate('/ingredients', { state: { category: category } })
+        }
         cursor="pointer"
       >
         +

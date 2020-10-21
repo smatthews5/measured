@@ -4,7 +4,7 @@ import { Booze, User } from './interfaces';
 
 interface Person {
   user: User;
-  setUser: (user: User) => Booze;
+  setUser: (user: User) => User;
 }
 interface Drink {
   booze: Booze;

@@ -7,7 +7,6 @@ import { Box, Divider, Flex, Button } from '@chakra-ui/core';
 import { Cocktail, Ingredient } from '../interfaces';
 import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
 import BuilderInstructions from '../containers/BuilderInstructions';
-// import CardSuggestionContainer from '../containers/CardSuggestionContainer';
 
 const responsiveFontButton = ['8px', '12px', '14px', '16px'];
 const responsiveButtonHeight = ['20px', '30px', '40px'];

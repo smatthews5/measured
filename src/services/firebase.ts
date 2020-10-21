@@ -4,7 +4,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
 import { collectIdsAndDocs } from '../utilities';
-import {User} from '../interfaces';
+import { User } from '../interfaces';
 
 import { Cocktail, Ingredient } from '../interfaces';
 
@@ -59,7 +59,10 @@ export const postCocktail = async (
     );
 };
 
-export const createUserProfileDocument = async (user: User, additionalData: {[key: string]: string}): Promise<> => {
+export const createUserProfileDocument = async (
+  user: User,
+  additionalData: { [key: string]: string },
+): Promise<> => {
   if (!user) return;
   // get a reference to the place in the database where the user profile might be
   const userRef = firestore.doc(`users/${user.uid}`);
@@ -89,8 +92,10 @@ export const createUserProfileDocument = async (user: User, additionalData: {[ke
   return getUserDocument(user.uid);
 };
 
-export const getUserDocument = async (uid: string): Promise<null | undefined> => {
-  if (!uid) return null;
+export const getUserDocument = async (
+  uid: string,
+): Promise<User | undefined> => {
+  if (!uid) return undefined;
   try {
     const userDocument = await firestore.collection('users').doc(uid).get();
 
@@ -100,7 +105,10 @@ export const getUserDocument = async (uid: string): Promise<null | undefined> =>
   }
 };
 
-export const addIngredient = async (uid: string, ingredient: string): Promise<null | undefined> => {
+export const addIngredient = async (
+  uid: string,
+  ingredient: string,
+): Promise<null | undefined> => {
   if (!uid) return null;
   try {
     const ingredientsRef = firestore.collection('users').doc(uid);
@@ -113,7 +121,10 @@ export const addIngredient = async (uid: string, ingredient: string): Promise<nu
   }
 };
 
-export const removeIngredient = async (uid: string, ingredient: string): Promise<null | undefined> => {
+export const removeIngredient = async (
+  uid: string,
+  ingredient: string,
+): Promise<null | undefined> => {
   if (!uid) return null;
   try {
     const ingredientsRef = firestore.collection('users').doc(uid);
@@ -126,7 +137,10 @@ export const removeIngredient = async (uid: string, ingredient: string): Promise
   }
 };
 
-export const addCocktail = async (uid: string, cocktail: string): Promise<null | undefined> => {
+export const addCocktail = async (
+  uid: string,
+  cocktail: string,
+): Promise<null | undefined> => {
   if (!uid) return null;
   try {
     const userRef = firestore.collection('users').doc(uid);
@@ -139,7 +153,10 @@ export const addCocktail = async (uid: string, cocktail: string): Promise<null |
   }
 };
 
-export const removeCocktail = async (uid: string, cocktail: string): Promise<null | undefined> => {
+export const removeCocktail = async (
+  uid: string,
+  cocktail: string,
+): Promise<null | undefined> => {
   if (!uid) return null;
   try {
     const userRef = firestore.collection('users').doc(uid);

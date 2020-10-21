@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Text, Heading, IconButton } from '@chakra-ui/core';
+import { Flex, IconButton } from '@chakra-ui/core';
 import CoreRecipe from '../components/CoreRecipe';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
