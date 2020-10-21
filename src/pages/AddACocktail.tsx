@@ -91,6 +91,7 @@ const AddACocktail: React.FC = () => {
       categories,
       ingredientsList,
       garnish,
+      relevance: 0,
     };
     try {
       await postCocktail(newCocktail);

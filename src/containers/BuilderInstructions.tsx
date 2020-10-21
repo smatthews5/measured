@@ -22,7 +22,7 @@ const BuilderInstructions: React.FC = () => {
       seasoning: '1 lemon twist/ olive',
       variations: ['manhattan', 'negroni'],
       imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fmartini.jpg?alt=media&token=fd7bb2e5-106f-426d-9617-a0674e4d6334',
+        'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fmartini.jpg?alt=media&token=e07331db-a9c7-4dbf-a303-d068cebc236c',
     },
     {
       name: 'daiquiri',
@@ -31,7 +31,7 @@ const BuilderInstructions: React.FC = () => {
       seasoning: '¾ oz. simple syrup',
       variations: ['amaretto sour', 'whisky sour'],
       imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/ingredients%2Fdaiquiri.jpg?alt=media&token=113b7562-30d5-4e1e-a555-f988bcac796b',
+        'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fdaiquiri.jpg?alt=media&token=a1e5c70b-7edb-43d8-8794-1ccac7e508b2',
     },
     {
       name: 'sidecar',
@@ -40,7 +40,7 @@ const BuilderInstructions: React.FC = () => {
       seasoning: '¾ oz. lemon juice',
       variations: ['margarita', 'white lady'],
       imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fsidecar.jpg?alt=media&token=013b9006-3c3f-4625-8e03-c168171804e5',
+        'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fsidecar.jpg?alt=media&token=d945f152-73c3-464f-b13e-70765ef9d723',
     },
     {
       name: 'whisky highball',
@@ -73,7 +73,7 @@ const BuilderInstructions: React.FC = () => {
   };
 
   return (
-    <Flex direction="column" mt="1%" width="40vw" mx="auto">
+    <Flex direction="column" mt="1%" width="40vw" mx="auto" overflowX="scroll">
       <Flex color="purple.400" fontFamily="heading" fontSize="4vh">
         Use the cocktail builder to test out combinations of ingredients and
         discover similar cocktails!
