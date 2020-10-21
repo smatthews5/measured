@@ -240,7 +240,6 @@ const Header: React.FC = () => {
                 <ModalBody pb={6}>
                   <Flex align="center" justify="center" direction="column">
                     <Flex
-                      height="30vh"
                       align="center"
                       justify="space-between"
                       direction="column"
@@ -249,7 +248,7 @@ const Header: React.FC = () => {
                         {user.displayName}
                       </Text>
                       <Text color="white" zIndex="0" fontSize="20px">
-                        {user.email}
+                        {user.email.toLowerCase()}
                       </Text>
                       <Heading
                         mt={2}
