@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Flex,
-  Image,
-  Text,
-  Heading,
-  UnorderedList,
-  ListItem,
-  IconButton,
-} from '@chakra-ui/core';
+import { Flex, Text, Heading, IconButton } from '@chakra-ui/core';
 import CoreRecipe from '../components/CoreRecipe';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
@@ -17,8 +9,8 @@ const BuilderInstructions: React.FC = () => {
     {
       name: 'old fashioned',
       core: '2 oz. bourbon',
-      balance: '1 demerara sugar cube',
-      seasoning: '2 dashes angostura bitters',
+      balance: '1 sugar cube',
+      seasoning: '2 dashes bitters',
       variations: ['champagne cocktail', 'mint julep'],
       imageUrl:
         'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fold-fashioned.jpg?alt=media&token=56997234-f1fa-4b11-a4e2-25b7d98a9cfe',
@@ -81,44 +73,44 @@ const BuilderInstructions: React.FC = () => {
   };
 
   return (
-    <Flex direction="column" mt="1%">
-      <Text color="purple.400" fontFamily="heading" fontSize="4vh">
+    <Flex direction="column" mt="1%" width="40vw" mx="auto">
+      <Flex color="purple.400" fontFamily="heading" fontSize="4vh">
         Use the cocktail builder to test out combinations of ingredients and
         discover similar cocktails!
-      </Text>
+      </Flex>
       <Flex alignItems="center" mt="2%">
-        <Text fontFamily="heading" fontSize="4vh" textTransform="uppercase">
+        <Flex fontFamily="heading" fontSize="4vh" textTransform="uppercase">
           Core:
-        </Text>
-        <Text pl="1%" pb="3px">
+        </Flex>
+        <Flex pl="16%" pb="3px">
           The main flavour of the drink, usually a spirit or wine
-        </Text>
+        </Flex>
       </Flex>
       <Flex alignItems="center" mt="1%">
-        <Text fontFamily="heading" fontSize="4vh" textTransform="uppercase">
+        <Flex fontFamily="heading" fontSize="4vh" textTransform="uppercase">
           Balance:
-        </Text>
-        <Text pl="1%" pb="3px" justifySelf="flex-end">
+        </Flex>
+        <Flex pl="9%" pb="3px" justifySelf="flex-end">
           Increase the drinkability by balancing the drink with acidity or
           sweetness (or both!)
-        </Text>
+        </Flex>
       </Flex>
       <Flex alignItems="center" mt="1%">
-        <Text fontFamily="heading" fontSize="4vh" textTransform="uppercase">
+        <Flex fontFamily="heading" fontSize="4vh" textTransform="uppercase">
           Seasoning:
-        </Text>
-        <Text pl="1%" pb="3px">
+        </Flex>
+        <Flex pl="5%" pb="3px">
           Add flavour to complement or contrast the core and add more dimension
           to the drink
-        </Text>
+        </Flex>
       </Flex>
-      <Text mt="2%">
+      <Flex mt="2%">
         Most cocktails are simply variations on a handful of basic formulas.
         Explore the templates below for inspiration, by varying the three
         elements and experimenting with new combinations and proportions you can
         discover new drinks!
-      </Text>
-      <Flex mt="2%" height="45vh">
+      </Flex>
+      <Flex mt="2%" height="35vh">
         <IconButton
           aria-label="Change index"
           icon={<ChevronLeftIcon fontSize="3xl" />}
@@ -134,6 +126,32 @@ const BuilderInstructions: React.FC = () => {
           onClick={handleRightClick}
           height="100%"
         />
+        <Flex
+          direction="column"
+          width="40%"
+          ml="5%"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Flex justifyContent="space-between" width="100%">
+            <Flex textTransform="uppercase" alignSelf="flex-start">
+              Core:
+            </Flex>
+            <Flex>{coreRecipes[index].core}</Flex>
+          </Flex>
+          <Flex justifyContent="space-between" width="100%">
+            <Flex textTransform="uppercase" alignSelf="flex-start">
+              Balance:
+            </Flex>
+            <Flex>{coreRecipes[index].balance}</Flex>
+          </Flex>
+          <Flex justifyContent="space-between" width="100%">
+            <Flex textTransform="uppercase" alignSelf="flex-start">
+              Seasoning:
+            </Flex>
+            <Flex>{coreRecipes[index].seasoning}</Flex>
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   );

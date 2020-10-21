@@ -29,7 +29,9 @@ const Ingredients: React.FC = () => {
   const { category } = location.state;
   const initialValue = category === undefined ? [] : [category];
 
-  const [searchTerms, setSearchTerms] = useState<string | string[]>(initialValue);
+  const [searchTerms, setSearchTerms] = useState<string | string[]>(
+    initialValue,
+  );
   const [filteredIngredients, setFilteredIngredients] = useState<Ingredient[]>(
     ingredients,
   );
@@ -43,9 +45,9 @@ const Ingredients: React.FC = () => {
     ingredients: Ingredient[],
     searchTerms: string | string[],
   ) => {
-    const filteredIngredients = ingredients.filter((ingredient) =>
-      searchTerms.includes(ingredient.barCategory),
-    ).sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));;
+    const filteredIngredients = ingredients
+      .filter((ingredient) => searchTerms.includes(ingredient.barCategory))
+      .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
 
     return filteredIngredients;
   };

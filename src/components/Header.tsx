@@ -50,7 +50,6 @@ const Header: React.FC = () => {
   const successfulLogout = () => {
     const message = toast({
       title: 'Until next time! Thanks for using Measured',
-
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -235,7 +234,6 @@ const Header: React.FC = () => {
                   zIndex="0"
                   marginTop="10px"
                 >
-
                   Ready to go?
                 </Heading>
                 <ModalCloseButton color="white" />
@@ -247,11 +245,7 @@ const Header: React.FC = () => {
                       justify="space-between"
                       direction="column"
                     >
-                      <Text
-                        color="white"
-                        zIndex="0"
-                        fontSize="20px"
-                      >
+                      <Text color="white" zIndex="0" fontSize="20px">
                         {user.displayName}
                       </Text>
                       <Text color="white" zIndex="0" fontSize="20px">
@@ -329,8 +323,6 @@ const Header: React.FC = () => {
                   bgColor="purple.400"
                 >
                   <Heading textTransform="uppercase">Login to Measured</Heading>
-
-
                 </ModalHeader>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>

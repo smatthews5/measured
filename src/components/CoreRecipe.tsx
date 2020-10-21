@@ -15,7 +15,7 @@ interface CoreRecipeProps extends RouteComponentProps {
 
 const CoreRecipe: React.FC<CoreRecipeProps> = ({ recipe, index }) => {
   return (
-    <Flex direction="column" alignItems="center" mx="2%" width="30vw">
+    <Flex direction="column" alignItems="center" mx="2%" width="15vw">
       <Heading>Core Recipe #{index + 1}</Heading>
       <Image
         src={recipe.imageUrl}
@@ -29,13 +29,9 @@ const CoreRecipe: React.FC<CoreRecipeProps> = ({ recipe, index }) => {
         borderRadius="5px"
       />
       <Heading>{recipe.name}</Heading>
-      {/* <Flex>
-        <Text>Core: </Text>
-        <Text>{recipe.core}</Text>
-      </Flex> */}
-      <Text>Core: {recipe.core}</Text>
+      {/* <Text>Core: {recipe.core}</Text>
       <Text>Balance: {recipe.balance}</Text>
-      <Text>Seasoning: {recipe.seasoning}</Text>
+      <Text>Seasoning: {recipe.seasoning}</Text> */}
     </Flex>
   );
 };
