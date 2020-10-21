@@ -37,7 +37,7 @@ export const removeDuplicatesAndRankResults = (allMatches: Cocktail[]) => {
     const rankedCocktails = uniqueCocktails
       .map((cocktail) => ({
         ...cocktail,
-        relevance: cocktail.hasOwnProperty('relevance')
+        relevance: Object.prototype.hasOwnProperty.call(cocktail, 'relevance')
           ? cocktail.relevance + relevance[cocktail.id]
           : relevance[cocktail.id],
       }))
