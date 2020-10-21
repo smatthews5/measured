@@ -2,11 +2,11 @@ import React from 'react';
 import { navigate, RouteComponentProps } from '@reach/router';
 
 import Card from '../components/Card';
-import { Cocktail, Ingredient } from '../interfaces';
+import { Cocktail } from '../interfaces';
 import { Box, Heading, Flex } from '@chakra-ui/core';
 
 interface CardGalleryProps extends RouteComponentProps {
-  content: Cocktail[] | Ingredient[];
+  content: Cocktail[];
   categoryHeading: string;
 }
 
@@ -14,8 +14,6 @@ const CardGallery: React.FC<CardGalleryProps> = ({
   content,
   categoryHeading,
 }) => {
-  // content[0].hasOwnProperty('base') ? '82vw' : '100%'; NEED TO FIX FOR MYBAR PAGE
-
   let boxWidth;
   const urlLocation = location.pathname == '/';
   urlLocation ? (boxWidth = '82vw') : (boxWidth = '100%');
@@ -44,7 +42,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({
           </Heading>
         </Box>
         <Flex overflowX="scroll" mx="1%" mb={2}>
-          {content.map((object: Cocktail | Ingredient) => (
+          {content.map((object: Cocktail) => (
             <Card content={object} key={object.id} />
           ))}
         </Flex>

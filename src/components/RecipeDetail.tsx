@@ -56,7 +56,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
         removeCocktail(user.uid, cocktail);
       }
       const updatedUser: User | undefined = await getUserDocument(user.uid);
-      if (updatedUser) setUser(updatedUser);
+      if (updatedUser && setUser) setUser(updatedUser);
     }
   };
 

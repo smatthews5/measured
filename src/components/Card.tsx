@@ -1,17 +1,8 @@
 /* eslint-disable no-prototype-builtins */
 import React, { useContext, useState, useEffect } from 'react';
 
-import {
-  Box,
-  Flex,
-  Image,
-  Heading,
-  IconButton,
-  Tooltip,
-  useToast,
-} from '@chakra-ui/core';
+import { Box, Flex, Image, Heading, Tooltip, useToast } from '@chakra-ui/core';
 import { RouteComponentProps, navigate } from '@reach/router';
-import { CloseIcon } from '@chakra-ui/icons';
 import { UserContext } from '../Context';
 
 import ingredients from '../assets/images/ingredients.png';
@@ -19,7 +10,7 @@ import empty from '../assets/images/empty.png';
 import full from '../assets/images/full.png';
 import loading from '../assets/images/loading.png';
 
-import { Cocktail, Ingredient } from '../interfaces';
+import { Cocktail } from '../interfaces';
 import {
   addCocktail,
   getUserDocument,
@@ -27,7 +18,7 @@ import {
 } from '../services/firebase';
 
 interface CardProps extends RouteComponentProps {
-  content: Cocktail | Ingredient;
+  content: Cocktail;
 }
 
 const Card: React.FC<CardProps> = ({ content }) => {
@@ -37,8 +28,8 @@ const Card: React.FC<CardProps> = ({ content }) => {
 
   const toast = useToast();
 
-  const imageWidth = content.hasOwnProperty('base') ? '18vw' : '16vw';
-  const imageHeight = content.hasOwnProperty('base') ? '18vw' : '16vw';
+  const imageWidth = '18vw';
+  const imageHeight = '18vw';
 
   const responsiveText = ['sm', 'lg', 'xl', '2xl'];
   const responsiveBadge = ['0px', '0px', '60px', '60px'];
@@ -52,7 +43,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
         removeCocktail(user.uid, cocktail);
       }
       const updatedUser = await getUserDocument(user.uid);
-      if (updatedUser) setUser(updatedUser);
+      if (updatedUser && setUser) setUser(updatedUser);
     }
   };
 
@@ -73,34 +64,33 @@ const Card: React.FC<CardProps> = ({ content }) => {
       position="relative"
     >
       <Box position="relative">
-        {content.hasOwnProperty('base') && showBadge ? (
-          <Box
+        <Box
+          position="absolute"
+          bottom="10px"
+          right="13%"
+          w={responsiveBadge}
+          h={responsiveBadge}
+        >
+          <Image
+            fit="contain"
+            src={ingredients}
+            alt="ingredients indicator"
+            w="100%"
+          ></Image>
+          <Heading
+            fontFamily="mono"
+            lineHeight="70%"
+            fontWeight="200"
+            fontSize={responsiveHeading}
+            color="white"
             position="absolute"
-            bottom="10px"
-            right="13%"
-            w={responsiveBadge}
-            h={responsiveBadge}
+            left="25%"
+            top="15%"
           >
-            <Image
-              fit="contain"
-              src={ingredients}
-              alt="ingredients indicator"
-              w="100%"
-            ></Image>
-            <Heading
-              fontFamily="mono"
-              lineHeight="70%"
-              fontWeight="200"
-              fontSize={responsiveHeading}
-              color="white"
-              position="absolute"
-              left="25%"
-              top="15%"
-            >
-              {content.ingredientsList.length}
-            </Heading>
-          </Box>
-        ) : null}
+            {content.ingredientsList.length}
+          </Heading>
+        </Box>
+
         <Image
           fit="cover"
           borderRadius="5px"
@@ -111,11 +101,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
           w={imageWidth}
           h={imageHeight}
           overflow="hidden"
-          onClick={() =>
-            content.hasOwnProperty('base')
-              ? navigate(`/recipes/${content.name}`)
-              : null
-          }
+          onClick={() => navigate(`/recipes/${content.name}`)}
         />
       </Box>
       <Flex
@@ -144,7 +130,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
             fontWeight="200"
             fontSize={['0px', '0px', 'sm', 'md']}
           >
-            {content.hasOwnProperty('base') ? content.base.toLowerCase() : null}
+            {content.base.toLowerCase()}
           </Heading>
         </Flex>
         <hr id="wide" />
@@ -154,62 +140,45 @@ const Card: React.FC<CardProps> = ({ content }) => {
           fontWeight="200"
           mt={3}
         >
-          {content.hasOwnProperty('base')
-            ? content.categories.map((category, index) => {
-                if (index > 2) return '';
-                else if (index === content.categories.length - 1 || index === 2)
-                  return `${category}`;
-                else return `${category} — `;
-              })
-            : null}
+          {content.categories.map((category, index) => {
+            if (index > 2) return '';
+            else if (index === content.categories.length - 1 || index === 2)
+              return `${category}`;
+            else return `${category} — `;
+          })}
         </Heading>
-        {content.hasOwnProperty('base') ? (
-          <Tooltip
-            label={
-              showFavourite ? 'Remove from favourites' : 'Add to favourites'
-            }
-            fontSize="sm"
-            bgColor="purple.400"
-          >
-            <Image
-              position="absolute"
-              bottom={['22%', '22%', '3%', '3%']}
-              right="10%"
-              border="2px white solid"
-              bgColor="white"
-              fit="contain"
-              fallbackSrc={loading}
-              src={showFavourite ? full : empty}
-              alt={showFavourite ? 'full glass icon' : 'empty glass icon'}
-              w={['15px', '15px', '25px', '25px']}
-              onClick={
-                user
-                  ? () => handleClickMyBar(content.name)
-                  : () =>
-                      toast({
-                        title: 'Log in / sign up to Measured',
-                        description:
-                          'Want to add cocktails to your favourites? Create an account or login.',
-                        status: 'warning',
-                        duration: 5000,
-                        isClosable: true,
-                      })
-              }
-            ></Image>
-          </Tooltip>
-        ) : (
-          <IconButton
+
+        <Tooltip
+          label={showFavourite ? 'Remove from favourites' : 'Add to favourites'}
+          fontSize="sm"
+          bgColor="purple.400"
+        >
+          <Image
             position="absolute"
+            bottom={['22%', '22%', '3%', '3%']}
             right="10%"
-            width={['5px', '20px']}
-            height={['5px', '20px']}
-            aria-label="delete"
-            icon={<CloseIcon />}
-            colorScheme="gray"
-            variant="ghost"
-            size="sm"
-          />
-        )}
+            border="2px white solid"
+            bgColor="white"
+            fit="contain"
+            fallbackSrc={loading}
+            src={showFavourite ? full : empty}
+            alt={showFavourite ? 'full glass icon' : 'empty glass icon'}
+            w={['15px', '15px', '25px', '25px']}
+            onClick={
+              user
+                ? () => handleClickMyBar(content.name)
+                : () =>
+                    toast({
+                      title: 'Log in / sign up to Measured',
+                      description:
+                        'Want to add cocktails to your favourites? Create an account or login.',
+                      status: 'warning',
+                      duration: 5000,
+                      isClosable: true,
+                    })
+            }
+          ></Image>
+        </Tooltip>
       </Flex>
     </Flex>
   );

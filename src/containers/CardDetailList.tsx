@@ -4,7 +4,6 @@ import React from 'react';
 
 import CardDetail from '../components/CardDetail';
 import { Ingredient } from '../interfaces';
-// import { shuffleOrder } from '../utilities';
 
 interface CardDetailListProps extends RouteComponentProps {
   ingredients: Ingredient[];
