@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   FormControl,
   FormLabel,
   Input,
   Flex,
   Button,
-  Text,
   Image,
+  Heading,
   useToast,
   useDisclosure,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Modal,
 } from '@chakra-ui/core';
+import FormModal from '../components/formModal';
+import { UserContext } from '../Context';
+
 import { signInWithGoogle } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { auth, createUserProfileDocument } from '../services/firebase';
@@ -25,13 +21,12 @@ import { navigate } from '@reach/router';
 import loginBG from '../assets/images/loginBG.png';
 
 const Form: React.FC = () => {
+  const { user } = useContext(UserContext);
+
   const toast = useToast();
   const [displayName, setDisplayName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -47,7 +42,7 @@ const Form: React.FC = () => {
   };
   const newAccountMessage = (displayName: string | null) => {
     const message = toast({
-      title: `Hey ${displayName}, you've successfully set up an account!`,
+      title: `Hey ${displayName}, welcome to Measured!`,
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -56,7 +51,7 @@ const Form: React.FC = () => {
   };
   const successfullLogin = () => {
     const message = toast({
-      title: "Hey, you're logged in!",
+      title: 'Welcome back to Measured',
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -81,7 +76,6 @@ const Form: React.FC = () => {
       setNewPassword('');
     } catch (error) {
       const errors = error.message;
-      setErrors(errors);
       showErrors(errors);
     }
   };
@@ -93,50 +87,19 @@ const Form: React.FC = () => {
     });
   };
 
-  const emailSignIn = async () => {
-    try {
-      await auth
-        .signInWithEmailAndPassword(email, password)
-        .then(() => {
-          onClose();
-          setTimeout(() => successfullLogin(), 1000);
-          setTimeout(() => navigate('/'), 1000);
-          setTimeout(() => {
-            setEmail('');
-            setPassword('');
-          }, 1000);
-        })
-        .catch((error) => {
-          const errors = error.message;
-          setErrors(errors);
-          if (errors) {
-            showErrors(errors);
-          }
-        });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('error in modal signup', error);
-    }
-  };
   return (
     <Flex
       justify="center"
-      align="center"
       direction="row"
-      margin="10px"
       width="100%"
       height="100%"
-      marginTop="50px"
     >
       <Flex
         justify="center"
-        align="center"
         direction="row"
-        margin="10px"
         width="50vw"
-        marginTop="50px"
         borderRadius="8px"
-        height="60vh"
+        height="70vh"
         minWidth="400px"
       >
         <Image
@@ -159,11 +122,21 @@ const Form: React.FC = () => {
           margin="40px"
           minWidth="300px"
         >
+          <Heading
+            alignSelf="center"
+            color="white"
+            zIndex="0"
+            textTransform="uppercase"
+            marginTop="10px"
+          >
+            Create a Measured account
+          </Heading>
+
           <Button
             minWidth="200px"
             leftIcon={<FcGoogle />}
             width="50%"
-            margin="20px"
+            marginTop="20px"
             onClick={googleSignIn}
             bgColor="white"
             _hover={{ bgColor: 'white' }}
@@ -173,7 +146,15 @@ const Form: React.FC = () => {
           >
             Sign up with Google
           </Button>
-          <Text margin="20px">Or</Text>
+          <Heading
+            mt={2}
+            color="white"
+            fontSize="2xl"
+            zIndex="0"
+            textTransform="uppercase"
+          >
+            or
+          </Heading>
           <FormControl width="100%" isRequired>
             <FormLabel color="white">Display Name</FormLabel>
             <Input
@@ -211,7 +192,7 @@ const Form: React.FC = () => {
               }
             />
           </FormControl>
-          <Flex width="100%" margin="20px">
+          <Flex width="100%" marginTop="20px">
             <Button
               width="50%"
               marginRight="5px"
@@ -235,98 +216,7 @@ const Form: React.FC = () => {
               Sign in
             </Button>
           </Flex>
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay>
-              <ModalContent borderRadius="16px" position="relative">
-                <Image
-                  src={loginBG}
-                  objectFit="cover"
-                  position="absolute"
-                  top="0px"
-                  left="0px"
-                  width="100%"
-                  height="100%"
-                  borderRadius="16px"
-                ></Image>
-                <ModalHeader
-                  alignSelf="center"
-                  textDecoration="underline"
-                  color="white"
-                  zIndex="0"
-                  bgColor="#9F465F"
-                >
-                  Log in to your account
-                </ModalHeader>
-                <ModalCloseButton color="white" />
-                <ModalBody pb={6}>
-                  <Flex align="center" justify="center" direction="column">
-                    <Button
-                      isTruncated
-                      leftIcon={<FcGoogle />}
-                      width="100%"
-                      marginLeft="5px"
-                      marginTop="10px"
-                      onClick={googleSignIn}
-                      boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
-                      height="55px"
-                    >
-                      Log in with Google
-                    </Button>
-                    <Text marginTop="30px" color="white" zIndex="0">
-                      or
-                    </Text>
-                    <FormControl mt={4} isRequired>
-                      <FormLabel padding="2px" margin="2px" color="white">
-                        email
-                      </FormLabel>
-                      <Input
-                        placeholder="Email"
-                        type="email"
-                        color="white"
-                        value={email}
-                        onChange={(
-                          value: React.ChangeEvent<HTMLInputElement>,
-                        ) => setEmail(value.target.value)}
-                      />
-                    </FormControl>
-                    <FormControl mt={4} isRequired>
-                      <FormLabel padding="2px" margin="2px" color="white">
-                        password
-                      </FormLabel>
-                      <Input
-                        placeholder="Password"
-                        type="password"
-                        color="white"
-                        value={password}
-                        onChange={(
-                          value: React.ChangeEvent<HTMLInputElement>,
-                        ) => setPassword(value.target.value)}
-                      />
-                    </FormControl>
-                  </Flex>
-                </ModalBody>
-                <ModalFooter borderBottomRadius="16px" flexDirection="column">
-                  <Flex
-                    direction="row"
-                    width="75%"
-                    justify="space-around"
-                    margin="10px"
-                  >
-                    <Button
-                      mr={3}
-                      width="150px"
-                      onClick={emailSignIn}
-                      color="white"
-                      bgColor="purple.400"
-                      _hover={{ bgColor: 'purple.400' }}
-                    >
-                      Submit
-                    </Button>
-                  </Flex>
-                </ModalFooter>
-              </ModalContent>
-            </ModalOverlay>
-          </Modal>
+          <FormModal onClose={onClose} isOpen={isOpen} user={user} />
         </Flex>
       </Flex>
     </Flex>

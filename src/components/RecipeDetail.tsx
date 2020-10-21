@@ -49,7 +49,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
 
   const handleClickMyBar = async (cocktail: string) => {
     if (user) {
-      let cocktailList = user?.likedDrinks.slice();
+      const cocktailList = user?.likedDrinks.slice();
       if (!cocktailList?.includes(cocktail)) {
         addCocktail(user.uid, cocktail);
       } else {
