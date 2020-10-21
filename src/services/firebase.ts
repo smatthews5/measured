@@ -127,7 +127,6 @@ export const addIngredient = async (
     await ingredientsRef.update({
       myIngredients: firebase.firestore.FieldValue.arrayUnion(ingredient),
     });
-    console.log('successfully added ingredient');
   } catch (error) {
     console.error('error updating my ingredients', error.message);
   }
@@ -143,7 +142,6 @@ export const removeIngredient = async (
     await ingredientsRef.update({
       myIngredients: firebase.firestore.FieldValue.arrayRemove(ingredient),
     });
-    console.log('successfully removed ingredient');
   } catch (error) {
     console.error('error updating my ingredients', error.message);
   }
@@ -159,7 +157,6 @@ export const addCocktail = async (
     await userRef.update({
       likedDrinks: firebase.firestore.FieldValue.arrayUnion(cocktail),
     });
-    console.log('successfully added cocktail');
   } catch (error) {
     console.error('error adding cocktail', error.message);
   }
@@ -175,7 +172,6 @@ export const removeCocktail = async (
     await userRef.update({
       likedDrinks: firebase.firestore.FieldValue.arrayRemove(cocktail),
     });
-    console.log('successfully removed cocktail');
   } catch (error) {
     console.error('error removing cocktail', error.message);
   }
