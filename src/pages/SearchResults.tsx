@@ -7,6 +7,7 @@ import Search from '../components/Search';
 import CardGrid from '../containers/CardGrid';
 import { Cocktail } from '../interfaces';
 import { Divider } from '@chakra-ui/core';
+import LoadingScreen from './CocktailLoadingScreen';
 
 import { removeDuplicatesAndRankResults, splitAndSearch } from '../utilities';
 
@@ -14,6 +15,7 @@ const SearchResults = () => {
   const { query } = useParams();
   const { booze } = useContext(BoozeContext);
   const [results, setResults] = useState<Cocktail[]>([]);
+  const [isLoading, toggleLoading] = useState(true);
 
   let cocktails: Cocktail[] = [];
   if (booze) {
@@ -50,6 +52,11 @@ const SearchResults = () => {
   };
 
   useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        toggleLoading(false);
+      }, 1500);
+    }
     const [bases, categories, searchTerms] = query.split('_');
     const baseArray = decodeURI(bases).split('+');
     const categoryArray = decodeURI(categories).split('+');
@@ -60,6 +67,7 @@ const SearchResults = () => {
 
   return (
     <>
+      {isLoading ? <LoadingScreen /> : null}
       <div id="fixed">
         <Header />
         <Divider />
@@ -70,7 +78,11 @@ const SearchResults = () => {
           cocktails={
             results.length ? results : booze?.cocktails ? booze.cocktails : []
           }
-          title="Search results"
+          title={
+            results.length
+              ? 'Search results'
+              : 'nothing matched your search, take a look at everything..'
+          }
         />
       </div>
     </>

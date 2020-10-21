@@ -135,6 +135,7 @@ const Form: React.FC = () => {
               textTransform="uppercase"
               _hover={{ color: 'gray.300' }}
               onClick={onOpen}
+              cursor='pointer'
             >
               Sign in &rarr;
             </Heading>
