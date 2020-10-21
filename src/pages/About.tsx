@@ -90,7 +90,13 @@ const About: React.FC = () => {
               can filter for the ingredients you have and the kind of drinks
               that you like:
             </Heading>
-            <Flex width="100%" height="60vh" justify="center" align="center" margin={['0px', '50px']}>
+            <Flex
+              width="100%"
+              height="60vh"
+              justify="center"
+              align="center"
+              margin={['0px', '50px']}
+            >
               <AboutGallery />
             </Flex>
           </Flex>

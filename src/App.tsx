@@ -78,20 +78,22 @@ const App: React.FC = () => {
           glasses: allGlasses,
         }));
       })
-      .catch((error) => console.error('---> error getting all cocktails', error));
+      .catch((error) =>
+        console.error('---> error getting all cocktails', error),
+      );
 
     CocktailService.auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
-      const user = await CocktailService.createUserProfileDocument(userAuth, {
-        displayName: '',
-      });
-      setUser(user);
+        const user = await CocktailService.createUserProfileDocument(userAuth, {
+          displayName: '',
+        });
+        setUser(user);
       } else {
-      setUser(user);
+        setUser(user);
       }
     });
   }, []);
-  
+
   return (
     <UserContext.Provider value={currentUser}>
       <BoozeContext.Provider value={currentBooze}>

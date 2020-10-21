@@ -45,7 +45,6 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
   handleRightClick,
 }) => {
   const responsiveFontSize = ['2xl', '2xl', '3xl', '3xl'];
-  const responsiveBoxSize = ['', '', '', ''];
 
   return (
     <>
@@ -91,7 +90,12 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
                 handleLeftClick(seasoning, seasoningIndex, setSeasoningIndex);
               }}
             />
-            <Heading textAlign="center" fontSize={responsiveFontSize} pb={3}>
+            <Heading
+              textAlign="center"
+              fontSize={responsiveFontSize}
+              pb={3}
+              color="purple.400"
+            >
               {seasoning.length > 0 ? seasoning[seasoningIndex].name : ''}
             </Heading>
             <IconButton
@@ -116,7 +120,12 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
                 handleLeftClick(balance, balanceIndex, setBalanceIndex);
               }}
             />
-            <Heading textAlign="center" fontSize={responsiveFontSize} pb={3}>
+            <Heading
+              textAlign="center"
+              fontSize={responsiveFontSize}
+              pb={3}
+              color="purple.400"
+            >
               {balance.length > 0 ? balance[balanceIndex].name : ''}
             </Heading>
             <IconButton
@@ -141,7 +150,12 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
                 handleLeftClick(core, coreIndex, setCoreIndex);
               }}
             />
-            <Heading textAlign="center" fontSize={responsiveFontSize} pb={3}>
+            <Heading
+              textAlign="center"
+              fontSize={responsiveFontSize}
+              pb={3}
+              color="purple.400"
+            >
               {core.length > 0 ? core[coreIndex].name : ''}
             </Heading>
             <IconButton
