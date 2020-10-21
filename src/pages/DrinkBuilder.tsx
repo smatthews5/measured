@@ -37,7 +37,7 @@ const DrinkBuilder: React.FC = () => {
   }, [selection]);
 
   const seasoning = ingredients.filter((ingredient) =>
-    ingredient.builder.includes('seasoning'),
+    ingredient.builder.includes('seasoning' || 'garnish'),
   );
   const balance = ingredients.filter((ingredient) =>
     ingredient.builder.includes('balance'),
@@ -101,8 +101,12 @@ const DrinkBuilder: React.FC = () => {
         <Divider />
       </div>
       <div id="scroll">
-        <Flex>
-          <Flex width="50vw" direction="column">
+        <Flex width="100%" direction={['column', 'column', 'column', 'row']}>
+          <Flex
+            width={['100%', '100%', '100%', '50%']}
+            direction="column"
+            align="center"
+          >
             <CocktailShaker
               seasoning={seasoning}
               balance={balance}
@@ -117,12 +121,11 @@ const DrinkBuilder: React.FC = () => {
               handleLeftClick={handleLeftClick}
               handleRightClick={handleRightClick}
             />
-            <Flex>
+            <Flex align="center" justify="center" py={4} w="80%">
               <Button
-                w="30%"
-                my="3%"
-                ml="20%"
-                mr="1%"
+                w="60%"
+                h="55px"
+                mx={2}
                 onClick={handleButtonClick}
                 variant="unstyled"
                 bgColor="purple.400"
@@ -131,31 +134,30 @@ const DrinkBuilder: React.FC = () => {
                 height={responsiveButtonHeight}
                 zIndex={4}
               >
-                Find cocktails
+                What can I build?
               </Button>
-              <Button
-                w="30%"
-                my="3%"
-                ml="1%"
-                onClick={() => setSelection([])}
-                variant="outline"
-                color="purple.400"
-                borderColor="purple.400"
-                fontSize={responsiveFontButton}
-                height={responsiveButtonHeight}
-                zIndex={4}
-              >
-                Reset
-              </Button>
+              {selection.length ? (
+                <Button
+                  w="30%"
+                  h="55px"
+                  mx={2}
+                  onClick={() => setSelection([])}
+                  variant="outline"
+                  color="purple.400"
+                  borderColor="purple.400"
+                  fontSize={responsiveFontButton}
+                  height={responsiveButtonHeight}
+                  zIndex={4}
+                >
+                  Back to instructions
+                </Button>
+              ) : null}
             </Flex>
           </Flex>
-          <Box
-            width="50vw"
-            borderLeft="0.5px solid lightGray"
-            px="5%"
-            pt="2%"
-            h="85vh"
+          <Flex
+            width={['100%', '100%', '100%', '50%']}
             overflowX="scroll"
+            borderLeft="0.5px solid gray.400"
           >
             {selection.length === 0 ? (
               <BuilderInstructions />
@@ -165,7 +167,7 @@ const DrinkBuilder: React.FC = () => {
                 selection={selection}
               />
             )}
-          </Box>
+          </Flex>
         </Flex>
       </div>
     </>
