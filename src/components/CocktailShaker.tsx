@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Image, Box, IconButton } from '@chakra-ui/core';
+import { Flex, Image, Box, IconButton, Heading } from '@chakra-ui/core';
 import { ChevronRightIcon, ChevronLeftIcon } from '@chakra-ui/icons';
 import shaker from '../assets/images/shaker.jpg';
 
@@ -44,6 +44,9 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
   handleLeftClick,
   handleRightClick,
 }) => {
+  const responsiveFontSize = ['2xl', '2xl', '3xl', '3xl'];
+  const responsiveBoxSize = ['', '', '', ''];
+
   return (
     <>
       <Flex
@@ -57,109 +60,98 @@ const CocktailShaker: React.FC<CocktailShakerProps> = ({
       >
         <Image
           src={shaker}
-          mt="3%"
-          height="85vh"
+          height="100%"
           width="auto"
           minWidth="350px"
           position="absolute"
           zIndex={2}
         />
 
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="25vh">
-          <IconButton
-            aria-label="Change index"
-            icon={<ChevronLeftIcon fontSize="3xl" />}
-            height="8vh"
-            background="white"
-            onClick={() => {
-              handleLeftClick(seasoning, seasoningIndex, setSeasoningIndex);
-            }}
-          />
-          <Box
-            width="25vw"
-            height="8vh"
-            background="white"
-            textAlign="center"
-            fontSize="3vw"
-            fontFamily="heading"
-            textTransform="uppercase"
-            pt="1%"
+        <Flex
+          zIndex={3}
+          align="space-between"
+          justify="space-between"
+          direction="column"
+          pt="10%"
+          w="80%"
+          minWidth="300px"
+          h="50%"
+        >
+          <Flex
+            zIndex={3}
+            justify="space-between"
+            align="center"
+            height="7vh"
+            bg="white"
           >
-            {seasoning.length > 0 ? seasoning[seasoningIndex].name : ''}
-          </Box>
-          <IconButton
-            aria-label="Change index"
-            icon={<ChevronRightIcon fontSize="3xl" />}
-            height="8vh"
-            background="white"
-            onClick={() => {
-              handleRightClick(seasoning, seasoningIndex, setSeasoningIndex);
-            }}
-          />
-        </Flex>
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="3vh">
-          <IconButton
-            aria-label="Change index"
-            icon={<ChevronLeftIcon fontSize="3xl" />}
-            height="8vh"
-            background="white"
-            onClick={() => {
-              handleLeftClick(balance, balanceIndex, setBalanceIndex);
-            }}
-          />
-          <Box
-            width="25vw"
-            height="8vh"
-            background="white"
-            textAlign="center"
-            fontSize="3vw"
-            fontFamily="heading"
-            textTransform="uppercase"
-            pt="1%"
+            <IconButton
+              aria-label="Change index"
+              icon={<ChevronLeftIcon fontSize="3xl" />}
+              onClick={() => {
+                handleLeftClick(seasoning, seasoningIndex, setSeasoningIndex);
+              }}
+            />
+            <Heading textAlign="center" fontSize={responsiveFontSize} pb={3}>
+              {seasoning.length > 0 ? seasoning[seasoningIndex].name : ''}
+            </Heading>
+            <IconButton
+              aria-label="Change index"
+              icon={<ChevronRightIcon fontSize="3xl" />}
+              onClick={() => {
+                handleRightClick(seasoning, seasoningIndex, setSeasoningIndex);
+              }}
+            />
+          </Flex>
+          <Flex
+            zIndex={3}
+            justify="space-between"
+            align="center"
+            height="7vh"
+            bg="white"
           >
-            {balance.length > 0 ? balance[balanceIndex].name : ''}
-          </Box>
-          <IconButton
-            aria-label="Change index"
-            icon={<ChevronRightIcon fontSize="3xl" />}
-            height="8vh"
-            background="white"
-            onClick={() => {
-              handleRightClick(balance, balanceIndex, setBalanceIndex);
-            }}
-          />
-        </Flex>
-        <Flex position="relative" zIndex={3} justifyContent="center" pt="3vh">
-          <IconButton
-            aria-label="Change index"
-            icon={<ChevronLeftIcon fontSize="3xl" />}
-            height="8vh"
-            background="white"
-            onClick={() => {
-              handleLeftClick(core, coreIndex, setCoreIndex);
-            }}
-          />
-          <Box
-            width="25vw"
-            height="8vh"
-            background="white"
-            textAlign="center"
-            fontSize="3vw"
-            fontFamily="heading"
-            textTransform="uppercase"
-            pt="1%"
+            <IconButton
+              aria-label="Change index"
+              icon={<ChevronLeftIcon fontSize="3xl" />}
+              onClick={() => {
+                handleLeftClick(balance, balanceIndex, setBalanceIndex);
+              }}
+            />
+            <Heading textAlign="center" fontSize={responsiveFontSize} pb={3}>
+              {balance.length > 0 ? balance[balanceIndex].name : ''}
+            </Heading>
+            <IconButton
+              aria-label="Change index"
+              icon={<ChevronRightIcon fontSize="3xl" />}
+              onClick={() => {
+                handleRightClick(balance, balanceIndex, setBalanceIndex);
+              }}
+            />
+          </Flex>
+          <Flex
+            zIndex={3}
+            justify="space-between"
+            align="center"
+            height="7vh"
+            bg="white"
           >
-            {core.length > 0 ? core[coreIndex].name : ''}
-          </Box>
-          <IconButton
-            aria-label="Change index"
-            icon={<ChevronRightIcon fontSize="3xl" />}
-            height="8vh"
-            background="white"
-            onClick={() => {
-              handleRightClick(core, coreIndex, setCoreIndex);
-            }}
-          />
+            <IconButton
+              aria-label="Change index"
+              icon={<ChevronLeftIcon fontSize="3xl" />}
+              onClick={() => {
+                handleLeftClick(core, coreIndex, setCoreIndex);
+              }}
+            />
+            <Heading textAlign="center" fontSize={responsiveFontSize} pb={3}>
+              {core.length > 0 ? core[coreIndex].name : ''}
+            </Heading>
+            <IconButton
+              aria-label="Change index"
+              icon={<ChevronRightIcon fontSize="3xl" />}
+              onClick={() => {
+                handleRightClick(core, coreIndex, setCoreIndex);
+              }}
+            />
+          </Flex>
         </Flex>
       </Flex>
     </>

@@ -4,6 +4,7 @@ import {
   FormLabel,
   Input,
   Flex,
+  Text,
   Button,
   Image,
   Heading,
@@ -90,134 +91,118 @@ const Form: React.FC = () => {
   return (
     <Flex
       justify="center"
+      align="center"
       direction="row"
       width="100%"
       height="100%"
+      position="relative"
     >
+      <Image
+        src={loginBG}
+        fit="cover"
+        position="absolute"
+        width="100%"
+        height="100%"
+        overflow="hidden"
+      />
       <Flex
-        justify="center"
-        direction="row"
-        width="50vw"
-        borderRadius="8px"
-        height="70vh"
+        justify="space-between"
+        align="center"
+        direction="column"
+        width="80vw"
         minWidth="400px"
+        overflowX="scroll"
+        pb={2}
       >
-        <Image
-          src={loginBG}
-          fit="cover"
-          position="absolute"
-          width="50vw"
-          height="66vh"
-          marginTop="50px"
-          borderRadius="8px"
-          minWidth="400px"
-          boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.5)"
-        ></Image>
-        <Flex
-          width="55%"
-          direction="column"
-          justify="center"
-          align="center"
-          padding="10px"
-          margin="40px"
-          minWidth="300px"
+        <Heading
+          color="white"
+          zIndex="0"
+          textTransform="uppercase"
+          mb={2}
+          fontSize={['3xl', '4xl', '5xl', '6xl']}
         >
-          <Heading
-            alignSelf="center"
-            color="white"
-            zIndex="0"
-            textTransform="uppercase"
-            marginTop="10px"
-          >
-            Create a Measured account
-          </Heading>
-
-          <Button
-            minWidth="200px"
-            leftIcon={<FcGoogle />}
-            width="50%"
-            marginTop="20px"
-            onClick={googleSignIn}
-            bgColor="white"
-            _hover={{ bgColor: 'white' }}
-            color="gray"
-            border="0.5px solid lightGray"
-            boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
-          >
-            Sign up with Google
-          </Button>
-          <Heading
-            mt={2}
-            color="white"
-            fontSize="2xl"
-            zIndex="0"
-            textTransform="uppercase"
-          >
-            or
-          </Heading>
-          <FormControl width="100%" isRequired>
-            <FormLabel color="white">Display Name</FormLabel>
-            <Input
-              marginBottom="20px"
-              placeholder="Display name"
+          Create a Measured account
+        </Heading>
+        <Flex direction="column" mb={3} zIndex="0">
+          <Flex align="center" justify="center">
+            <Text color="white">Already have an account?</Text>
+            <Heading
+              pl={2}
+              pb={1}
               color="white"
-              value={displayName}
-              onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
-                setDisplayName(value.target.value)
-              }
-            />
-            <FormLabel padding="2px" margin="2px" color="white">
-              Email address
-            </FormLabel>
-            <Input
-              marginBottom="20px"
-              placeholder="Email"
-              type="email"
-              color="white"
-              value={newEmail}
-              onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
-                setNewEmail(value.target.value)
-              }
-            />
-            <FormLabel padding="2px" margin="2px" color="white">
-              Password
-            </FormLabel>
-            <Input
-              placeholder="Password"
-              type="password"
-              color="white"
-              value={newPassword}
-              onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
-                setNewPassword(value.target.value)
-              }
-            />
-          </FormControl>
-          <Flex width="100%" marginTop="20px">
-            <Button
-              width="50%"
-              marginRight="5px"
-              marginTop="10px"
-              onClick={onSubmit}
-              color="white"
-              bgColor="purple.400"
-              _hover={{ bgColor: 'purple.400' }}
-            >
-              Sign up
-            </Button>
-            <Button
-              width="50%"
-              marginRight="5px"
-              marginTop="10px"
+              fontSize="2xl"
+              zIndex="0"
+              textTransform="uppercase"
+              _hover={{ color: 'gray.300' }}
               onClick={onOpen}
-              color="white"
-              bgColor="purple.400"
-              _hover={{ bgColor: 'purple.400' }}
             >
-              Sign in
-            </Button>
+              Sign in &rarr;
+            </Heading>
           </Flex>
-          <FormModal onClose={onClose} isOpen={isOpen} user={user} />
         </Flex>
+
+        <FormControl width="50%" py={3} isRequired>
+          <FormLabel pt={1} color="white">
+            Name
+          </FormLabel>
+          <Input
+            mb={2}
+            color="white"
+            value={displayName}
+            onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
+              setDisplayName(value.target.value)
+            }
+          />
+          <FormLabel pt={1} color="white">
+            Email
+          </FormLabel>
+          <Input
+            mb={2}
+            type="email"
+            color="white"
+            value={newEmail}
+            onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
+              setNewEmail(value.target.value)
+            }
+          />
+          <FormLabel pt={1} color="white">
+            Password
+          </FormLabel>
+          <Input
+            mb={2}
+            type="password"
+            color="white"
+            value={newPassword}
+            onChange={(value: React.ChangeEvent<HTMLInputElement>) =>
+              setNewPassword(value.target.value)
+            }
+          />
+        </FormControl>
+        <Button
+          minWidth="300px"
+          width="30%"
+          height="55px"
+          mt={6}
+          onClick={onSubmit}
+          color="purple.400"
+          bgColor="white"
+          _hover={{ bgColor: 'gray.200' }}
+        >
+          Sign up with <span id="title">Measured</span>
+        </Button>
+        <Button
+          minWidth="300px"
+          leftIcon={<FcGoogle />}
+          width="30%"
+          height="55px"
+          mt={3}
+          onClick={googleSignIn}
+          bgColor="white"
+          _hover={{ bgColor: 'gray.200' }}
+        >
+          Sign up with Google
+        </Button>
+        <FormModal onClose={onClose} isOpen={isOpen} user={user} />
       </Flex>
     </Flex>
   );

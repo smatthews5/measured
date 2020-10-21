@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Flex,
-  Image,
-  Heading,
-  Tag,
-  TagLabel,
-} from '@chakra-ui/core';
+import { Flex, Image, Heading, Tag, TagLabel } from '@chakra-ui/core';
 import { Cocktail } from '../interfaces';
 import { navigate, RouteComponentProps } from '@reach/router';
 import loading from '../assets/images/loading.png';
@@ -21,7 +15,8 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
 }) => {
   return (
     <Flex
-      mb="6%"
+      m={4}
+      w="95%"
       h="20vh"
       onClick={() =>
         // eslint-disable-next-line no-prototype-builtins
