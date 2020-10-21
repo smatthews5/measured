@@ -5,7 +5,6 @@ import {
   Input,
   Flex,
   Button,
-  Text,
   Image,
   Heading,
   useToast,
@@ -15,9 +14,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
   Modal,
-  Link,
 } from '@chakra-ui/core';
 import { signInWithGoogle } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
