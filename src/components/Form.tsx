@@ -90,22 +90,16 @@ const Form: React.FC = () => {
   return (
     <Flex
       justify="center"
-      align="center"
       direction="row"
-      margin="10px"
       width="100%"
       height="100%"
-      marginTop="50px"
     >
       <Flex
         justify="center"
-        align="center"
         direction="row"
-        margin="10px"
         width="50vw"
-        marginTop="50px"
         borderRadius="8px"
-        height="60vh"
+        height="70vh"
         minWidth="400px"
       >
         <Image
@@ -133,7 +127,7 @@ const Form: React.FC = () => {
             color="white"
             zIndex="0"
             textTransform="uppercase"
-            marginTop="50px"
+            marginTop="10px"
           >
             Create a Measured account
           </Heading>
@@ -142,7 +136,7 @@ const Form: React.FC = () => {
             minWidth="200px"
             leftIcon={<FcGoogle />}
             width="50%"
-            marginTop="40px"
+            marginTop="20px"
             onClick={googleSignIn}
             bgColor="white"
             _hover={{ bgColor: 'white' }}
@@ -198,7 +192,7 @@ const Form: React.FC = () => {
               }
             />
           </FormControl>
-          <Flex width="100%" margin="20px">
+          <Flex width="100%" marginTop="20px">
             <Button
               width="50%"
               marginRight="5px"
