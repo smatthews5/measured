@@ -19,8 +19,8 @@ const responsiveButtonHeight = ['20px', '30px', '40px'];
 
 interface IngredientSearchProps extends RouteComponentProps {
   barCategories: string[];
-  category: string[] | string[];
-  handleSelect: (category: string | string[]) => void;
+  category: string[];
+  handleSelect: (category: string[]) => void;
   clearCategories: () => void;
 }
 
@@ -65,7 +65,10 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
                   type="checkbox"
                   defaultValue={category}
                   value={category}
-                  onChange={(value) => handleSelect(value)}
+                  onChange={(value) => {
+                    if (typeof value === 'string') value = [value];
+                    handleSelect(value);
+                  }}
                 >
                   {barCategories.map((item: string) => (
                     <MenuItemOption
@@ -105,28 +108,29 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
                   Show me...
                 </Heading>
               </Flex>
-              {category.length > 0 ?
+              {category.length > 0 ? (
                 category.map((selection) => (
+                  <Heading
+                    as="h5"
+                    key={selection}
+                    pl={3}
+                    textTransform="uppercase"
+                    color="gray.400"
+                    fontSize={responsiveFontButton}
+                  >
+                    {selection}
+                  </Heading>
+                ))
+              ) : (
                 <Heading
                   as="h5"
-                  key={selection}
                   pl={3}
                   textTransform="uppercase"
                   color="gray.400"
                   fontSize={responsiveFontButton}
                 >
-                  {selection}
+                  all
                 </Heading>
-              )) : (
-                <Heading
-                as="h5"
-                pl={3}
-                textTransform="uppercase"
-                color="gray.400"
-                fontSize={responsiveFontButton}
-              >
-                all
-              </Heading>
               )}
             </Flex>
           </Flex>

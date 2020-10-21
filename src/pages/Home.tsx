@@ -8,11 +8,19 @@ import CardGallery from '../containers/CardGallery';
 import { Divider } from '@chakra-ui/core';
 
 import LoadingScreen from './LoadingScreen';
+import { Cocktail } from '../interfaces';
 
 const Home: React.FC = () => {
   const { booze } = useContext(BoozeContext);
   const { user } = useContext(UserContext);
   const [isLoading, toggleLoading] = useState(true);
+
+  let cocktails: Cocktail[] = [];
+  let categories: string[] = [];
+  if (booze) {
+    cocktails = booze.cocktails;
+    categories = booze.categories;
+  }
 
   useEffect(() => {
     if (isLoading) {
@@ -37,18 +45,15 @@ const Home: React.FC = () => {
             <Search existingSearch={''} />
             {user && user.likedDrinks.length ? (
               <CardGallery
-                content={booze.cocktails.filter((cocktail) =>
+                content={cocktails.filter((cocktail) =>
                   user.likedDrinks.includes(cocktail.name),
                 )}
                 categoryHeading="top shelf — my favourites"
               />
             ) : null}
-            <CardGallery
-              content={booze.cocktails}
-              categoryHeading="all cocktails"
-            />
-            {booze.categories.map((category) => {
-              const categoryCocktails = booze.cocktails.filter((cocktail) =>
+            <CardGallery content={cocktails} categoryHeading="all cocktails" />
+            {categories.map((category) => {
+              const categoryCocktails = cocktails.filter((cocktail) =>
                 cocktail.categories.includes(category),
               );
               return (
