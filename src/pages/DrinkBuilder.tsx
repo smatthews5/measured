@@ -6,6 +6,7 @@ import CocktailShaker from '../components/CocktailShaker';
 import { Box, Divider, Flex, Button } from '@chakra-ui/core';
 import { Cocktail, Ingredient } from '../interfaces';
 import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
+import BuilderInstructions from '../containers/BuilderInstructions';
 // import CardSuggestionContainer from '../containers/CardSuggestionContainer';
 
 const responsiveFontButton = ['8px', '12px', '14px', '16px'];
@@ -109,20 +110,37 @@ const DrinkBuilder: React.FC = () => {
               handleLeftClick={handleLeftClick}
               handleRightClick={handleRightClick}
             />
-            <Button
-              w="60%"
-              my="3%"
-              ml="20%"
-              onClick={handleButtonClick}
-              variant="unstyled"
-              bgColor="purple.400"
-              color="white"
-              fontSize={responsiveFontButton}
-              height={responsiveButtonHeight}
-              zIndex={4}
-            >
-              Find cocktails
-            </Button>
+            <Flex>
+              <Button
+                w="30%"
+                my="3%"
+                ml="20%"
+                mr="1%"
+                onClick={handleButtonClick}
+                variant="unstyled"
+                bgColor="purple.400"
+                color="white"
+                fontSize={responsiveFontButton}
+                height={responsiveButtonHeight}
+                zIndex={4}
+              >
+                Find cocktails
+              </Button>
+              <Button
+                w="30%"
+                my="3%"
+                ml="1%"
+                onClick={() => setSelection([])}
+                variant="outline"
+                color="purple.400"
+                borderColor="purple.400"
+                fontSize={responsiveFontButton}
+                height={responsiveButtonHeight}
+                zIndex={4}
+              >
+                Reset
+              </Button>
+            </Flex>
           </Flex>
           <Box
             width="50vw"
@@ -132,10 +150,14 @@ const DrinkBuilder: React.FC = () => {
             h="85vh"
             overflowX="scroll"
           >
-            <BuilderSuggestionContainer
-              cocktails={content}
-              selection={selection}
-            />
+            {selection.length === 0 ? (
+              <BuilderInstructions />
+            ) : (
+              <BuilderSuggestionContainer
+                cocktails={content}
+                selection={selection}
+              />
+            )}
           </Box>
         </Flex>
       </div>

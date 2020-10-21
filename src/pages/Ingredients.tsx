@@ -17,7 +17,6 @@ const Ingredients: React.FC = () => {
     ingredients = booze.ingredients.sort((a, b) =>
       a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
     );
-
   const location = useLocation();
 
   const barCategories = [
@@ -49,6 +48,7 @@ const Ingredients: React.FC = () => {
     const filteredIngredients = ingredients
       .filter((ingredient) => searchTerms.includes(ingredient.barCategory))
       .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
+
     return filteredIngredients;
   };
 

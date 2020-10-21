@@ -81,8 +81,8 @@ const Header: React.FC = () => {
       await auth
         .signInWithEmailAndPassword(email, password)
         .then(() => {
+          onClose();
           setTimeout(() => successfulLogin(), 1000);
-          setTimeout(() => onClose(), 1000);
           setTimeout(() => navigate('/'), 1000);
           setTimeout(() => {
             setEmail('');
