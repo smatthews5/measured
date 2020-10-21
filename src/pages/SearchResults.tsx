@@ -70,7 +70,7 @@ const SearchResults = () => {
           cocktails={
             results.length ? results : booze?.cocktails ? booze.cocktails : []
           }
-          title="Search results"
+          title= {results.length ? 'Search results' : 'nothing matched your search, take a look at everything..' }
         />
       </div>
     </>
