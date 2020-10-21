@@ -34,7 +34,6 @@ const Header: React.FC = () => {
   const { user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -85,12 +84,13 @@ const Header: React.FC = () => {
           setTimeout(() => successfulLogin(), 1000);
           setTimeout(() => onClose(), 1000);
           setTimeout(() => navigate('/'), 1000);
-          setEmail('');
-          setPassword('');
+          setTimeout(() => {
+            setEmail('');
+            setPassword('');
+          }, 1000);
         })
         .catch((error) => {
           const errors = error.message;
-          setErrors(errors);
           if (errors) {
             showErrors(errors);
           }
@@ -211,6 +211,7 @@ const Header: React.FC = () => {
             alt="Login/signup icon"
             mb={2}
             onClick={onOpen}
+            cursor="pointer"
           />
         </Flex>
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -244,6 +245,12 @@ const Header: React.FC = () => {
                       justify="space-between"
                       direction="column"
                     >
+                      <Text color="white" zIndex="0" fontSize="20px">
+                        {user.displayName}
+                      </Text>
+                      <Text color="white" zIndex="0" fontSize="20px">
+                        {user.email}
+                      </Text>
                       <Heading
                         mt={2}
                         color="white"
@@ -330,7 +337,7 @@ const Header: React.FC = () => {
                       boxShadow="0px 0px 10px 0.5px rgba(0,0,0,0.15)"
                       height="55px"
                     >
-                      Login with Google
+                      Log in with Google
                     </Button>
                     <Heading
                       mt={2}
