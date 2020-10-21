@@ -30,7 +30,10 @@ const DrinkBuilder: React.FC = () => {
 
   useEffect(() => {
     const newCocktails = filterCocktails(selection);
-    setContent(newCocktails.sort((a, b) => b.relevance - a.relevance));
+    const sortedCocktails = newCocktails.sort(
+      (a, b) => b.relevance - a.relevance,
+    );
+    setContent(sortedCocktails);
   }, [selection]);
 
   const seasoning = ingredients.filter((ingredient) =>
