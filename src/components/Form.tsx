@@ -30,7 +30,6 @@ const Form: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -80,7 +79,6 @@ const Form: React.FC = () => {
       setNewPassword('');
     } catch (error) {
       const errors = error.message;
-      setErrors(errors);
       showErrors(errors);
     }
   };
@@ -107,7 +105,6 @@ const Form: React.FC = () => {
         })
         .catch((error) => {
           const errors = error.message;
-          setErrors(errors);
           if (errors) {
             showErrors(errors);
           }
