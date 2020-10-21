@@ -31,7 +31,6 @@ const MyBar: React.FC = () => {
         toggleLoading(false);
       }, 1500);
     }
-    if (!user) navigate('/welcome');
     if (user && booze) {
       setIngredientsDetail(
         booze.ingredients.filter((ingredient) =>
