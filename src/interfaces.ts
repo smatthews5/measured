@@ -4,8 +4,7 @@ export interface User {
   email: string;
   myIngredients: string[];
   likedDrinks: string[];
-  createdDrinks: Cocktail[];
-  photoUrl: string;
+  photoURL: string;
   createdAt: Date;
 }
 
@@ -38,8 +37,9 @@ export interface Cocktail {
   ingredientsList: string[];
   garnish: Garnish;
   instructions: string[];
-  relevance?: number;
-  id?: string;
+  relevance: number;
+  // id: string;
+  [property: string]: any;
 }
 
 export interface Ingredient {

@@ -51,7 +51,7 @@ export const removeDuplicatesAndRankResults = (
   }
 };
 
-export const shuffleOrder = (content: Ingredient[] | Cocktail[]) => {
+export const shuffleOrder = (content: Cocktail[]) => {
   let current = content.length;
   let temp;
   let random;

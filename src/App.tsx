@@ -53,7 +53,7 @@ const App: React.FC = () => {
       .then((allIngredients: Ingredient[]) =>
         setBooze((prevState) => ({
           ...prevState,
-          ingredients: shuffleOrder(allIngredients),
+          ingredients: allIngredients,
         })),
       )
       .catch((error) =>
@@ -61,7 +61,10 @@ const App: React.FC = () => {
       );
     CocktailService.getCocktails()
       .then((allCocktails: Cocktail[]) => {
-        setBooze((prevState) => ({ ...prevState, cocktails: allCocktails }));
+        setBooze((prevState) => ({
+          ...prevState,
+          cocktails: shuffleOrder(allCocktails),
+        }));
         return allCocktails;
       })
       .then((allCocktails) => {
@@ -78,8 +81,12 @@ const App: React.FC = () => {
       .catch((error) => console.log('---> error getting all cocktails', error));
 
     CocktailService.auth.onAuthStateChanged(async (userAuth) => {
-      const user = await CocktailService.createUserProfileDocument(userAuth);
+      //if (userAuth) {
+      const user = await CocktailService.createUserProfileDocument(userAuth, {
+        displayName: '',
+      });
       setUser(user);
+      //}
     });
   }, []);
 
