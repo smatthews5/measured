@@ -14,10 +14,9 @@ import full from '../assets/images/full.png';
 import loading from '../assets/images/loading.png';
 import measurements from '../assets/images/measurements.png';
 
-import { Cocktail } from '../interfaces';
+import { Cocktail, User } from '../interfaces';
 
 import {
-  Box,
   Flex,
   Heading,
   Image,
@@ -30,7 +29,7 @@ import {
 import { calculateFraction } from '../utilities';
 
 interface RecipeDetailProps extends RouteComponentProps {
-  cocktail: Cocktail | undefined;
+  cocktail: Cocktail;
 }
 
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
@@ -49,14 +48,16 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   }, [cocktail?.name, user, user?.likedDrinks]);
 
   const handleClickMyBar = async (cocktail: string) => {
-    let cocktailList = user?.likedDrinks.slice();
-    if (!cocktailList?.includes(cocktail)) {
-      addCocktail(user?.uid, cocktail);
-    } else {
-      removeCocktail(user?.uid, cocktail);
+    if (user) {
+      let cocktailList = user?.likedDrinks.slice();
+      if (!cocktailList?.includes(cocktail)) {
+        addCocktail(user.uid, cocktail);
+      } else {
+        removeCocktail(user.uid, cocktail);
+      }
+      const updatedUser: User | undefined = await getUserDocument(user.uid);
+      if (updatedUser) setUser(updatedUser);
     }
-    const updatedUser = await getUserDocument(user?.uid);
-    setUser(updatedUser);
   };
 
   const convertOzToMl = (measurement: number, unit: string) => {

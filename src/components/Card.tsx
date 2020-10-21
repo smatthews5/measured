@@ -45,13 +45,15 @@ const Card: React.FC<CardProps> = ({ content }) => {
   const responsiveHeading = ['0px', '0px', '58px', '58px'];
 
   const handleClickMyBar = async (cocktail: string) => {
-    if (!user?.likedDrinks.includes(cocktail)) {
-      addCocktail(user.uid, cocktail);
-    } else {
-      removeCocktail(user.uid, cocktail);
+    if (user) {
+      if (!user.likedDrinks.includes(cocktail)) {
+        addCocktail(user.uid, cocktail);
+      } else {
+        removeCocktail(user.uid, cocktail);
+      }
+      const updatedUser = await getUserDocument(user.uid);
+      if (updatedUser) setUser(updatedUser);
     }
-    const updatedUser = await getUserDocument(user.uid);
-    setUser(updatedUser);
   };
 
   useEffect(() => {
