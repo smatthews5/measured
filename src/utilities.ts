@@ -22,7 +22,9 @@ export const getUniqueOptions = (
   return sortedValues;
 };
 
-export const removeDuplicatesAndRankResults = (allMatches: Cocktail[]) => {
+export const removeDuplicatesAndRankResults = (
+  allMatches: Cocktail[],
+): Cocktail[] => {
   try {
     const relevance: Relevance = {};
     const uniqueCocktails: Cocktail[] = [];
@@ -45,6 +47,7 @@ export const removeDuplicatesAndRankResults = (allMatches: Cocktail[]) => {
     return rankedCocktails;
   } catch (error) {
     console.log('---> error ranking and removing duplicates', error);
+    return [];
   }
 };
 

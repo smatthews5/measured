@@ -17,7 +17,7 @@ const Ingredients: React.FC = () => {
     ingredients = booze.ingredients.sort((a, b) =>
       a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
     );
-  const location = useLocation();
+  const location: any = useLocation();
 
   const barCategories = [
     'spirit',
@@ -29,9 +29,7 @@ const Ingredients: React.FC = () => {
   const { category } = location.state;
   const initialValue = category === undefined ? [] : [category];
 
-  const [searchTerms, setSearchTerms] = useState<string | string[]>(
-    initialValue,
-  );
+  const [searchTerms, setSearchTerms] = useState<string[]>(initialValue);
   const [filteredIngredients, setFilteredIngredients] = useState<Ingredient[]>(
     ingredients,
   );
@@ -43,7 +41,7 @@ const Ingredients: React.FC = () => {
 
   const filterIngredients = (
     ingredients: Ingredient[],
-    searchTerms: string | string[],
+    searchTerms: string[],
   ) => {
     const filteredIngredients = ingredients
       .filter((ingredient) => searchTerms.includes(ingredient.barCategory))
@@ -52,7 +50,7 @@ const Ingredients: React.FC = () => {
     return filteredIngredients;
   };
 
-  const handleSelect = (searchTerms: string | string[]) => {
+  const handleSelect = (searchTerms: string[]) => {
     setSearchTerms(searchTerms);
   };
 

@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import RecipeDetail from '../components/RecipeDetail';
 import { useParams } from '@reach/router';
 import { Divider } from '@chakra-ui/core';
+import { Cocktail } from '../interfaces';
 
 const Recipe: React.FC = () => {
   const { booze } = useContext(BoozeContext);

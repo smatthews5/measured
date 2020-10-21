@@ -15,21 +15,26 @@ const SearchResults = () => {
   const { booze } = useContext(BoozeContext);
   const [results, setResults] = useState<Cocktail[]>([]);
 
+  let cocktails: Cocktail[] = [];
+  if (booze) {
+    cocktails = booze.cocktails;
+  }
+
   const getMatches = async (
     baseArray: string[],
     categoryArray: string[],
     searchTermsArray: string[],
   ) => {
     try {
-      const matchBases = booze?.cocktails.filter((cocktail) =>
+      const matchBases = cocktails.filter((cocktail) =>
         baseArray.includes(cocktail.base),
       );
-      const matchCategories = booze?.cocktails.filter((cocktail) =>
+      const matchCategories = cocktails.filter((cocktail) =>
         cocktail.categories.some((categoryName) =>
           categoryArray.includes(categoryName),
         ),
       );
-      const matchSearchTerms = booze?.cocktails.filter(
+      const matchSearchTerms = cocktails.filter(
         (cocktail) => splitAndSearch(cocktail, searchTermsArray) > 0,
       );
       const allMatches = [
