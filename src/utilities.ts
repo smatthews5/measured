@@ -105,9 +105,9 @@ export const filterCocktails = (
   cocktails: Cocktail[],
   ingredients: string[],
 ) => {
-  let allIngredients: Cocktail[] = [];
-  let missingOne: Cocktail[] = [];
-  let missingTwo: Cocktail[] = [];
+  const allIngredients: Cocktail[] = [];
+  const missingOne: Cocktail[] = [];
+  const missingTwo: Cocktail[] = [];
 
   cocktails.forEach((cocktail) => {
     const ingredientsLength = cocktail.ingredientsList.length;
