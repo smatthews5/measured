@@ -7,6 +7,7 @@ import {
   Button,
   Text,
   Image,
+  Heading,
   useToast,
   useDisclosure,
   ModalOverlay,
@@ -16,6 +17,7 @@ import {
   ModalBody,
   ModalFooter,
   Modal,
+  Link,
 } from '@chakra-ui/core';
 import { signInWithGoogle } from '../services/firebase';
 import { FcGoogle } from 'react-icons/fc';
@@ -47,7 +49,7 @@ const Form: React.FC = () => {
   };
   const newAccountMessage = (displayName: string | null) => {
     const message = toast({
-      title: `Hey ${displayName}, you've successfully set up an account!`,
+      title: `Hey ${displayName}, welcome to Measured!`,
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -56,7 +58,7 @@ const Form: React.FC = () => {
   };
   const successfullLogin = () => {
     const message = toast({
-      title: "Hey, you're logged in!",
+      title: 'Welcome back to Measured',
       status: 'success',
       duration: 4000,
       isClosable: true,
@@ -159,11 +161,21 @@ const Form: React.FC = () => {
           margin="40px"
           minWidth="300px"
         >
+          <Heading
+            alignSelf="center"
+            color="white"
+            zIndex="0"
+            textTransform="uppercase"
+            marginTop="50px"
+          >
+            Create a Measured account
+          </Heading>
+
           <Button
             minWidth="200px"
             leftIcon={<FcGoogle />}
             width="50%"
-            margin="20px"
+            marginTop="40px"
             onClick={googleSignIn}
             bgColor="white"
             _hover={{ bgColor: 'white' }}
@@ -173,7 +185,15 @@ const Form: React.FC = () => {
           >
             Sign up with Google
           </Button>
-          <Text margin="20px">Or</Text>
+          <Heading
+            mt={2}
+            color="white"
+            fontSize="2xl"
+            zIndex="0"
+            textTransform="uppercase"
+          >
+            or
+          </Heading>
           <FormControl width="100%" isRequired>
             <FormLabel color="white">Display Name</FormLabel>
             <Input
@@ -250,12 +270,11 @@ const Form: React.FC = () => {
                 ></Image>
                 <ModalHeader
                   alignSelf="center"
-                  textDecoration="underline"
                   color="white"
                   zIndex="0"
-                  bgColor="#9F465F"
+                  bgColor="purple.400"
                 >
-                  Log in to your account
+                  <Heading textTransform="uppercase">Login to Measured</Heading>
                 </ModalHeader>
                 <ModalCloseButton color="white" />
                 <ModalBody pb={6}>
@@ -272,29 +291,33 @@ const Form: React.FC = () => {
                     >
                       Log in with Google
                     </Button>
-                    <Text marginTop="30px" color="white" zIndex="0">
+                    <Heading
+                      mt={2}
+                      color="white"
+                      fontSize="2xl"
+                      zIndex="0"
+                      textTransform="uppercase"
+                    >
                       or
-                    </Text>
-                    <FormControl mt={4} isRequired>
+                    </Heading>
+                    <FormControl mt={1} isRequired>
                       <FormLabel padding="2px" margin="2px" color="white">
-                        email
+                        Email
                       </FormLabel>
                       <Input
-                        placeholder="Email"
                         type="email"
-                        color="white"
                         value={email}
+                        color="white"
                         onChange={(
                           value: React.ChangeEvent<HTMLInputElement>,
                         ) => setEmail(value.target.value)}
                       />
                     </FormControl>
-                    <FormControl mt={4} isRequired>
+                    <FormControl my={2} isRequired>
                       <FormLabel padding="2px" margin="2px" color="white">
-                        password
+                        Password
                       </FormLabel>
                       <Input
-                        placeholder="Password"
                         type="password"
                         color="white"
                         value={password}
@@ -303,27 +326,19 @@ const Form: React.FC = () => {
                         ) => setPassword(value.target.value)}
                       />
                     </FormControl>
-                  </Flex>
-                </ModalBody>
-                <ModalFooter borderBottomRadius="16px" flexDirection="column">
-                  <Flex
-                    direction="row"
-                    width="75%"
-                    justify="space-around"
-                    margin="10px"
-                  >
                     <Button
-                      mr={3}
-                      width="150px"
+                      mt={3}
+                      height="55px"
                       onClick={emailSignIn}
-                      color="white"
-                      bgColor="purple.400"
-                      _hover={{ bgColor: 'purple.400' }}
+                      color="purple.400"
+                      bgColor="white"
+                      _hover={{ bgColor: 'gray.300' }}
+                      width="100%"
                     >
-                      Submit
+                      Login with a <span id="title">Measured</span> account
                     </Button>
                   </Flex>
-                </ModalFooter>
+                </ModalBody>
               </ModalContent>
             </ModalOverlay>
           </Modal>
