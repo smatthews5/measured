@@ -14,10 +14,7 @@ import {
   MenuOptionGroup,
 } from '@chakra-ui/core';
 
-import {
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from '@chakra-ui/icons';
+import { ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 const responsiveFontButton = ['8px', '12px', '14px', '16px'];
 const responsiveButtonHeight = ['20px', '30px', '40px'];
@@ -109,6 +106,7 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
                   type="checkbox"
                   defaultValue={base}
                   onChange={(value) => {
+                    if (typeof value === 'string') value = [value];
                     setBase(value);
                   }}
                 >
@@ -145,6 +143,7 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
                   type="checkbox"
                   defaultValue={category}
                   onChange={(value) => {
+                    if (typeof value === 'string') value = [value];
                     setCategory(value);
                   }}
                 >

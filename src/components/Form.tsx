@@ -75,7 +75,7 @@ const Form: React.FC = () => {
         newEmail,
         newPassword,
       );
-      createUserProfileDocument(user, { displayName });
+      if (user) createUserProfileDocument(user, { displayName });
       newAccountMessage(displayName);
       navigate('/');
       setDisplayName('');

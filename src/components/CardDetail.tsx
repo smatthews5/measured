@@ -2,7 +2,6 @@ import {
   Heading,
   Flex,
   Image,
-  HStack,
   Tag,
   TagLabel,
   Button,
@@ -33,13 +32,15 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
   const toast = useToast();
 
   const handleClickMyBar = async (ingredient: string) => {
-    if (!user.myIngredients.includes(ingredient)) {
-      addIngredient(user.uid, ingredient);
-    } else {
-      removeIngredient(user.uid, ingredient);
+    if (user) {
+      if (!user.myIngredients.includes(ingredient)) {
+        addIngredient(user.uid, ingredient);
+      } else {
+        removeIngredient(user.uid, ingredient);
+      }
+      const updatedUser = await getUserDocument(user.uid);
+      if (updatedUser && setUser) setUser(updatedUser);
     }
-    const updatedUser = await getUserDocument(user.uid);
-    setUser(updatedUser);
   };
 
   return (
@@ -90,7 +91,7 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
           }
         >
           {user?.myIngredients.includes(ingredient.name) ? (
-            <CheckIcon size={30} />
+            <CheckIcon />
           ) : (
             <GiWineBottle size={30} />
           )}

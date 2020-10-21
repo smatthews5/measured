@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Image, Text, Heading } from '@chakra-ui/core';
+import { Flex, Image, Heading } from '@chakra-ui/core';
 import { RouteComponentProps } from '@reach/router';
 
 interface CoreRecipeProps extends RouteComponentProps {
@@ -29,9 +29,6 @@ const CoreRecipe: React.FC<CoreRecipeProps> = ({ recipe, index }) => {
         borderRadius="5px"
       />
       <Heading>{recipe.name}</Heading>
-      {/* <Text>Core: {recipe.core}</Text>
-      <Text>Balance: {recipe.balance}</Text>
-      <Text>Seasoning: {recipe.seasoning}</Text> */}
     </Flex>
   );
 };
