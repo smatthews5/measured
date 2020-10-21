@@ -33,27 +33,21 @@ export const signOut = (): Promise<void> => auth.signOut();
 export const getCocktails = async (): Promise<Cocktail[]> => {
   const snapshot = await firestore.collection('cocktails').get();
   const cocktails = snapshot.docs.map(collectIdsAndDocs);
-  // console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return cocktails;
 };
 
 export const getIngredients = async (): Promise<Ingredient[]> => {
   const snapshot = await firestore.collection('ingredients').get();
   const ingredients = snapshot.docs.map(collectIdsAndDocs);
-  // console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   return ingredients;
 };
 
 export const postCocktail = async (
   newCocktail: Partial<Cocktail>,
 ): Promise<void> => {
-  // console.log('---> RAN A FIREBASE REQUEST AT', new Date());
   await firestore
     .collection('cocktails')
     .add(newCocktail)
-    .then((docRef) =>
-      console.log('---> New cocktail document created with ID:', docRef.id),
-    )
     .catch((error) =>
       console.error('---> Error adding new cocktail to firestore:', error),
     );
@@ -127,7 +121,6 @@ export const addIngredient = async (
     await ingredientsRef.update({
       myIngredients: firebase.firestore.FieldValue.arrayUnion(ingredient),
     });
-    console.log('successfully added ingredient');
   } catch (error) {
     console.error('error updating my ingredients', error.message);
   }
@@ -143,7 +136,6 @@ export const removeIngredient = async (
     await ingredientsRef.update({
       myIngredients: firebase.firestore.FieldValue.arrayRemove(ingredient),
     });
-    console.log('successfully removed ingredient');
   } catch (error) {
     console.error('error updating my ingredients', error.message);
   }
@@ -159,7 +151,6 @@ export const addCocktail = async (
     await userRef.update({
       likedDrinks: firebase.firestore.FieldValue.arrayUnion(cocktail),
     });
-    console.log('successfully added cocktail');
   } catch (error) {
     console.error('error adding cocktail', error.message);
   }
@@ -175,7 +166,6 @@ export const removeCocktail = async (
     await userRef.update({
       likedDrinks: firebase.firestore.FieldValue.arrayRemove(cocktail),
     });
-    console.log('successfully removed cocktail');
   } catch (error) {
     console.error('error removing cocktail', error.message);
   }

@@ -42,11 +42,10 @@ const SearchResults = () => {
         ...matchCategories,
         ...matchSearchTerms,
       ];
-      console.log('---> allMatches', allMatches);
       const rankedMatches = removeDuplicatesAndRankResults(allMatches);
       setResults(rankedMatches);
     } catch (error) {
-      console.log('---> error getting cocktails by base/category', error);
+      console.error('---> error getting cocktails by base/category', error);
     }
   };
 

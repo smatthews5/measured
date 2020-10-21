@@ -92,12 +92,11 @@ const AddACocktail: React.FC = () => {
       ingredientsList,
       garnish,
     };
-    console.log('---> newCocktail:', newCocktail);
     try {
       await postCocktail(newCocktail);
       navigate('/');
     } catch (error) {
-      console.log('---> error posting new cocktail to db', error);
+      console.error('---> error posting new cocktail to db', error);
     }
   };
 

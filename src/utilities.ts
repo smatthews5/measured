@@ -46,7 +46,7 @@ export const removeDuplicatesAndRankResults = (
       .sort((a, b) => b.relevance - a.relevance);
     return rankedCocktails;
   } catch (error) {
-    console.log('---> error ranking and removing duplicates', error);
+    console.error('---> error ranking and removing duplicates', error);
     return [];
   }
 };
