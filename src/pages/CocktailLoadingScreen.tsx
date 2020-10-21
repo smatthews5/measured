@@ -1,18 +1,19 @@
 import React from 'react';
 
 import Lottie from 'react-lottie';
-import martini from '../assets/animations/martini.json';
-const martiniAnimation = {
+import cocktail from '../assets/animations/Cocktail.json';
+
+const cocktailAnimation = {
   loop: false,
   autoplay: true,
-  animationData: martini,
+  animationData: cocktail,
   rendererSettings: {
     preserveAspectRatio: 'xMidYMid slice',
   },
 };
 import { Heading, Flex } from '@chakra-ui/core';
 
-function LoadingScreen() {
+const HomeLoadingScreen: React.FC = () => {
   return (
     <Flex
       align="center"
@@ -21,12 +22,12 @@ function LoadingScreen() {
       height="100vh"
       direction="column"
     >
-      <Lottie options={martiniAnimation} height={250} width={250} />
+      <Lottie options={cocktailAnimation} height={250} width={250} />
       <Heading as="h3" color="purple.400" fontSize="6xl">
         Loading
       </Heading>
     </Flex>
   );
-}
+};
 
-export default LoadingScreen;
+export default HomeLoadingScreen;
