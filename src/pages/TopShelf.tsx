@@ -14,12 +14,13 @@ const TopShelf = () => {
 
   useEffect(() => {
     if (!user) navigate('/');
-    else
+    else if (booze) {
       setUserFavourites(
-        booze?.cocktails.filter((cocktail) =>
+        booze.cocktails.filter((cocktail) =>
           user.likedDrinks.includes(cocktail.name),
         ),
       );
+    }
   }, [user]);
 
   return (

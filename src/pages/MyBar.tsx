@@ -32,20 +32,20 @@ const MyBar: React.FC = () => {
       }, 1500);
     }
     if (!user) navigate('/welcome');
-    if (user) {
+    if (user && booze) {
       setIngredientsDetail(
-        booze?.ingredients.filter((ingredient) =>
+        booze.ingredients.filter((ingredient) =>
           user.myIngredients.includes(ingredient.name),
         ),
       );
       setReady(
-        filterCocktails(booze?.cocktails, user.myIngredients).allIngredients,
+        filterCocktails(booze.cocktails, user.myIngredients).allIngredients,
       );
       setOneMore(
-        filterCocktails(booze?.cocktails, user.myIngredients).missingOne,
+        filterCocktails(booze.cocktails, user.myIngredients).missingOne,
       );
       setTwoMore(
-        filterCocktails(booze?.cocktails, user.myIngredients).missingTwo,
+        filterCocktails(booze.cocktails, user.myIngredients).missingTwo,
       );
     }
   }, [user]);
@@ -109,7 +109,7 @@ const MyBar: React.FC = () => {
                       {category}
                     </Heading>
                     <IngredientsGallery
-                    category={category}
+                      category={category}
                       key={category}
                       ingredients={
                         ingredientsDetail

@@ -13,8 +13,13 @@ const responsiveButtonHeight = ['20px', '30px', '40px'];
 
 const DrinkBuilder: React.FC = () => {
   const { booze } = useContext(BoozeContext);
-  const cocktails = booze?.cocktails;
-  const ingredients = booze?.ingredients;
+
+  let cocktails: Cocktail[] = [];
+  let ingredients: Ingredient[] = [];
+  if (booze) {
+    cocktails = booze.cocktails;
+    ingredients = booze.ingredients;
+  }
 
   const [selection, setSelection] = useState<string[]>([]);
   const [content, setContent] = useState<Cocktail[]>([]);
@@ -25,7 +30,10 @@ const DrinkBuilder: React.FC = () => {
 
   useEffect(() => {
     const newCocktails = filterCocktails(selection);
-    setContent(newCocktails.sort((a, b) => b.relevance - a.relevance));
+    const sortedCocktails = newCocktails.sort(
+      (a, b) => b.relevance - a.relevance,
+    );
+    setContent(sortedCocktails);
   }, [selection]);
 
   const seasoning = ingredients.filter((ingredient) =>

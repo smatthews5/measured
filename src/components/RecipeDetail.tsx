@@ -29,7 +29,7 @@ import {
 import { calculateFraction } from '../utilities';
 
 interface RecipeDetailProps extends RouteComponentProps {
-  cocktail: Cocktail;
+  cocktail: Cocktail | undefined;
 }
 
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
@@ -42,7 +42,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
   const toast = useToast();
 
   useEffect(() => {
-    if (user && user.likedDrinks.includes(cocktail?.name))
+    if (cocktail && user && user.likedDrinks.includes(cocktail.name))
       toggleFavourite(true);
     else toggleFavourite(false);
   }, [cocktail?.name, user, user?.likedDrinks]);
@@ -108,7 +108,9 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ cocktail }) => {
             w={['25px', '25px', '40px', '50px']}
             onClick={
               user
-                ? () => handleClickMyBar(cocktail.name)
+                ? () => {
+                    if (cocktail) handleClickMyBar(cocktail.name);
+                  }
                 : () =>
                     toast({
                       title: 'Log in / sign up to Measured',

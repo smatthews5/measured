@@ -34,9 +34,9 @@ const AddACocktail: React.FC = () => {
   const { booze } = useContext(BoozeContext);
 
   const [name, setName] = useState<string>('');
-  const [base, setBase] = useState<string>('');
+  const [base, setBase] = useState<string | string[]>('');
   const [imageUrl, setImageUrl] = useState<string>('');
-  const [glassware, setGlassware] = useState<string>('');
+  const [glassware, setGlassware] = useState<string | string[]>('');
   const [categories, setCategories] = useState<string[]>([]);
   const [ingredientsList, setIngredientsList] = useState<string[]>([]);
   const [instructions, setInstructions] = useState<{ [key: number]: string }>(
@@ -85,9 +85,9 @@ const AddACocktail: React.FC = () => {
       name: name.toLowerCase(),
       ingredients: allIngredients,
       instructions: Object.values(instructions),
-      base,
+      base: base[0],
       imageUrl,
-      glassware,
+      glassware: glassware[0],
       categories,
       ingredientsList,
       garnish,
@@ -206,7 +206,10 @@ const AddACocktail: React.FC = () => {
                   <MenuOptionGroup
                     title="Select one"
                     type="radio"
-                    onChange={(value: React.SetStateAction<string>) => setBase(value)}
+                    onChange={(value) => {
+                      if (typeof value === 'string') value = [value];
+                      setBase(value);
+                    }}
                   >
                     {booze?.bases.map((base) => (
                       <MenuItemOption value={base} key={base}>
@@ -232,7 +235,10 @@ const AddACocktail: React.FC = () => {
                   <MenuOptionGroup
                     title="Select all"
                     type="checkbox"
-                    onChange={(value) => setCategories(value)}
+                    onChange={(value) => {
+                      if (typeof value === 'string') value = [value];
+                      setCategories(value);
+                    }}
                   >
                     {booze?.categories.map((category) => (
                       <MenuItemOption value={category} key={category}>
@@ -258,7 +264,10 @@ const AddACocktail: React.FC = () => {
                   <MenuOptionGroup
                     title="Select one"
                     type="radio"
-                    onChange={(value) => setGlassware(value)}
+                    onChange={(value) => {
+                      if (typeof value === 'string') value = [value];
+                      setGlassware(value);
+                    }}
                   >
                     {booze?.glasses.map((glass) => (
                       <MenuItemOption value={glass} key={glass}>
@@ -300,6 +309,7 @@ const AddACocktail: React.FC = () => {
                     title="Select all"
                     type="checkbox"
                     onChange={(value) => {
+                      if (typeof value === 'string') value = [value];
                       toggleIngredientSection(true);
                       setIngredientsList(value);
                       setUnits(getUnits());
@@ -345,7 +355,7 @@ const AddACocktail: React.FC = () => {
                           onChange={(value) => {
                             setTempAmounts((prevObj) => ({
                               ...prevObj,
-                              [ingredient]: value,
+                              [ingredient]: parseFloat(value),
                             }));
                           }}
                         >
@@ -404,9 +414,10 @@ const AddACocktail: React.FC = () => {
                     title="Select one"
                     type="radio"
                     onChange={(value) => {
+                      if (typeof value === 'string') value = [value];
                       setGarnish((prevGarnish) => ({
                         ...prevGarnish,
-                        name: value,
+                        name: value[0],
                       }));
                       toggleGarnishSection(true);
                     }}
