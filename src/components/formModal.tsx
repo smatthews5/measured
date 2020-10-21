@@ -26,7 +26,7 @@ import {
 
 import icon from '../assets/images/header_icon.png';
 import loading from '../assets/images/loading.png';
-import loginBG from '../assets/images/loginBg.png';
+import loginBG from '../assets/images/loginBG.png';
 
 interface HeaderProps {
   isOpen: boolean;
@@ -149,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({isOpen, onClose, user}) => {
                         {user.displayName}
                       </Text>
                       <Text color="white" zIndex="0" fontSize="20px">
-                        {user.email}
+                        {user.email.toLowerCase()}
                       </Text>
                       <Heading
                         mt={2}

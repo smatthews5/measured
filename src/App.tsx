@@ -5,7 +5,7 @@ import { UserContext, BoozeContext } from './Context';
 import { Booze, User, Cocktail, Ingredient } from './interfaces';
 
 import * as CocktailService from './services/firebase';
-import { getUniqueOptions } from './utilities';
+import { getUniqueOptions, shuffleOrder } from './utilities';
 
 // import full-screen pages
 import Home from './pages/Home';
@@ -53,7 +53,7 @@ const App: React.FC = () => {
       .then((allIngredients: Ingredient[]) =>
         setBooze((prevState) => ({
           ...prevState,
-          ingredients: allIngredients,
+          ingredients: shuffleOrder(allIngredients),
         })),
       )
       .catch((error) =>
