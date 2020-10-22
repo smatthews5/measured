@@ -8,55 +8,55 @@ const BuilderInstructions: React.FC = () => {
   const [index, setIndex] = useState(0);
   const coreRecipes = [
     {
-      name: 'old fashioned',
-      core: 'bourbon',
-      balance: 'sugar cube',
-      seasoning: 'bitters',
-      variations: ['champagne cocktail', 'mint julep'],
-      imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fold-fashioned.jpg?alt=media&token=56997234-f1fa-4b11-a4e2-25b7d98a9cfe',
-    },
-    {
       name: 'martini',
-      core: 'gin',
-      balance: 'dry vermouth',
-      seasoning: 'lemon / olive',
+      core: 'three parts gin',
+      balance: 'one part dry vermouth',
+      seasoning: 'lemon twist / olive',
       variations: ['manhattan', 'negroni'],
       imageUrl:
         'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fmartini.jpg?alt=media&token=e07331db-a9c7-4dbf-a303-d068cebc236c',
     },
     {
+      name: 'old fashioned',
+      core: 'two parts bourbon',
+      balance: 'one sugar cube',
+      seasoning: 'two dashes bitters',
+      variations: ['champagne cocktail', 'mint julep'],
+      imageUrl:
+        'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fold-fashioned.jpg?alt=media&token=56997234-f1fa-4b11-a4e2-25b7d98a9cfe',
+    },
+    {
       name: 'daiquiri',
-      core: 'rum',
-      balance: 'lime juice',
-      seasoning: 'simple syrup',
+      core: 'eight parts rum',
+      balance: 'three parts lime juice',
+      seasoning: 'three parts simple syrup',
       variations: ['amaretto sour', 'whisky sour'],
       imageUrl:
         'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fdaiquiri.jpg?alt=media&token=a1e5c70b-7edb-43d8-8794-1ccac7e508b2',
     },
     {
       name: 'sidecar',
-      core: 'cognac',
-      balance: 'Cointreau',
-      seasoning: 'lemon',
+      core: 'eight parts cognac',
+      balance: 'three parts triple sec',
+      seasoning: 'three parts lemon',
       variations: ['margarita', 'white lady'],
       imageUrl:
         'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fsidecar.jpg?alt=media&token=d945f152-73c3-464f-b13e-70765ef9d723',
     },
     {
       name: 'whisky highball',
-      core: 'whisky',
-      balance: 'soda water',
-      seasoning: 'lemon',
+      core: 'one part whisky',
+      balance: 'two parts soda water',
+      seasoning: 'lemon wedge',
       variations: ['gin & tonic', 'cuba libre', 'aperol spritz'],
       imageUrl:
         'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fwhisky-highball.jpg?alt=media&token=f9341fdf-5529-400e-a392-7d3573a7a99b',
     },
     {
       name: 'flip',
-      core: 'port',
-      balance: 'egg white',
-      seasoning: 'demerara sugar',
+      core: 'two parts port',
+      balance: 'one whole egg',
+      seasoning: 'two spoons demerara sugar',
       variations: ['white russian', 'pina colada'],
       imageUrl:
         'https://firebasestorage.googleapis.com/v0/b/measured-885db.appspot.com/o/cocktails%2Fflip.jpg?alt=media&token=26d69c49-76ee-4fb4-9f67-3d092673c26f',
@@ -224,6 +224,16 @@ const BuilderInstructions: React.FC = () => {
           </Heading>
           <Text w="100%">{coreRecipes[index].seasoning}</Text>
         </Flex>
+      </Flex>
+      <Flex justify="space-between" align="center" py={4}>
+        <Heading p={4} fontSize={responsiveFontSize} color="gray.400">
+          Formula for
+        </Heading>
+        {coreRecipes[index].variations.map((variation) => (
+          <Text px={4} pb={2} textTransform="capitalize" key={variation}>
+            {variation}
+          </Text>
+        ))}
       </Flex>
     </Flex>
   );

@@ -15,7 +15,7 @@ const Header: React.FC = () => {
 
   const onHomepage = location.pathname === '/';
   const responsiveFontSize = ['md', 'lg', '3xl', '4xl'];
-  const responsiveWidth = ['7vw', '12vw', '17vw', '20vw'];
+  const responsiveWidth = ['7vw', '10vw', '15vw', '18vw'];
   const responsiveImage = ['15px', '30px', '40px', ' 50px'];
   const responsiveImageBorder = ['25px', '40px', '50px', ' 60px'];
   const border = user ? '2px solid #9f465f' : '0px'; //purple.400
@@ -49,7 +49,7 @@ const Header: React.FC = () => {
             align="center"
             justify="center"
             textAlign="center"
-            maxWidth={responsiveWidth}
+            maxWidth={['7vw', '12vw', '17vw', '20vw']}
           >
             <Heading as="h3" fontSize={responsiveFontSize}>
               browse ingredients
