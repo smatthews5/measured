@@ -8,13 +8,7 @@ import LoadingScreen from './CocktailLoadingScreen';
 import Header from '../components/Header';
 import IngredientsGallery from '../containers/IngredientsGallery';
 import BuilderSuggestionContainer from '../containers/BuilderSuggestionContainer';
-import {
-  Box,
-  Flex,
-  Heading,
-  Text,
-  Divider
-} from '@chakra-ui/core';
+import { Box, Flex, Heading, Text, Divider } from '@chakra-ui/core';
 
 // import loadingWhite from '../assets/images/loadingWhite.png';
 const MyBar: React.FC = () => {
@@ -67,9 +61,7 @@ const MyBar: React.FC = () => {
 
   return (
     <>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : null}
+      {isLoading ? <LoadingScreen /> : null}
       <>
         <div id="fixed">
           <Header />
@@ -142,7 +134,8 @@ const MyBar: React.FC = () => {
               pt={['6', '6', '6', '0']}
               overflowX="scroll"
               height="100%"
-              px={4}
+              pl={8}
+              pr={1}
             >
               <Flex
                 direction="row"
@@ -159,16 +152,16 @@ const MyBar: React.FC = () => {
                   What can I make?
                 </Heading>
                 <Box
-                  width="30%"
+                  width="40%"
                   cursor="pointer"
                   onClick={() => navigate('/top-shelf')}
+                  mx={4}
                 >
                   <Heading
                     as="h3"
                     fontSize={['sm', 'sm', 'md', 'md']}
                     color="gray.600"
-                    py={2}
-                    textAlign="right"
+                    textAlign="center"
                   >
                     See drinks I&apos;ve favourited &rarr;
                   </Heading>

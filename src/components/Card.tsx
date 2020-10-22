@@ -102,6 +102,7 @@ const Card: React.FC<CardProps> = ({ content }) => {
           h={imageHeight}
           overflow="hidden"
           onClick={() => navigate(`/recipes/${content.name}`)}
+          cursor="pointer"
         />
       </Box>
       <Flex

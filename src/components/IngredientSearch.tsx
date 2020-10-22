@@ -31,7 +31,13 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
   clearCategories,
 }) => {
   return (
-    <Flex justify="center" align="center" direction="column" pt="5vh">
+    <Flex
+      justify="center"
+      align="center"
+      direction="column"
+      pt="5vh"
+      width="100%"
+    >
       <Flex
         direction={{ base: 'column', md: 'row' }}
         width="70%"
@@ -42,15 +48,16 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
             <Menu closeOnSelect={false}>
               <MenuButton
                 isTruncated
+                width="80%"
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
                 variant="unstyled"
                 bgColor="purple.400"
                 color="white"
-                width="33%"
                 id="base-ingedient"
                 fontSize={responsiveFontButton}
                 size="lg"
+                px={2}
                 height={responsiveButtonHeight}
                 marginRight="5px"
               >
@@ -87,8 +94,8 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
               onClick={clearCategories}
               variant="outline"
               color="purple.400"
-              width="15%"
-              ml="2%"
+              width="20%"
+              px={2}
               fontSize={responsiveFontButton}
               height={responsiveButtonHeight}
               size="lg"
