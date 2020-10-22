@@ -32,13 +32,13 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {isLoading ?<LoadingScreen /> : null}
+      {isLoading ? <LoadingScreen /> : null}
       <>
         <div id="fixed">
           <Header />
           <Divider />
         </div>
-        <div id='scroll-large'>
+        <div id="scroll-large">
           <Banner />
           <Search existingSearch={''} />
           {user && user.likedDrinks.length ? (
