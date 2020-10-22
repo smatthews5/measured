@@ -19,7 +19,7 @@ const CoreRecipe: React.FC<CoreRecipeProps> = ({ recipe, index }) => {
   return (
     <Flex direction="column" align="center" width="90%">
       <Heading color="purple.400" fontSize={responsiveFontSize} py={2}>
-        Formula #{index + 1}
+        Formula #{index + 1}: The {recipe.name}
       </Heading>
       <Image
         src={recipe.imageUrl}
@@ -31,9 +31,6 @@ const CoreRecipe: React.FC<CoreRecipeProps> = ({ recipe, index }) => {
         objectFit="cover"
         borderRadius="2px"
       />
-      <Heading color="purple.400" fontSize={responsiveFontSize} pt={3}>
-        {recipe.name}
-      </Heading>
     </Flex>
   );
 };

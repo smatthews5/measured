@@ -13,9 +13,12 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
   cocktail,
   selection,
 }) => {
+  const onBuilder = location.pathname === '/build-a-drink';
+
   return (
     <Flex
-      m={4}
+      mx={onBuilder ? 4 : 0}
+      my={onBuilder ? 4 : 2}
       w="95%"
       h="20vh"
       onClick={() =>
@@ -45,14 +48,14 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
         >
           {cocktail.name}
         </Heading>
-        <Flex flexWrap="wrap" pb="5px">
+        <Flex flexWrap="wrap" pb="5px" overflow="hidden">
           {cocktail.ingredientsList.map((ingredient) => (
             <Tag
               variant="subtle"
               fontWeight="600"
               fontFamily="mono"
               letterSpacing="0.02em"
-              fontSize="1.25em"
+              fontSize={['0.75em', '1em', '1.25em', '1.25em']}
               size="lg"
               key={ingredient}
               bgColor={
