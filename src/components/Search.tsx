@@ -69,6 +69,7 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
           borderRadius="8px"
           width="100%"
           size="sm"
+          placeholder='Search keywords..'
           height={responsiveButtonHeight}
           value={searchTerms}
           onChange={(event) => setSearchTerms(event.target.value)}
