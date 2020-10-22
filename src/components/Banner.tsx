@@ -23,8 +23,11 @@ const Banner: React.FC = () => {
   useEffect(() => {
     if (booze?.cocktails.length) {
       const index = Math.floor(Math.random() * booze.cocktails.length);
-      const recipeOfTheDay = booze.cocktails[index];
-      setFeatureCocktail(recipeOfTheDay);
+      // const recipeOfTheDay = booze.cocktails[index];
+      const hardCodedRecipe = booze.cocktails.filter(
+        (cocktail) => cocktail.name === 'siesta',
+      )[0];
+      setFeatureCocktail(hardCodedRecipe);
     }
   }, [todayDate, booze?.cocktails.length, booze?.cocktails]);
 
