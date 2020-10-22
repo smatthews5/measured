@@ -16,7 +16,7 @@ import TopShelf from './pages/TopShelf';
 import DrinkBuilder from './pages/DrinkBuilder';
 import Recipe from './pages/Recipe';
 import SearchResults from './pages/SearchResults';
-import LoginSignup from './pages/LoginSignup';
+import SignUp from './pages/SignUp';
 import AddACocktail from './pages/AddACocktail';
 
 // set up page prop-types for routing
@@ -28,7 +28,7 @@ const TopShelfPage = (props: RouteComponentProps) => <TopShelf />;
 const DrinkBuilderPage = (props: RouteComponentProps) => <DrinkBuilder />;
 const RecipePage = (props: RouteComponentProps) => <Recipe />;
 const SearchResultsPage = (props: RouteComponentProps) => <SearchResults />;
-const LoginSignupPage = (props: RouteComponentProps) => <LoginSignup />;
+const SignUpPage = (props: RouteComponentProps) => <SignUp />;
 const AddACocktailPage = (props: RouteComponentProps) => <AddACocktail />;
 
 const App: React.FC = () => {
@@ -107,7 +107,7 @@ const App: React.FC = () => {
           <RecipePage path="/recipes/:name" />
           <SearchResultsPage path="/search/:query" />
           <Redirect from="/search" to="/search/__" />
-          <LoginSignupPage path="/welcome" />
+          <SignUpPage path="/welcome" />
           <AddACocktailPage path="/add" />
         </Router>
       </BoozeContext.Provider>

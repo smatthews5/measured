@@ -7,7 +7,7 @@ import Search from '../components/Search';
 import CardGrid from '../containers/CardGrid';
 import { Cocktail } from '../interfaces';
 import { Divider } from '@chakra-ui/core';
-import LoadingScreen from './CocktailLoadingScreen';
+import CocktailLoadingScreen from '../components/CocktailLoadingScreen';
 
 import { removeDuplicatesAndRankResults, splitAndSearch } from '../utilities';
 
@@ -67,8 +67,12 @@ const SearchResults = () => {
 
   return (
     <>
-      {isLoading ? <LoadingScreen /> : null}
       <div id="fixed">
+        {isLoading ? (
+          <div id="loading">
+            <CocktailLoadingScreen />
+          </div>
+        ) : null}
         <Header />
         <Divider />
       </div>
@@ -81,7 +85,7 @@ const SearchResults = () => {
           title={
             results.length
               ? 'Search results'
-              : 'nothing matched your search, take a look at everything..'
+              : 'No exact matches. Our whole collection below:'
           }
         />
       </div>
