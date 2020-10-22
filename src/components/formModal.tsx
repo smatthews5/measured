@@ -28,13 +28,13 @@ import icon from '../assets/images/header_icon.png';
 import loading from '../assets/images/loading.png';
 import loginBG from '../assets/images/loginBG.png';
 
-interface HeaderProps {
+interface FormModalProps {
   isOpen: boolean;
   onClose: () => void;
   user?: User;
 }
 
-const Header: React.FC<HeaderProps> = ({ isOpen, onClose, user }) => {
+const FormModal: React.FC<FormModalProps> = ({ isOpen, onClose, user }) => {
   const toast = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -310,4 +310,4 @@ const Header: React.FC<HeaderProps> = ({ isOpen, onClose, user }) => {
   );
 };
 
-export default Header;
+export default FormModal;

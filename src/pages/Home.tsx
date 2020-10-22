@@ -7,7 +7,7 @@ import Search from '../components/Search';
 import CardGallery from '../containers/CardGallery';
 import { Divider } from '@chakra-ui/core';
 
-import LoadingScreen from './MartiniLoadingScreen';
+import MartiniLoadingScreen from '../components/MartiniLoadingScreen';
 import { Cocktail } from '../interfaces';
 
 const Home: React.FC = () => {
@@ -32,38 +32,40 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {isLoading ?<LoadingScreen /> : null}
-      <>
-        <div id="fixed">
-          <Header />
-          <Divider />
-        </div>
-        <div id='scroll-large'>
-          <Banner />
-          <Search existingSearch={''} />
-          {user && user.likedDrinks.length ? (
+      <div id="fixed">
+        {isLoading ? (
+          <div id="loading">
+            <MartiniLoadingScreen />
+          </div>
+        ) : null}
+        <Header />
+        <Divider />
+      </div>
+      <div id="scroll-large">
+        <Banner />
+        <Search existingSearch={''} />
+        {user && user.likedDrinks.length ? (
+          <CardGallery
+            content={cocktails.filter((cocktail) =>
+              user.likedDrinks.includes(cocktail.name),
+            )}
+            categoryHeading="top shelf — my favourites"
+          />
+        ) : null}
+        <CardGallery content={cocktails} categoryHeading="all cocktails" />
+        {categories.map((category) => {
+          const categoryCocktails = cocktails.filter((cocktail) =>
+            cocktail.categories.includes(category),
+          );
+          return (
             <CardGallery
-              content={cocktails.filter((cocktail) =>
-                user.likedDrinks.includes(cocktail.name),
-              )}
-              categoryHeading="top shelf — my favourites"
+              content={categoryCocktails}
+              categoryHeading={category}
+              key={category}
             />
-          ) : null}
-          <CardGallery content={cocktails} categoryHeading="all cocktails" />
-          {categories.map((category) => {
-            const categoryCocktails = cocktails.filter((cocktail) =>
-              cocktail.categories.includes(category),
-            );
-            return (
-              <CardGallery
-                content={categoryCocktails}
-                categoryHeading={category}
-                key={category}
-              />
-            );
-          })}
-        </div>
-      </>
+          );
+        })}
+      </div>
     </>
   );
 };

@@ -11,7 +11,7 @@ import {
   useToast,
   useDisclosure,
 } from '@chakra-ui/core';
-import FormModal from '../components/formModal';
+import FormModal from './formModal';
 import { UserContext } from '../Context';
 
 import { signInWithGoogle } from '../services/firebase';
