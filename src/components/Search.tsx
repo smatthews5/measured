@@ -64,12 +64,54 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
 
   return (
     <Flex justify="center" align="center" direction="column" py="5vh">
+      {base.length || category.length ? (
+        <Flex width="70%" overflowX="scroll">
+          <Flex>
+            <Heading
+              as="h5"
+              color="gray.500"
+              fontSize={responsiveFontButton}
+              textTransform="uppercase"
+            >
+              Show me...
+            </Heading>
+          </Flex>
+          {base
+            ? base.map((selection: string) => (
+                <Heading
+                  as="h5"
+                  key={selection}
+                  pl={3}
+                  textTransform="uppercase"
+                  color="gray.400"
+                  fontSize={responsiveFontButton}
+                >
+                  {selection}
+                </Heading>
+              ))
+            : null}
+          {category
+            ? category.map((selection: string) => (
+                <Heading
+                  as="h5"
+                  key={selection}
+                  pl={3}
+                  textTransform="uppercase"
+                  color="gray.400"
+                  fontSize={responsiveFontButton}
+                >
+                  {selection}
+                </Heading>
+              ))
+            : null}
+        </Flex>
+      ) : null}
       <Flex width="70%" justify="center" align="center">
         <Input
           borderRadius="8px"
           width="100%"
           size="sm"
-          placeholder='Search keywords..'
+          placeholder="Search keywords..."
           height={responsiveButtonHeight}
           value={searchTerms}
           onChange={(event) => setSearchTerms(event.target.value)}
@@ -169,48 +211,6 @@ const Search: React.FC<SearchProps> = ({ existingSearch }) => {
               Find my cocktail
             </Button>
           </Flex>
-          {base.length || category.length ? (
-            <Flex marginTop="10px" width="100%" overflowX="scroll">
-              <Flex>
-                <Heading
-                  as="h5"
-                  color="gray.500"
-                  fontSize={responsiveFontButton}
-                  textTransform="uppercase"
-                >
-                  Show me...
-                </Heading>
-              </Flex>
-              {base
-                ? base.map((selection: string) => (
-                    <Heading
-                      as="h5"
-                      key={selection}
-                      pl={3}
-                      textTransform="uppercase"
-                      color="gray.400"
-                      fontSize={responsiveFontButton}
-                    >
-                      {selection}
-                    </Heading>
-                  ))
-                : null}
-              {category
-                ? category.map((selection: string) => (
-                    <Heading
-                      as="h5"
-                      key={selection}
-                      pl={3}
-                      textTransform="uppercase"
-                      color="gray.400"
-                      fontSize={responsiveFontButton}
-                    >
-                      {selection}
-                    </Heading>
-                  ))
-                : null}
-            </Flex>
-          ) : null}
         </Flex>
       </Flex>
     </Flex>

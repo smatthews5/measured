@@ -45,6 +45,34 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
       >
         <Flex direction="column" width="100%" mt={2}>
           <Flex>
+            {category.length > 0 ? (
+              <Flex marginTop="10px" width="100%" overflowX="scroll">
+                <Flex>
+                  <Heading
+                    as="h5"
+                    color="gray.500"
+                    fontSize={responsiveFontButton}
+                    textTransform="uppercase"
+                  >
+                    Show me...
+                  </Heading>
+                </Flex>
+                {category.map((selection) => (
+                  <Heading
+                    as="h5"
+                    key={selection}
+                    pl={3}
+                    textTransform="uppercase"
+                    color="gray.400"
+                    fontSize={responsiveFontButton}
+                  >
+                    {selection}
+                  </Heading>
+                ))}
+              </Flex>
+            ) : null}
+          </Flex>
+          <Flex>
             <Menu closeOnSelect={false}>
               <MenuButton
                 isTruncated
@@ -78,12 +106,7 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
                   }}
                 >
                   {barCategories.map((item: string) => (
-                    <MenuItemOption
-                      key={item}
-                      value={item}
-                      type="checkbox"
-                      textTransform="capitalize"
-                    >
+                    <MenuItemOption key={item} value={item} type="checkbox">
                       {item}
                     </MenuItemOption>
                   ))}
@@ -102,44 +125,6 @@ const IngredientSearch: React.FC<IngredientSearchProps> = ({
             >
               Show all
             </Button>
-          </Flex>
-          <Flex>
-            <Flex marginTop="10px" width="100%" overflowX="scroll">
-              <Flex>
-                <Heading
-                  as="h5"
-                  color="gray.500"
-                  fontSize={responsiveFontButton}
-                  textTransform="uppercase"
-                >
-                  Show me...
-                </Heading>
-              </Flex>
-              {category.length > 0 ? (
-                category.map((selection) => (
-                  <Heading
-                    as="h5"
-                    key={selection}
-                    pl={3}
-                    textTransform="uppercase"
-                    color="gray.400"
-                    fontSize={responsiveFontButton}
-                  >
-                    {selection}
-                  </Heading>
-                ))
-              ) : (
-                <Heading
-                  as="h5"
-                  pl={3}
-                  textTransform="uppercase"
-                  color="gray.400"
-                  fontSize={responsiveFontButton}
-                >
-                  all
-                </Heading>
-              )}
-            </Flex>
           </Flex>
         </Flex>
       </Flex>
