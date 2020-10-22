@@ -21,6 +21,16 @@ const DrinkBuilder: React.FC = () => {
     ingredients = booze.ingredients;
   }
 
+  const seas = ['demerara sugar', 'grapefruit', 'mint', 'lemon', 'orange'];
+  const bal = [
+    'Cointreau',
+    'Campari',
+    'coffee liqueur',
+    'dry vermouth',
+    'sweet vermouth',
+  ];
+  const cor = ['cognac', 'gin', 'tequila blanco', 'bourbon'];
+
   const [selection, setSelection] = useState<string[]>([]);
   const [content, setContent] = useState<Cocktail[]>([]);
 
@@ -37,13 +47,16 @@ const DrinkBuilder: React.FC = () => {
   }, [selection]);
 
   const seasoning = ingredients.filter((ingredient) =>
-    ingredient.builder.includes('seasoning' || 'garnish'),
+    // ingredient.builder.includes('seasoning' || 'garnish'),
+    seas.includes(ingredient.name),
   );
   const balance = ingredients.filter((ingredient) =>
-    ingredient.builder.includes('balance'),
+    // ingredient.builder.includes('balance'),
+    bal.includes(ingredient.name),
   );
   const core = ingredients.filter((ingredient) =>
-    ingredient.builder.includes('core'),
+    // ingredient.builder.includes('core'),
+    cor.includes(ingredient.name),
   );
 
   const updateSelection = () => {
