@@ -9,3 +9,37 @@ Easy-to-use, easy-to-understand recipes for cocktails — filtered for what you 
 - List of common ingredients, with basic info and the option to 'add to your bar'
 - Interactive, build-a-drink cocktail creator, allowing three options and preferencing ingredients from your bar
 - Authentication and login with Google OAuth
+
+## Screenshots
+
+<p align="center" height='75%' width='75%'>
+  <img src="" />
+</p>
+
+## Getting Started 
+
+## Installation
+
+* Clone this repo and enter!
+```bash
+git clone https://github.com/smatthews5/measured.git
+cd measured
+```
+Install dependencies.
+```bash
+npm install
+npm start
+```
+
+## Tech Stack
+
+* React
+* TypeScript
+* Firebase
+* Chakra UI
+
+## Developers
+
+* Stephen Matthews GitHub](https://github.com/smatthews5) | [LinkedIn](https://www.linkedin.com/in/stephen-matthews5/)
+* Jill Masters GitHub](https://github.com/jillmasters) | [LinkedIn](https://www.linkedin.com/in/jillianchuahmasters/)
+* Chris Perry GitHub](https://github.com/chrisperry-sd) | [LinkedIn](https://www.linkedin.com/in/chrisdperry-sd/)
