@@ -40,7 +40,7 @@ const Ingredients: React.FC = () => {
     if (isLoading) {
       setTimeout(() => {
         toggleLoading(false);
-      }, 2000);
+      }, 1500);
     }
   }, []);
 

@@ -13,7 +13,7 @@ const cocktailAnimation = {
 };
 import { Heading, Flex } from '@chakra-ui/core';
 
-const HomeLoadingScreen: React.FC = () => {
+const CocktailLoadingScreen: React.FC = () => {
   return (
     <Flex
       align="center"
@@ -30,4 +30,4 @@ const HomeLoadingScreen: React.FC = () => {
   );
 };
 
-export default HomeLoadingScreen;
+export default CocktailLoadingScreen;

@@ -13,13 +13,15 @@ const martiniAnimation = {
 
 import { Heading, Flex } from '@chakra-ui/core';
 
-const HomeLoadingScreen: React.FC = () => {
+const MartiniLoadingScreen: React.FC = () => {
   return (
     <Flex
       align="center"
       justify="center"
+      py={8}
       width="100vw"
       height="100vh"
+      minHeight="100vh"
       direction="column"
     >
       <Lottie options={martiniAnimation} height={250} width={250} />
@@ -30,4 +32,4 @@ const HomeLoadingScreen: React.FC = () => {
   );
 };
 
-export default HomeLoadingScreen;
+export default MartiniLoadingScreen;

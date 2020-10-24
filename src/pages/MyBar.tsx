@@ -22,6 +22,7 @@ const MyBar: React.FC = () => {
 
   const responsiveLargeText = ['4xl', '4xl', '4xl', '3vw'];
   const responsiveMedText = ['3xl', '2xl', '2xl', '3xl'];
+  const responsiveHeight = ['8vh', '8vh', '8vh', '10vh'];
 
   useEffect(() => {
     if (isLoading) {
@@ -86,7 +87,8 @@ const MyBar: React.FC = () => {
             pl={4}
           >
             <Flex
-              height={['8vh', '8vh', '8vh', '15vh']}
+              height={responsiveHeight}
+              minHeight={responsiveHeight}
               align="flex-end"
               pr={4}
             >
@@ -94,14 +96,14 @@ const MyBar: React.FC = () => {
                 as="h4"
                 my="2.5vh"
                 fontSize={responsiveLargeText}
-                letterSpacing="-0.02em"
+                fontFamily="mono"
               >
                 What&apos;s in my bar?
               </Heading>
             </Flex>
             <hr id="wide" />
             {barCategories.map((category) => (
-              <Box key={category} mb="2vh">
+              <Box key={category} my="2vh">
                 <Heading
                   as="h4"
                   alignSelf="left"
@@ -147,13 +149,14 @@ const MyBar: React.FC = () => {
               direction="row"
               align="flex-end"
               justify="space-between"
-              height={['8vh', '8vh', '8vh', '15vh']}
+              height={responsiveHeight}
+              minHeight={responsiveHeight}
             >
               <Heading
                 as="h4"
                 my="2.5vh"
+                fontFamily="mono"
                 fontSize={responsiveLargeText}
-                letterSpacing="-0.02em"
               >
                 What can I make?
               </Heading>
@@ -163,31 +166,36 @@ const MyBar: React.FC = () => {
                 onClick={() => navigate('/top-shelf')}
                 mx={4}
               >
-                <Heading
-                  as="h3"
-                  fontSize={['sm', 'sm', 'md', 'md']}
-                  color="gray.600"
-                  textAlign="center"
-                >
-                  See drinks I&apos;ve favourited &rarr;
-                </Heading>
+                {user && user.likedDrinks.length ? (
+                  <Heading
+                    as="h3"
+                    fontSize={['sm', 'sm', 'md', 'md']}
+                    color="gray.600"
+                    textAlign="center"
+                  >
+                    See drinks I&apos;ve favourited &rarr;
+                  </Heading>
+                ) : null}
               </Box>
             </Flex>
             <hr id="wide" />
             {user && !user.myIngredients.length ? (
               <>
-                <Text as="h4" pr={4} fontSize="2xl">
-                  &larr; Add any ingredients you have to your{' '}
-                  <span id="title">Measured</span> bar.
+                <Text as="h4" pr={4} fontSize="lg" mt="2vh" lineHeight="2.5em">
+                  In the &apos;What&apos;s in my bar?&apos; section, you can add
+                  the ingredients that you have at home to your{' '}
+                  <span id="title">Measured</span> bar. Just click the plus
+                  button to add to your inventory.
                 </Text>
                 <br />
-                <Text as="h4" pr={4} fontSize="lg">
-                  We&apos;ll let you know which cocktails you can make with
-                  ingredients you already have, or with just a few more.
+                <Text as="h4" pr={4} fontSize="lg" lineHeight="2.5em">
+                  One you&apos;ve stocked up, on this side, we&apos;ll let you
+                  know which cocktails you can make with ingredients you already
+                  have, or with just a few more.
                 </Text>
               </>
             ) : (
-              <>
+              <Box mt="2vh">
                 {ready.length ? (
                   <>
                     <Heading
@@ -242,7 +250,7 @@ const MyBar: React.FC = () => {
                     />
                   </>
                 ) : null}
-              </>
+              </Box>
             )}
           </Flex>
         </Flex>

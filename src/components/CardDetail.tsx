@@ -1,24 +1,27 @@
-import {
-  Heading,
-  Flex,
-  Image,
-  Tag,
-  TagLabel,
-  Button,
-  Stack,
-  useToast,
-} from '@chakra-ui/core';
-import { RouteComponentProps } from '@reach/router';
 import React, { useContext } from 'react';
-import { Ingredient } from '../interfaces';
-import { GiWineBottle } from 'react-icons/gi';
+import { RouteComponentProps } from '@reach/router';
 import { UserContext } from '../Context';
 import {
   addIngredient,
   getUserDocument,
   removeIngredient,
 } from '../services/firebase';
-import { CheckIcon } from '@chakra-ui/icons';
+import { Ingredient } from '../interfaces';
+
+import {
+  Heading,
+  Flex,
+  Image,
+  Tag,
+  TagLabel,
+  Tooltip,
+  Stack,
+  useToast,
+} from '@chakra-ui/core';
+
+import tick from '../assets/images/tick.png';
+import bar from '../assets/images/bar.png';
+import loading from '../assets/images/loading.png';
 
 interface CardDetailProps extends RouteComponentProps {
   ingredient: Ingredient;
@@ -30,6 +33,8 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
   const { user, setUser } = useContext(UserContext);
 
   const toast = useToast();
+
+  const imageSide = ['35vw', '22vw', '18vw', '18vw'];
 
   const handleClickMyBar = async (ingredient: string) => {
     if (user) {
@@ -71,32 +76,40 @@ const CardDetail: React.FC<CardDetailProps> = ({ ingredient }) => {
           </Tag>
         </div>
       </Flex>
-      <Stack direction="row" spacing={4} align="center">
-        <Button
-          colorScheme="gray"
-          variant="solid"
-          w="6vw"
-          onClick={
-            user
-              ? () => handleClickMyBar(ingredient.name)
-              : () =>
-                  toast({
-                    title: 'Please log in.',
-                    description:
-                      'You need to be logged in to add ingredients to your bar.',
-                    status: 'warning',
-                    duration: 5000,
-                    isClosable: true,
-                  })
+      <Flex w="5vw" h="5vw" my="auto" align="center" justify="center">
+        <Tooltip
+          label={
+            user?.myIngredients.includes(ingredient.name)
+              ? 'Remove from my bar'
+              : 'Add to my bar'
           }
+          fontSize="sm"
+          bgColor="purple.400"
         >
-          {user?.myIngredients.includes(ingredient.name) ? (
-            <CheckIcon />
-          ) : (
-            <GiWineBottle size={30} />
-          )}
-        </Button>
-      </Stack>
+          <Image
+            fit="cover"
+            borderRadius={['2px', '3px', '4px', '5px']}
+            fallbackSrc={loading}
+            src={user?.myIngredients.includes(ingredient.name) ? tick : bar}
+            alt={ingredient.name}
+            overflow="hidden"
+            cursor="pointer"
+            onClick={
+              user
+                ? () => handleClickMyBar(ingredient.name)
+                : () =>
+                    toast({
+                      title: 'Please log in.',
+                      description:
+                        'You need to be logged in to add ingredients to your bar.',
+                      status: 'warning',
+                      duration: 5000,
+                      isClosable: true,
+                    })
+            }
+          />
+        </Tooltip>
+      </Flex>
     </Flex>
   );
 };

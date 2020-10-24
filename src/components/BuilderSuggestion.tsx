@@ -21,6 +21,7 @@ const BuilderSuggestion: React.FC<BuilderSuggestionProps> = ({
       my={onBuilder ? 4 : 2}
       w="95%"
       h="20vh"
+      minHeight="150px"
       onClick={() =>
         // eslint-disable-next-line no-prototype-builtins
         cocktail.hasOwnProperty('base')

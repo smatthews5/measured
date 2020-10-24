@@ -28,9 +28,9 @@ const Card: React.FC<CardProps> = ({ content }) => {
 
   const toast = useToast();
 
-  const imageWidth = '18vw';
-  const imageHeight = '18vw';
+  const imageSide = ['35vw', '22vw', '18vw', '18vw'];
 
+  const responsiveImage = ['50%', '33%', '25%', '25%'];
   const responsiveText = ['sm', 'lg', 'xl', '2xl'];
   const responsiveBadge = ['0px', '0px', '60px', '60px'];
   const responsiveHeading = ['0px', '0px', '58px', '58px'];
@@ -55,12 +55,12 @@ const Card: React.FC<CardProps> = ({ content }) => {
   return (
     <Flex
       direction="column"
-      width="25%"
-      minWidth="25%"
-      borderRadius="6px"
+      width={responsiveImage}
+      minWidth={responsiveImage}
+      borderRadius={['0px', '2px', '6px', '6px']}
       m={2}
       ml="0"
-      pb={2}
+      pb={[0, 0, 2, 2]}
       position="relative"
     >
       <Box position="relative">
@@ -93,13 +93,13 @@ const Card: React.FC<CardProps> = ({ content }) => {
 
         <Image
           fit="cover"
-          borderRadius="5px"
+          borderRadius={['2px', '3px', '4px', '5px']}
           fallbackSrc={loading}
           src={content.imageUrl}
           onLoad={() => toggleBadge(true)}
           alt={content.name}
-          w={imageWidth}
-          h={imageHeight}
+          w={imageSide}
+          h={imageSide}
           overflow="hidden"
           onClick={() => navigate(`/recipes/${content.name}`)}
           cursor="pointer"
@@ -134,52 +134,55 @@ const Card: React.FC<CardProps> = ({ content }) => {
             {content.base.toLowerCase()}
           </Heading>
         </Flex>
-        <hr id="wide" />
-        <Heading
-          as="h6"
-          fontSize={['0px', '0px', 'sm', 'md']}
-          fontWeight="200"
-          mt={3}
-        >
-          {content.categories.map((category, index) => {
-            if (index > 2) return '';
-            else if (index === content.categories.length - 1 || index === 2)
-              return `${category}`;
-            else return `${category} — `;
-          })}
-        </Heading>
-
-        <Tooltip
-          label={showFavourite ? 'Remove from favourites' : 'Add to favourites'}
-          fontSize="sm"
-          bgColor="purple.400"
-        >
-          <Image
-            position="absolute"
-            bottom={['22%', '22%', '3%', '3%']}
-            right="10%"
-            border="2px white solid"
-            bgColor="white"
-            fit="contain"
-            fallbackSrc={loading}
-            src={showFavourite ? full : empty}
-            alt={showFavourite ? 'full glass icon' : 'empty glass icon'}
-            w={['15px', '15px', '25px', '25px']}
-            onClick={
-              user
-                ? () => handleClickMyBar(content.name)
-                : () =>
-                    toast({
-                      title: 'Log in / sign up to Measured',
-                      description:
-                        'Want to add cocktails to your favourites? Create an account or login.',
-                      status: 'warning',
-                      duration: 5000,
-                      isClosable: true,
-                    })
+        <Box w={['0', '0', '100%', '100%']} h={['0', '0', 'auto', 'auto']}>
+          <hr id="wide" />
+          <Heading
+            as="h6"
+            fontSize={['0px', '0px', 'sm', 'md']}
+            fontWeight="200"
+            mt={3}
+          >
+            {content.categories.map((category, index) => {
+              if (index > 2) return '';
+              else if (index === content.categories.length - 1 || index === 2)
+                return `${category}`;
+              else return `${category} — `;
+            })}
+          </Heading>
+          <Tooltip
+            label={
+              showFavourite ? 'Remove from favourites' : 'Add to favourites'
             }
-          ></Image>
-        </Tooltip>
+            fontSize="sm"
+            bgColor="purple.400"
+          >
+            <Image
+              position="absolute"
+              bottom={['22%', '22%', '3%', '3%']}
+              right="10%"
+              border="2px white solid"
+              bgColor="white"
+              fit="contain"
+              fallbackSrc={loading}
+              src={showFavourite ? full : empty}
+              alt={showFavourite ? 'full glass icon' : 'empty glass icon'}
+              w={['0px', '0px', '25px', '25px']}
+              onClick={
+                user
+                  ? () => handleClickMyBar(content.name)
+                  : () =>
+                      toast({
+                        title: 'Log in / sign up to Measured',
+                        description:
+                          'Want to add cocktails to your favourites? Create an account or login.',
+                        status: 'warning',
+                        duration: 5000,
+                        isClosable: true,
+                      })
+              }
+            ></Image>
+          </Tooltip>
+        </Box>
       </Flex>
     </Flex>
   );

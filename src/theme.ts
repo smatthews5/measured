@@ -69,6 +69,7 @@ const customTheme = extendTheme({
       'div[id="loading"]': {
         overflow: 'hidden',
         height: '100vh',
+        minHeight: '100%',
         bgColor: 'white',
       },
       'div::-webkit-scrollbar': {
