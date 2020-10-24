@@ -33,7 +33,7 @@ const Form: React.FC = () => {
 
   const showErrors = (errorMessage: string) => {
     const errors = toast({
-      title: 'Error in form. Please try again!',
+      title: 'Missing some details we need...',
       description: errorMessage,
       duration: 9000,
       status: 'warning',
@@ -95,6 +95,7 @@ const Form: React.FC = () => {
       direction="row"
       width="100%"
       height="100%"
+      minHeight="100%"
       position="relative"
     >
       <Image
@@ -102,7 +103,7 @@ const Form: React.FC = () => {
         fit="cover"
         position="absolute"
         width="100%"
-        height="100%"
+        height="100vh"
         overflow="hidden"
       />
       <Flex
@@ -110,9 +111,11 @@ const Form: React.FC = () => {
         align="center"
         direction="column"
         width="80vw"
+        height="100%"
         minWidth="400px"
         overflowX="scroll"
         pb={2}
+        my={4}
       >
         <Heading
           color="white"

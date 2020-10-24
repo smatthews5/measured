@@ -102,7 +102,7 @@ const Banner: React.FC = () => {
             color="white"
             fontFamily="mono"
             fontWeight="normal"
-            fontSize={['2xl', '3xl', '4vw', '6vw']}
+            fontSize={['40px', '40px', '4vw', '6vw']}
           >
             {featureCocktail.name}
           </Heading>
@@ -112,7 +112,7 @@ const Banner: React.FC = () => {
             fontFamily="body"
             fontWeight="200"
             color="white"
-            fontSize={['lg', 'xl', '2xl', '2vw']}
+            fontSize={['md', 'md', '2xl', '2vw']}
             mt={5}
           >
             Featured cocktail

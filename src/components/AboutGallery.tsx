@@ -36,37 +36,37 @@ const About: React.FC = () => {
     <Flex
       width="100%"
       height="100%"
-      minWidth="350px"
+      minWidth="250px"
       align="center"
       justify="center"
-      margin={['0px', '100px']}
+      border="solid thick"
+      borderColor="purple.400"
+      mb={4}
     >
       <IconButton
         aria-label="Change index"
-        icon={<ChevronLeftIcon fontSize="3xl" />}
+        icon={<ChevronLeftIcon fontSize="4xl" />}
         height="50%"
         alignSelf="center"
-        // marginRight={['0px', '20px']}
         background="white"
         color="purple.400"
         onClick={handleLeftClick}
       />
       <Image
         alignSelf="center"
-        margin="20px"
+        margin={2}
         width="100%"
         py={4}
         fit="cover"
         src={image}
         fallbackSrc={loadingWhite}
-        alt="welcome to Measured"
+        alt="Measured how-to guide"
       />
       <IconButton
         aria-label="Change index"
-        icon={<ChevronRightIcon fontSize="3xl" />}
+        icon={<ChevronRightIcon fontSize="4xl" />}
         height="50%"
         alignSelf="center"
-        // marginLeft={['0px', '20px']}
         background="white"
         color="purple.400"
         onClick={handleRightClick}

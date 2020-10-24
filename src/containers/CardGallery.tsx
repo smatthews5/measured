@@ -20,7 +20,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({
 
   return (
     <>
-      <Box w={boxWidth} mx="auto" my="2.5vh">
+      <Box w={boxWidth} mx="auto" my={[1, 2, '2.5vh', '2.5vh']}>
         <Box
           cursor="pointer"
           onClick={

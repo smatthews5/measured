@@ -4,7 +4,7 @@ import CoreRecipe from '../components/CoreRecipe';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
 const BuilderInstructions: React.FC = () => {
-  const responsiveFontSize = ['2xl', '2xl', '3xl', '3xl'];
+  const responsiveFontSize = ['xl', '2xl', '3xl', '3xl'];
   const [index, setIndex] = useState(0);
   const coreRecipes = [
     {
@@ -78,6 +78,7 @@ const BuilderInstructions: React.FC = () => {
       direction="column"
       align="center"
       width="100%"
+      height="100%"
       overflowY="scroll"
       p={4}
     >
@@ -111,6 +112,7 @@ const BuilderInstructions: React.FC = () => {
         align="center"
         justify="space-between"
         w="90%"
+        minHeight="300px"
       >
         <Flex align="flex-end" justify="space-between" w="100%" py={2}>
           <Heading
@@ -154,86 +156,89 @@ const BuilderInstructions: React.FC = () => {
           </Text>
         </Flex>
       </Flex>
-      <Heading
-        w="80%"
-        fontSize={responsiveFontSize}
-        color="gray.400"
-        textAlign="center"
-      >
-        Classic cocktails follow six basic formulas
-      </Heading>
-      <Text pt={6} pb={2} textAlign="center" w="80%">
-        Often, cocktails are just variations on a handful of formulas, based on
-        cocktails you may already know. Use the templates below for inspiration.
-      </Text>
-      <Text pb={6} pt={2} textAlign="center" w="80%">
-        Vary the three elements, experiment with new combinations, or tweak the
-        proportions. You could stumble on some boozy delights of your own.
-      </Text>
-      <Flex my={6} w="100%" align="center" justify="space-between">
-        <IconButton
-          aria-label="Change index"
-          icon={<ChevronLeftIcon fontSize="3xl" />}
-          background="white"
-          onClick={handleLeftClick}
-          height="100%"
-        />
-        <CoreRecipe recipe={coreRecipes[index]} index={index} />
-        <IconButton
-          aria-label="Change index"
-          icon={<ChevronRightIcon fontSize="3xl" />}
-          background="white"
-          onClick={handleRightClick}
-          height="100%"
-        />
-      </Flex>
-      <Flex width="100%" mb={4} mt={1} align="center" justify="space-between">
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          w="33%"
+      <Flex minHeight="800px" direction="column" align="center">
+        <Heading
+          w="80%"
+          fontSize={responsiveFontSize}
+          color="gray.400"
           textAlign="center"
         >
-          <Heading w="100%" fontSize={responsiveFontSize} color="purple.400">
-            Base
-          </Heading>
-          <Text w="100%">{coreRecipes[index].core}</Text>
-        </Flex>
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          w="33%"
-          textAlign="center"
-        >
-          <Heading w="100%" fontSize={responsiveFontSize} color="purple.400">
-            Balance
-          </Heading>
-          <Text w="100%">{coreRecipes[index].balance}</Text>
-        </Flex>
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          w="33%"
-          textAlign="center"
-        >
-          <Heading w="100%" fontSize={responsiveFontSize} color="purple.400">
-            Seasoning
-          </Heading>
-          <Text w="100%">{coreRecipes[index].seasoning}</Text>
-        </Flex>
-      </Flex>
-      <Flex justify="space-between" align="center" py={4}>
-        <Heading p={4} fontSize={responsiveFontSize} color="gray.400">
-          Formula for
+          Classic cocktails follow six basic formulas
         </Heading>
-        {coreRecipes[index].variations.map((variation) => (
-          <Text px={4} pb={2} textTransform="capitalize" key={variation}>
-            {variation}
-          </Text>
-        ))}
+        <Text pt={6} pb={2} textAlign="center" w="80%">
+          Often, cocktails are just variations on a handful of formulas, based
+          on cocktails you may already know. Use the templates below for
+          inspiration.
+        </Text>
+        <Text pb={6} pt={2} textAlign="center" w="80%">
+          Vary the three elements, experiment with new combinations, or tweak
+          the proportions. You could stumble on some boozy delights of your own.
+        </Text>
+        <Flex my={6} w="100%" align="center" justify="space-between">
+          <IconButton
+            aria-label="Change index"
+            icon={<ChevronLeftIcon fontSize="3xl" />}
+            background="white"
+            onClick={handleLeftClick}
+            height="100%"
+          />
+          <CoreRecipe recipe={coreRecipes[index]} index={index} />
+          <IconButton
+            aria-label="Change index"
+            icon={<ChevronRightIcon fontSize="3xl" />}
+            background="white"
+            onClick={handleRightClick}
+            height="100%"
+          />
+        </Flex>
+        <Flex width="100%" mb={4} mt={1} align="center" justify="space-between">
+          <Flex
+            direction="column"
+            align="center"
+            justify="center"
+            w="33%"
+            textAlign="center"
+          >
+            <Heading w="100%" fontSize={responsiveFontSize} color="purple.400">
+              Base
+            </Heading>
+            <Text w="100%">{coreRecipes[index].core}</Text>
+          </Flex>
+          <Flex
+            direction="column"
+            align="center"
+            justify="center"
+            w="33%"
+            textAlign="center"
+          >
+            <Heading w="100%" fontSize={responsiveFontSize} color="purple.400">
+              Balance
+            </Heading>
+            <Text w="100%">{coreRecipes[index].balance}</Text>
+          </Flex>
+          <Flex
+            direction="column"
+            align="center"
+            justify="center"
+            w="33%"
+            textAlign="center"
+          >
+            <Heading w="100%" fontSize={responsiveFontSize} color="purple.400">
+              Seasoning
+            </Heading>
+            <Text w="100%">{coreRecipes[index].seasoning}</Text>
+          </Flex>
+        </Flex>
+        <Flex justify="space-between" align="center" py={4}>
+          <Heading p={4} fontSize={responsiveFontSize} color="gray.400">
+            Formula for
+          </Heading>
+          {coreRecipes[index].variations.map((variation) => (
+            <Text px={4} pb={2} textTransform="capitalize" key={variation}>
+              {variation}
+            </Text>
+          ))}
+        </Flex>
       </Flex>
     </Flex>
   );

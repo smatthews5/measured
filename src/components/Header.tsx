@@ -110,7 +110,6 @@ const Header: React.FC = () => {
             w={responsiveImage}
             h={responsiveImage}
             objectFit="cover"
-            fallbackSrc={loading}
             src={icon}
             alt="Login/signup icon"
             mb={2}
