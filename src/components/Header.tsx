@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from '@reach/router';
 import { UserContext } from '../Context';
 
-import FormModal from '../components/formModal';
+import FormModal from './formModal';
 
 import { Flex, Heading, Image, useDisclosure } from '@chakra-ui/core';
 
@@ -110,7 +110,6 @@ const Header: React.FC = () => {
             w={responsiveImage}
             h={responsiveImage}
             objectFit="cover"
-            fallbackSrc={loading}
             src={icon}
             alt="Login/signup icon"
             mb={2}

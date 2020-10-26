@@ -4,6 +4,7 @@ import { useLocation } from '@reach/router';
 
 import { Divider } from '@chakra-ui/core';
 
+import MartiniLoadingScreen from '../components/MartiniLoadingScreen';
 import Header from '../components/Header';
 import CardDetailList from '../containers/CardDetailList';
 import IngredientSearch from '../components/IngredientSearch';
@@ -11,13 +12,21 @@ import { Ingredient } from '../interfaces';
 
 const Ingredients: React.FC = () => {
   const { booze } = useContext(BoozeContext);
+  const location: any = useLocation();
+  const { category } = location.state;
+
+  const [isLoading, toggleLoading] = useState(true);
+  const initialValue = category === undefined ? [] : [category];
+  const [searchTerms, setSearchTerms] = useState<string[]>(initialValue);
   let ingredients: Ingredient[] = [];
+  const [filteredIngredients, setFilteredIngredients] = useState<Ingredient[]>(
+    ingredients,
+  );
 
   if (booze)
     ingredients = booze.ingredients.sort((a, b) =>
       a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1,
     );
-  const location: any = useLocation();
 
   const barCategories = [
     'spirit',
@@ -26,13 +35,14 @@ const Ingredients: React.FC = () => {
     'fresh',
     'pantry',
   ];
-  const { category } = location.state;
-  const initialValue = category === undefined ? [] : [category];
 
-  const [searchTerms, setSearchTerms] = useState<string[]>(initialValue);
-  const [filteredIngredients, setFilteredIngredients] = useState<Ingredient[]>(
-    ingredients,
-  );
+  useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        toggleLoading(false);
+      }, 1500);
+    }
+  }, []);
 
   useEffect(() => {
     const updatedIngredients = filterIngredients(ingredients, searchTerms);
@@ -57,6 +67,11 @@ const Ingredients: React.FC = () => {
   return (
     <>
       <div id="fixed">
+        {isLoading ? (
+          <div id="loading">
+            <MartiniLoadingScreen />
+          </div>
+        ) : null}
         <Header />
         <Divider />
       </div>

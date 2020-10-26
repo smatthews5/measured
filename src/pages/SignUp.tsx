@@ -5,7 +5,7 @@ import { Divider } from '@chakra-ui/core';
 import Header from '../components/Header';
 import Form from '../components/Form';
 
-const LoginSignup: React.FC = () => {
+const SignUp: React.FC = () => {
   return (
     <>
       <div id="fixed">
@@ -19,4 +19,4 @@ const LoginSignup: React.FC = () => {
   );
 };
 
-export default LoginSignup;
+export default SignUp;

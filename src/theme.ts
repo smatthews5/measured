@@ -62,10 +62,15 @@ const customTheme = extendTheme({
       },
       'div[id="scroll"]': {
         pt: '12vh',
-        height: '100vh',
       },
       'div[id="scroll-large"]': {
         pt: '16vh',
+      },
+      'div[id="loading"]': {
+        overflow: 'hidden',
+        height: '100vh',
+        minHeight: '100%',
+        bgColor: 'white',
       },
       'div::-webkit-scrollbar': {
         height: '1vh',
