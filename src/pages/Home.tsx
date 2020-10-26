@@ -32,18 +32,6 @@ const Home: React.FC = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      {isLoading ? <LoadingScreen /> : null}
-      <>
-        <div id="fixed">
-          <Header />
-          <Divider />
-        </div>
-        <div id="scroll-large">
-          <Banner />
-          <Search existingSearch={''} />
-          {user && user.likedDrinks.length ? (
-=======
       <div id="fixed">
         {isLoading ? (
           <div id="loading">
@@ -70,7 +58,6 @@ const Home: React.FC = () => {
             cocktail.categories.includes(category),
           );
           return (
->>>>>>> 45cd9d0c474f6b00a1b1f159006dc3607a8e70d0
             <CardGallery
               content={categoryCocktails}
               categoryHeading={category}
