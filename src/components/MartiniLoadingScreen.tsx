@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import martini from '../assets/animations/Martini.json';
+import martini from '../assets/animations/martini.json';
 
 const martiniAnimation = {
   loop: false,
