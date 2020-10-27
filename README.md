@@ -1,6 +1,6 @@
 # Measured: Full-stack cocktail recipes website built with React
 
-<img src="src/assets/images/iphone+Desktop1.png" align='center'/>
+<img src="./src/assets/images/iphone+Desktop1.png" align='center'/>
 
 Easy-to-use, easy-to-understand recipes for cocktails — filtered for what you have and what you like. Quality, curated recipes, with all of the booze and less of the bullshit.
 
