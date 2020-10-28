@@ -1,4 +1,3 @@
-
 <img src="./src/assets/images/iphone+Desktop1.png" align='center'/>
 
 # Measured: Full-stack cocktail recipes website built with React
@@ -8,7 +7,7 @@
 ## Core features
 
 <p>
-  <img src="./src/assets/images/measuredQuickDemoGif.gif"  width=300px align="right"/>
+  <img src="./src/assets/images/Readme1.gif"  width=300px align="right"/>
 
 - Landing page displays a range of cocktail recipes, including a feature recipe and categories of interest
 - Search bar to dynamically filter/search specific recipes, based on name, ingredient or category
@@ -18,9 +17,14 @@
 
 </p>
 
-## Live Demo
+## Demo
 
 You can find a deployed version of this App [here](https://measured-885db.web.app/).
+
+## Screenshots
+
+<img src="./src/assets/images/Readme2.gif"  width=300px align="right"/>
+<img src="./src/assets/images/Readme3.gif"  width=300px align="right"/>
 
 ## Getting Started
 
