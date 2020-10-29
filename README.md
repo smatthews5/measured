@@ -1,40 +1,65 @@
-<img src="./src/assets/images/iphone+Desktop1.png" align='center'/>
+<!-- Remember to reflect any changes to the readme in the Table of Contents-->
 
-# Measured: Full-stack cocktail recipes website built with React
+# Measured: Make the cocktails you like with the ingredients you have
 
-- Easy-to-use, easy-to-understand recipes for cocktails — filtered for what you have and what you like. Quality, curated recipes, with all of the booze and less of the bullshit.
+<img src="./src/assets/images/Readme1.png" align="center"/>
 
-## Core features
+Measured is a responsive web app that gives you easy-to-use, easy-to-understand cocktail recipes, and lets you filter them for the ingredients you have and the flavours you like.
 
-<p>
-  <img src="./src/assets/images/Readme1.gif"  width=300px align="right"/>
+## Table of Contents
 
-- Landing page displays a range of cocktail recipes, including a feature recipe and categories of interest
-- Search bar to dynamically filter/search specific recipes, based on name, ingredient or category
-- List of common ingredients, with basic info and the option to 'add to your bar'
-- Interactive, build-a-drink cocktail creator, allowing three options and preferencing ingredients from your bar
-- Authentication and login with Google OAuth
+- [Live Demo](#Live-Demo)
 
-</p>
+- [Features](#Features)
 
-## Demo
+- [Walkthrough](#Walkthrough)
+
+- [Getting Started](#Getting-Started)
+
+- [Tech Stack](#Tech-Stack)
+
+- [Contributors](#Contributors)
+
+- [License](#License)
+
+## Live Demo
 
 You can find a deployed version of this App [here](https://measured-885db.web.app/).
+Client and server are hosted on [Firebase](https://firebase.google.com/). Our database is hosted through [Cloud Firestore](https://firebase.google.com/docs/firestore).
 
-## Screenshots
+## Features
 
-<img src="./src/assets/images/Readme2.gif"  width=300px align="right"/>
-<img src="./src/assets/images/Readme3.gif"  width=300px align="right"/>
+- Measured is all about quality, curated recipes, written in plain English — so you get all of the booze, less of the bullshit, and... definitely no blue cocktails.
+- Our homepage displays a range of cocktail recipes, including a feature recipe, scrollable galleries of cocktails based on flavour/type, and — if you're logged in — a 'top shelf' of your favourite drinks.
+- Anyone can browse the cocktail collection or look at instructions for individual drinks, which have badges to indicate the number of ingredients they include. You can use the search bar to dynamically filter or search specific recipes, based on name, ingredient or flavour category.
+- Anyone can also use our build-a-drink cocktail creator, which provides instructions on the basic formula for different cocktails, and lets you test flavour combinations. It suggests cocktails from our collection based on your preferred 'build'.
+- Users can create a Measured account or login through Google Authentication. Once logged in, you'll get access to our 'My Bar' page, which lets you browse ingredients, add the ones you have at home, and suggests cocktails you can make based on the ingredients you already have.
+
+## Walkthrough
+
+<img src="./src/assets/images/measuredQuickDemoGif.gif" align="center"/>
+<img src="./src/assets/images/Readme2.png" align="center"/>
+<img src="./src/assets/images/Readme3.png" align="center"/>
+
+Measured was developed as a Thesis Project for the coding bootcamp [Codeworks](https://codeworks.me/) by [Chris Perry](https://github.com/chrisperry-sd), [Stephen Matthews](https://github.com/smatthews5) and [Jill Masters](https://github.com/jillmasters).
+
+You can watch the presentation of the project below, produced after 12 days of development:
+
+<p align="center">
+<a href="https://www.youtube.com/watch?v=T0dUa8-gh5Y"><img src="https://img.youtube.com/vi/T0dUa8-gh5Y/0.jpg" alt="Measured Video Thumbnail"/></a>
+</p>
 
 ## Getting Started
 
-### get the repo
+These instructions will help you setup a local development instance of Measured.
+
+### Get the repo
 
 ```bash
 git clone https://github.com/smatthews5/measured.git
 ```
 
-### Install Dependencies
+### Install dependencies
 
 ```bash
 npm install
@@ -48,14 +73,23 @@ npm start
 
 ## Tech Stack
 
-- React
-- Typescript
-- Firebase
-- Cloud Firestore
-- Chakra UI
+### Front End
 
-## Developers
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [ChakraUI](https://next.chakra-ui.com/)
 
-- Jill Masters [GitHub](https://github.com/jillmasters) | [LinkedIn](https://www.linkedin.com/in/jillianchuahmasters/)
-- Stephen Matthews [GitHub](https://github.com/smatthews5) | [LinkedIn](https://www.linkedin.com/in/stephen-matthews5/)
-- Chris Perry [GitHub](https://github.com/chrisperry-sd) | [LinkedIn](https://www.linkedin.com/in/chrisdperry-sd/)
+### Back End
+
+- [Firebase](https://firebase.google.com/)
+- [Cloud Firestore](https://firebase.google.com/docs/firestore)
+
+## Contributors
+
+- Jill Masters — [GitHub](https://github.com/jillmasters) | [LinkedIn](https://www.linkedin.com/in/jillchuahmasters/)
+- Stephen Matthews — [GitHub](https://github.com/smatthews5) | [LinkedIn](https://www.linkedin.com/in/stephen-matthews5/)
+- Chris Perry — [GitHub](https://github.com/chrisperry-sd) | [LinkedIn](https://www.linkedin.com/in/chrisdperry-sd/)
+
+## License
+
+This project is licensed under the ISC License.
