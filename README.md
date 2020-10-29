@@ -44,11 +44,11 @@ Client and server are hosted on [Firebase](https://firebase.google.com/). Our da
 
 Measured was developed as a Thesis Project for the coding bootcamp [Codeworks](https://codeworks.me/) by [Chris Perry](https://github.com/chrisperry-sd), [Stephen Matthews](https://github.com/smatthews5) and [Jill Masters](https://github.com/jillmasters).
 
-<img src="./src/assets/images/measuredQuickDemoGif.gif" width="50%" align="center"/>  
+<div width="100%"><img src="./src/assets/images/measuredQuickDemoGif.gif" width="50%" align="center"/></div>
 
 You can watch the presentation of the project below, produced after 12 days of development:
 
-<a href="https://www.youtube.com/watch?v=T0dUa8-gh5Y"><img src="https://img.youtube.com/vi/T0dUa8-gh5Y/0.jpg" alt="Measured Video Thumbnail" width="50%" align="center"/></a>
+<div width="100%"><a href="https://www.youtube.com/watch?v=T0dUa8-gh5Y"><img src="https://img.youtube.com/vi/T0dUa8-gh5Y/0.jpg" alt="Measured Video Thumbnail" width="50%" align="center"/></a></div>
 
 ## Getting Started
 
