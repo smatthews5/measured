@@ -1,6 +1,6 @@
 <!-- Remember to reflect any changes to the readme in the Table of Contents-->
 
-# Measured: Make the cocktails you like with the ingredients you have
+# Measured
 
 <img src="./src/assets/images/Readme1.png" align="center"/>
 
@@ -25,9 +25,14 @@ Measured is a responsive web app that gives you easy-to-use, easy-to-understand 
 ## Live Demo
 
 You can find a deployed version of this App [here](https://measured-885db.web.app/).
+
+<img src="./src/assets/images/Readme2.png" align="center"/>
+
 Client and server are hosted on [Firebase](https://firebase.google.com/). Our database is hosted through [Cloud Firestore](https://firebase.google.com/docs/firestore).
 
 ## Features
+
+<img src="./src/assets/images/Readme3.png" align="center"/>
 
 - Measured is all about quality, curated recipes, written in plain English — so you get all of the booze, less of the bullshit, and... definitely no blue cocktails.
 - Our homepage displays a range of cocktail recipes, including a feature recipe, scrollable galleries of cocktails based on flavour/type, and — if you're logged in — a 'top shelf' of your favourite drinks.
@@ -37,17 +42,13 @@ Client and server are hosted on [Firebase](https://firebase.google.com/). Our da
 
 ## Walkthrough
 
-<img src="./src/assets/images/measuredQuickDemoGif.gif" align="center"/>
-<img src="./src/assets/images/Readme2.png" align="center"/>
-<img src="./src/assets/images/Readme3.png" align="center"/>
-
 Measured was developed as a Thesis Project for the coding bootcamp [Codeworks](https://codeworks.me/) by [Chris Perry](https://github.com/chrisperry-sd), [Stephen Matthews](https://github.com/smatthews5) and [Jill Masters](https://github.com/jillmasters).
+
+<img src="./src/assets/images/measuredQuickDemoGif.gif" width="50%" align="center"/>  
 
 You can watch the presentation of the project below, produced after 12 days of development:
 
-<p align="center">
-<a href="https://www.youtube.com/watch?v=T0dUa8-gh5Y"><img src="https://img.youtube.com/vi/T0dUa8-gh5Y/0.jpg" alt="Measured Video Thumbnail"/></a>
-</p>
+<a href="https://www.youtube.com/watch?v=T0dUa8-gh5Y"><img src="https://img.youtube.com/vi/T0dUa8-gh5Y/0.jpg" alt="Measured Video Thumbnail" width="50%" align="center"/></a>
 
 ## Getting Started
 
